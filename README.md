@@ -20,36 +20,6 @@ It's symfony website-skeleton project with some additional tools to validate cod
     * PHPStan will check PHP recommendation.
  
 
-## Getting Started for trainers
-
-Before your students can code, you have some work to do !
-
-### Get starter kit
-
-1. Use this repository as template to create a new repsoitory. Name it as 
-**ville-language-sessionYYYYMM-type-project** as **bordeaux-php-202003-pjt3-servyy**
-5. Edit `.travis.yml` file to change default e-mails settings to get notification checking tasks end
-6. Remove the trainers instructions int this README file
-
-
-### Check on Travis
-
-1. Go on [https://travis-ci.com](https://travis-ci.com).
-2. Sign up if you don't have account,
-3. Look for your project in search bar on the left,
-4. As soon as your repository have a `.travis.yml` in root folder, Travis should detect it and run test.
-
-> You can watch this screenshot to see basic configuration : ![basic config](http://images.innoveduc.fr/symfony4/travis-config.png)
-
-
-
-### Configure you repository - Settings options
-
-1. Add your students team as contributor .
-2. Disallow both on 'dev' and 'master' branches your students writing credentials. 
-3. Disallow merge available while one approbation is not submitted on PR.
-
-> You can watch this very tiny short video : (Loom : verrouillage branches GitHub)[https://www.loom.com/share/ad0c641d0b9447be9e40fa38a499953b]
 
 ## Getting Started for Projects
 
