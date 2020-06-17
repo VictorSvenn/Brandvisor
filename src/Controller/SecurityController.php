@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use LogicException;
 use App\Entity\Enterprise;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ class SecurityController extends AbstractController
     {
         $enterprise = $this->getDoctrine()
             ->getRepository(Enterprise::class)
-            ->find(223);
+            ->find(231);
         return $this->render('connected.html.twig', ['etp' => $enterprise]);
     }
     /**
@@ -42,6 +43,7 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new LogicException('This method can be blank - it will be intercepted by the logout 
+        key on your firewall.');
     }
 }

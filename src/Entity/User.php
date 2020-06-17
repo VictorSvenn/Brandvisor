@@ -6,10 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -75,6 +77,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Opinion::class, mappedBy="depositary")
      */
     private $opinions;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Admin::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $admin;
 
     public function __construct()
     {
@@ -324,6 +331,23 @@ class User implements UserInterface
             if ($opinion->getDepositary() === $this) {
                 $opinion->setDepositary(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getAdmin(): ?Admin
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(Admin $admin): self
+    {
+        $this->admin = $admin;
+
+        // set the owning side of the relation if necessary
+        if ($admin->getUser() !== $this) {
+            $admin->setUser($this);
         }
 
         return $this;
