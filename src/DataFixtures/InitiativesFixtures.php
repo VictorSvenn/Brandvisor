@@ -28,6 +28,7 @@ class InitiativesFixtures extends Fixture implements DependentFixtureInterface
             $initiative->setGeographicArea($faker->city);
             $initiative->setKeywords(["keyword1","keyword2"]);
             $initiative->setIsConform(rand(true, false));
+            $initiative->addLike($this->getReference('consumer_'.rand(1, 10)));
             $initiative->addOdd($this->getReference('odd_'.rand(1, 17)));
             $manager->persist($initiative);
         }

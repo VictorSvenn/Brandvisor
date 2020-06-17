@@ -6,6 +6,7 @@ use App\Entity\Admin;
 use App\Entity\Consumer;
 use App\Entity\Enterprise;
 use App\Entity\Expert;
+use App\Entity\Initiative;
 use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker;

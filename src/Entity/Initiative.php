@@ -85,9 +85,15 @@ class Initiative
      */
     private $odd;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Consumer::class, inversedBy="liked")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->odd = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -260,6 +266,32 @@ class Initiative
     {
         if ($this->odd->contains($odd)) {
             $this->odd->removeElement($odd);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Consumer[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Consumer $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Consumer $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
         }
 
         return $this;
