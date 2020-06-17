@@ -43,8 +43,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('firstName',null)
-            ->add('lastName',null)
+            ->add('firstName', null)
+            ->add('lastName', null)
         ;
     }
 
