@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Félicitations {{ app.user.email }}, vous êtes bien connectés ! </h1>
+    <a href="{{ path ('app_logout') }}">Me déconnecter</a>
+    <p>{{ etp.name }} est une entreprise de {{ etp.type.category.name }}, plus spécialement de {{ etp.type.name }}. Le
+        compte de cette entreprise a été crée par {{ etp.user.firstname }} {{ etp.user.lastname }}</p>
+
+    {% for opinion in etp.opinions %}
+        <p>
+            {{ opinion.depositary.firstname }} à dit {{ opinion.text }}.
+        </p>
+    {% endfor %}
+    <p>Cette entreprise s'engage à :</p>
+    {% for engagement in etp.engagements %}
+    <p>
+        Engagement n°{{ loop.index }} : {{ engagement.name }} : {{ engagement.actionText }}
+        {% for challenge in engagement.challenges %}
+            Cet engagement a été challengé par {{ challenge.depositary.name }}
+        {% endfor %}
+    </p>
+    {% endfor  %}
+
+
+
+{% endblock %}

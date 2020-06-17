@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\Admin;
 use App\Entity\Consumer;
 use App\Entity\Enterprise;
@@ -15,6 +16,13 @@ use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -27,7 +35,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setFirstName($fname);
             $user->setLastName($lname);
             $user->setEmail("$fname.$lname@gmail.com");
-            $user->setPassword($faker->password);
+            $user->setPassword($this->passwordEncoder->encodePassword($user, 'password'));
             $user->setRoles(['ROLE_CONSUMER']);
             $manager->persist($user);
 
@@ -49,7 +57,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setFirstName($fname);
             $user->setLastName($lname);
             $user->setEmail("$fname.$lname@gmail.com");
-            $user->setPassword($faker->password);
+            $user->setPassword($this->passwordEncoder->encodePassword($user, 'password'));
             $user->setRoles(['ROLE_EXPERT']);
             $manager->persist($user);
 
@@ -77,7 +85,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setFirstName($fname);
             $user->setLastName($lname);
             $user->setEmail("$fname.$lname@gmail.com");
-            $user->setPassword($faker->password);
+            $user->setPassword($this->passwordEncoder->encodePassword($user, 'password'));
             $user->setRoles(['ROLE_ENTERPRISE']);
             $manager->persist($user);
 
@@ -101,7 +109,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         }
         $admin = new Admin();
         $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword('admin');
+        $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'admin'));
         $admin->setEmail('admin@brandvisor.fr');
         $manager->persist($admin);
         $manager->flush();

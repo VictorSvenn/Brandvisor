@@ -11,7 +11,7 @@ class EtptypeFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        include 'data.php';
+        include '../../data.php';
         $tmp = 0;
         $otmp = 0;
         foreach ($data as $category => $type) {
