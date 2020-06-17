@@ -16,7 +16,7 @@
     <p>
         Engagement n°{{ loop.index }} : {{ engagement.name }} : {{ engagement.actionText }}
         {% for challenge in engagement.challenges %}
-            Cet engagement a été challengé par {{ challenge.depositary.name }}
+            Cet engagement a été challengé par {{ challenge.depositary.firstname }}
         {% endfor %}
     </p>
     {% endfor  %}

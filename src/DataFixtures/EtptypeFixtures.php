@@ -6,12 +6,26 @@ use App\Entity\EnterpriseType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Psr\Container\ContainerInterface;
 
-class EtptypeFixtures extends Fixture implements DependentFixtureInterface
+class EtptypeFixtures extends Fixture implements ContainerAwareInterface
 {
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
     public function load(ObjectManager $manager)
     {
-        include '../../data.php';
+        $serializer = $this->container->get('serializer');
+        $filepath = $this->container->get('kernel')->getRootDir() . "/DataFixtures/data.json";
+
+        // on récupère le contenu du fichier csv ( avec toutes les données des villes à l'intérieur )
+        // et on le décode à l'aide de serializer (que l'on obtient grâce au container)
+        $data = $serializer->decode(file_get_contents($filepath), 'json');
+
         $tmp = 0;
         $otmp = 0;
         foreach ($data as $category => $type) {

@@ -107,10 +107,15 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('etp_'.$i, $enterprise);
             $manager->persist($enterprise);
         }
+        $user = new User();
+        $user->setEmail('admin@brandvisor.fr');
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setPassword($this->passwordEncoder->encodePassword($user, 'admin'));
+        $user->setFirstName('fname');
+        $user->setLastName('lname');
+        $manager->persist($user);
         $admin = new Admin();
-        $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'admin'));
-        $admin->setEmail('admin@brandvisor.fr');
+        $admin->setUser($user);
         $manager->persist($admin);
         $manager->flush();
     }
