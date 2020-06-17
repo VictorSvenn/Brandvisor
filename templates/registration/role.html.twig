@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Je m'inscris{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <form action="" method="post">
+        <div class="container-fluid">
+            <div class="row col-5 my-5 mx-auto">
+                <h1 class="text-center mx-auto my-auto">CRÉER MON COMPTE</h1>
+            </div>
+            <div class="row col-3 mx-auto">
+                <label for="role_select">Je suis :</label><select name="roles" class="form-control" id="role_select">
+                    <option value="ROLE_CONSUMER">Un consommateur</option>
+                    <option value="ROLE_EXPERT">Un expert</option>
+                    <option value="ROLE_ENTERPRISE">Une entreprise</option>
+                </select>
+            </div>
+            <div class="row col-1 my-3 mx-auto">
+                <button type="submit" class="btn btn-primary btn-lg" name="submit">Valider</button>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}
