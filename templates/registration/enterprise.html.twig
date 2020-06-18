@@ -1,37 +1,81 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/form.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
-{% block body %}
+{% block form %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-
-    <h1>Register</h1>
-
     {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.firstName) }}
-    {{ form_row(registrationForm.lastName) }}
-    <label>Nom de l'entreprise
-        <input type="text" name="etp_name">
-    </label>
-    <label>Votre fonction au sein de cette entreprise
-        <input type="text" name="contact_function">
-    </label>
-    <label>Le numéro de SIRET de l'entreprise
-        <input type="number" name="SIRET">
-    </label>
-
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.plainPassword, {
-        label: 'Password'
-    }) }}
-    {{ form_row(registrationForm.agreeTerms) }}
-    <select name="type">
-        {% for type in types %}
-            <option value="{{ type.id }}">{{ type.name }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit" class="btn">Register</button>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.firstName) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.firstName) }}</div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.lastName) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.lastName) }}</div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1"><label for="etp_name">Le nom de l'entreprise</label></div>
+            <div class="row col-10 offset-1"><input type="text" name="etp_name" id="etp_name"></div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1"><label for="SIRET">Le numéro de SIRET de l'entreprise</label> </div>
+            <div class="row col-10 offset-1"><input type="number" id="SIRET" name="SIRET"></div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1"><label for="contact_function">Votre fonction au sein de cette entreprise</label></div>
+            <div class="row col-10 offset-1"><input type="text" name="contact_function" id="contact_function"></div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{form_label(registrationForm.email)}}</div>
+            <div class="row col-10 offset-1">{{form_widget(registrationForm.email)}}</div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.plainPassword) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.plainPassword) }}</div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">
+                <label for="validationPassword">Validation de votre mot de passe</label>
+            </div>
+            <div class="row col-10 offset-1">
+                <input type="tel" id="validationPassword" name="validationPassword">
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">
+                <button type="submit" class="btn">Register</button>
+            </div>
+        </div>
+    </div>
     {{ form_end(registrationForm) }}
+
+    {#    <div class="row my-3">#}
+    {#        <div class="container-fluid col-10">#}
+    {#            <div class="row col-10 offset-1">#}
+    {#            </div>#}
+    {#            <div class="row col-10 offset-1">#}
+
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+
+
 {% endblock %}

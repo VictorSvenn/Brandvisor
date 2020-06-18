@@ -7,37 +7,65 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
     {{ form_start(registrationForm) }}
-    <div class="container-fluid my-3">
-        <div class="row col-5 offset-1">{{ form_row(registrationForm.firstName) }}</div>
-        <div class="row col-5 offset-1">{{ form_row(registrationForm.lastName) }}</div>
-    </div>
     <div class="row my-3">
-        <div class="col-5 offset-1">
-            <label for="structure">Votre structure de rattachement</label>
-                <input type="text" name="structure" id="structure">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.firstName) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.firstName) }}</div>
         </div>
-        <div class="col-5 offset-1">
-            {{ form_row(registrationForm.email) }}
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.lastName) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.lastName) }}</div>
         </div>
     </div>
     <div class="row my-3">
-        <div class="col-5 offset-1">
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1"><label for="structure">Votre structure de rattachement</label></div>
+            <div class="row col-10 offset-1"><input type="text" name="structure" id="structure"></div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.email) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.email) }}</div>
         </div>
     </div>
     <div class="row my-3">
-        <div class="col-5 offset-1">
-            {{ form_row(registrationForm.agreeTerms) }}
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.plainPassword) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.plainPassword) }}</div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">
+                <label for="validationPassword">Validation de votre mot de passe</label>
+            </div>
+            <div class="row col-10 offset-1">
+                <input type="tel" id="validationPassword" name="validationPassword">
+            </div>
         </div>
     </div>
-    <div class="row my-3 col-1 mx-auto">
-        <button type="submit" class="btn">Register</button>
-        {{ form_end(registrationForm) }}
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1">
+                <button type="submit" class="btn">Register</button>
+            </div>
+        </div>
     </div>
+    {{ form_end(registrationForm) }}
+
+    {#    <div class="row my-3">#}
+    {#        <div class="container-fluid col-10">#}
+    {#            <div class="row col-10 offset-1">#}
+    {#            </div>#}
+    {#            <div class="row col-10 offset-1">#}
+
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
 
 
 
 
-    {% endblock %}
+{% endblock %}

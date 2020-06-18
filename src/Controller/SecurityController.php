@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use LogicException;
 use App\Entity\Enterprise;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,12 +15,9 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connected", name="app_connected")
      */
-    public function connected(): Response
+    public function connected(AuthenticationUtils $authenticationUtils): Response
     {
-        $enterprise = $this->getDoctrine()
-            ->getRepository(Enterprise::class)
-            ->find(246);
-        return $this->render('connected.html.twig', ['etp' => $enterprise]);
+        return $this->render('connected.html.twig');
     }
     /**
      * @Route("/login", name="app_login")
