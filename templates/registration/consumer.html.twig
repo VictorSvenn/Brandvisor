@@ -1,31 +1,119 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/form.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
-{% block body %}
+{% block form %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-
-    <h1>Register</h1>
-
     {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.firstName) }}
-    {{ form_row(registrationForm.lastName) }}
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.firstName) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.firstName) }}</div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.lastName) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.lastName) }}</div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-8 offset-1 mx-auto"><label for="date">Votre date de naissance</label></div>
+            <div class="row col-8 offset-1 mx-auto"><input type="date" name="date" id="date"></div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-8 offset-1 mx-auto"><label for="SIRET">Votre zone géographique</label> </div>
+            <div class="row col-8 offset-1 mx-auto"><input type="text" id="date" name="date"></div>
+        </div>
+    </div>
 
-    <label>Votre date de naissance
-        <input type="date" name="date">
-    </label>
-    <br>
-    <label>Votre zone géographique
-        <input type="text" name="geo">
-    </label>
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <div class="row my-3">
+        <div class="container-fluid col-5 ">
+            <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.plainPassword) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.plainPassword) }}</div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-8 offset-1 mx-auto">
+                <label for="validationPassword">Validation de votre mot de passe</label>
+            </div>
+            <div class="row col-8 offset-1 mx-auto">
+                <input type="tel" id="validationPassword" name="validationPassword">
+            </div>
+        </div>
+    </div>
 
-    <button type="submit" class="btn">Register</button>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.email) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.email) }}</div>
+        </div>
+        <div class="container-fluid col-5">
+        </div>
+    </div>
+
+
+
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="rrow col-8 offset-1 mx-auto">
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-8 offset-1 mx-auto">
+                <button type="submit" class="btn">Register</button>
+            </div>
+        </div>
+    </div>
     {{ form_end(registrationForm) }}
+
+    {#    <div class="row my-3">#}
+    {#        <div class="container-fluid col-10">#}
+{#        <input type="text" name="geo">#}
+{#    </label>
+    {#            <div class="row col-10 offset-1">#}
+    {#            </div>#}
+    {#            <div class="row col-10 offset-1">#}
+
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+
+
 {% endblock %}
+
+
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Register{% endblock %}#}
+
+{#{% block body %}#}
+{#    {% for flashError in app.flashes('verify_email_error') %}#}
+{#        <div class="alert alert-danger" role="alert">{{ flashError }}</div>#}
+{#    {% endfor %}#}
+
+{#    <h1>Register</h1>#}
+
+{#    {{ form_start(registrationForm) }}#}
+{#    {{ form_row(registrationForm.firstName) }}#}
+{#    {{ form_row(registrationForm.lastName) }}#}
+
+    {#    <label>Votre date de naissance#}
+    {#        <input type="date" name="date">#}
+    {#    </label>#}
+    {#    <br>#}
+    {#    <label>Votre zone géographique#}
+    {#        <input type="text" name="geo">#}
+    {#    </label>#}
+{#        {{ form_row(registrationForm.email) }}#}
+{#        {{ form_row(registrationForm.plainPassword, {#}
+{#            label: 'Password'#}
+{#        }) }}#}
+{#        {{ form_row(registrationForm.agreeTerms) }}#}
+
+{#    <button type="submit" class="btn">Register</button>#}
+{#    {{ form_end(registrationForm) }}#}
+{#{% endblock %}#}
