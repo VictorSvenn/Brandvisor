@@ -58,7 +58,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setRoles(["ROLE_CONSUMER"]);
+            $user->setRoles(["ROLE_CONSUMER","ROLE_USER"]);
 
             $consumer = new Consumer();
             $consumer->setUser($user);
@@ -104,7 +104,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setRoles(["ROLE_EXPERT"]);
+            $user->setRoles(["ROLE_EXPERT","ROLE_USER"]);
 
             $expert = new Expert();
             $expert->setUser($user);
@@ -143,15 +143,13 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             $etpname = $_POST['etp_name'];
             $fct = $_POST['contact_function'];
             $siret = $_POST['SIRET'];
             $typeid = $_POST['type'];
             $type = $this->getDoctrine()
                 ->getRepository(EnterpriseType::class)
-                ->find($typeid);
+                ->findOneBy(['id' => $typeid]);
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -159,7 +157,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            $user->setRoles(["ROLE_ENTERPRISE"]);
+            $user->setRoles(["ROLE_ENTERPRISE","ROLE_USER"]);
 
             $enterprise = new Enterprise();
             $enterprise->setUser($user);
@@ -183,7 +181,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/enterprise.html.twig', [
+        return $this->render('registration/form.html.twig', [
             'registrationForm' => $form->createView(),
             'types' => $etptype
         ]);

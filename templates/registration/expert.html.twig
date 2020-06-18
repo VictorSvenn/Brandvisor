@@ -1,26 +1,44 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/form.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
-{% block body %}
+{% block form %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-
-    <h1>Register</h1>
-
     {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.firstName) }}
-    {{ form_row(registrationForm.lastName) }}
-    <label>Votre structure de rattachement
-        <input type="text" name="structure">
-    </label>
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <div class="row my-3">
+        <div class="col-5 offset-1">{{ form_row(registrationForm.firstName) }}</div>
+        <div class="col-5 offset-1">{{ form_row(registrationForm.lastName) }}</div>
+    </div>
+    <div class="row my-3">
+        <div class="col-5 offset-1">
+            <label for="structure">Votre structure de rattachement</label>
+                <input type="text" name="structure" id="structure">
+        </div>
+        <div class="col-5 offset-1">
+            {{ form_row(registrationForm.email) }}
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-5 offset-1">
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+        </div>
+    </div>
+    <div class="row my-3">
 
-    <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+        <div class="col-5 offset-1">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+    </div>
+    <div class="row my-3 col-1 mx-auto">
+        <button type="submit" class="btn">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
+
+
+
+
+    {% endblock %}

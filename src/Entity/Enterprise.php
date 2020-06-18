@@ -6,6 +6,7 @@ use App\Repository\EnterpriseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Object_;
 
 /**
  * @ORM\Entity(repositoryClass=EnterpriseRepository::class)
@@ -373,7 +374,7 @@ class Enterprise
         return $this->type;
     }
 
-    public function setType(?EnterpriseType $type): self
+    public function setType($type): self
     {
         $this->type = $type;
 
