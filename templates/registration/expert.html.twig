@@ -7,9 +7,9 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
     {{ form_start(registrationForm) }}
-    <div class="row my-3">
-        <div class="col-5 offset-1">{{ form_row(registrationForm.firstName) }}</div>
-        <div class="col-5 offset-1">{{ form_row(registrationForm.lastName) }}</div>
+    <div class="container-fluid my-3">
+        <div class="row col-5 offset-1">{{ form_row(registrationForm.firstName) }}</div>
+        <div class="row col-5 offset-1">{{ form_row(registrationForm.lastName) }}</div>
     </div>
     <div class="row my-3">
         <div class="col-5 offset-1">
@@ -28,7 +28,6 @@
         </div>
     </div>
     <div class="row my-3">
-
         <div class="col-5 offset-1">
             {{ form_row(registrationForm.agreeTerms) }}
         </div>
