@@ -29,16 +29,12 @@
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">{{ form_label(registrationForm.plainPassword) }}</div>
-            <div class="row col-10 offset-1">{{ form_widget(registrationForm.plainPassword) }}</div>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.password.first) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.first) }}</div>
         </div>
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">
-                <label for="validationPassword">Validation de votre mot de passe</label>
-            </div>
-            <div class="row col-10 offset-1">
-                <input type="tel" id="validationPassword" name="validationPassword">
-            </div>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.password.second) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.second) }}</div>
         </div>
     </div>
     <div class="row my-3">

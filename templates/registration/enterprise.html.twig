@@ -19,38 +19,53 @@
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1"><label for="etp_name">Le nom de l'entreprise</label></div>
-            <div class="row col-10 offset-1"><input type="text" name="etp_name" id="etp_name"></div>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.etpname) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.etpname) }}</div>
         </div>
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1"><label for="SIRET">Le numéro de SIRET de l'entreprise</label> </div>
-            <div class="row col-10 offset-1"><input type="number" id="SIRET" name="SIRET"></div>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.SIRET) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.SIRET) }}</div>
         </div>
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1"><label for="contact_function">Votre fonction au sein de cette entreprise</label></div>
-            <div class="row col-10 offset-1"><input type="text" name="contact_function" id="contact_function"></div>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.contact_fct) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.contact_fct) }}</div>
         </div>
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">{{form_label(registrationForm.email)}}</div>
-            <div class="row col-10 offset-1">{{form_widget(registrationForm.email)}}</div>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.email) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.email) }}</div>
         </div>
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">{{ form_label(registrationForm.plainPassword) }}</div>
-            <div class="row col-10 offset-1">{{ form_widget(registrationForm.plainPassword) }}</div>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.password.first) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.first) }}</div>
         </div>
         <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">
-                <label for="validationPassword">Validation de votre mot de passe</label>
+            <div class="row col-10 offset-1">{{ form_label(registrationForm.password.second) }}</div>
+            <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.second) }}</div>
+        </div>
+
+    </div>
+    <div class="row my-3">
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1 pr-0">
+                <select name="type" id="type" style="width: 100%">
+                    {% for type in types %}
+                        <option value="{{ type.id }}">{{ type.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            <div class="row col-10 offset-1">
-                <input type="tel" id="validationPassword" name="validationPassword">
-            </div>
+            <div class="row col-10 offset-1"></div>
+        </div>
+        <div class="container-fluid col-5">
+            <div class="row col-10 offset-1"></div>
+            <div class="row col-10 offset-1"></div>
         </div>
     </div>
+
+
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">

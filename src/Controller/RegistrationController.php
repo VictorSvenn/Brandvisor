@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Enterprise;
 use App\Entity\EnterpriseType;
+use App\Form\ConsumerRegistrationFormType;
+use App\Form\ExpertRegistrationFormType;
 use DateTime;
 use App\Entity\Consumer;
 use App\Entity\Expert;
 use App\Entity\User;
-use App\Form\RegistrationFormType;
+use App\Form\EtpRegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +45,7 @@ class RegistrationController extends AbstractController
     $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): ?Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(ConsumerRegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -55,7 +57,7 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
             $user->setRoles(["ROLE_CONSUMER","ROLE_USER"]);
@@ -91,7 +93,7 @@ class RegistrationController extends AbstractController
     $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): ?Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(ExpertRegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -101,7 +103,7 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
             $user->setRoles(["ROLE_EXPERT","ROLE_USER"]);
@@ -140,12 +142,12 @@ class RegistrationController extends AbstractController
             ->getRepository(EnterpriseType::class)
             ->findAll();
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(EtpRegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $etpname = $_POST['etp_name'];
-            $fct = $_POST['contact_function'];
-            $siret = $_POST['SIRET'];
+            $name = $form->get('etpname')->getData();
+            $fct = $form->get('contact_fct')->getData();
+            $siret = $form->get('SIRET')->getData();
             $typeid = $_POST['type'];
             $type = $this->getDoctrine()
                 ->getRepository(EnterpriseType::class)
@@ -154,16 +156,16 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
             $user->setRoles(["ROLE_ENTERPRISE","ROLE_USER"]);
 
             $enterprise = new Enterprise();
             $enterprise->setUser($user);
-            $enterprise->setName($etpname);
+            $enterprise->setName($name);
             $enterprise->setContactFunction($fct);
-            $enterprise->setSiret($siret);
+            $enterprise->setSiret((int)$siret);
             $enterprise->setType($type);
 
 
