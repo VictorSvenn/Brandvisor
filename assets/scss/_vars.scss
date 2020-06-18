@@ -1,5 +1,7 @@
-$primary-color: #787979; //gris acier
-$secondary-color: white;
-$third-color: #73B981; //vert clair
-$fourth-color: #356315; //vert moins clair
-$fifth-color: #FF3254; //rouge
+$primary: #787979; //gris acier
+$secondary: white;
+$third: #73B981; //vert clair
+$fourth: #356315; //vert moins clair
+$fifth: #FF3254; //rouge
+
+@import "~bootstrap/scss/bootstrap";

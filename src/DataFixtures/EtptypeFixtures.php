@@ -7,9 +7,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Psr\Container\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class EtptypeFixtures extends Fixture implements ContainerAwareInterface
+class EtptypeFixtures extends Fixture implements ContainerAwareInterface, DependentFixtureInterface
 {
     private $container;
 

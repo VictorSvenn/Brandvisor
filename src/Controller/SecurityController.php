@@ -18,7 +18,7 @@ class SecurityController extends AbstractController
     {
         $enterprise = $this->getDoctrine()
             ->getRepository(Enterprise::class)
-            ->find(231);
+            ->find(246);
         return $this->render('connected.html.twig', ['etp' => $enterprise]);
     }
     /**
