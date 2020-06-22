@@ -10,42 +10,47 @@
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.firstName) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_errors(registrationForm.firstName) }}</div>
             <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.firstName) }}</div>
         </div>
         <div class="container-fluid col-5">
             <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.lastName) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_errors(registrationForm.lastName) }}</div>
             <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.lastName) }}</div>
         </div>
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-8 offset-1 mx-auto"><label for="date">Votre date de naissance</label></div>
+            {% if errorDate == 1 %}<div class="row col-8 offset-1 mx-auto"><ul><li>Veuillez renseigner votre date de naissance</li></ul></div>{% endif %}
+
             <div class="row col-8 offset-1 mx-auto"><input type="date" name="date" id="date"></div>
         </div>
         <div class="container-fluid col-5">
-            <div class="row col-8 offset-1 mx-auto"><label for="SIRET">Votre zone géographique</label> </div>
-            <div class="row col-8 offset-1 mx-auto"><input type="text" id="date" name="date"></div>
+            <div class="row col-8 offset-1 mx-auto"><label for="geo">Votre zone géographique</label> </div>
+            {% if errorGeo == 1 %}<div class="row col-8 offset-1 mx-auto"><ul></li>Veuillez renseigner votre zone géographique</li></ul></div>{% endif %}
+
+            <div class="row col-8 offset-1 mx-auto"><input type="text" id="geo" name="geo"></div>
         </div>
     </div>
 
     <div class="row my-3">
         <div class="container-fluid col-5 ">
-            <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.plainPassword) }}</div>
-            <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.plainPassword) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.password.first) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_errors(registrationForm.password.first) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.password.first) }}</div>
         </div>
         <div class="container-fluid col-5">
-            <div class="row col-8 offset-1 mx-auto">
-                <label for="validationPassword">Validation de votre mot de passe</label>
-            </div>
-            <div class="row col-8 offset-1 mx-auto">
-                <input type="tel" id="validationPassword" name="validationPassword">
-            </div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.password.second) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_errors(registrationForm.password.first) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.password.second) }}</div>
         </div>
     </div>
 
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-8 offset-1 mx-auto">{{ form_label(registrationForm.email) }}</div>
+            <div class="row col-8 offset-1 mx-auto">{{ form_errors(registrationForm.email) }}</div>
             <div class="row col-8 offset-1 mx-auto">{{ form_widget(registrationForm.email) }}</div>
         </div>
         <div class="container-fluid col-5">
@@ -84,36 +89,3 @@
 
 
 {% endblock %}
-
-
-{#{% extends 'base.html.twig' %}#}
-
-{#{% block title %}Register{% endblock %}#}
-
-{#{% block body %}#}
-{#    {% for flashError in app.flashes('verify_email_error') %}#}
-{#        <div class="alert alert-danger" role="alert">{{ flashError }}</div>#}
-{#    {% endfor %}#}
-
-{#    <h1>Register</h1>#}
-
-{#    {{ form_start(registrationForm) }}#}
-{#    {{ form_row(registrationForm.firstName) }}#}
-{#    {{ form_row(registrationForm.lastName) }}#}
-
-    {#    <label>Votre date de naissance#}
-    {#        <input type="date" name="date">#}
-    {#    </label>#}
-    {#    <br>#}
-    {#    <label>Votre zone géographique#}
-    {#        <input type="text" name="geo">#}
-    {#    </label>#}
-{#        {{ form_row(registrationForm.email) }}#}
-{#        {{ form_row(registrationForm.plainPassword, {#}
-{#            label: 'Password'#}
-{#        }) }}#}
-{#        {{ form_row(registrationForm.agreeTerms) }}#}
-
-{#    <button type="submit" class="btn">Register</button>#}
-{#    {{ form_end(registrationForm) }}#}
-{#{% endblock %}#}
