@@ -1,25 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/form.html.twig' %}
 
 {% block title %}Je m'inscris{% endblock %}
-
-{% block body %}
+{% block formtitle %}Inscription{% endblock %}
+{% block form %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
     <form action="" method="post">
-        <div class="container-fluid">
-            <div class="row col-5 my-5 mx-auto">
-                <h1 class="text-center mx-auto my-auto">CRÉER MON COMPTE</h1>
+        <div class="row my-3">
+            <div class="container-fluid col-10">
+                <div class="row col-10 offset-1"><label for="role_select">Je suis :</label></div>
+                <div class="row col-10 offset-1"><select name="roles" class="form-control" id="role_select">
+                        <option value="ROLE_CONSUMER">Un consommateur</option>
+                        <option value="ROLE_EXPERT">Un expert</option>
+                        <option value="ROLE_ENTERPRISE">Une entreprise</option>
+                    </select>
+                </div>
             </div>
-            <div class="row col-3 mx-auto">
-                <label for="role_select">Je suis :</label><select name="roles" class="form-control" id="role_select">
-                    <option value="ROLE_CONSUMER">Un consommateur</option>
-                    <option value="ROLE_EXPERT">Un expert</option>
-                    <option value="ROLE_ENTERPRISE">Une entreprise</option>
-                </select>
-            </div>
-            <div class="row col-1 my-3 mx-auto">
-                <button type="submit" class="btn btn-primary btn-lg" name="submit">Valider</button>
+        </div>
+        <div class="container-fluid col-4">
+            <div class="row col-10 offset-1">
+                <button type="submit" class="btn mx-auto" name="submit">Register</button>
             </div>
         </div>
     </form>
