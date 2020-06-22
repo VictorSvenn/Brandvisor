@@ -41,10 +41,12 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register/consumer", name="app_register_consumer")
      */
-    public function consumerregister(Request $request, UserPasswordEncoderInterface $passwordEncoder,
-                                     GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator)
-    : ?Response
-    {
+    public function consumerregister(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        GuardAuthenticatorHandler $guardHandler,
+        LoginFormAuthenticator $authenticator
+    ): ?Response {
         $user = new User();
         $form = $this->createForm(ConsumerRegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -110,10 +112,12 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register/expert", name="app_register_expert")
      */
-    public function expertregister(Request $request, UserPasswordEncoderInterface $passwordEncoder,
-                                   GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator)
-    : ?Response
-    {
+    public function expertregister(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        GuardAuthenticatorHandler $guardHandler,
+        LoginFormAuthenticator $authenticator
+    ): ?Response {
         $user = new User();
         $form = $this->createForm(ExpertRegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -163,10 +167,12 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register/enterprise", name="app_register_enterprise")
      */
-    public function enterpriseregister(Request $request, UserPasswordEncoderInterface $passwordEncoder,
-                                       GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator)
-    : ?Response
-    {
+    public function enterpriseregister(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        GuardAuthenticatorHandler $guardHandler,
+        LoginFormAuthenticator $authenticator
+    ): ?Response {
         $etptype = $this->getDoctrine()
             ->getRepository(EnterpriseType::class)
             ->findAll();
@@ -213,21 +219,9 @@ class RegistrationController extends AbstractController
             );
         }
         if ($form->isSubmitted()) {
-            if ($form->get('etpname')->getData() == '') {
-                $errorname = 1;
-            } else {
-                $errorname = 0;
-            }
-            if ($form->get('SIRET')->getData() == '') {
-                $errorsiret = 1;
-            } else {
-                $errorsiret = 0;
-            }
-            if ($form->get('contact_fct')->getData() == '') {
-                $errorfct = 1;
-            } else {
-                $errorfct = 0;
-            }
+            $errorfct = $form->get('contact_fct')->getData() == '';
+            $errorsiret = $form->get('SIRET')->getData() == '';
+            $errorname = $form->get('etpname')->getData() == '';
 
             return $this->render('registration/enterprise.html.twig', [
                 'registrationForm' => $form->createView(),
