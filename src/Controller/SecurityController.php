@@ -12,6 +12,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+
+    /**
+     * @Route("/", name="app_home")
+     */
+    public function index(): Response
+    {
+        #//TODO : CREER PAGE D'ACCUEIL
+        return $this->redirectToRoute('app_login');
+    }
+
     /**
      * @Route("/connected", name="app_connected")
      */
@@ -19,6 +29,8 @@ class SecurityController extends AbstractController
     {
         return $this->render('connected.html.twig');
     }
+
+
     /**
      * @Route("/login", name="app_login")
      */
@@ -41,7 +53,5 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        throw new LogicException('This method can be blank - it will be intercepted by the logout 
-        key on your firewall.');
     }
 }
