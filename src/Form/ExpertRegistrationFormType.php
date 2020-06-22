@@ -28,13 +28,13 @@ class ExpertRegistrationFormType extends AbstractType implements FormTypeInterfa
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Veuillez accepter les conditions générales d\'utilisation',
                     ]),
                 ],
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'Veuillez renseigner deux mots de passes identiques',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],

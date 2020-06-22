@@ -10,40 +10,54 @@
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.firstName) }}</div>
+            <div class="row col-10 offset-1">{{ form_errors(registrationForm.firstName) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.firstName) }}</div>
         </div>
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.lastName) }}</div>
+            <div class="row col-10 offset-1">{{ form_errors(registrationForm.lastName) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.lastName) }}</div>
         </div>
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.etpname) }}</div>
+            {% if errorname == 1 %}
+                <div class="row col-10 offset-1"><ul><li>Veuillez renseigner le nom de votre entreprise.</li></ul></div>
+            {% endif %}
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.etpname) }}</div>
         </div>
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.SIRET) }}</div>
+            {% if errorsiret == 1%}
+                <div class="row col-10 offset-1"><ul><li>Veuillez renseigner votre numéro SIRET</li></ul></div>
+            {% endif %}
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.SIRET) }}</div>
         </div>
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.contact_fct) }}</div>
+            {% if errorfct == 1%}
+                <div class="row col-10 offset-1"><ul><li>Veuillez renseigner votre fonction au sein de cette entreprise.</li></ul></div>
+            {% endif %}
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.contact_fct) }}</div>
         </div>
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.email) }}</div>
+            <div class="row col-10 offset-1">{{ form_errors(registrationForm.email) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.email) }}</div>
         </div>
     </div>
     <div class="row my-3">
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.password.first) }}</div>
+            <div class="row col-10 offset-1">{{ form_errors(registrationForm.password.first) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.first) }}</div>
         </div>
         <div class="container-fluid col-5">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.password.second) }}</div>
+            <div class="row col-10 offset-1">{{ form_errors(registrationForm.password.first) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.second) }}</div>
         </div>
 
