@@ -102,7 +102,6 @@ class Enterprise
      */
     private $type;
 
-
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
@@ -355,6 +354,7 @@ class Enterprise
 
         return $this;
     }
+
 
     public function removeOpinion(Opinion $opinion): self
     {

@@ -1,4 +1,44 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.name) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.name) }}</div>
+    <div class="row col-10 offset-1">{{ form_widget(form.name) }}</div>
+</div>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.siret) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.siret) }}</div>
+    <div class="row col-10 offset-1">{{ form_widget(form.siret) }}</div>
+</div>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.type) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.type) }}</div>
+    <div class="row col-10 offset-1 ">{{ form_widget(form.type) }}</div>
+</div>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.website) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.website) }}</div>
+    <div class="row col-10 offset-1 ">{{ form_widget(form.website) }}</div>
+</div>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.adress) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.adress) }}</div>
+    <div class="row col-10 offset-1 ">{{ form_widget(form.adress) }}</div>
+</div>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.user) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.user) }}</div>
+    <div class="row col-10 offset-1 ">{{ form_widget(form.user) }}</div>
+</div>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.contactFunction) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.contactFunction) }}</div>
+    <div class="row col-10 offset-1 ">{{ form_widget(form.contactFunction) }}</div>
+</div>
+<div class="row col-6">
+    <div class="row col-10 offset-1">{{ form_label(form.email) }}</div>
+    <div class="row col-10 offset-1">{{ form_errors(form.email) }}</div>
+    <div class="row col-10 offset-1 ">{{ form_widget(form.email) }}</div>
+</div>
+<button class="btn">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}
