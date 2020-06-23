@@ -99,7 +99,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $enterprise->setContactFunction($faker->jobTitle);
             $enterprise->setWebsite($faker->url);
             $enterprise->setSiret($faker->randomNumber());
-            $enterprise->setLogo('enterpriseLogo.' . $faker->fileExtension);
+            $enterprise->setLogo('logo.png');
             $enterprise->setEnterprisePhone($faker->phoneNumber);
             $enterprise->setEnterprisePres($faker->text);
             $enterprise->setDocuments(["etpdocument_$i.$faker->fileExtension", "etpdocument_$i.$faker->fileExtension"]);

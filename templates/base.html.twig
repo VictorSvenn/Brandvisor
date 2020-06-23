@@ -22,12 +22,18 @@
             </a>
             <form class="form-inline">
                 {% if app.user %}
-                    <a href="{{ path ('app_logout') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Se déconnecter</a>
+                    <a href="{{ path ('app_logout') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark"
+                       type="submit">Se déconnecter</a>
                 {% else %}
-                    <a href="{{ path ('app_login') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Se Connecter</a>
+                    <a href="{{ path ('app_login') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark"
+                       type="submit">Se Connecter</a>
                 {% endif %}
                 <a href="#" class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Anglais/Français</a>
-                <a class="navbar-brand p-2" href="#">
+                <a class="navbar-brand p-2" href="
+{% if is_granted('ROLE_ENTERPRISE') %}
+{{ path ('account_enterprise') }}
+{% endif %}
+">
                     <img src="{{ asset('images/User_Avatar_2.png') }}" width="30" height="30"
                          alt="MyAccount">
                 </a>
