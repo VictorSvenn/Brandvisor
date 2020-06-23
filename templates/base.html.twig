@@ -14,14 +14,14 @@
     {% endblock %}
 
     {% block head %}
-        <nav class="navbar navbar-light sticky-top lightGreen">
-            <a class="navbar-brand" href="#">
+        <nav class="navbar navbar-light sticky-top bg-lightGreen">
+            <a class="navbar-brand" href="/">
                 <img src={{ asset( 'images/Android_O_Preview_Logo.png' ) }} width="30" height="30"
                      class="d-inline-block align-top" alt="">
                 Brandvisor
             </a>
             <form class="form-inline">
-                <button class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Se Connecter</button>
+                <a href="{{ path ('app_login') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Se Connecter</a>
                 <button class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Anglais/Français</button>
             </form>
         </nav>
@@ -30,7 +30,7 @@
 
 
 <body>
-<div class="bg-secondary col-8 offset-2 p-3">
+<div class="col-8 offset-2 p-3">
     {% block body %}{% endblock %}
 
     {% block javascripts %}
@@ -38,7 +38,7 @@
 
     {% block footer %}
     <!-- Footer -->
-    <footer class="page-footer lightGreen fixed-bottom">
+    <footer class="page-footer bg-lightGreen fixed-bottom">
 
         <!-- Footer Links -->
         <div class="container">
