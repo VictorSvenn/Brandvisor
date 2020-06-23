@@ -13,46 +13,41 @@
                     , {{ user.enterprise.name }} {{ user.email }}</p>
             </div>
             <div class="row col-12">
-                <ul class="nav justify-content-around mx-auto">
-                    <li class="nav-item mx-auto" style="border: black 1px solid">
-                        <a class="nav-link" href="#">Modifier mes informations</a>
-                    </li>
-                    <li class="nav-item mx-auto" style="border: black 1px solid">
-                        <a class="nav-link" href="#">Déposer un engagement</a>
-                    </li>
-                    <li class="nav-item mx-auto"style="border: black 1px solid">
-                        <a class="nav-link" href="#">Avis sur mon entreprise</a>
-                    </li>
-                    <li class="nav-item mx-auto" style="border: black 1px solid">
-                        <a class="nav-link" href="#">Challenge</a>
-                    </li>
-                    <li class="nav-item mx-auto" style="border: black 1px solid">
-                        <a class="nav-link" href="#">Déposer une initiative</a>
-                    </li>
-                </ul>
+                <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="#">Modifier mes
+                    informations</a>
+                <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="#">Déposer un
+                    engagement</a>
+                <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="#">Avis sur mon
+                    entreprise</a>
+                <a class="mx-auto text-center col-3 btn btn-outline-secondary" href="#">Challenge</a>
             </div>
         </div>
         <hr>
         <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
             <div class="container-fluid col-5">
                 <div class="row">
-                    <p class="font-weight-bold">Adresse : </p><p class="mx-2"> {{ user.enterprise.adress }}</p>
+                    <p class="font-weight-bold">Adresse : </p>
+                    <p class="mx-2"> {{ user.enterprise.adress }}</p>
                 </div>
                 <div class="row">
-                    <p class="font-weight-bold">Téléphone : </p><p class="mx-2"> {{ user.enterprise.enterprisePhone }}</p>
+                    <p class="font-weight-bold">Téléphone : </p>
+                    <p class="mx-2"> {{ user.enterprise.enterprisePhone }}</p>
                 </div>
                 <div class="row">
-                    <p class="font-weight-bold">Nom de l'entreprise : </p><p class="mx-2"> {{ user.enterprise.name }}</p>
+                    <p class="font-weight-bold">Nom de l'entreprise : </p>
+                    <p class="mx-2"> {{ user.enterprise.name }}</p>
                 </div>
                 <div class="row">
-                    <p class="font-weight-bold">Fonction : </p><p class="mx-2"> {{ user.enterprise.contactFunction }}</p>
+                    <p class="font-weight-bold">Fonction : </p>
+                    <p class="mx-2"> {{ user.enterprise.contactFunction }}</p>
                 </div>
                 <div class="row">
-                    <p class="font-weight-bold">Catégorie de l'entreprise : </p><p class="mx-2"> {{ user.enterprise.type.name }}</p>
+                    <p class="font-weight-bold">Catégorie de l'entreprise : </p>
+                    <p class="mx-2"> {{ user.enterprise.type.name }}</p>
                 </div>
                 <div class="row">
                     <p class="font-weight-bold"> Site web de l'entreprise : </p><a
-                                href="{{ user.enterprise.website }}" class="mx-2"> {{ user.enterprise.website }}</a>
+                            href="{{ user.enterprise.website }}" class="mx-2"> {{ user.enterprise.website }}</a>
                 </div>
                 <div class="row">
                     <p class="font-weight-bold">Documents utiles : </p>
@@ -70,7 +65,10 @@
         <hr>
         <div class="row justify-content-around my-5 mb-5">
             {% for engagement in enterprise.engagements %}
-                <div class="container-fluid col-3 border border-dark">
+                <div class="container-fluid col-3 border border-info">
+                    <div class="row mx-auto">
+                        <h2 class="text-center mx-auto">Challenge {{ loop.index }}</h2>
+                    </div>
                     <div class="row mx-auto">
                         <h3 class="text-center mx-auto">{{ engagement.name }}</h3>
                     </div>
