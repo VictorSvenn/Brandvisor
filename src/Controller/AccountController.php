@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Enterprise;
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
@@ -22,16 +20,9 @@ class AccountController extends AbstractController
      */
     public function enterprise()
     {
-        $usert = $this->security->getUser()->getUsername();
-        $user = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findOneBy(['email' => $usert]);
-        $enterprise = $this->getDoctrine()
-            ->getRepository(Enterprise::class)
-            ->findOneBy(['user' => $user]);
+        $enterprise=$this->getUser()->getEnterprise();
         return $this->render('account/enterprise.html.twig', [
             'controller_name' => 'AccountController',
-            'user' => $user,
             'enterprise' => $enterprise,
         ]);
     }
