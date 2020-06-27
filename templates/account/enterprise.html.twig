@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title %}{{enterprise.name}} account{% endblock %}
 
 {% block body %}
     <div class="container-fluid bg-white px-5 py-5">
@@ -13,7 +13,7 @@
                     , {{ enterprise.name }} {{ app.user.email }}</p>
             </div>
             <div class="row col-12">
-                <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="#">Modifier mes
+                <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="{{ path('enterprise_edit', {'id': enterprise.id}) }}">Modifier mes
                     informations</a>
                 <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="#">Déposer un
                     engagement</a>

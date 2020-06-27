@@ -1,0 +1,13 @@
+{% extends 'registration/form.html.twig' %}
+
+{% block title %}Edit Enterprise{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-white px-5 py-5">
+        <h1>Modifier mes informations</h1>
+
+            <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
+                {{ include('enterprise/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+    </div>
+{% endblock %}

@@ -8,13 +8,6 @@ use Symfony\Component\Security\Core\Security;
 
 class AccountController extends AbstractController
 {
-    private $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security=$security;
-    }
-
     /**
      * @Route("/account/enterprise", name="account_enterprise")
      */
@@ -22,7 +15,6 @@ class AccountController extends AbstractController
     {
         $enterprise=$this->getUser()->getEnterprise();
         return $this->render('account/enterprise.html.twig', [
-            'controller_name' => 'AccountController',
             'enterprise' => $enterprise,
         ]);
     }
