@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Engagement{% endblock %}
+
+{% block body %}
+
+    <h1>Déposer un engagement</h1>
+    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
+
+        {{ include('engagement/_form.html.twig') }}
+    </div>
+{% endblock %}

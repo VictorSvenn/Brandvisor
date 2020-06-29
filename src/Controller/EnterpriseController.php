@@ -58,25 +58,6 @@ class EnterpriseController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="enterprise_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Enterprise $enterprise): Response
-    {
-        $form = $this->createForm(EnterpriseType::class, $enterprise);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('account_enterprise');
-        }
-
-        return $this->render('enterprise/edit.html.twig', [
-            'enterprise' => $enterprise,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="enterprise_delete", methods={"DELETE"})
