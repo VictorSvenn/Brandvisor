@@ -22,6 +22,16 @@ class AccountController extends AbstractController
             'enterprise' => $enterprise,
         ]);
     }
+    /**
+     * @Route("/account/expert", name="expert")
+     */
+    public function expert()
+    {
+        $expert = $this->getUser()->getExpert();
+        return $this->render('account/expert.html.twig', [
+            'expert' => $expert,
+        ]);
+    }
 
     /**
      * @Route("enterprise/opinions", name="enterprise_opinions")
