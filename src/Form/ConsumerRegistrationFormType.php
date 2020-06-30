@@ -23,9 +23,12 @@ class ConsumerRegistrationFormType extends AbstractType implements FormTypeInter
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('email', null, [
+                'label' => 'Votre email : '
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => "J'accepte les termes.",
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -37,12 +40,15 @@ class ConsumerRegistrationFormType extends AbstractType implements FormTypeInter
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options' => ['label' => 'Votre mot de passe : '],
+                'second_options' => ['label' => 'Validez votre mot de passe :'],
             ])
-            ->add('firstName', null)
-            ->add('lastName', null)
-        ;
+            ->add('firstName', null, [
+                'label' => 'Votre prénom : '
+            ])
+            ->add('lastName', null, [
+                'label' => 'Votre nom :'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
