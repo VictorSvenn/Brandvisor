@@ -11,6 +11,7 @@
               rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
               crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/build/app.css"/>
+        <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
     {% endblock %}
     {% block javascripts %}
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -37,6 +38,8 @@
                 <a class="navbar-brand p-2" href="
 {% if is_granted('ROLE_ENTERPRISE') %}
 {{ path ('account_enterprise') }}
+{% elseif is_granted('ROLE_EXPERT') %}
+{{ path('account_expert') }}
 {% endif %}
 ">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

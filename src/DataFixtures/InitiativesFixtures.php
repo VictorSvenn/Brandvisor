@@ -22,11 +22,11 @@ class InitiativesFixtures extends Fixture implements DependentFixtureInterface
             $initiative->setPresentation($faker->text);
             $initiative->setObjective($faker->text);
             $initiative->setDetailledDescription($faker->text);
-            $initiative->setPartner(["partner1","partner2"]);
-            $initiative->setLinks(["link1","link2"]);
+            $initiative->setPartner("partner1", "partner2");
+            $initiative->setLinks('link1 link2');
             $initiative->setWebsite($faker->url);
             $initiative->setGeographicArea($faker->city);
-            $initiative->setKeywords(["keyword1","keyword2"]);
+            $initiative->setKeywords("keyword1", "keyword2");
             $initiative->setIsConform(rand(true, false));
             $initiative->addLike($this->getReference('consumer_'.rand(1, 10)));
             $initiative->addOdd($this->getReference('odd_'.rand(1, 17)));

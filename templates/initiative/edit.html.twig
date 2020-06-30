@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Initiative{% endblock %}
+
+{% block body %}
+    <h1>Edit Initiative</h1>
+
+    {{ include('initiative/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('initiative_index') }}">back to list</a>
+
+    {{ include('initiative/_delete_form.html.twig') }}
+{% endblock %}
