@@ -36,7 +36,6 @@ class InitiativeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $roles = $this->getUser()->getRoles();
             $initiative->setDepositary($this->getUser());
             $entityManager->persist($initiative);
             $entityManager->flush();
