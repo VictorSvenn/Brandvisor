@@ -14,7 +14,7 @@ class OpinionFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i=1; $i<=10; $i++) {
+        for ($i=1; $i<=50; $i++) {
             $opinion = new Opinion();
             $opinion->setDepositary($this->getReference('user_'.rand(1, 20)));
             $opinion->setEnterprise($this->getReference('etp_'.rand(21, 30)));

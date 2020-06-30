@@ -1,12 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/form.html.twig' %}
 
-{% block title %}New Engagement{% endblock %}
+{% block title %}Déposer un engagement {% endblock %}
+{% block formtitle %}
+    Déposer un engagement
+{% endblock %}
+{% block form %}
 
-{% block body %}
-
-    <h1>Déposer un engagement</h1>
-    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
-
-        {{ include('engagement/_form.html.twig') }}
-    </div>
+    {{ include('engagement/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

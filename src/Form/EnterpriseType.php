@@ -32,11 +32,17 @@ class EnterpriseType extends AbstractType
             ])
             ->add('enterprisePhone')
             ->add('enterprisePres')
-            ->add('documents', FileType::class, [
+            ->add('document_list', FileType::class, [
                 'label' => 'Vos documents utiles',
                 'mapped' => false,
                 'required' => false,
-                'multiple'=> 'multiple'
+                'multiple'=> 'multiple',
+//                'constraints' => [
+//                    new File([
+//                        'mimeTypes' => 'application/png',
+//                        'mimeTypesMessage' => 'Please upload a valid PDF document'
+//                    ])
+//                ],
             ])
             ->add('type', EntityType::class, [
                 'class' => \App\Entity\EnterpriseType::class,

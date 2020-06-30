@@ -24,6 +24,15 @@ class AccountController extends AbstractController
     }
 
     /**
+     * @Route("enterprise/opinions", name="enterprise_opinions")
+     */
+    public function etpOpinions(): Response
+    {
+        $user = $this->getUser();
+        return $this->render('opinion/opinions.html.twig',['user'=>$user]);
+    }
+
+    /**
      * @Route("/{id}/edit", name="enterprise_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Enterprise $enterprise, FileUpload $fileUpload): Response
@@ -31,19 +40,16 @@ class AccountController extends AbstractController
         $form = $this->createForm(EnterpriseType::class, $enterprise);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $logo = $form->get('logo')->getData();
-            $filename = $fileUpload->upload($logo);
-            $enterprise->setLogo($filename);
-
-
+            if ($form->get('logo')->getData()) {
+                $logo = $form->get('logo')->getData();
+                $filename = $fileUpload->upload($logo);
+                $enterprise->setLogo($filename);
+            }
             $docs = [];
-            $files = $request->files->get('enterprise')['documents'];
+            $files = $request->files->get('enterprise')['document_list'];
             foreach ($files as $file) {
                 $filename = $fileUpload->upload($file);
                 array_push($docs, $filename);
-
-//                $filename = $fileUpload->upload($file);
-//                array_push($docs, $file);
             }
             $enterprise->setDocuments($docs);
 

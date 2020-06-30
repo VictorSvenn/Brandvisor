@@ -18,9 +18,9 @@
             <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
                href="{{ path('engagement_new') }}">Déposer un
                 engagement</a>
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="#">Avis sur mon
+            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="{{ path('enterprise_opinions') }}">Avis sur mon
                 entreprise</a>
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" href="#">Challenge</a>
+            <a class="mx-auto text-center col-3 btn btn-outline-secondary" href="{{ path('show_challenges') }}">Challenge</a>
         </div>
     </div>
     <hr>
@@ -55,7 +55,8 @@
             </div>
             {% for document in enterprise.documents %}
                 <div class="row">
-                    <a class="mx-2" href="{{ document }}">{{ document }}</a>
+                    <a href="{{ asset('uploads/' ~ document) }}">LE DOCUMENT {{ loop.index }}</a>
+{#                    <iframe src="{{ asset('uploads/' ~ document) }}" style="height: 30%" class="col-12"></iframe>#}
                 </div>
             {% endfor %}
         </div>

@@ -16,60 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class EnterpriseController extends AbstractController
 {
     /**
-     * @Route("/", name="enterprise_index", methods={"GET"})
+     * @Route("showChallenges", name="show_challenges")
      */
-    public function index(EnterpriseRepository $enterpriseRepository): Response
+    public function showChallenges(): Response
     {
-        return $this->render('enterprise/index.html.twig', [
-            'enterprises' => $enterpriseRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="enterprise_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $enterprise = new Enterprise();
-        $form = $this->createForm(EnterpriseType::class, $enterprise);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($enterprise);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('enterprise_index');
-        }
-
-        return $this->render('enterprise/new.html.twig', [
-            'enterprise' => $enterprise,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="enterprise_show", methods={"GET"})
-     */
-    public function show(Enterprise $enterprise): Response
-    {
-        return $this->render('enterprise/show.html.twig', [
-            'enterprise' => $enterprise,
-        ]);
-    }
-
-
-    /**
-     * @Route("/{id}", name="enterprise_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Enterprise $enterprise): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$enterprise->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($enterprise);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('enterprise_index');
+        $challenges = count($this->getUser()->getEnterprise()->getChallenges());
+        return $this->render('challenges/etpchallenges.html.twig',['user' => $this->getUser(), 'nb' => $challenges]);
     }
 }
