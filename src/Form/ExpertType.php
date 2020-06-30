@@ -2,28 +2,31 @@
 
 namespace App\Form;
 
-use App\Entity\Opinion;
+use App\Entity\Expert;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OpinionType extends AbstractType
+class ExpertType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('text')
-            ->add('date')
-            ->add('isConform')
-            ->add('depositary')
-            ->add('enterprise')
+            ->add('connectingStructure')
+            ->add('adress')
+            ->add('phone')
+            ->add('presentation')
+            ->add('illustration')
+            ->add('website')
+            ->add('expertiseAreas')
+            ->add('interventionZones')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Opinion::class,
+            'data_class' => Expert::class,
         ]);
     }
 }

@@ -32,6 +32,8 @@
                 <a class="navbar-brand p-2" href="
 {% if is_granted('ROLE_ENTERPRISE') %}
 {{ path ('account_enterprise') }}
+{% elseif is_granted('ROLE_EXPERT') %}
+{{ path('account_expert') }}
 {% endif %}
 ">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

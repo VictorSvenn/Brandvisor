@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expert index{% endblock %}
+
+{% block body %}
+    <h1>Expert index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ConnectingStructure</th>
+                <th>Adress</th>
+                <th>Phone</th>
+                <th>Presentation</th>
+                <th>Illustration</th>
+                <th>Website</th>
+                <th>ExpertiseAreas</th>
+                <th>InterventionZones</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for expert in experts %}
+            <tr>
+                <td>{{ expert.id }}</td>
+                <td>{{ expert.connectingStructure }}</td>
+                <td>{{ expert.adress }}</td>
+                <td>{{ expert.phone }}</td>
+                <td>{{ expert.presentation }}</td>
+                <td>{{ expert.illustration }}</td>
+                <td>{{ expert.website }}</td>
+                <td>{{ expert.expertiseAreas }}</td>
+                <td>{{ expert.interventionZones }}</td>
+                <td>
+                    <a href="{{ path('expert_show', {'id': expert.id}) }}">show</a>
+                    <a href="{{ path('expert_edit', {'id': expert.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('expert_new') }}">Create new</a>
+{% endblock %}
