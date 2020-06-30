@@ -1,0 +1,10 @@
+{% extends 'registration/form.html.twig' %}
+
+{% block title %}Déposer un engagement {% endblock %}
+{% block formtitle %}
+    Déposer un engagement
+{% endblock %}
+{% block form %}
+
+    {{ include('engagement/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

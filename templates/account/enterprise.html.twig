@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ enterprise.name }} account{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row col-5 mx-auto">
+            <h1 class="mx-auto text-center">Mon compte</h1>
+        </div>
+        <div class="row col-8 mx-auto">
+            <p class="mx-auto text-center">M./Mme. {{ enterprise.user.lastName }} {{ enterprise.user.firstName }}
+                , {{ enterprise.name }} {{ app.user.email }}</p>
+        </div>
+        <div class="row col-12">
+            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
+               href="{{ path('enterprise_edit', {'id': enterprise.id}) }}">Modifier mes
+                informations</a>
+            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
+               href="{{ path('engagement_new') }}">Déposer un
+                engagement</a>
+            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="{{ path('enterprise_opinions') }}">Avis sur mon
+                entreprise</a>
+            <a class="mx-auto text-center col-3 btn btn-outline-secondary" href="{{ path('show_challenges') }}">Challenge</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
+        <div class="container-fluid col-5">
+            <div class="row">
+                <p class="font-weight-bold">Adresse : </p>
+                <p class="mx-2"> {{ enterprise.adress }}</p>
+            </div>
+            <div class="row">
+                <p class="font-weight-bold">Téléphone : </p>
+                <p class="mx-2"> {{ enterprise.enterprisePhone }}</p>
+            </div>
+            <div class="row">
+                <p class="font-weight-bold">Nom de l'entreprise : </p>
+                <p class="mx-2"> {{ enterprise.name }}</p>
+            </div>
+            <div class="row">
+                <p class="font-weight-bold">Fonction : </p>
+                <p class="mx-2"> {{ enterprise.contactFunction }}</p>
+            </div>
+            <div class="row">
+                <p class="font-weight-bold">Catégorie de l'entreprise : </p>
+                <p class="mx-2"> {{ enterprise.type.name }}</p>
+            </div>
+            <div class="row">
+                <p class="font-weight-bold"> Site web de l'entreprise : </p><a
+                        href="{{ enterprise.website }}" class="mx-2"> {{ enterprise.website }}</a>
+            </div>
+            <div class="row">
+                <p class="font-weight-bold">Documents utiles : </p>
+            </div>
+            {% for document in enterprise.documents %}
+                <div class="row">
+                    <a href="{{ asset('uploads/' ~ document) }}">LE DOCUMENT {{ loop.index }}</a>
+{#                    <iframe src="{{ asset('uploads/' ~ document) }}" style="height: 30%" class="col-12"></iframe>#}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="container-fluid col-3 mx-auto my-auto ">
+            <img src="{{ asset('uploads/' ~ enterprise.logo) }}" alt="enterprise's logo" class="img-thumbnail">
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-around my-5 mb-5">
+        {% for engagement in enterprise.engagements %}
+            <div class="container-fluid col-3 border border-info">
+                <div class="row mx-auto">
+                    <h5 class="">{{ engagement.name }}</h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <p class="px-2">{{ engagement.actionText }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

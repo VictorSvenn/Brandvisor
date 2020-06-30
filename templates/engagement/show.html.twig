@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Engagement{% endblock %}
+
+{% block body %}
+    <h1>Engagement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ engagement.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ engagement.name }}</td>
+            </tr>
+            <tr>
+                <th>ActionText</th>
+                <td>{{ engagement.actionText }}</td>
+            </tr>
+            <tr>
+                <th>ActionDocuments</th>
+                <td>{{ engagement.actionDocuments ? engagement.actionDocuments|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ResultsText</th>
+                <td>{{ engagement.resultsText }}</td>
+            </tr>
+            <tr>
+                <th>ResultsDocuments</th>
+                <td>{{ engagement.resultsDocuments ? engagement.resultsDocuments|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Benefits</th>
+                <td>{{ engagement.benefits }}</td>
+            </tr>
+            <tr>
+                <th>ProofText</th>
+                <td>{{ engagement.proofText }}</td>
+            </tr>
+            <tr>
+                <th>ProofDocuments</th>
+                <td>{{ engagement.proofDocuments ? engagement.proofDocuments|join(', ') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('engagement_index') }}">back to list</a>
+
+    <a href="{{ path('engagement_edit', {'id': engagement.id}) }}">edit</a>
+
+    {{ include('engagement/_delete_form.html.twig') }}
+{% endblock %}
