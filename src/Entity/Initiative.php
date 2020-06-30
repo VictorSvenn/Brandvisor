@@ -71,9 +71,9 @@ class Initiative
     private $geographicArea;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string")
      */
-    private $keywords = [];
+    private $keywords;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -221,12 +221,12 @@ class Initiative
         return $this;
     }
 
-    public function getKeywords(): ?array
+    public function getKeywords(): ?string
     {
         return $this->keywords;
     }
 
-    public function setKeywords(array $keywords): self
+    public function setKeywords(string $keywords): self
     {
         $this->keywords = $keywords;
 
