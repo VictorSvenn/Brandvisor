@@ -21,6 +21,6 @@ class EnterpriseController extends AbstractController
     public function showChallenges(): Response
     {
         $challenges = count($this->getUser()->getEnterprise()->getChallenges());
-        return $this->render('challenges/etpchallenges.html.twig',['user' => $this->getUser(), 'nb' => $challenges]);
+        return $this->render('challenges/etpchallenges.html.twig', ['user' => $this->getUser(), 'nb' => $challenges]);
     }
 }

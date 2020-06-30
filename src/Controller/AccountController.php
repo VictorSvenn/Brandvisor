@@ -29,7 +29,7 @@ class AccountController extends AbstractController
     public function etpOpinions(): Response
     {
         $user = $this->getUser();
-        return $this->render('opinion/opinions.html.twig',['user'=>$user]);
+        return $this->render('opinion/opinions.html.twig', ['user'=>$user]);
     }
 
     /**
