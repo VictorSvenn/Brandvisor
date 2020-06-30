@@ -26,9 +26,10 @@ class InitiativeRepository extends ServiceEntityRepository
     public function findWhereNameAndKewordsLike($value)
     {
         return $this->createQueryBuilder('i')
-            ->where('i.name LIKE :val')
-            ->andWhere('i.keywords Like :val')
-            ->setParameter('val', '%' . $value . '%')
+            ->where('i.name LIKE :val1')
+            ->setParameter('val1', '%' . $value . '%')
+            ->andWhere('i.keywords Like :val2')
+            ->setParameter('val2', '%' . $value . '%')
             ->getQuery()
             ->getResult();
     }

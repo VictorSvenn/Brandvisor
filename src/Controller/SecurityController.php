@@ -43,12 +43,16 @@ class SecurityController extends AbstractController
             // Requête pour la table ODD
             $oddResult = $oddRepo->findWhereNameLike($query);
             $form = true;
+            $numResults = count($enterpriseResult) + count($initiativeResult) + count($oddResult);
+        } else {
+            $numResults = 0;
         }
         return $this->render('/home/home.html.twig', [
-            'enterprises' =>$enterpriseResult,
+            'enterprises' => $enterpriseResult,
             'initiatives' => $initiativeResult,
             'odds' => $oddResult,
             'form' => $form,
+            'numResults' => $numResults,
         ]);
     }
 

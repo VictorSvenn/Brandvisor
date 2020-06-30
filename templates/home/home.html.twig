@@ -1,46 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {# Inclusion de l'affichage des menus déroulants inérants aux rôles#}
     {% include '/home/roles.html.twig' %}
-<div class="col-8 text-center mt-4 mb-4">
-    <h4>Bienvenue sur BrandVisor!</h4>
-    <p>Le site ou exprimer ce que vous faites de bien pour la société et l'environnement en toute
-        transparence</p>
-</div>
-<hr>
-<form method="post" action="" class="col-8">
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Nom d'une entreprise, d'une initiative..."
-               aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchText">
-        <div class="input-group-append">
-            <input class="btn btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
+    {#~~~~~~~~~~~#}
+    <div class="col-8 text-center mt-4 mb-4">
+        <h4>Bienvenue sur BrandVisor!</h4>
+        <p>Le site ou exprimer ce que vous faites de bien pour la société et l'environnement en toute
+            transparence</p>
+    </div>
+    <hr>
+    {# Inclusion du formulaire et affichage des résultats#}
+    {% include '/home/research.html.twig' %}
+    {#~~~~~~~~~~#}
+
+    {# Section "Les Objectifs"#}
+    <div class="container-fluid col-8 ml-0">
+        <div class="row text-center mt-4 mb-4 mr-0">
+            {#Texte#}
+            <div class="col-6">
+                <h2>Les Objectifs</h2>
+                <p>Vous pensez que le partage des projets et des initiatives entre tous peut conduire à un monde
+                    meilleur
+                    Vous pensez qu'évaluer les entreprises et les marques sur leurs reponsabilités sociales et
+                    environnementales va les inciter à s'améliorer
+                    Vous pensez que les marques ont besoin de s'engager vers plus de transparence et ont des choses à
+                    faire
+                    valoir</p>
+            </div>
+            {#Image#}
+            <div class="col-6 my-auto">
+                <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
+            </div>
         </div>
     </div>
-</form>
-<div class="col-8">
-    {% if form == true %}
-        <h2 class="font-weight-bold text-center">Résultats en lien avec des entreprises:</h2>
-        {% for enterprise in enterprises %}
-        <h3>{{ enterprise.name }}</h3>
-        {% else %}
-            <h3>Aucun résultat en lien avec votre recherche.</h3>
-        {% endfor %}
+    {#~~~~~~~~~~~~~#}
+    {# Section "Nous sommes tous acteurs du changement"#}
+    <div class="container-fluid col-8 ml-0">
+        <div class="row text-center mt-4 mb-4 mr-0">
+            {#Image#}
+            <div class="col-6 my-auto">
+                <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
+            </div>
+            {#Texte#}
+            <div class="col-6">
+                <h2>Nous sommes tous acteurs du changement</h2>
+                <p>Décrire les cibles : les entreprises, les consommateurs, les experts.</p>
+            </div>
 
-        <h2 class="font-weight-bold text-center">Résultats en lien avec des initiatives:</h2>
-        {% for initiative in initiatives %}
-            <h3>{{ initiative.name }}</h3>
-            {% else %}
-            <h3>Aucun résultat en lien avec votre recherche.</h3>
-        {% endfor %}
-
-        <h2 class="font-weight-bold text-center">Résultats en lien avec des Thématiques:</h2>
-        {% for odd in odds %}
-            <h3>{{ odd.name }}</h3>
-        {% else %}
-            <h3>Aucun résultat en lien avec votre recherche.</h3>
-        {% endfor %}
-    {% endif %}
-</div>
-
-
+        </div>
+    </div>
+    {#~~~~~~~~~~~~~#}
 {% endblock %}
