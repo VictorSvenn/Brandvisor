@@ -1,0 +1,55 @@
+{% extends 'registration/form.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+{% block formtitle %}CONNEXION{% endblock %}
+{% block form %}
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {#    {% if app.user %}#}
+        {#        <div class="mb-3">#}
+        {#            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>#}
+        {#        </div>#}
+        {#    {% endif %}#}
+
+
+        <div class="row my-3">
+            <div class="container-fluid col-10">
+                <div class="row col-10 offset-1"><label for="inputEmail">Email</label></div>
+                <div class="row col-10 offset-1"><input type="email" value="{{ last_username }}" name="email"
+                                                        id="inputEmail" class="form-control" required autofocus>
+                </div>
+                <div class="row col-10 offset-1"><label for="inputPassword">Mot de passe</label></div>
+                <div class="row col-10 offset-1"><input type="password" name="password" id="inputPassword"
+                                                        class="form-control" required>
+                </div>
+            </div>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+        </div>
+
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        #}
+
+        <div class="row">
+            <p class="my-4 col-6 mx-auto">Je n'ai pas de compte, <a href="{{ path ('app_role') }}">m'inscrire</a> </p>
+            <div class="mx-auto">
+                <button class="mx-auto my-3 btn btn-lg btn-primary" type="submit">
+                    Sign in
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

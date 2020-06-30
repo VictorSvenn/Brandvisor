@@ -1,0 +1,59 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-image: url("../images/fougeressamere.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+$lightGreen: #73B981;
+$greySteel: #787979;
+$white: rgba(255, 255, 255, 0.84);
+$darkGreen: #356315;
+$red: #ff3254;
+
+.text-lightGreen {
+    color: $lightGreen;
+}
+
+.text-greySteel {
+    color: $greySteel;
+}
+
+.text-white {
+    color: $white;
+}
+
+.text-darkGreen {
+    color: $darkGreen;
+}
+
+.text-red {
+    color: $red;
+}
+
+.border-greySteel {
+    border-color: $greySteel;
+}
+
+.bg-lightGreen {
+    background-color: $lightGreen;
+}
+
+.bg-greySteel {
+    background-color: $greySteel;
+}
+
+.bg-white {
+    background-color: $white;
+}
+
+.bg-darkGreen {
+    background-color: $darkGreen;
+}
+
+.bg-red {
+    background-color: $red;
+}
+
+@import "~bootstrap/scss/bootstrap";

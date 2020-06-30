@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row col-5 my-5 mx-auto">
+            <h1 class="mx-auto my-auto text-center text-light">
+                {% block formtitle %} INSCRIPTION {% endblock %}
+            </h1>
+        </div>
+        <div class="row">
+            <div class="border col-10 mx-auto bg-white py-3">
+                {% block form %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

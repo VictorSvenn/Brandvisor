@@ -1,0 +1,31 @@
+{% extends 'registration/form.html.twig' %}
+
+{% block title %}Je m'inscris{% endblock %}
+{% block formtitle %}Inscription{% endblock %}
+{% block form %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <form action="" method="post">
+        <div class="row my-3">
+            <div class="container-fluid col-11">
+                <div class="row col-12"><label for="role_select">Je suis :</label></div>
+                <div class="row col-12 mx-auto"><select name="roles" class="form-control" id="role_select">
+                        <option value="ROLE_CONSUMER">Un consommateur</option>
+                        <option value="ROLE_EXPERT">Un expert</option>
+                        <option value="ROLE_ENTERPRISE">Une entreprise</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid col-4">
+            <div class="row col-10 offset-1">
+                <button class="mx-auto my-3 btn btn-lg btn-primary" type="submit" name="submit">
+                    Sign in
+                </button>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}
