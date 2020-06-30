@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.enterprise.name }} opinions{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row col-5 mx-auto">
+            <h1 class="mx-auto text-center my-5">Les avis sur mon compte</h1>
+        </div>
+        <div class="row d-flex justify-content-between">
+            {% for opinion in user.enterprise.opinions %}
+                <div class="card col-5 my-3" style="width: 18rem; background-color: rgba(128,128,128,0.25)">
+                    <div class="card-body">
+                        <h5 class="card-title">Avis déposé par M./Mme {{ opinion.depositary.lastName }}</h5>
+                        <p class="card-text">{{ opinion.text }}</p>
+                        <a href="#" class="btn btn-primary">Voir cet avis</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

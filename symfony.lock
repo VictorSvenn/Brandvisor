@@ -129,6 +129,9 @@
     "justinrainbow/json-schema": {
         "version": "5.2.8"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.4"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },
@@ -159,6 +162,9 @@
     "nikic/php-parser": {
         "version": "v4.2.1"
     },
+    "ocramius/package-versions": {
+        "version": "1.9.0"
+    },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
@@ -166,7 +172,7 @@
         "version": "2.5.2"
     },
     "php": {
-        "version": "7.2"
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -616,6 +622,9 @@
     },
     "twig/twig": {
         "version": "v2.9.0"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.4.0"

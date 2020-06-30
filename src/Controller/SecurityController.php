@@ -18,8 +18,8 @@ class SecurityController extends AbstractController
      */
     public function index(): Response
     {
-        #//TODO : CREER PAGE D'ACCUEIL
-        return $this->redirectToRoute('app_login');
+
+        return $this->render('/home/home.html.twig');
     }
 
     /**

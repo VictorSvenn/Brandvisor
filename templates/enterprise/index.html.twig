@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enterprise index{% endblock %}
+
+{% block body %}
+    <h1>Enterprise index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Note</th>
+                <th>Adress</th>
+                <th>ContactFunction</th>
+                <th>Website</th>
+                <th>Siret</th>
+                <th>Logo</th>
+                <th>EnterprisePhone</th>
+                <th>EnterprisePres</th>
+                <th>Documents</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for enterprise in enterprises %}
+            <tr>
+                <td>{{ enterprise.id }}</td>
+                <td>{{ enterprise.name }}</td>
+                <td>{{ enterprise.note }}</td>
+                <td>{{ enterprise.adress }}</td>
+                <td>{{ enterprise.contactFunction }}</td>
+                <td>{{ enterprise.website }}</td>
+                <td>{{ enterprise.siret }}</td>
+                <td>{{ enterprise.logo }}</td>
+                <td>{{ enterprise.enterprisePhone }}</td>
+                <td>{{ enterprise.enterprisePres }}</td>
+                <td>{{ enterprise.documents ? enterprise.documents|join(', ') : '' }}</td>
+                <td>
+                    <a href="{{ path('enterprise_show', {'id': enterprise.id}) }}">show</a>
+                    <a href="{{ path('enterprise_edit', {'id': enterprise.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('enterprise_new') }}">Create new</a>
+{% endblock %}

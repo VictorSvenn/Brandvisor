@@ -14,15 +14,32 @@
     {% endblock %}
 
     {% block head %}
-        <nav class="navbar navbar-light sticky-top lightGreen">
-            <a class="navbar-brand" href="#">
+        <nav class="navbar navbar-light sticky-top bg-lightGreen">
+            <a class="navbar-brand" href="/">
                 <img src={{ asset( 'images/Android_O_Preview_Logo.png' ) }} width="30" height="30"
                      class="d-inline-block align-top" alt="">
                 Brandvisor
             </a>
             <form class="form-inline">
-                <button class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Se Connecter</button>
-                <button class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Anglais/Français</button>
+                {% if app.user %}
+                    <a href="{{ path ('app_logout') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark"
+                       type="submit">Se déconnecter</a>
+                {% else %}
+                    <a href="{{ path ('app_login') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark"
+                       type="submit">Se Connecter</a>
+                {% endif %}
+                <a href="#" class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Anglais/Français</a>
+                <a class="navbar-brand p-2" href="
+{% if is_granted('ROLE_ENTERPRISE') %}
+{{ path ('account_enterprise') }}
+{% endif %}
+">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                    </svg>
+                </a>
             </form>
         </nav>
     {% endblock %}
@@ -30,15 +47,17 @@
 
 
 <body>
-<div class="bg-secondary col-8 offset-2 p-3">
-    {% block body %}{% endblock %}
+<div class="col-10 offset-1 p-3">
+    <div class="container-fluid bg-white px-5 py-5">
+        {% block body %}{% endblock %}
+    </div>
 
     {% block javascripts %}
     {% endblock %}
 
     {% block footer %}
     <!-- Footer -->
-    <footer class="page-footer lightGreen fixed-bottom">
+    <footer class="page-footer bg-lightGreen fixed-bottom">
 
         <!-- Footer Links -->
         <div class="container">
@@ -89,5 +108,4 @@
             </div>
             {% endblock %}
 </body>
-</div>
 </html>

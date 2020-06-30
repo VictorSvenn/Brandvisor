@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{# Select qui permet d'accéder aux pages du site #}
+    {% if is_granted('ROLE_CONSUMER') %}
+<select>
+    <option>Déposer une initiative</option>
+    <option>Évaluer une entreprise</option>
+    <option>Voir la liste des experts référencés</option>
+</select>
+    {% elseif is_granted('ROLE_EXPERT') %}
+    <select>
+        <option>Déposer une initiative</option>
+        <option>Évaluer une entreprise</option>
+        <option>Se référencer comme conseil/expert</option>
+        <option>Voir la liste des experts référencés</option>
+    </select>
+    {% elseif is_granted('ROLE_ENTERPRISE') %}
+    <select>
+        <option>Déposer des informations sur mon entreprise</option>
+        <option>Voir la liste des experts référencés</option>
+    </select>
+    {% endif %}
+    <select>
+        <option>Qui sommes-nous</option>
+        <option>Mission</option>
+        <option>Équipe</option>
+        <option>Nos valeurs</option>
+        <option>Contact</option>
+    </select>
+
+{% endblock %}
