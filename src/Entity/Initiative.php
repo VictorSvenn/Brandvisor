@@ -51,14 +51,14 @@ class Initiative
     private $detailledDescription;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $partner = [];
+    private $partner;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $links = [];
+    private $links;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -173,24 +173,24 @@ class Initiative
         return $this;
     }
 
-    public function getPartner(): ?array
+    public function getPartner(): ?string
     {
         return $this->partner;
     }
 
-    public function setPartner(?array $partner): self
+    public function setPartner(?string $partner): self
     {
         $this->partner = $partner;
 
         return $this;
     }
 
-    public function getLinks(): ?array
+    public function getLinks(): ?string
     {
         return $this->links;
     }
 
-    public function setLinks(?array $links): self
+    public function setLinks(?string $links): self
     {
         $this->links = $links;
 
