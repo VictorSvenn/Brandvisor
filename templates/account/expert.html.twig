@@ -25,7 +25,7 @@
     </div>
     <hr>
     <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
-        <div class="container-fluid col-10 mx-auto">
+        <div class="container-fluid col-5">
             <div class="row">
                 <p class="font-weight-bold">Adresse : </p>
                 <p class="mx-2"> {{ expert.adress }}</p>
@@ -39,5 +39,27 @@
                 <p class="mx-2"> {{ expert.connectingStructure }}</p>
             </div>
         </div>
+        <div class="container-fluid col-3 mx-auto my-auto ">
+            <img src="{{ asset('uploads/' ~ expert.illustration) }}" alt="expert's illustration" class="img-thumbnail">
+        </div>
     </div>
+    {#    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">#}
+    {#        <div class="container-fluid col-5">#}
+    {#            <div class="row">#}
+    {#                <p class="font-weight-bold">Adresse : </p>#}
+    {#                <p class="mx-2"> {{ expert.adress }}</p>#}
+    {#            </div>#}
+    {#            <div class="row">#}
+    {#                <p class="font-weight-bold">Téléphone : </p>#}
+    {#                <p class="mx-2"> {{ expert.phone }}</p>#}
+    {#            </div>#}
+    {#            <div class="row">#}
+    {#                <p class="font-weight-bold">Structure de rattachement : </p>#}
+    {#                <p class="mx-2"> {{ expert.connectingStructure }}</p>#}
+    {#            </div>#}
+
+    {#            <div class="container-fluid col-3 mx-auto my-auto ">#}
+    {#                <img src="{{ asset('uploads/' ~ expert.illustration) }}" alt="expert's illustration" class="img-thumbnail">#}
+    {#            </div>#}
+    {#        </div>#}
 {% endblock %}

@@ -56,7 +56,7 @@
             {% for document in enterprise.documents %}
                 <div class="row">
                     <a href="{{ asset('uploads/' ~ document) }}">LE DOCUMENT {{ loop.index }}</a>
-{#                    <iframe src="{{ asset('uploads/' ~ document) }}" style="height: 30%" class="col-12"></iframe>#}
+                    {#                    <iframe src="{{ asset('uploads/' ~ document) }}" style="height: 30%" class="col-12"></iframe>#}
                 </div>
             {% endfor %}
         </div>

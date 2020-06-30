@@ -60,10 +60,12 @@ class EnterpriseController extends AbstractController
                 $enterprise->setLogo($filename);
             }
             $docs = [];
-            $files = $request->files->get('enterprise')['document_list'];
-            foreach ($files as $file) {
-                $filename = $fileUpload->upload($file);
-                array_push($docs, $filename);
+            if ($request->files->get('enterprise')['document_list']) {
+                $files = $request->files->get('enterprise')['document_list'];
+                foreach ($files as $file) {
+                    $filename = $fileUpload->upload($file);
+                    array_push($docs, $filename);
+                }
             }
             $enterprise->setDocuments($docs);
 

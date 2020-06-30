@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'registration/form.html.twig' %}
 
 {% block title %}Edit Expert{% endblock %}
+{% block formtitle %}
+    Editer mon compte
+{% endblock %}
+{% block form %}
 
-{% block body %}
-    <h1>Edit Expert</h1>
     {{ include('expert/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}
