@@ -15,16 +15,36 @@ class InitiativeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('illustration')
-            ->add('presentation')
-            ->add('objective')
-            ->add('detailledDescription')
-            ->add('partner')
-            ->add('links')
-            ->add('website')
-            ->add('geographicArea')
-            ->add('keywords')
+            ->add('name', null, [
+                'label'=>'Le nom de votre initiative : '
+            ])
+            ->add('illustration', null, [
+                'label' => "Une potentielle illustration de votre initiative : "
+            ])
+            ->add('presentation', null, [
+                'label' => "Une présentation de votre initiative : "
+            ])
+            ->add('objective', null, [
+                'label' => "Le(s) objectifs de votre initiative : "
+            ])
+            ->add('detailledDescription', null, [
+                'label'=>"Une description détaillée de votre initiative : "
+            ])
+            ->add('partner', null, [
+                'label' => "Le(s) partenaires de cette initiative : "
+            ])
+            ->add('links', null, [
+                'label' => "Des liens importants pour cette initiative : "
+            ])
+            ->add('website', null, [
+                'label' => "Le site web lié a votre initiative : "
+            ])
+            ->add('geographicArea', null, [
+                'label' => "La zone géographique de votre initiative : "
+            ])
+            ->add('keywords', null, [
+                'label' => "Les mots clés liés à votre initiative : "
+            ])
             ->add('odd', EntityType::class, [
                 'class' => Odd::class,
                 'choice_label' => 'name',

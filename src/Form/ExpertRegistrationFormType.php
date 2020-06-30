@@ -25,6 +25,7 @@ class ExpertRegistrationFormType extends AbstractType implements FormTypeInterfa
         $builder
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
+                'label'=>"Termes de l'application : ",
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -37,11 +38,15 @@ class ExpertRegistrationFormType extends AbstractType implements FormTypeInterfa
                 'invalid_message' => 'Veuillez renseigner deux mots de passes identiques',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Votre mot de passe : '],
+                'second_options' => ['label' => 'Validation de votre mot de passe : '],
             ])
-            ->add('firstName', null)
-            ->add('lastName', null)
+            ->add('firstName', null, [
+                'label'=> "Votre prénom : "
+            ])
+            ->add('lastName', null, [
+                'label'=>"Votre nom : "
+            ])
         ;
     }
 

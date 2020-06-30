@@ -15,11 +15,12 @@ class OpinionType extends AbstractType
     {
         $builder
             ->add('text', null, [
-
+                'label' => 'Votre commentaire : '
             ])
             ->add('enterprise', EntityType::class, [
                 'class' => Enterprise::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'label' => "L'entreprise visée : "
             ]);
     }
 
