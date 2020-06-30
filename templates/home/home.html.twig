@@ -1,32 +1,46 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{# Select qui permet d'accéder aux pages du site #}
-    {% if is_granted('ROLE_CONSUMER') %}
-<select>
-    <option>Déposer une initiative</option>
-    <option>Évaluer une entreprise</option>
-    <option>Voir la liste des experts référencés</option>
-</select>
-    {% elseif is_granted('ROLE_EXPERT') %}
-    <select>
-        <option>Déposer une initiative</option>
-        <option>Évaluer une entreprise</option>
-        <option>Se référencer comme conseil/expert</option>
-        <option>Voir la liste des experts référencés</option>
-    </select>
-    {% elseif is_granted('ROLE_ENTERPRISE') %}
-    <select>
-        <option>Déposer des informations sur mon entreprise</option>
-        <option>Voir la liste des experts référencés</option>
-    </select>
+    {% include '/home/roles.html.twig' %}
+<div class="col-8 text-center mt-4 mb-4">
+    <h4>Bienvenue sur BrandVisor!</h4>
+    <p>Le site ou exprimer ce que vous faites de bien pour la société et l'environnement en toute
+        transparence</p>
+</div>
+<hr>
+<form method="post" action="" class="col-8">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Nom d'une entreprise, d'une initiative..."
+               aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchText">
+        <div class="input-group-append">
+            <input class="btn btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
+        </div>
+    </div>
+</form>
+<div class="col-8">
+    {% if form == true %}
+        <h2 class="font-weight-bold text-center">Résultats en lien avec des entreprises:</h2>
+        {% for enterprise in enterprises %}
+        <h3>{{ enterprise.name }}</h3>
+        {% else %}
+            <h3>Aucun résultat en lien avec votre recherche.</h3>
+        {% endfor %}
+
+        <h2 class="font-weight-bold text-center">Résultats en lien avec des initiatives:</h2>
+        {% for initiative in initiatives %}
+            <h3>{{ initiative.name }}</h3>
+            {% else %}
+            <h3>Aucun résultat en lien avec votre recherche.</h3>
+        {% endfor %}
+
+        <h2 class="font-weight-bold text-center">Résultats en lien avec des Thématiques:</h2>
+        {% for odd in odds %}
+            <h3>{{ odd.name }}</h3>
+        {% else %}
+            <h3>Aucun résultat en lien avec votre recherche.</h3>
+        {% endfor %}
     {% endif %}
-    <select>
-        <option>Qui sommes-nous</option>
-        <option>Mission</option>
-        <option>Équipe</option>
-        <option>Nos valeurs</option>
-        <option>Contact</option>
-    </select>
+</div>
+
 
 {% endblock %}

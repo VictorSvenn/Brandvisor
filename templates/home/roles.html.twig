@@ -1,0 +1,56 @@
+{% block body %}
+    <div class="col-8">
+        <div class="d-flex flex-wrap justify-content-center">
+            {# Select qui permet d'accéder aux pages du site #}
+            {% if is_granted('ROLE_CONSUMER') %}
+                <div class="dropdown col-4 m-2">
+                    <button class="btn btn-success dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Entrée Consommateur
+                    </button>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Déposer une initiative</a>
+                    <a class="dropdown-item" href="#">Évaluer une entreprise</a>
+                    <a class="dropdown-item" href="#">Voir la liste des experts référencés</a>
+                </div>
+            {% elseif is_granted('ROLE_EXPERT') %}
+                <div class="dropdown col-4 m-2">
+                    <button class="btn btn-success dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Entrée Expert
+                    </button>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Déposer une initiative</a>
+                    <a class="dropdown-item" href="#">Évaluer une entreprise</a>
+                    <a class="dropdown-item" href="#">Se référencer comme conseil/expert</a>
+                    <a class="dropdown-item" href="#">Voir la liste des experts référencés</a>
+                </div>
+            {% elseif is_granted('ROLE_ENTERPRISE') %}
+                <div class="dropdown col-4 m-2">
+                    <button class="btn btn-success dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">Entrée Entreprise
+                    </button>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Déposer des informations sur mon entreprise</a>
+                    <a class="dropdown-item" href="#">Voir la liste des experts référencés</a>
+                </div>
+            {% endif %}
+            <div class="dropdown col-4 m-2">
+                <button class="btn btn-success dropdown-toggle" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">Qui sommes-nous?
+                </button>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Mission</a>
+                <a class="dropdown-item" href="#">Équipe</a>
+                <a class="dropdown-item" href="#">Nos valeurs</a>
+                <a class="dropdown-item" href="#">Contact</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

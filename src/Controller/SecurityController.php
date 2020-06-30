@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Initiative;
+use App\Entity\Odd;
 use App\Entity\User;
+use App\Repository\EnterpriseRepository;
+use App\Repository\InitiativeRepository;
+use App\Repository\OddRepository;
 use LogicException;
 use App\Entity\Enterprise;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +21,37 @@ class SecurityController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(): Response
-    {
+    public function index(
+        EnterpriseRepository $entRepo,
+        InitiativeRepository $initRepo,
+        OddRepository $oddRepo
+    ): Response {
+        // Fonction de recheche dans l'index
+        $enterpriseResult = null;
+        $initiativeResult = null;
+        $oddResult = null;
+        $form = false;
+        if (isset($_POST['indexSearch'])) {
+            $query = $_POST['searchText'];
 
-        return $this->render('/home/home.html.twig');
+            // Requête pour la table entreprise
+            $enterpriseResult = $entRepo->findWhereNameLike($query);
+
+            // Requête pour la table initiative
+            $initiativeResult = $initRepo->findWhereNameAndKewordsLike($query);
+
+            // Requête pour la table ODD
+            $oddResult = $oddRepo->findWhereNameLike($query);
+            $form = true;
+        }
+        return $this->render('/home/home.html.twig', [
+            'enterprises' =>$enterpriseResult,
+            'initiatives' => $initiativeResult,
+            'odds' => $oddResult,
+            'form' => $form,
+        ]);
     }
+
 
     /**
      * @Route("/connected", name="app_connected")

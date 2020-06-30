@@ -22,19 +22,17 @@ class InitiativeRepository extends ServiceEntityRepository
     // /**
     //  * @return Initiative[] Returns an array of Initiative objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findWhereNameAndKewordsLike($value)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('i.name LIKE :val')
+            ->andWhere('i.keywords Like :val')
+            ->setParameter('val', '%' . $value . '%')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Initiative
