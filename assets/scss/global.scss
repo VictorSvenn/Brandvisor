@@ -1,14 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-    background-image: url("../images/fougeressamere.jpeg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+    background-color: black;
+    //background-image: url("../images/fougeressamere.jpeg");
+    //background-repeat: no-repeat;
+    //background-size: 100%;
 }
 
 $lightGreen: #73B981;
 $greySteel: #787979;
-$white: rgba(255, 255, 255, 0.84);
+$white: rgba(255, 255, 255, 0.99);
 $darkGreen: #356315;
 $red: #ff3254;
 

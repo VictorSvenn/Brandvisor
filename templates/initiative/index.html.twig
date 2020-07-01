@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Initiative index{% endblock %}
+
+{% block body %}
+    <h1>Initiative index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Illustration</th>
+                <th>Presentation</th>
+                <th>Objective</th>
+                <th>DetailledDescription</th>
+                <th>Partner</th>
+                <th>Links</th>
+                <th>Website</th>
+                <th>GeographicArea</th>
+                <th>Keywords</th>
+                <th>IsConform</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for initiative in initiatives %}
+            <tr>
+                <td>{{ initiative.id }}</td>
+                <td>{{ initiative.name }}</td>
+                <td>{{ initiative.illustration }}</td>
+                <td>{{ initiative.presentation }}</td>
+                <td>{{ initiative.objective }}</td>
+                <td>{{ initiative.detailledDescription }}</td>
+                <td>{{ initiative.partner ? initiative.partner|join(', ') : '' }}</td>
+                <td>{{ initiative.links ? initiative.links|join(', ') : '' }}</td>
+                <td>{{ initiative.website }}</td>
+                <td>{{ initiative.geographicArea }}</td>
+                <td>{{ initiative.keywords ? initiative.keywords|join(', ') : '' }}</td>
+                <td>{{ initiative.isConform ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('initiative_show', {'id': initiative.id}) }}">show</a>
+                    <a href="{{ path('initiative_edit', {'id': initiative.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('initiative_new') }}">Create new</a>
+{% endblock %}

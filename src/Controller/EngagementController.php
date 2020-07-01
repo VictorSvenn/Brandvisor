@@ -17,16 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class EngagementController extends AbstractController
 {
     /**
-     * @Route("/", name="engagement_index", methods={"GET"})
-     */
-    public function index(EngagementRepository $engagementRepository): Response
-    {
-        return $this->render('engagement/index.html.twig', [
-            'engagements' => $engagementRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new", name="engagement_new", methods={"GET","POST"})
      */
     public function new(Request $request, FileUpload $fileUpload): Response
@@ -75,49 +65,5 @@ class EngagementController extends AbstractController
             'engagement' => $engagement,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="engagement_show", methods={"GET"})
-     */
-    public function show(Engagement $engagement): Response
-    {
-        return $this->render('engagement/show.html.twig', [
-            'engagement' => $engagement,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="engagement_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Engagement $engagement): Response
-    {
-        $form = $this->createForm(EngagementType::class, $engagement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('engagement_index');
-        }
-
-        return $this->render('engagement/edit.html.twig', [
-            'engagement' => $engagement,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="engagement_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Engagement $engagement): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $engagement->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($engagement);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('engagement_index');
     }
 }

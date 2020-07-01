@@ -15,13 +15,23 @@ class EnterpriseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('adress')
-            ->add('contactFunction')
-            ->add('website')
-            ->add('siret')
+            ->add('name', null, [
+                'label' => 'Le nom de votre entreprise : '
+            ])
+            ->add('adress', null, [
+                'label' => "L'adresse de votre entreprise : "
+            ])
+            ->add('contactFunction', null, [
+                'label' => 'Votre fonction au sein de cette entreprise : '
+            ])
+            ->add('website', null, [
+                'label' => "Un lien vers votre site web"
+            ])
+            ->add('siret', null, [
+                'label' => "Le numéro SIRET de votre entreprise : "
+            ])
             ->add('logo', FileType::class, [
-                'label' => 'Votre logo',
+                'label' => 'Le logo de votre entreprise : ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -30,13 +40,17 @@ class EnterpriseType extends AbstractType
                     ])
                 ]
             ])
-            ->add('enterprisePhone')
-            ->add('enterprisePres')
+            ->add('enterprisePhone', null, [
+                'label' => "Le numéro de téléphone de votre entreprise :"
+            ])
+            ->add('enterprisePres', null, [
+                'label' => "Une présentation de votre entreprise :"
+            ])
             ->add('document_list', FileType::class, [
-                'label' => 'Vos documents utiles',
+                'label' => 'Les documents utiles de votre entreprise : ',
                 'mapped' => false,
                 'required' => false,
-                'multiple'=> 'multiple',
+                'multiple' => 'multiple',
 //                'constraints' => [
 //                    new File([
 //                        'mimeTypes' => 'application/png',
@@ -45,6 +59,7 @@ class EnterpriseType extends AbstractType
 //                ],
             ])
             ->add('type', EntityType::class, [
+                'label' => "Le type de votre entreprise :",
                 'class' => \App\Entity\EnterpriseType::class,
                 'choice_label' => 'name',
             ]);
