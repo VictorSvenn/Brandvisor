@@ -19,6 +19,22 @@ class ChallengeRepository extends ServiceEntityRepository
         parent::__construct($registry, Challenge::class);
     }
 
+    public function findWhereVotes()
+    {
+        $sql = "SELECT COUNT(challenge_id) AS likes, challenge_id FROM challenge_consumer 
+        GROUP BY challenge_id";
+        $conn = $this->getEntityManager()->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $challenges = $stmt->fetchAll();
+        $results = [];
+        foreach ($challenges as $current) {
+            $results [] = $this->find($current['challenge_id']);
+        }
+        shuffle($results);
+        return $results[0];
+    }
+
     // /**
     //  * @return Challenge[] Returns an array of Challenge objects
     //  */

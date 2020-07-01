@@ -78,9 +78,23 @@
         <div class="container-fluid col-3">
             {# Section "Challenge du Jour"#}
             <div class="row">
-                <div>
-                    <h2>Challenge du Jour</h2>
+                <div class="mx-auto text-center">
+                    <h2 class="">Challenge du Jour</h2>
                 </div>
+                <div class="card">
+                    <div class="card-body p-2 bg-info">
+                        <h4 class="card-title text-center">{{ dayChallenge.name }}</h4>
+                        <p class="card-text text-center">{{ dayChallenge.description }}</p>
+                        <p class="card-text text-center font-italic">Nombre de votes: {{ votes }}</p>
+                        <a href="#" class="btn btn-dark card-link w-100">Voter pour ce challenge</a>
+                        <a href="#" class="btn btn-dark card-link w-100 m-0 mt-1">Voir tous les challenges</a>
+                    </div>
+                </div>
+            </div>
+            {#~~~~~~~~#}
+            {# Section "Thématique à l'honneur"#}
+            <div>
+
             </div>
         </div>
         {#~~~~~~~~~~~~~#}

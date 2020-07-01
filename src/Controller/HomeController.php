@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ChallengeRepository;
 use App\Repository\EnterpriseRepository;
 use App\Repository\InitiativeRepository;
 use App\Repository\OddRepository;
@@ -17,7 +18,8 @@ class HomeController extends AbstractController
     public function index(
         EnterpriseRepository $entRepo,
         InitiativeRepository $initRepo,
-        OddRepository $oddRepo
+        OddRepository $oddRepo,
+        ChallengeRepository $challRepo
     ): Response {
         // Fonction de recheche dans l'index
         $enterpriseResult = null;
@@ -40,8 +42,14 @@ class HomeController extends AbstractController
         } else {
             $numResults = 0;
         }
+        // Affichage des entreprises dans la page d'accueil
         $enterpriseNotes = $entRepo->findWhereNoteHigh();
-        $initiativeLikes = $initRepo->findWhereNoteHigh();
+        // Affichage des initiatives dans la page d'accueil
+        $initiativeLikes = $initRepo->findWhereLikesHigh();
+        // affichage d'un challenge random sur la page d'accueil
+        $dayChallenge = $challRepo->findWhereVotes();
+        $votes = count($dayChallenge->getLikes());
+        //Affichage d'une thématique random sur l'accueil
 
         return $this->render('/home/home.html.twig', [
             'enterprises' => $enterpriseResult,
@@ -51,6 +59,8 @@ class HomeController extends AbstractController
             'numResults' => $numResults,
             'enterpriseNotes' => $enterpriseNotes,
             'initiativeLikes' => $initiativeLikes,
+            'dayChallenge' => $dayChallenge,
+            'votes' => $votes,
         ]);
     }
 }

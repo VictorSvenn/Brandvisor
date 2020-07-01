@@ -34,7 +34,7 @@ class InitiativeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findWhereNoteHigh()
+    public function findWhereLikesHigh()
     {
         $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_consumer 
         GROUP BY initiative_id ORDER BY likes DESC LIMIT 2";
@@ -46,7 +46,6 @@ class InitiativeRepository extends ServiceEntityRepository
         foreach ($initiatives as $current) {
             $results [] = $this->find($current["initiative_id"]);
         }
-        dump($results);
         return $results;
     }
 
