@@ -46,8 +46,10 @@ class OpinionController extends AbstractController
             $entityManager->flush();
             if ($this->getUser()->getExpert()) {
                 return $this->redirectToRoute('account_expert');
-            } else {
+            } elseif ($this->getUser()->getEnterprise()) {
                 return $this->redirectToRoute('account_enterprise');
+            } else {
+                return $this->redirectToRoute('account_consumer');
             }
         }
 
