@@ -32,6 +32,16 @@ class EnterpriseRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findWhereNoteHigh()
+    {
+        $query = $this->createQueryBuilder('e');
+        $query->select('e');
+        $query->setMaxResults(2);
+        $query->orderBy('e.note', 'DESC');
+
+        return $query->getQuery()->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Enterprise
     {

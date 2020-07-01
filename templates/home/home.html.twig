@@ -1,54 +1,90 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {# Inclusion de l'affichage des menus déroulants inérants aux rôles#}
-    {% include '/home/roles.html.twig' %}
-    {#~~~~~~~~~~~#}
-    <div class="col-8 text-center mt-4 mb-4">
-        <h4>Bienvenue sur BrandVisor!</h4>
-        <p>Le site ou exprimer ce que vous faites de bien pour la société et l'environnement en toute
-            transparence</p>
-    </div>
-    <hr>
-    {# Inclusion du formulaire et affichage des résultats#}
-    {% include '/home/research.html.twig' %}
-    {#~~~~~~~~~~#}
-
-    {# Section "Les Objectifs"#}
-    <div class="container-fluid col-8 ml-0">
-        <div class="row text-center mt-4 mb-4 mr-0">
-            {#Texte#}
-            <div class="col-6">
-                <h2>Les Objectifs</h2>
-                <p>Vous pensez que le partage des projets et des initiatives entre tous peut conduire à un monde
-                    meilleur
-                    Vous pensez qu'évaluer les entreprises et les marques sur leurs reponsabilités sociales et
-                    environnementales va les inciter à s'améliorer
-                    Vous pensez que les marques ont besoin de s'engager vers plus de transparence et ont des choses à
-                    faire
-                    valoir</p>
+    <div class="container-fluid d-flex">
+        <div class="container-fluid col-9">
+            <div class="row">
+                {# Inclusion de l'affichage des menus déroulants inérants aux rôles#}
+                {% include '/home/roles.html.twig' %}
+                {#~~~~~~~~~~~#}
+                <div class="text-center">
+                    <h4>Bienvenue sur BrandVisor!</h4>
+                    <p>Le site ou exprimer ce que vous faites de bien pour la société et l'environnement en toute
+                        transparence</p>
+                </div>
+                {# Inclusion du formulaire et affichage des résultats#}
+                {% include '/home/research.html.twig' %}
             </div>
-            {#Image#}
-            <div class="col-6 my-auto">
-                <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
+            {#~~~~~~~~~~#}
+
+            <div class="container-fluid">
+                {# Section "Les Objectifs"#}
+                <div class="row text-center border border-dark">
+                    {#Texte#}
+                    <div class="col-6 my-auto ">
+                        <h2>Les Objectifs</h2>
+                        <p>Vous pensez que le partage des projets et des initiatives entre tous peut conduire à un monde
+                            meilleur
+                            Vous pensez qu'évaluer les entreprises et les marques sur leurs reponsabilités sociales et
+                            environnementales va les inciter à s'améliorer
+                            Vous pensez que les marques ont besoin de s'engager vers plus de transparence et ont des
+                            choses
+                            à
+                            faire
+                            valoir</p>
+                    </div>
+                    {#Image#}
+                    <div class="col-6 my-auto border-left border-dark">
+                        <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
+                    </div>
+                </div>
+                {#~~~~~~~~~~~~~#}
+                {# Section "Nous sommes tous acteurs du changement"#}
+                <div class="row text-center border border-dark ">
+                    {#Image#}
+                    <div class="col-6 my-auto border-right border-dark">
+                        <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
+                    </div>
+                    {#Texte#}
+                    <div class="col-6 my-auto">
+                        <h2>Nous sommes tous acteurs du changement</h2>
+                        <p>Décrire les cibles : les entreprises, les consommateurs, les experts.</p>
+                    </div>
+                </div>
+                {#~~~~~~~~~~~~~#}
+                {# Section "Entreprises à l'honneur + initiatives les + likées"#}
+                <div class="row text-center border border-dark ">
+                    {#Entreprise par notes #}
+                    <div class="col-6 my-auto border-right border-dark">
+                        <h2>Entreprises à l'honneur</h2>
+                        {% for enterpriseNote in enterpriseNotes %}
+                            <a href="#"><img src="{{ enterpriseNote.logo }}" alt="" width="45%"></a>
+                        {% endfor %}
+                    </div>
+                    {# Section "initiatives les + likées"#}
+                    <div class="col-6">
+                        <h2>Initiatives à l'honneur</h2>
+                        {% for initiativeLike in initiativeLikes %}
+                            <a class="text-decoration-none text-dark" href="#">
+                                <h3 class="bg-lightGreen p-3 mt-3 rounded">{{ initiativeLike.name }}</h3>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#~~~~~~~~~~~~~#}
             </div>
         </div>
-    </div>
-    {#~~~~~~~~~~~~~#}
-    {# Section "Nous sommes tous acteurs du changement"#}
-    <div class="container-fluid col-8 ml-0">
-        <div class="row text-center mt-4 mb-4 mr-0">
-            {#Image#}
-            <div class="col-6 my-auto">
-                <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
+        {# SideBar #}
+        <div class="container-fluid col-3">
+            {# Section "Challenge du Jour"#}
+            <div class="row">
+                <div>
+                    <h2>Challenge du Jour</h2>
+                </div>
             </div>
-            {#Texte#}
-            <div class="col-6">
-                <h2>Nous sommes tous acteurs du changement</h2>
-                <p>Décrire les cibles : les entreprises, les consommateurs, les experts.</p>
-            </div>
-
         </div>
+        {#~~~~~~~~~~~~~#}
     </div>
-    {#~~~~~~~~~~~~~#}
+
+
 {% endblock %}

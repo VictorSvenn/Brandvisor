@@ -9,9 +9,10 @@ body {
 
 $lightGreen: #73B981;
 $greySteel: #787979;
-$white: rgba(255, 255, 255, 0.99);
+$white: rgba(255, 255, 255, 0.4);
 $darkGreen: #356315;
 $red: #ff3254;
+$black: #000000;
 
 .text-lightGreen {
     color: $lightGreen;
@@ -37,6 +38,9 @@ $red: #ff3254;
     border-color: $greySteel;
 }
 
+.bg-black{
+    background-color: $black;
+}
 .bg-lightGreen {
     background-color: $lightGreen;
 }
@@ -55,6 +59,21 @@ $red: #ff3254;
 
 .bg-red {
     background-color: $red;
+}
+
+.bg-blueGreen{
+  background-image: linear-gradient(515deg, rgba(54, 54, 54, 0.05) 0%,
+          rgba(54, 54, 54, 0.05) 33.333%,rgba(85, 85, 85, 0.05) 33.333%,
+          rgba(85, 85, 85, 0.05) 66.666%,rgba(255, 255, 255, 0.05) 66.666%,
+          rgba(255, 255, 255, 0.05) 99.999%),linear-gradient(562deg, rgba(81, 81, 81, 0.05) 0%,
+          rgba(81, 81, 81, 0.05) 33.333%,rgba(238, 238, 238, 0.05) 33.333%,
+          rgba(238, 238, 238, 0.05) 66.666%,rgba(32, 32, 32, 0.05) 66.666%, rgba(32, 32, 32, 0.05) 99.999%),
+  linear-gradient(349deg, rgba(192, 192, 192, 0.05) 0%, rgba(192, 192, 192, 0.05) 33.333%,
+                  rgba(109, 109, 109, 0.05) 33.333%, rgba(109, 109, 109, 0.05) 66.666%,rgba(30, 30, 30, 0.05) 66.666%,
+                  rgba(30, 30, 30, 0.05) 99.999%),linear-gradient(398deg, rgba(77, 77, 77, 0.05) 0%,
+                  rgba(77, 77, 77, 0.05) 33.333%,rgba(55, 55, 55, 0.05) 33.333%, rgba(55, 55, 55, 0.05) 66.666%,
+                  rgba(145, 145, 145, 0.05) 66.666%, rgba(145, 145, 145, 0.05) 99.999%),
+  linear-gradient(299deg, rgb(0,250,29),rgb(18, 131, 221));
 }
 
 @import "~bootstrap/scss/bootstrap";

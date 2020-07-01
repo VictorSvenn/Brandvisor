@@ -28,10 +28,26 @@ class InitiativeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('i')
             ->where('i.name LIKE :val1')
             ->setParameter('val1', '%' . $value . '%')
-            ->andWhere('i.keywords Like :val2')
+            ->orWhere('i.keywords LIKE :val2')
             ->setParameter('val2', '%' . $value . '%')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findWhereNoteHigh()
+    {
+        $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_consumer 
+        GROUP BY initiative_id ORDER BY likes DESC LIMIT 2";
+        $conn = $this->getEntityManager()->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $initiatives = $stmt->fetchAll();
+        $results = [];
+        foreach ($initiatives as $current) {
+            $results [] = $this->find($current["initiative_id"]);
+        }
+        dump($results);
+        return $results;
     }
 
 

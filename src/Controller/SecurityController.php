@@ -19,45 +19,6 @@ class SecurityController extends AbstractController
 {
 
     /**
-     * @Route("/", name="app_home")
-     */
-    public function index(
-        EnterpriseRepository $entRepo,
-        InitiativeRepository $initRepo,
-        OddRepository $oddRepo
-    ): Response {
-        // Fonction de recheche dans l'index
-        $enterpriseResult = null;
-        $initiativeResult = null;
-        $oddResult = null;
-        $form = false;
-        if (isset($_POST['indexSearch'])) {
-            $query = $_POST['searchText'];
-
-            // Requête pour la table entreprise
-            $enterpriseResult = $entRepo->findWhereNameLike($query);
-
-            // Requête pour la table initiative
-            $initiativeResult = $initRepo->findWhereNameAndKewordsLike($query);
-
-            // Requête pour la table ODD
-            $oddResult = $oddRepo->findWhereNameLike($query);
-            $form = true;
-            $numResults = count($enterpriseResult) + count($initiativeResult) + count($oddResult);
-        } else {
-            $numResults = 0;
-        }
-        return $this->render('/home/home.html.twig', [
-            'enterprises' => $enterpriseResult,
-            'initiatives' => $initiativeResult,
-            'odds' => $oddResult,
-            'form' => $form,
-            'numResults' => $numResults,
-        ]);
-    }
-
-
-    /**
      * @Route("/connected", name="app_connected")
      */
     public function connected(AuthenticationUtils $authenticationUtils): Response
