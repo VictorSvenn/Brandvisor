@@ -40,7 +40,13 @@ class InitiativeController extends AbstractController
             $entityManager->persist($initiative);
             $entityManager->flush();
 
-            return $this->redirectToRoute('initiative_index');
+            if ($this->getUser()->getExpert()) {
+                return $this->redirectToRoute('account_expert');
+            } elseif ($this->getUser()->getEnterprise()) {
+                return $this->redirectToRoute('account_enterprise');
+            } else {
+                return $this->redirectToRoute('account_consumer');
+            }
         }
 
         return $this->render('initiative/new.html.twig', [

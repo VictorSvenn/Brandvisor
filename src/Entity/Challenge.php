@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChallengeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +59,16 @@ class Challenge
      * @ORM\ManyToOne(targetEntity=Engagement::class, inversedBy="challenges")
      */
     private $engagement;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Consumer::class, inversedBy="likedChallenges")
+     */
+    private $likes;
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +167,32 @@ class Challenge
     public function setEngagement(?Engagement $engagement): self
     {
         $this->engagement = $engagement;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Consumer[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Consumer $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Consumer $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+        }
+
         return $this;
     }
 }
