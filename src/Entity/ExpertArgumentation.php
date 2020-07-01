@@ -49,14 +49,14 @@ class ExpertArgumentation
     private $illustration;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $links = [];
+    private $links;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $keywords = [];
+    private $keywords;
 
     public function getId(): ?int
     {
@@ -135,24 +135,24 @@ class ExpertArgumentation
         return $this;
     }
 
-    public function getLinks(): ?array
+    public function getLinks(): ?string
     {
         return $this->links;
     }
 
-    public function setLinks(?array $links): self
+    public function setLinks(?string $links): self
     {
         $this->links = $links;
 
         return $this;
     }
 
-    public function getKeywords(): ?array
+    public function getKeywords(): ?string
     {
         return $this->keywords;
     }
 
-    public function setKeywords(?array $keywords): self
+    public function setKeywords(?string $keywords): self
     {
         $this->keywords = $keywords;
 

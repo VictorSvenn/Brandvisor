@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ExpertArgumentation index{% endblock %}
+
+{% block body %}
+    <h1>ExpertArgumentation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Text</th>
+                <th>Illustration</th>
+                <th>Links</th>
+                <th>Keywords</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for expert_argumentation in expert_argumentations %}
+            <tr>
+                <td>{{ expert_argumentation.id }}</td>
+                <td>{{ expert_argumentation.date ? expert_argumentation.date|date('Y-m-d') : '' }}</td>
+                <td>{{ expert_argumentation.text }}</td>
+                <td>{{ expert_argumentation.illustration }}</td>
+                <td>{{ expert_argumentation.links ? expert_argumentation.links|join(', ') : '' }}</td>
+                <td>{{ expert_argumentation.keywords ? expert_argumentation.keywords|join(', ') : '' }}</td>
+                <td>
+                    <a href="{{ path('expert_argumentation_show', {'id': expert_argumentation.id}) }}">show</a>
+                    <a href="{{ path('expert_argumentation_edit', {'id': expert_argumentation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('expert_argumentation_new') }}">Create new</a>
+{% endblock %}
