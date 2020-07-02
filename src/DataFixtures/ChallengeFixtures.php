@@ -27,9 +27,9 @@ class ChallengeFixtures extends Fixture implements DependentFixtureInterface
             $challenge->setDescription($faker->text);
             $challenge->setComment($faker->text);
             $challenge->setIsConform(rand(true, false));
-            $rand = rand(0,4);
-            for ($o=1;$o<=$rand;$o++){
-                $challenge->addLike($this->getReference('consumer_'.rand(1,10)));
+            $rand = rand(0, 4);
+            for ($o=1; $o<=$rand; $o++) {
+                $challenge->addLike($this->getReference('consumer_'.rand(1, 10)));
             }
             $challenge->setDocuments(["document$i.$faker->fileExtension","document$i.$faker->fileExtension"]);
             $manager->persist($challenge);

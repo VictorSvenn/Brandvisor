@@ -24,7 +24,7 @@ class ExpertArgumentations extends Fixture implements DependentFixtureInterface
             $arg->setDepositary($this->getReference('expert_' . rand(11, 20)));
             $arg->setDate($faker->dateTime);
             $arg->setText($faker->text);
-            $arg->setIllustration("illustration.$faker->fileExtension");
+            $arg->setIllustration('https://picsum.photos/id/' . rand(1, 1000) . '/200');
             $arg->setLinks("link1 link2");
             $arg->setKeywords("keyword1");
             $manager->persist($arg);

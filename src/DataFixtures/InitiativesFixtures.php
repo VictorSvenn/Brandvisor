@@ -18,7 +18,7 @@ class InitiativesFixtures extends Fixture implements DependentFixtureInterface
             $initiative = new Initiative();
             $initiative->setDepositary($this->getReference('user_' . rand(1, 20)));
             $initiative->setName($faker->word);
-            $initiative->setIllustration("illustration.$faker->fileExtension");
+            $initiative->setIllustration('https://picsum.photos/id/' . rand(1, 1000) . '/200');
             $initiative->setPresentation($faker->text);
             $initiative->setObjective($faker->text);
             $initiative->setDetailledDescription($faker->text);
