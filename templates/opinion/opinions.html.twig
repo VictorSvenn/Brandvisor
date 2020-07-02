@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Avis déposé par M./Mme {{ opinion.depositary.lastName }}</h5>
                         <p class="card-text">{{ opinion.text }}</p>
-                        <a href="#" class="btn btn-primary">Voir cet avis</a>
+                        <a href="{{ path('opinion_show', { 'id': opinion.id }) }}" class="btn btn-primary">Voir cet avis</a>
                     </div>
                 </div>
             {% endfor %}

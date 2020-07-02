@@ -78,20 +78,25 @@
                     <div class="col-6 my-auto ">
                         <h2>Paroles de consommateur</h2>
                         {% for consumerAdvice in consumerAdvices %}
-                            <div class="bg-white rounded p-2 m-2">
-                                <h4>{{ consumerAdvice.enterprise.name }}</h4>
-                                <p>{{ consumerAdvice.text }}</p>
-                            </div>
+                            <a href="{{ path('opinion_show', { 'id': consumerAdvice.id }) }}">
+
+                                <div class="bg-white rounded p-2 m-2">
+                                    <h4>{{ consumerAdvice.enterprise.name }}</h4>
+                                    <p>{{ consumerAdvice.text }}</p>
+                                </div>
+                            </a>
                         {% endfor %}
                     </div>
                     {# Section "Paroles d'expert"#}
                     <div class="col-6">
                         <h2>Paroles d'expert</h2>
                         {% for expertAdvice in expertAdvices %}
-                            <div class="bg-white rounded p-2 m-2">
-                                <h4>{{ expertAdvice.enterprise.name }}</h4>
-                                <p>{{ expertAdvice.text }}</p>
-                            </div>
+                            <a href="{{ path('opinion_show', { 'id': expertAdvice.id }) }}">
+                                <div class="bg-white rounded p-2 m-2">
+                                    <h4>{{ expertAdvice.enterprise.name }}</h4>
+                                    <p>{{ expertAdvice.text }}</p>
+                                </div>
+                            </a>
                         {% endfor %}
                     </div>
                 </div>
