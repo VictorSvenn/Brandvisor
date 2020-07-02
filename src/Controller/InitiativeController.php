@@ -13,9 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/initiative")
- * @IsGranted("ROLE_CONSUMER")
- * @IsGranted("ROLE_ENTERPRISE")
- * @IsGranted("ROLE_EXPERT")
  */
 class InitiativeController extends AbstractController
 {
@@ -54,8 +51,10 @@ class InitiativeController extends AbstractController
      */
     public function show(Initiative $initiative): Response
     {
+        $likes = $initiative->getLikes();
         return $this->render('initiative/show.html.twig', [
             'initiative' => $initiative,
+            'likes' => count($likes),
         ]);
     }
 }
