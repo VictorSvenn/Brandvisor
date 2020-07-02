@@ -6,6 +6,7 @@ use App\Entity\Enterprise;
 use App\Form\EnterpriseType;
 use App\Repository\EnterpriseRepository;
 use App\Services\FileUpload;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/enterprise")
+ * @IsGranted("ROLE_ENTERPRISE")
  */
 class EnterpriseController extends AbstractController
 {
     /**
-     * @Route("showChallenges", name="show_challenges")
+     * @Route("/challenges", name="show_challenges")
      */
     public function showChallenges(): Response
     {
@@ -27,7 +29,7 @@ class EnterpriseController extends AbstractController
 
 
     /**
-     * @Route("/account/enterprise", name="account_enterprise")
+     * @Route("/account", name="account_enterprise")
      */
     public function enterprise()
     {
@@ -38,7 +40,7 @@ class EnterpriseController extends AbstractController
     }
 
     /**
-     * @Route("enterprise/opinions", name="enterprise_opinions")
+     * @Route("/opinions", name="enterprise_opinions")
      */
     public function etpOpinions(): Response
     {
@@ -47,7 +49,7 @@ class EnterpriseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit/enterprise", name="enterprise_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="enterprise_edit", methods={"GET","POST"})
      */
     public function editEnterprise(Request $request, Enterprise $enterprise, FileUpload $fileUpload): Response
     {
