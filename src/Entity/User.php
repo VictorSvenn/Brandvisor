@@ -88,11 +88,17 @@ class User implements UserInterface
      */
     private $admin;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Challenge::class, mappedBy="likes")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
         $this->initiatives = new ArrayCollection();
         $this->opinions = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getFullName(): string
@@ -358,6 +364,24 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($admin->getUser() !== $this) {
             $admin->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Challenge[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Challenge $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->addLike($this);
         }
 
         return $this;

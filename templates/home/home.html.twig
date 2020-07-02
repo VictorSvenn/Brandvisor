@@ -78,10 +78,11 @@
                     <div class="col-6 my-auto ">
                         <h2>Paroles de consommateur</h2>
                         {% for consumerAdvice in consumerAdvices %}
-                            <a href="{{ path('opinion_show', { 'id': consumerAdvice.id }) }}">
+                            <a href="{{ path('opinion_show', { 'id': consumerAdvice.id }) }}" class="text-decoration-none text-dark">
 
                                 <div class="bg-white rounded p-2 m-2">
-                                    <h4>{{ consumerAdvice.enterprise.name }}</h4>
+                                    <h4>{{ consumerAdvice.depositary.fullName }} a déposé un avis
+                                        sur {{ consumerAdvice.enterprise.name }}</h4>
                                     <p>{{ consumerAdvice.text }}</p>
                                 </div>
                             </a>
@@ -91,9 +92,10 @@
                     <div class="col-6">
                         <h2>Paroles d'expert</h2>
                         {% for expertAdvice in expertAdvices %}
-                            <a href="{{ path('opinion_show', { 'id': expertAdvice.id }) }}">
+                            <a href="{{ path('opinion_show', { 'id': expertAdvice.id }) }}" class=" text-decoration-none text-dark">
                                 <div class="bg-white rounded p-2 m-2">
-                                    <h4>{{ expertAdvice.enterprise.name }}</h4>
+                                    <h4>{{ expertAdvice.depositary.fullName }} a déposé un avis
+                                        sur {{ expertAdvice.enterprise.name }}</h4>
                                     <p>{{ expertAdvice.text }}</p>
                                 </div>
                             </a>
@@ -115,7 +117,10 @@
                             <h4 class="card-title text-center">{{ dayChallenge.name }}</h4>
                             <p class="card-text text-center">{{ dayChallenge.description }}</p>
                             <p class="card-text text-center font-italic">Nombre de votes: {{ votes }}</p>
-                            <a href="#" class="btn btn-dark card-link w-100">Voter pour ce challenge</a>
+                            {% if is_granted('ROLE_CONSUMER') or is_granted('ROLE_EXPERT') %}
+                                <a href="{{ path('vote_challenge', { 'id': dayChallenge.id }) }}"
+                                   class="btn btn-dark card-link w-100">Voter pour ce challenge</a>
+                            {% endif %}
                             <a href="#" class="btn btn-dark card-link w-100 m-0 mt-1">Voir tous les challenges</a>
                         </div>
                     </div>

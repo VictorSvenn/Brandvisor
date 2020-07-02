@@ -47,16 +47,10 @@ class Consumer
      */
     private $liked;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Challenge::class, mappedBy="likes")
-     */
-    private $likedChallenges;
-
     public function __construct()
     {
         $this->bookmarks = new ArrayCollection();
         $this->liked = new ArrayCollection();
-        $this->likedChallenges = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,34 +143,6 @@ class Consumer
         if ($this->liked->contains($liked)) {
             $this->liked->removeElement($liked);
             $liked->removeLike($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Challenge[]
-     */
-    public function getLikedChallenges(): Collection
-    {
-        return $this->likedChallenges;
-    }
-
-    public function addLikedChallenge(Challenge $likedChallenge): self
-    {
-        if (!$this->likedChallenges->contains($likedChallenge)) {
-            $this->likedChallenges[] = $likedChallenge;
-            $likedChallenge->addLike($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLikedChallenge(Challenge $likedChallenge): self
-    {
-        if ($this->likedChallenges->contains($likedChallenge)) {
-            $this->likedChallenges->removeElement($likedChallenge);
-            $likedChallenge->removeLike($this);
         }
 
         return $this;

@@ -13,9 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/initiative")
- * @IsGranted("ROLE_CONSUMER")
- * @IsGranted("ROLE_ENTERPRISE")
- * @IsGranted("ROLE_EXPERT")
  */
 class InitiativeController extends AbstractController
 {

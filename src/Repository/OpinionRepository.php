@@ -48,19 +48,18 @@ class OpinionRepository extends ServiceEntityRepository
     // /**
     //  * @return Opinion[] Returns an array of Opinion objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllDesc($value)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
+            ->andWhere('o.enterprise = :val')
             ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('o.id', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Opinion

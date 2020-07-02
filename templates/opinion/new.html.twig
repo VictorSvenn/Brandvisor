@@ -1,0 +1,9 @@
+{% extends 'registration/form.html.twig' %}
+
+{% block title %}Nouvel avis{% endblock %}
+{% block formtitle %}
+    Déposer un avis
+{% endblock %}
+{% block form %}
+    {{ include('opinion/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}
