@@ -16,7 +16,7 @@ class NewsFixtures extends Fixture
         for ($i=1; $i<=10; $i++) {
             $news = new News();
             $news->setDate($faker->dateTime);
-            $news->setIllustration("illustration.$faker->fileExtension");
+            $news->setIllustration('https://picsum.photos/id/' . rand(1, 1000) . '/200');
             $news->setTitle($faker->word);
             $news->setText($faker->text);
             $manager->persist($news);

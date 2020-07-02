@@ -6,6 +6,7 @@ use App\Entity\Consumer;
 use App\Entity\Enterprise;
 use App\Form\ConsumerType;
 use App\Repository\ConsumerRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ class ConsumerController extends AbstractController
 {
     /**
      * @Route("/account", name="account_consumer")
+     * @IsGranted("ROLE_CONSUMER")
      */
     public function consumer()
     {
