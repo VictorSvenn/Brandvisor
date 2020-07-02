@@ -19,7 +19,7 @@
 
             <div class="container-fluid">
                 {# Section "Les Objectifs"#}
-                <div class="row text-center border border-dark">
+                <div class="row text-center bg-white mb-2">
                     {#Texte#}
                     <div class="col-6 my-auto ">
                         <h2>Les Objectifs</h2>
@@ -34,15 +34,15 @@
                             valoir</p>
                     </div>
                     {#Image#}
-                    <div class="col-6 my-auto border-left border-dark">
+                    <div class="col-6 my-auto">
                         <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
                     </div>
                 </div>
                 {#~~~~~~~~~~~~~#}
                 {# Section "Nous sommes tous acteurs du changement"#}
-                <div class="row text-center border border-dark ">
+                <div class="row text-center bg-black mb-2">
                     {#Image#}
-                    <div class="col-6 my-auto border-right border-dark">
+                    <div class="col-6 my-auto ">
                         <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
                     </div>
                     {#Texte#}
@@ -53,9 +53,9 @@
                 </div>
                 {#~~~~~~~~~~~~~#}
                 {# Section "Entreprises à l'honneur + initiatives les + likées"#}
-                <div class="row text-center border border-dark ">
+                <div class="row text-center bg-white mb-2">
                     {#Entreprise par notes #}
-                    <div class="col-6 my-auto border-right border-dark">
+                    <div class="col-6 my-auto ">
                         <h2>Entreprises à l'honneur</h2>
                         {% for enterpriseNote in enterpriseNotes %}
                             <a href="#"><img src="{{ enterpriseNote.logo }}" alt="" width="45%"></a>
@@ -72,33 +72,85 @@
                     </div>
                 </div>
                 {#~~~~~~~~~~~~~#}
+                {# Section "Paroles de consommateur + expert"#}
+                <div class="row text-center bg-black mb-2">
+                    {# Paroles de consommateur #}
+                    <div class="col-6 my-auto ">
+                        <h2>Paroles de consommateur</h2>
+                        {% for consumerAdvice in consumerAdvices %}
+                            <div class="bg-white rounded p-2 m-2">
+                                <h4>{{ consumerAdvice.enterprise.name }}</h4>
+                                <p>{{ consumerAdvice.text }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {# Section "Paroles d'expert"#}
+                    <div class="col-6">
+                        <h2>Paroles d'expert</h2>
+                        {% for expertAdvice in expertAdvices %}
+                            <div class="bg-white rounded p-2 m-2">
+                                <h4>{{ expertAdvice.enterprise.name }}</h4>
+                                <p>{{ expertAdvice.text }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         {# SideBar #}
         <div class="container-fluid col-3">
             {# Section "Challenge du Jour"#}
-            <div class="row">
-                <div class="mx-auto text-center">
-                    <h2 class="">Challenge du Jour</h2>
-                </div>
-                <div class="card">
-                    <div class="card-body p-2 bg-info">
-                        <h4 class="card-title text-center">{{ dayChallenge.name }}</h4>
-                        <p class="card-text text-center">{{ dayChallenge.description }}</p>
-                        <p class="card-text text-center font-italic">Nombre de votes: {{ votes }}</p>
-                        <a href="#" class="btn btn-dark card-link w-100">Voter pour ce challenge</a>
-                        <a href="#" class="btn btn-dark card-link w-100 m-0 mt-1">Voir tous les challenges</a>
+            <div class="row mt-3 bg-white">
+                <div>
+                    <div class="mx-auto text-center">
+                        <h2 class="bg-black p-2 ">Challenge du jour</h2>
+                    </div>
+                    <div class="card bg-transparent">
+                        <div class="card-body p-2">
+                            <h4 class="card-title text-center">{{ dayChallenge.name }}</h4>
+                            <p class="card-text text-center">{{ dayChallenge.description }}</p>
+                            <p class="card-text text-center font-italic">Nombre de votes: {{ votes }}</p>
+                            <a href="#" class="btn btn-dark card-link w-100">Voter pour ce challenge</a>
+                            <a href="#" class="btn btn-dark card-link w-100 m-0 mt-1">Voir tous les challenges</a>
+                        </div>
                     </div>
                 </div>
             </div>
             {#~~~~~~~~#}
+            <hr/>
             {# Section "Thématique à l'honneur"#}
-            <div>
-
+            <div class="row mt-3 bg-white">
+                <div>
+                    <div class="mx-auto text-center">
+                        <h2 class="bg-black p-2">Thématique du jour</h2>
+                    </div>
+                    <div class="mx-auto text-center">
+                        <h4>{{ thematique.name }}</h4>
+                    </div>
+                </div>
+            </div>
+            {#~~~~~~~~~~~~~#}
+            <hr/>
+            {# Section "Fil d'actualité"#}
+            <div class="row mt-3 bg-white">
+                <div>
+                    <div class="mx-auto text-center">
+                        <h2 class="bg-black p-2 ">Fil d'actualités</h2>
+                    </div>
+                    <div class="mx-auto text-center">
+                        {% for new in news %}
+                            <h3>{{ new.title }}</h3>
+                            <p class="font-italic">{{ new.date|date("m/d/Y") }}</p>
+                            <img src="{{ new.illustration }}" width="70%">
+                            <p>{{ new.text }}</p>
+                            <hr/>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-        {#~~~~~~~~~~~~~#}
     </div>
+    {#~~~~~~~~~~~~~#}
 
 
 {% endblock %}

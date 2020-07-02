@@ -32,6 +32,17 @@ class OddRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllOdd()
+    {
+
+         $results=$this->createQueryBuilder('o')
+            ->select('o')
+            ->getQuery()
+            ->getResult();
+        shuffle($results);
+        return $results[0];
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Odd

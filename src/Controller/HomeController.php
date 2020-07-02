@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Repository\ChallengeRepository;
 use App\Repository\EnterpriseRepository;
 use App\Repository\InitiativeRepository;
+use App\Repository\NewsRepository;
 use App\Repository\OddRepository;
+use App\Repository\OpinionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +21,9 @@ class HomeController extends AbstractController
         EnterpriseRepository $entRepo,
         InitiativeRepository $initRepo,
         OddRepository $oddRepo,
-        ChallengeRepository $challRepo
+        ChallengeRepository $challRepo,
+        NewsRepository $newsRepo,
+        OpinionRepository $opinionRepo
     ): Response {
         // Fonction de recheche dans l'index
         $enterpriseResult = null;
@@ -44,12 +48,24 @@ class HomeController extends AbstractController
         }
         // Affichage des entreprises dans la page d'accueil
         $enterpriseNotes = $entRepo->findWhereNoteHigh();
+
         // Affichage des initiatives dans la page d'accueil
         $initiativeLikes = $initRepo->findWhereLikesHigh();
+
         // affichage d'un challenge random sur la page d'accueil
         $dayChallenge = $challRepo->findWhereVotes();
         $votes = count($dayChallenge->getLikes());
+
         //Affichage d'une thématique random sur l'accueil
+        $thematique = $oddRepo->findAllOdd();
+
+        // Affichage des dernières news dans le fil d'actualité
+        $news = $newsRepo->findByDate();
+
+        // Je choppe tous les avis consommateurs et je récupère seulement les deux derniers
+        $consummerAdvices = $opinionRepo->findConsummerOpinions();
+        // Je choppe tous les avis experts et je récupère seulement les deux derniers
+        $expertAdvices = $opinionRepo->findExpertOpinions();
 
         return $this->render('/home/home.html.twig', [
             'enterprises' => $enterpriseResult,
@@ -61,6 +77,10 @@ class HomeController extends AbstractController
             'initiativeLikes' => $initiativeLikes,
             'dayChallenge' => $dayChallenge,
             'votes' => $votes,
+            'thematique' => $thematique,
+            'news' => $news,
+            'consumerAdvices' => $consummerAdvices,
+            'expertAdvices' => $expertAdvices,
         ]);
     }
 }
