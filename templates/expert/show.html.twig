@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expert{% endblock %}
+
+{% block body %}
+    <h1>Expert</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ expert.id }}</td>
+            </tr>
+            <tr>
+                <th>ConnectingStructure</th>
+                <td>{{ expert.connectingStructure }}</td>
+            </tr>
+            <tr>
+                <th>Adress</th>
+                <td>{{ expert.adress }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ expert.phone }}</td>
+            </tr>
+            <tr>
+                <th>Presentation</th>
+                <td>{{ expert.presentation }}</td>
+            </tr>
+            <tr>
+                <th>Illustration</th>
+                <td>{{ expert.illustration }}</td>
+            </tr>
+            <tr>
+                <th>Website</th>
+                <td>{{ expert.website }}</td>
+            </tr>
+            <tr>
+                <th>ExpertiseAreas</th>
+                <td>{{ expert.expertiseAreas }}</td>
+            </tr>
+            <tr>
+                <th>InterventionZones</th>
+                <td>{{ expert.interventionZones }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('expert_index') }}">back to list</a>
+
+    <a href="{{ path('expert_edit', {'id': expert.id}) }}">edit</a>
+
+    {{ include('expert/_delete_form.html.twig') }}
+{% endblock %}

@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Opinion;
 use App\Form\OpinionType;
 use App\Repository\OpinionRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @Route("/opinion")
@@ -36,10 +38,19 @@ class OpinionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $date = new DateTime();
+            $opinion->setDate($date);
+            $opinion->setDepositary($this->getUser());
+            $opinion->setIsConform(false);
             $entityManager->persist($opinion);
             $entityManager->flush();
-
-            return $this->redirectToRoute('opinion_index');
+            if ($this->getUser()->getExpert()) {
+                return $this->redirectToRoute('account_expert');
+            } elseif ($this->getUser()->getEnterprise()) {
+                return $this->redirectToRoute('account_enterprise');
+            } else {
+                return $this->redirectToRoute('account_consumer');
+            }
         }
 
         return $this->render('opinion/new.html.twig', [

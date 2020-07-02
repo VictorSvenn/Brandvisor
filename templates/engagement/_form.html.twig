@@ -1,65 +1,67 @@
+
+{#<div class="row my-3">#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.name) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.name) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.name) }}</div>#}
+{#    </div>#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.benefits) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.benefits) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.benefits) }}</div>#}
+{#    </div>#}
+{#</div>#}
+{#<div class="row my-3">#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.actionText) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.actionText) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.actionText) }}</div>#}
+{#    </div>#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.actionDocuments) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.actionDocuments) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.actionDocuments) }}</div>#}
+{#    </div>#}
+{#</div>#}
+{#<div class="row my-3">#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.resultsText) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.resultsText) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.resultsText) }}</div>#}
+{#    </div>#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.resultsDocuments) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.resultsDocuments) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.resultsDocuments) }}</div>#}
+{#    </div>#}
+{#</div>#}
+{#<div class="row my-3">#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.proofText) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.proofText) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.proofText) }}</div>#}
+{#    </div>#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.proofDocuments) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.proofDocuments) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.proofDocuments) }}</div>#}
+{#    </div>#}
+{#</div>#}
+{#<div class="row my-3">#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-10 offset-1">{{ form_label(form.odd) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_errors(form.odd) }}</div>#}
+{#        <div class="row col-10 offset-1">{{ form_widget(form.odd) }}</div>#}
+{#    </div>#}
+{#    <div class="container-fluid col-5">#}
+{#        <div class="row col-5 offset-1">{{ form_label(form.rse) }}</div>#}
+{#        <div class="row col-8 offset-1">{{ form_errors(form.rse) }}</div>#}
+{#        <div class="row col-8 offset-1">{{ form_widget(form.rse) }}</div>#}
+{#    </div>#}
+{#</div>#}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
 {{ form_start(form) }}
-<div class="row my-3">
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.name) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.name) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.name) }}</div>
-    </div>
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.benefits) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.benefits) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.benefits) }}</div>
-    </div>
-</div>
-<div class="row my-3">
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.actionText) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.actionText) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.actionText) }}</div>
-    </div>
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.actionDocuments) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.actionDocuments) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.actionDocuments) }}</div>
-    </div>
-</div>
-<div class="row my-3">
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.resultsText) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.resultsText) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.resultsText) }}</div>
-    </div>
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.resultsDocuments) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.resultsDocuments) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.resultsDocuments) }}</div>
-    </div>
-</div>
-<div class="row my-3">
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.proofText) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.proofText) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.proofText) }}</div>
-    </div>
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.proofDocuments) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.proofDocuments) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.proofDocuments) }}</div>
-    </div>
-</div>
-<div class="row my-3">
-    <div class="container-fluid col-5">
-        <div class="row col-10 offset-1">{{ form_label(form.odd) }}</div>
-        <div class="row col-10 offset-1">{{ form_errors(form.odd) }}</div>
-        <div class="row col-10 offset-1">{{ form_widget(form.odd) }}</div>
-    </div>
-    <div class="container-fluid col-5">
-        <div class="row col-5 offset-1">{{ form_label(form.rse) }}</div>
-        <div class="row col-8 offset-1">{{ form_errors(form.rse) }}</div>
-        <div class="row col-8 offset-1">{{ form_widget(form.rse) }}</div>
-    </div>
-</div>
-<div class="row my-3">
+    {{ form_widget(form) }}
+<div class="mx-auto col-3">
     <button class="btn mx-auto">{{ button_label|default('Save') }}</button>
-</div>
-{{ form_end(form) }}
+</div> {{ form_end(form) }}

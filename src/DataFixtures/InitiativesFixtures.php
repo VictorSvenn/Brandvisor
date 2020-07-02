@@ -14,26 +14,30 @@ class InitiativesFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($i=1; $i<=10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $initiative = new Initiative();
-            $initiative->setDepositary($this->getReference('user_'.rand(1, 20)));
+            $initiative->setDepositary($this->getReference('user_' . rand(1, 20)));
             $initiative->setName($faker->word);
-            $initiative->setIllustration("illustration.$faker->fileExtension");
+            $initiative->setIllustration('https://picsum.photos/id/' . rand(1, 1000) . '/200');
             $initiative->setPresentation($faker->text);
             $initiative->setObjective($faker->text);
             $initiative->setDetailledDescription($faker->text);
-            $initiative->setPartner(["partner1","partner2"]);
-            $initiative->setLinks(["link1","link2"]);
+            $initiative->setPartner("partner1", "partner2");
+            $initiative->setLinks('link1 link2');
             $initiative->setWebsite($faker->url);
             $initiative->setGeographicArea($faker->city);
-            $initiative->setKeywords(["keyword1","keyword2"]);
+            $initiative->setKeywords("keyword1", "keyword2");
             $initiative->setIsConform(rand(true, false));
-            $initiative->addLike($this->getReference('consumer_'.rand(1, 10)));
-            $initiative->addOdd($this->getReference('odd_'.rand(1, 17)));
+            $rand = rand(0, 5);
+            for ($o = 1; $o <= $rand; $o++) {
+                $initiative->addLike($this->getReference('consumer_' . rand(1, 10)));
+            }
+            $initiative->addOdd($this->getReference('odd_' . rand(1, 17)));
             $manager->persist($initiative);
         }
         $manager->flush();
     }
+
     public function getDependencies()
     {
         return [OddFixtures::class, UserFixtures::class];

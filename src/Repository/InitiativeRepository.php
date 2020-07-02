@@ -22,19 +22,33 @@ class InitiativeRepository extends ServiceEntityRepository
     // /**
     //  * @return Initiative[] Returns an array of Initiative objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findWhereNameAndKewordsLike($value)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('i.name LIKE :val1')
+            ->setParameter('val1', '%' . $value . '%')
+            ->orWhere('i.keywords LIKE :val2')
+            ->setParameter('val2', '%' . $value . '%')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
+    public function findWhereLikesHigh()
+    {
+        $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_consumer 
+        GROUP BY initiative_id ORDER BY likes DESC LIMIT 2";
+        $conn = $this->getEntityManager()->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $initiatives = $stmt->fetchAll();
+        $results = [];
+        foreach ($initiatives as $current) {
+            $results [] = $this->find($current["initiative_id"]);
+        }
+        return $results;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Initiative
