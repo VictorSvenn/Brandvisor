@@ -13,6 +13,17 @@
         <link rel="stylesheet" type="text/css" href="/build/app.css"/>
         <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
     {% endblock %}
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+    {% endblock %}
 
     {% block head %}
         <nav class="navbar navbar-light sticky-top bg-lightGreen">
@@ -23,24 +34,28 @@
             </a>
             <form class="form-inline">
                 {% if app.user %}
-                    <a href="{{ path ('app_logout') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark"
+                    <a href="{{ path ('app_logout') }}" class="btn btn-outline-success text-light my-2 my-sm-0 bg-dark"
                        type="submit">Se déconnecter</a>
                 {% else %}
-                    <a href="{{ path ('app_login') }}" class="btn btn-outline-success my-2 my-sm-0 bg-dark"
+                    <a href="{{ path ('app_login') }}" class="btn btn-outline-success text-light my-2 my-sm-0 bg-dark"
                        type="submit">Se Connecter</a>
                 {% endif %}
-                <a href="#" class="btn btn-outline-success my-2 my-sm-0 bg-dark" type="submit">Anglais/Français</a>
+                <a href="#" class="btn btn-outline-success my-2 my-sm-0 bg-dark text-light" type="submit">Anglais/Français</a>
                 <a class="navbar-brand p-2" href="
 {% if is_granted('ROLE_ENTERPRISE') %}
 {{ path ('account_enterprise') }}
 {% elseif is_granted('ROLE_EXPERT') %}
 {{ path('account_expert') }}
+{% elseif is_granted('ROLE_CONSUMER') %}
+{{ path('account_consumer') }}
 {% endif %}
 ">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
                         <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                        <path fill-rule="evenodd"
+                              d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                     </svg>
                 </a>
             </form>
@@ -49,66 +64,62 @@
 </head>
 
 
-<body>
-<div class="col-10 offset-1 p-3">
-    <div class="container-fluid bg-white px-5 py-5">
-        {% block body %}{% endblock %}
-    </div>
+<body class="bg-blueGreen">
+<div class="col-10 offset-1 p-3 bg-white">
+    {% block body %}{% endblock %}
+</div>
 
-    {% block javascripts %}
-    {% endblock %}
+{% block footer %}
+<!-- Footer -->
+<footer class="page-footer bg-lightGreen fixed-bottom">
 
-    {% block footer %}
-    <!-- Footer -->
-    <footer class="page-footer bg-lightGreen fixed-bottom">
+    <!-- Footer Links -->
+    <div class="container">
 
-        <!-- Footer Links -->
-        <div class="container">
+        <!-- Grid row-->
+        <div class="row d-flex justify-content-center pt-3 mb-1">
 
-            <!-- Grid row-->
-            <div class="row d-flex justify-content-center pt-3 mb-1">
-
-                <!-- Grid column -->
-                <div class="col-md-2 ">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <a href="#">Presse</a>
-                    </h6>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 ">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <a href="#">CGU</a>
-                    </h6>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-3 ">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <a href="#">Mentions Légales</a>
-                    </h6>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 ">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <a href="#">Contact</a>
-                    </h6>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 ">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <a href="#">Recrutement</a>
-                    </h6>
-                </div>
-                <!-- Grid column -->
-
+            <!-- Grid column -->
+            <div class="col-md-2 ">
+                <h6 class="text-uppercase font-weight-bold">
+                    <a class="text-light" href="#">Presse</a>
+                </h6>
             </div>
-            {% endblock %}
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 ">
+                <h6 class="text-uppercase font-weight-bold">
+                    <a class="text-light" href="#">CGU</a>
+                </h6>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 ">
+                <h6 class="text-uppercase font-weight-bold">
+                    <a class="text-light" href="#">Mentions Légales</a>
+                </h6>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 ">
+                <h6 class="text-uppercase font-weight-bold">
+                    <a class="text-light" href="#">Contact</a>
+                </h6>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 ">
+                <h6 class="text-uppercase font-weight-bold">
+                    <a class="text-light" href="#">Recrutement</a>
+                </h6>
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        {% endblock %}
 </body>
 </html>

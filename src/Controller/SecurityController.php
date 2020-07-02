@@ -2,7 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Initiative;
+use App\Entity\Odd;
 use App\Entity\User;
+use App\Repository\EnterpriseRepository;
+use App\Repository\InitiativeRepository;
+use App\Repository\OddRepository;
 use LogicException;
 use App\Entity\Enterprise;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,15 +17,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-
-    /**
-     * @Route("/", name="app_home")
-     */
-    public function index(): Response
-    {
-
-        return $this->render('/home/home.html.twig');
-    }
 
     /**
      * @Route("/connected", name="app_connected")
