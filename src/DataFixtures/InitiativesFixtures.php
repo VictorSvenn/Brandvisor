@@ -30,7 +30,7 @@ class InitiativesFixtures extends Fixture implements DependentFixtureInterface
             $initiative->setIsConform(rand(true, false));
             $rand = rand(0, 5);
             for ($o = 1; $o <= $rand; $o++) {
-                $initiative->addLike($this->getReference('consumer_' . rand(1, 10)));
+                $initiative->addLike($this->getReference('user_' . rand(1, 10)));
             }
             $initiative->addOdd($this->getReference('odd_' . rand(1, 17)));
             $manager->persist($initiative);

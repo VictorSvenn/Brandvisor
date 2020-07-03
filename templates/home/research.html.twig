@@ -46,7 +46,7 @@
                             <h5 class="card-title">{{ odd.name }}</h5>
                         {% endfor %}
                         <p class="card-text">{{ initiative.objective }}</p>
-                        <a href="#" class="btn btn-primary">Consulter l'initiative</a>
+                        <a href="{{ path('initiative_show', { 'id': initiative.id }) }}" class="btn btn-primary">Consulter l'initiative</a>
                     </div>
                 </div>
                 {% set count = count+1 %}
@@ -59,7 +59,6 @@
                     <p class="bg-info mx-auto rounded">Thématique odd</p>
                     <div class="card-body">
                         <h5 class="card-title">{{ odd.name }}</h5>
-                        <a href="#" class="btn btn-primary">Consulter la thématique</a>
                     </div>
                 </div>
                 {% set count = count+1 %}

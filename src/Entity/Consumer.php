@@ -42,15 +42,9 @@ class Consumer
      */
     private $bookmarks;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Initiative::class, mappedBy="likes")
-     */
-    private $liked;
-
     public function __construct()
     {
         $this->bookmarks = new ArrayCollection();
-        $this->liked = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,34 +109,6 @@ class Consumer
     {
         if ($this->bookmarks->contains($bookmark)) {
             $this->bookmarks->removeElement($bookmark);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Initiative[]
-     */
-    public function getLiked(): Collection
-    {
-        return $this->liked;
-    }
-
-    public function addLiked(Initiative $liked): self
-    {
-        if (!$this->liked->contains($liked)) {
-            $this->liked[] = $liked;
-            $liked->addLike($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLiked(Initiative $liked): self
-    {
-        if ($this->liked->contains($liked)) {
-            $this->liked->removeElement($liked);
-            $liked->removeLike($this);
         }
 
         return $this;

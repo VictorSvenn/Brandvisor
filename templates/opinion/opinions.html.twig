@@ -10,7 +10,7 @@
         <div class="row d-flex justify-content-between">
             {% for opinion in opinions %}
                 <div class="card col-5 my-3" style="width: 18rem; background-color: rgba(128,128,128,0.25)">
-                    <div class="card-body">
+                    <div class="card-body over text-truncate">
                         <h5 class="card-title">Avis déposé par M./Mme {{ opinion.depositary.lastName }}</h5>
                         <p class="card-text">{{ opinion.text }}</p>
                         <a href="{{ path('opinion_show', { 'id': opinion.id }) }}" class="btn btn-primary">Voir cet avis</a>
