@@ -51,8 +51,10 @@ class InitiativeController extends AbstractController
      */
     public function show(Initiative $initiative): Response
     {
+        $likes = $initiative->getLikes();
         return $this->render('initiative/show.html.twig', [
             'initiative' => $initiative,
+            'likes' => count($likes),
         ]);
     }
 }
