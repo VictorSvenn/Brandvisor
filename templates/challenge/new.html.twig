@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Challenge{% endblock %}
+
+{% block body %}
+    <div class="container-fluid col-md-10">
+        <div class="py-5 mx-auto text-center font-weight-bold">
+            <h1>Challenger une entreprise</h1>
+        </div>
+
+        <a href="{{ path('challenge_index') }}">Voir les challenges en cours</a>
+
+        <div class="mt25 mx-auto text-center">
+            <h2>Challenge</h2>
+        </div>
+        {{ include('challenge/_form.html.twig') }}
+
+    </div>
+{% endblock %}
