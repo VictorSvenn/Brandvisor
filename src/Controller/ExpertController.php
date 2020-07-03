@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Expert;
+use App\Entity\ExpertArgumentation;
 use App\Form\Expert1Type;
+use App\Form\ExpertArgumentationType;
 use App\Form\ExpertType;
 use App\Repository\ExpertRepository;
 use App\Services\FileUpload;
+use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,11 +18,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/expert")
+ * @IsGranted("ROLE_EXPERT")
  */
 class ExpertController extends AbstractController
 {
     /**
-     * @Route("/account/expert", name="account_expert")
+     * @Route("/account", name="account_expert")
      */
     public function expert()
     {
@@ -29,7 +34,7 @@ class ExpertController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit/expert", name="expert_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="expert_edit", methods={"GET","POST"})
      */
     public function editExpert(Request $request, Expert $expert, FileUpload $fileUpload): Response
     {
@@ -52,6 +57,41 @@ class ExpertController extends AbstractController
         return $this->render('expert/edit.html.twig', [
             'expert' => $expert,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/argumentation/new", name="expert_argumentation_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $expertArgumentation = new ExpertArgumentation();
+        $form = $this->createForm(ExpertArgumentationType::class, $expertArgumentation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $expertArgumentation->setDepositary($this->getUser()->getExpert());
+            $expertArgumentation->setDate(new DateTime());
+            $entityManager->persist($expertArgumentation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('account_expert');
+        }
+
+        return $this->render('expert_argumentation/new.html.twig', [
+            'expert_argumentation' => $expertArgumentation,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/argumentation/{id}", name="expert_argumentation_show", methods={"GET"})
+     */
+    public function show(ExpertArgumentation $expertArgumentation): Response
+    {
+        return $this->render('expert_argumentation/show.html.twig', [
+            'expert_argumentation' => $expertArgumentation,
         ]);
     }
 }

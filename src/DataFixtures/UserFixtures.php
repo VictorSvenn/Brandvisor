@@ -46,10 +46,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $consumer->setGeographicArea($faker->city);
             $consumer->setBirthDate($faker->dateTime);
 
-            $this->addReference('consumer_'.$i, $consumer);
+            $this->addReference('consumer_' . $i, $consumer);
             $manager->persist($consumer);
         }
-        for ($i=11; $i<=20; $i++) {
+        for ($i = 11; $i <= 20; $i++) {
             //creating experts
             $user = new User();
             $fname = $faker->firstName;
@@ -69,15 +69,15 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $expert->setAdress($faker->address);
             $expert->setPhone($faker->phoneNumber);
             $expert->setPresentation($faker->text);
-            $expert->setIllustration('expertIllustration.'.$faker->fileExtension);
+            $expert->setIllustration('https://picsum.photos/id/' . rand(1, 1000) . '/200');
             $expert->setWebsite($faker->url);
             $expert->setExpertiseAreas($faker->word);
             $expert->setInterventionZones($faker->city);
             $manager->persist($expert);
 
-            $this->addReference('expert_'.$i, $expert);
+            $this->addReference('expert_' . $i, $expert);
         }
-        for ($i=21; $i<=30; $i++) {
+        for ($i = 21; $i <= 30; $i++) {
             //creating Enterprises
             $user = new User();
             $fname = $faker->firstName;
@@ -99,12 +99,12 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $enterprise->setContactFunction($faker->jobTitle);
             $enterprise->setWebsite($faker->url);
             $enterprise->setSiret($faker->randomNumber());
-            $enterprise->setLogo('logo.png');
+            $enterprise->setLogo('https://picsum.photos/id/' . rand(1, 1000) . '/200');
             $enterprise->setEnterprisePhone($faker->phoneNumber);
             $enterprise->setEnterprisePres($faker->text);
             $enterprise->setDocuments(["etpdocument_$i.$faker->fileExtension", "etpdocument_$i.$faker->fileExtension"]);
-            $enterprise->setType($this->getReference('etp_type'.rand(0, 500)));
-            $this->addReference('etp_'.$i, $enterprise);
+            $enterprise->setType($this->getReference('etp_type' . rand(0, 500)));
+            $this->addReference('etp_' . $i, $enterprise);
             $manager->persist($enterprise);
         }
         $user = new User();

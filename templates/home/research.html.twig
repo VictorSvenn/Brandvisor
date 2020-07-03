@@ -1,5 +1,5 @@
 {% block body %}
-    <form method="post" action="" class="col-8">
+    <form method="post" action="" class="col-12">
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Nom d'une entreprise, d'une initiative..."
                    aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchText">
@@ -9,7 +9,7 @@
         </div>
     </form>
     {# Mise en place des cartes #}
-    <div class="container-fluid col-8 ml-0">
+    <div class="container-fluid ml-0">
         {% if form == true and numResults > 1 %}
             <p class="font-italic">{{ numResults }} résultats pour votre recherche</p>
         {% elseif form == true %}
@@ -21,8 +21,8 @@
             {% set count = 0 %}
             {# Cartes pour les ENTREPRISES #}
             {% for enterprise in enterprises %}
-                <div class="card col-5">
-                    <p class="bg-info mx-auto p-1 rounded">Entreprise</p>
+                <div class="card col-5 m-2 ">
+                    <p class="bg-info mx-auto rounded">Entreprise</p>
                     <img class="card-img-top" src="{{ enterprise.logo }}" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ enterprise.name }}</h5>
@@ -37,8 +37,8 @@
         {# Cartes pour les INITIATIVES #}
         <div class="row my-3">
             {% for initiative in initiatives %}
-                <div class="card col-5">
-                    <p class="bg-info mx-auto p-1 rounded">Initiative</p>
+                <div class="card col-5 m-2">
+                    <p class="bg-info mx-auto rounded">Initiative</p>
                     <img class="card-img-top" src="{{ initiative.illustration }}" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ initiative.name }}</h5>
@@ -55,8 +55,8 @@
         {# Cartes pour les THEMATIQUES ODD #}
         <div class="row my-3">
             {% for odd in odds %}
-                <div class="card col-5">
-                    <p class="bg-info mx-auto p-1 rounded">Thématique odd</p>
+                <div class="card col-5 m-2">
+                    <p class="bg-info mx-auto rounded">Thématique odd</p>
                     <div class="card-body">
                         <h5 class="card-title">{{ odd.name }}</h5>
                         <a href="#" class="btn btn-primary">Consulter la thématique</a>

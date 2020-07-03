@@ -6,6 +6,7 @@ use App\Entity\Engagement;
 use App\Form\EngagementType;
 use App\Repository\EngagementRepository;
 use App\Services\FileUpload;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ class EngagementController extends AbstractController
 {
     /**
      * @Route("/new", name="engagement_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {

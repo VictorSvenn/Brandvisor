@@ -6,6 +6,7 @@ use App\Entity\Opinion;
 use App\Form\OpinionType;
 use App\Repository\OpinionRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,17 +19,8 @@ use Symfony\Component\Validator\Constraints\Date;
 class OpinionController extends AbstractController
 {
     /**
-     * @Route("/", name="opinion_index", methods={"GET"})
-     */
-    public function index(OpinionRepository $opinionRepository): Response
-    {
-        return $this->render('opinion/index.html.twig', [
-            'opinions' => $opinionRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new", name="opinion_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_CONSUMER")
      */
     public function new(Request $request): Response
     {
@@ -61,45 +53,14 @@ class OpinionController extends AbstractController
 
     /**
      * @Route("/{id}", name="opinion_show", methods={"GET"})
+     * @IsGranted("ROLE_ENTERPRISE")
+     * @IsGranted("ROLE_CONSUMER")
+     * @IsGranted("ROLE_EXPERT")
      */
     public function show(Opinion $opinion): Response
     {
         return $this->render('opinion/show.html.twig', [
             'opinion' => $opinion,
         ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="opinion_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Opinion $opinion): Response
-    {
-        $form = $this->createForm(OpinionType::class, $opinion);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('opinion_index');
-        }
-
-        return $this->render('opinion/edit.html.twig', [
-            'opinion' => $opinion,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="opinion_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Opinion $opinion): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$opinion->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($opinion);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('opinion_index');
     }
 }
