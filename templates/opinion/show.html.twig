@@ -1,34 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Opinion{% endblock %}
+{% block title %}Avis de {{ opinion.depositary.firstName }}{% endblock %}
 
 {% block body %}
-    <h1>Opinion</h1>
+    <div class="container-fluid">
+        <div class="row col-5 mb-5 mx-auto">
+            <h3 class="text-center mx-auto">Avis de M./Mme {{ opinion.depositary.fullName }} sur l'entreprise {{ opinion.enterprise.name }}</h3>
+        </div>
+        <div class="row col-10 my-auto mx-auto">
+            <p class="text-center">{{ opinion.text }}</p>
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ opinion.id }}</td>
-            </tr>
-            <tr>
-                <th>Text</th>
-                <td>{{ opinion.text }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ opinion.date ? opinion.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>IsConform</th>
-                <td>{{ opinion.isConform ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('opinion_index') }}">back to list</a>
-
-    <a href="{{ path('opinion_edit', {'id': opinion.id}) }}">edit</a>
-
-    {{ include('opinion/_delete_form.html.twig') }}
 {% endblock %}

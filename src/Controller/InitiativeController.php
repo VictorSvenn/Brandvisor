@@ -57,4 +57,30 @@ class InitiativeController extends AbstractController
             'likes' => count($likes),
         ]);
     }
+
+    /**
+     * @Route("/vote/{id}", name="initiative_vote")
+     * @param Initiative $initiative
+     * @return Response
+     */
+    public function vote(Initiative $initiative): Response
+    {
+        $initiative->addLike($this->getUser());
+        $this->getDoctrine()->getManager()->persist($initiative);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
+//        return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
+    }
+
+//    /**
+//     * @Route("/vote/{id}",name="vote_challenge")
+//     */
+//    public function vote(Challenge $challenge)
+//    {
+//        $challenge->addLike($this->getUser());
+//        $this->getDoctrine()->getManager()->persist($challenge);
+//        $this->getDoctrine()->getManager()->flush();
+//
+//        return $this->redirectToRoute('app_home');
+//    }
 }
