@@ -43,5 +43,4 @@ class ExpertOpinionsController extends AbstractController
             'experts' => $expertResults,
         ]);
     }
-
 }

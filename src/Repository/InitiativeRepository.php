@@ -38,6 +38,7 @@ class InitiativeRepository extends ServiceEntityRepository
     {
         $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_consumer 
         GROUP BY initiative_id ORDER BY likes DESC LIMIT 6";
+
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -48,6 +49,7 @@ class InitiativeRepository extends ServiceEntityRepository
         }
         return $results;
     }
+
 
 
     /*

@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/expert")
- * @IsGranted("ROLE_EXPERT")
  */
 class ExpertController extends AbstractController
 {
