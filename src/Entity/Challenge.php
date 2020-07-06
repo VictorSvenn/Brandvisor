@@ -65,6 +65,11 @@ class Challenge
      */
     private $likes;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $response;
+
 
     public function __construct()
     {
@@ -193,6 +198,18 @@ class Challenge
         if ($this->likes->contains($like)) {
             $this->likes->removeElement($like);
         }
+
+        return $this;
+    }
+
+    public function getResponse(): ?string
+    {
+        return $this->response;
+    }
+
+    public function setResponse(?string $response): self
+    {
+        $this->response = $response;
 
         return $this;
     }

@@ -35,6 +35,14 @@ class InitiativeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllNotValid()
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.isConform = false')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findWhereLikesHigh()
     {
         $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_user JOIN initiative 

@@ -203,6 +203,7 @@ class RegistrationController extends AbstractController
             $enterprise->setContactFunction($fct);
             $enterprise->setSiret((int)$siret);
             $enterprise->setType($type);
+            $enterprise->setIsValid(false);
 
 
             $entityManager = $this->getDoctrine()->getManager();
