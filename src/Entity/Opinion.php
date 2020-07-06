@@ -108,4 +108,9 @@ class Opinion
 
         return $this;
     }
+
+    public function __construct()
+    {
+        $this->isConform = false;
+    }
 }

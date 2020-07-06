@@ -19,6 +19,17 @@ class ExpertRepository extends ServiceEntityRepository
         parent::__construct($registry, Expert::class);
     }
 
+    public function findExpertValidOpinions()
+    {
+        return $this->createQueryBuilder('e')
+            ->join(User::class, 'u')
+            ->where('u.id = e.user_id')
+            ->andWhere('u.firstname LIKE :val')
+            ->setParameter('val', '%value%')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Expert[] Returns an array of Expert objects
     //  */

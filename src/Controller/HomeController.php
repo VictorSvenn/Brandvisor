@@ -64,9 +64,9 @@ class HomeController extends AbstractController
         $news = $newsRepo->findByDate();
 
         // Je choppe tous les avis consommateurs et je récupère seulement les deux derniers
-        $consummerAdvices = $opinionRepo->findConsummerOpinions();
+        $consummerAdvices = $opinionRepo->findConsummerValidOpinions();
         // Je choppe tous les avis experts et je récupère seulement les deux derniers
-        $expertAdvices = $opinionRepo->findExpertOpinions();
+        $expertAdvices = $opinionRepo->findExpertValidOpinions();
 
         return $this->render('/home/home.html.twig', [
             'enterprises' => $enterpriseResult,
