@@ -1,5 +1,4 @@
 security:
-  access_denied_url: /
   encoders:
     App\Entity\User:
       algorithm: auto

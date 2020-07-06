@@ -20,7 +20,6 @@ class OpinionController extends AbstractController
 {
     /**
      * @Route("/new", name="opinion_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_CONSUMER")
      */
     public function new(Request $request): Response
     {
@@ -53,9 +52,6 @@ class OpinionController extends AbstractController
 
     /**
      * @Route("/{id}", name="opinion_show", methods={"GET"})
-     * @IsGranted("ROLE_ENTERPRISE")
-     * @IsGranted("ROLE_CONSUMER")
-     * @IsGranted("ROLE_EXPERT")
      */
     public function show(Opinion $opinion): Response
     {

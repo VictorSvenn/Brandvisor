@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/expert")
- * @IsGranted("ROLE_EXPERT")
  */
 class ExpertController extends AbstractController
 {
@@ -79,8 +78,8 @@ class ExpertController extends AbstractController
             return $this->redirectToRoute('account_expert');
         }
 
-        return $this->render('expert_argumentation/new.html.twig', [
-            'expert_argumentation' => $expertArgumentation,
+        return $this->render('expertOpinions/new.html.twig', [
+            'expertOpinions' => $expertArgumentation,
             'form' => $form->createView(),
         ]);
     }
@@ -90,8 +89,8 @@ class ExpertController extends AbstractController
      */
     public function show(ExpertArgumentation $expertArgumentation): Response
     {
-        return $this->render('expert_argumentation/show.html.twig', [
-            'expert_argumentation' => $expertArgumentation,
+        return $this->render('expertOpinions/show.html.twig', [
+            'expertOpinions' => $expertArgumentation,
         ]);
     }
 }

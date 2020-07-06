@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paroles d'expert{% endblock %}
+
+{% block body %}
+    <div class="container-fluid d-flex">
+        {# SideBar de recherche #}
+        <div class="container-fluid col-3">
+            {#Formulaire de recherche#}
+            <form method="post" action="" class="col-12">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Rechercher..."
+                           aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchText">
+                </div>
+                {#~~~~~~~~~#}
+                {#Liste déroulante RSE#}
+                <div class="row col-10">
+                    <label for="type">Catégories RSE</label>
+                    <select name="type" id="type" style="width: 100%">
+                        {% for type in types %}
+                            <option value="{{ type.id }}">{{ type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {#~~~~~~~~~#}
+                {#Liste déroulante ODD#}
+                <div class="row col-10">
+                    <label for="type">Catégories ODD</label>
+                    <select name="type" id="type" style="width: 100%">
+                        {% for odd in odds %}
+                            <option value="{{ odd.id }}">{{ odd.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {#~~~~~~~~~#}
+                {#Bouton "Rechercher"#}
+                <div class="input-group-append">
+                    <input class="btn btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
+                </div>
+                {#~~~~~#}
+            </form>
+        </div>
+        {# Affichage du contenu de la recherche #}
+        <div class="container-fluid col-9">
+            <div class="row d-flex">
+                {% for expert in experts %}
+                    <div class="card col-5 mx-auto">
+                        <p class="bg-info rounded p-2 my-auto mx-auto">Expert</p>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ expert.user.fullname }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ expert.connectingStructure }}</h6>
+                            <p class="card-text">{{ expert.presentation }}</p>
+                            <p class="card-text">{{ expert.website }}</p>
+                            <p class="card-text">{{ expert.expertiseAreas }}</p>
+                            <p class="card-text">{{ expert.phone }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for odd in odds %}
+                    <div class="card col-5 mx-auto">
+                        <p class="bg-info rounded p-2 my-auto mx-auto">Thématique</p>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ odd.name }}</h5>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

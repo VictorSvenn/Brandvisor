@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Enterprise;
+use App\Entity\Opinion;
 use App\Form\EnterpriseType;
 use App\Repository\EnterpriseRepository;
+use App\Repository\OpinionRepository;
 use App\Services\FileUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/enterprise")
- * @IsGranted("ROLE_ENTERPRISE")
  */
 class EnterpriseController extends AbstractController
 {
@@ -42,10 +43,11 @@ class EnterpriseController extends AbstractController
     /**
      * @Route("/opinions", name="enterprise_opinions")
      */
-    public function etpOpinions(): Response
+    public function etpOpinions(OpinionRepository $opinionRepository): Response
     {
         $user = $this->getUser();
-        return $this->render('opinion/opinions.html.twig', ['user' => $user]);
+        $opinions = $opinionRepository->findAllValidOpinionsDesc($this->getUser()->getEnterprise());
+        return $this->render('opinion/opinions.html.twig', ['user' => $user, 'opinions' => $opinions]);
     }
 
     /**

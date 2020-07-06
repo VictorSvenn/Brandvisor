@@ -3,64 +3,147 @@
 {% block title %}Initiative{% endblock %}
 
 {% block body %}
-    <h1>Initiative</h1>
+    {# Container page entière#}
+    <div class="container-fluid">
+        {# Formulaire de recherche d'initiative#}
+        <div class="row col-12 justify-content-between">
+            <form method="post" action="" class="col-5">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nom d'une initiative"
+                           aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchText">
+                    <div class="input-group-append">
+                        <input class="btn btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
+                    </div>
+                </div>
+            </form>
+            {#~~~~~~~~#}
+            {# Bouton pour déposer une initiative#}
+            <div>
+                <a href="{{ path('initiative_new') }}" class="btn btn-success">Déposer une initiative</a>
+            </div>
+            {#~~~~~~#}
+        </div>
+    </div>
+    <div class="container-fluid d-flex mt-5">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ initiative.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ initiative.name }}</td>
-            </tr>
-            <tr>
-                <th>Illustration</th>
-                <td>{{ initiative.illustration }}</td>
-            </tr>
-            <tr>
-                <th>Presentation</th>
-                <td>{{ initiative.presentation }}</td>
-            </tr>
-            <tr>
-                <th>Objective</th>
-                <td>{{ initiative.objective }}</td>
-            </tr>
-            <tr>
-                <th>DetailledDescription</th>
-                <td>{{ initiative.detailledDescription }}</td>
-            </tr>
-            <tr>
-                <th>Partner</th>
-                <td>{{ initiative.partner ? initiative.partner|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Links</th>
-                <td>{{ initiative.links ? initiative.links|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Website</th>
-                <td>{{ initiative.website }}</td>
-            </tr>
-            <tr>
-                <th>GeographicArea</th>
-                <td>{{ initiative.geographicArea }}</td>
-            </tr>
-            <tr>
-                <th>Keywords</th>
-                <td>{{ initiative.keywords ? initiative.keywords|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>IsConform</th>
-                <td>{{ initiative.isConform ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        {# Container partie gauche #}
+        <div class="container-fluid col-6">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Nom de l'initiative:</th>
+                    <td class="font-weight-light border-0">{{ initiative.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Porté par:</th>
+                    <td class="font-weight-light border-0"></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Objectif:</th>
+                    <td class="font-weight-light border-0">{{ initiative.objective }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Liens utiles:</th>
+                    <td class="font-weight-light border-0">{{ initiative.links }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Partenaires:</th>
+                    <td class="font-weight-light border-0">{{ initiative.partner }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Présentation:</th>
+                    <td class="font-weight-light border-0">{{ initiative.presentation }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Mots-clefs:</th>
+                    <td class="font-weight-light border-0">{{ initiative.keywords }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Déposé par:</th>
+                    <td class="font-weight-light border-0">{{ initiative.depositary.fullname }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Localisation:</th>
+                    <td class="font-weight-light border-0">{{ initiative.geographicArea }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Description:</th>
+                    <td class="font-weight-light border-0">{{ initiative.detailledDescription }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Pièce jointe:</th>
+                    <td class="font-weight-light border-0"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        {# Container partie droite #}
+        <div class="container-fluid col-6">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Thématique:</th>
+                    {% for odd in initiative.odd %}
+                        <td class="font-weight-light border-0">{{ odd.name }}</td>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+            {# affichage illustration #}
+            <div class="row col-11 mx-auto">
+                <img src="{{ asset('uploads/' ~ initiative.illustration) }}" width="100%" alt="">
+            </div>
+            {# Bouton Like #}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% set vote = false %}
+                {% for like in app.user.initlikes %}
+                    {% if like.name == initiative.name %}
+                        {% set vote = true  %}
+                    {% endif %}
+                {% endfor %}
+                {% if vote == true %}
+                    <div class="row mx-auto justify-content-center mt-5">
+                        <a href="{{ path('initiative_vote', { 'id': initiative.id }) }}"
+                           class="disabled btn btn-success font-weight-bold">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z"/>
+                                <path d="M7 13h2v3H7v-3z"/>
+                            </svg>
+                            Vous avez déja liké</a>
+                    </div>
+                {% else %}
+                    <div class="row mx-auto justify-content-center mt-5">
+                        <a href="{{ path('initiative_vote', { 'id': initiative.id }) }}"
+                           class="btn btn-success font-weight-bold">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z"/>
+                                <path d="M7 13h2v3H7v-3z"/>
+                            </svg>
+                            Liker cette initiative</a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="row mx-auto justify-content-center mt-5">
+                    <a href="{{ path('app_login') }}"
+                       class="disabled btn btn-success font-weight-bold">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z"/>
+                            <path d="M7 13h2v3H7v-3z"/>
+                        </svg>
+                        Veuillez vous connecter pour liker cette initiative</a>
+                </div>
+            {% endif %}
 
-    <a href="{{ path('initiative_index') }}">back to list</a>
-
-    <a href="{{ path('initiative_edit', {'id': initiative.id}) }}">edit</a>
-
-    {{ include('initiative/_delete_form.html.twig') }}
+            {# Affichage du nombre de likes #}
+            <div class="row mt-3 mx-auto justify-content-center">
+                <h5>Nombre de likes : {{ likes }}</h5>
+            </div>
+        </div>
+    </div>
 {% endblock %}
