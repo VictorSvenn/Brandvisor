@@ -48,7 +48,6 @@ class HomeController extends AbstractController
         }
         // Affichage des entreprises dans la page d'accueil
         $enterpriseNotes = $entRepo->findWhereNoteHigh();
-        dump($enterpriseNotes);
 
         // Affichage des initiatives dans la page d'accueil
         $initiativeLikes = $initRepo->findWhereLikesHigh();
@@ -68,7 +67,6 @@ class HomeController extends AbstractController
         // Je choppe tous les avis experts et je récupère seulement les deux derniers
         $expertAdvices = $opinionRepo->findExpertValidOpinions();
 
-        dump($initiativeLikes);
         return $this->render('/home/home.html.twig', [
             'enterprises' => $enterpriseResult,
             'initiatives' => $initiativeResult,
