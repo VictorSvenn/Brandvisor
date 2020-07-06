@@ -67,7 +67,7 @@ class OpinionRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.isConform = false')
-            ->orderBy('o.id', 'DESC')
+            ->orderBy('o.date', 'DESC')
             ->getQuery()
             ->getResult()
             ;
