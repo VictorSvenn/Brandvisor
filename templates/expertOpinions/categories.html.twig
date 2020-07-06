@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consultation des catégories{% endblock %}
+
+{% block body %}
+<div class="container-fluid d-flex">
+    {#Affichage des Thématiques ODD#}
+    <div class="container-fluid col-6">
+        <h2>Liste des thématiques ODD</h2>
+        {% for odd in odds %}
+            <p>{{ odd.name }}</p>
+        {% endfor %}
+    </div>
+    {#~~~~~~~~~~#}
+    {#Affichage des catégories RSE#}
+    <div class="container-fluid col-6">
+        <h2>Liste des catégories d'entreprises</h2>
+        {% for rse in rses %}
+            <p>{{ rse.name }}</p>
+        {% endfor %}
+    </div>
+    {#~~~~~~~~~~#}
+</div>
+    {#Bouton "Retour à l'annuaire"#}
+    <div class="input-group-append">
+        <a href="{{ path('expert_annuary') }}" class="btn bg-light btn-outline-success" type="submit">Retour à l'annuaire</a>
+    </div>
+    {#~~~~~#}
+{% endblock %}
