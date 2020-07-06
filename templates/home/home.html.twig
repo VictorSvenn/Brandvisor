@@ -58,7 +58,7 @@
                     <div class="col-6 my-auto ">
                         <h2>Entreprises à l'honneur</h2>
                         {% for enterpriseNote in enterpriseNotes %}
-                            <a href="#"><img src="{{ enterpriseNote.logo }}" alt="" width="45%"></a>
+                            <a href="#"><img src="{{ asset('uploads/' ~ enterpriseNote.logo) }}" alt="" width="45%"></a>
                         {% endfor %}
                     </div>
                     {# Section "initiatives les + likées"#}
@@ -165,8 +165,8 @@
                     <div class="mx-auto text-center">
                         {% for new in news %}
                             <h3>{{ new.title }}</h3>
-                            <p class="font-italic">{{ new.date|date("m/d/Y") }}</p>
-                            <img src="{{ new.illustration }}" width="70%">
+                            <p class="font-italic">{{ new.date|date("d/m/Y") }}</p>
+                            <img src="{{ asset('uploads/' ~ new.illustration) }}" width="70%">
                             <p>{{ new.text }}</p>
                             <hr/>
                         {% endfor %}

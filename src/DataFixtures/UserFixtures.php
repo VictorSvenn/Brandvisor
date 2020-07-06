@@ -69,7 +69,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $expert->setAdress($faker->address);
             $expert->setPhone($faker->phoneNumber);
             $expert->setPresentation($faker->text);
-            $expert->setIllustration('https://picsum.photos/id/' . rand(1, 1000) . '/200');
+            $expert->setIllustration('11333805-1-ConvertImage.jpg');
             $expert->setWebsite($faker->url);
             $expert->setExpertiseAreas($faker->word);
             $expert->setInterventionZones($faker->city);
@@ -99,7 +99,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $enterprise->setContactFunction($faker->jobTitle);
             $enterprise->setWebsite($faker->url);
             $enterprise->setSiret($faker->randomNumber());
-            $enterprise->setLogo('https://picsum.photos/id/' . rand(1, 1000) . '/200');
+            $enterprise->setLogo('logo.jpg');
             $enterprise->setEnterprisePhone($faker->phoneNumber);
             $enterprise->setEnterprisePres($faker->text);
             $enterprise->setDocuments(["etpdocument_$i.$faker->fileExtension", "etpdocument_$i.$faker->fileExtension"]);
