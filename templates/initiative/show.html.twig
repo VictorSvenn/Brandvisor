@@ -91,7 +91,7 @@
             </table>
             {# affichage illustration #}
             <div class="row col-11 mx-auto">
-                <img src="{{ initiative.illustration }}" width="100%" alt="">
+                <img src="{{ asset('uploads/' ~ initiative.illustration) }}" width="100%" alt="">
             </div>
             {# Bouton Like #}
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}

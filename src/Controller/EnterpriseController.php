@@ -46,8 +46,7 @@ class EnterpriseController extends AbstractController
     public function etpOpinions(OpinionRepository $opinionRepository): Response
     {
         $user = $this->getUser();
-        $opinions = $opinionRepository->findAllDesc($this->getUser()->getEnterprise());
-        dump($opinions);
+        $opinions = $opinionRepository->findAllValidOpinionsDesc($this->getUser()->getEnterprise());
         return $this->render('opinion/opinions.html.twig', ['user' => $user, 'opinions' => $opinions]);
     }
 
