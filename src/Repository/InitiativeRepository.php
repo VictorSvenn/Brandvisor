@@ -36,7 +36,7 @@ class InitiativeRepository extends ServiceEntityRepository
 
     public function findWhereLikesHigh()
     {
-        $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_consumer 
+        $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_user 
         GROUP BY initiative_id ORDER BY likes DESC LIMIT 2";
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->prepare($sql);
@@ -48,6 +48,7 @@ class InitiativeRepository extends ServiceEntityRepository
         }
         return $results;
     }
+
 
 
     /*

@@ -61,9 +61,10 @@ class Challenge
     private $engagement;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Consumer::class, inversedBy="likedChallenges")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likes")
      */
     private $likes;
+
 
     public function __construct()
     {
@@ -171,14 +172,14 @@ class Challenge
     }
 
     /**
-     * @return Collection|Consumer[]
+     * @return Collection|User[]
      */
     public function getLikes(): Collection
     {
         return $this->likes;
     }
 
-    public function addLike(Consumer $like): self
+    public function addLike(User $like): self
     {
         if (!$this->likes->contains($like)) {
             $this->likes[] = $like;
@@ -187,7 +188,7 @@ class Challenge
         return $this;
     }
 
-    public function removeLike(Consumer $like): self
+    public function removeLike(User $like): self
     {
         if ($this->likes->contains($like)) {
             $this->likes->removeElement($like);
