@@ -126,7 +126,10 @@
                             Liker cette initiative</a>
                     </div>
                 {% endif %}
+            {% elseif initiative.isConform is same as (false) %}
+
             {% else %}
+                {{ initiative.isConform }}
                 <div class="row mx-auto justify-content-center mt-5">
                     <a href="{{ path('app_login') }}"
                        class="disabled btn btn-success font-weight-bold">
@@ -141,9 +144,13 @@
             {% endif %}
 
             {# Affichage du nombre de likes #}
-            <div class="row mt-3 mx-auto justify-content-center">
-                <h5>Nombre de likes : {{ likes }}</h5>
-            </div>
+            {% if initiative.isConform is same as (false) %}
+
+            {% else %}
+                <div class="row mt-3 mx-auto justify-content-center">
+                    <h5>Nombre de likes : {{ likes }}</h5>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
