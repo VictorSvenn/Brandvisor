@@ -20,13 +20,14 @@ class ExpertRepository extends ServiceEntityRepository
         parent::__construct($registry, Expert::class);
     }
 
-    public function findExpertValidOpinions()
+    public function findWhereNameLike($value)
     {
         return $this->createQueryBuilder('e')
-            ->join(User::class, 'u')
-            ->where('u.id = e.user_id')
-            ->andWhere('u.firstname LIKE :val')
-            ->setParameter('val', '%value%')
+            ->Join(User::class, 'u')
+            ->where('u.id = e.user')
+            ->andWhere('u.firstName LIKE :val')
+            ->orWhere('u.lastName LIKE :val')
+            ->setParameter('val', '%' . $value . '%')
             ->getQuery()
             ->getResult();
     }

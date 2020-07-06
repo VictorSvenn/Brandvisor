@@ -47,7 +47,7 @@ class InitiativeRepository extends ServiceEntityRepository
     {
         $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_user JOIN initiative 
         ON initiative.id = initiative_user.initiative_id WHERE initiative.is_conform = true
-     GROUP BY initiative_id ORDER BY likes DESC LIMIT 2";
+     GROUP BY initiative_id ORDER BY likes DESC LIMIT 6";
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
