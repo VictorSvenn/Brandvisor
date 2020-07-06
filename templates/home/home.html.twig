@@ -66,7 +66,7 @@
                             <div class="carousel-inner">
                                 {% for enterpriseNote in enterpriseNotes %}
                                     <div class="{{ loop.first ? 'carousel-item active' : 'carousel-item' }}">
-                                        <a href="#"><img class="d-block w-100" src="{{ enterpriseNote.logo }}" alt=""></a>
+                                        <a href="#"><img class="d-block w-100" src="{{ asset('uploads/' ~ enterpriseNote.logo) }}" alt=""></a>
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5 class="bg-info rounded">{{ enterpriseNote.name }}</h5>
                                         </div>
@@ -88,12 +88,33 @@
                     {# Section "initiatives les + likées"#}
                     <div class="col-6">
                         <h2>Initiatives à l'honneur</h2>
-                        {% for initiativeLike in initiativeLikes %}
-                            <a class="text-decoration-none text-dark"
-                               href="{{ path('initiative_show', { 'id': initiativeLike.id }) }}">
-                                <h3 class="bg-lightGreen p-3 mt-3 rounded">{{ initiativeLike.name }}</h3>
+                        <div id="initiatives" class="carousel slide mb-2" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                {% for initiativeLike in initiativeLikes %}
+                                    <li data-target="#initiatives" data-slide-to="{{ loop.index }}" class="{{ loop.first ? 'active' : ' ' }}"></li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                {% for initiativeLike in initiativeLikes %}
+                                    <div class="{{ loop.first ? 'carousel-item active' : 'carousel-item' }}">
+                                        <a href="#"><img class="d-block w-100" src="{{ asset('uploads/' ~ initiativeLike.illustration) }}" alt=""></a>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="bg-info rounded">{{ initiativeLike.name }}</h5>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#initiatives" role="button"
+                               data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
                             </a>
-                        {% endfor %}
+                            <a class="carousel-control-next" href="#initiatives" role="button"
+                               data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 {#~~~~~~~~~~~~~#}

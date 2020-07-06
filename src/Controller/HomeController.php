@@ -68,6 +68,7 @@ class HomeController extends AbstractController
         // Je choppe tous les avis experts et je récupère seulement les deux derniers
         $expertAdvices = $opinionRepo->findExpertValidOpinions();
 
+        dump($initiativeLikes);
         return $this->render('/home/home.html.twig', [
             'enterprises' => $enterpriseResult,
             'initiatives' => $initiativeResult,

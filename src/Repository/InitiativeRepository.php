@@ -27,6 +27,7 @@ class InitiativeRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('i')
             ->where('i.name LIKE :val1')
+            ->andWhere('i.isConform = true')
             ->setParameter('val1', '%' . $value . '%')
             ->orWhere('i.keywords LIKE :val2')
             ->setParameter('val2', '%' . $value . '%')
@@ -36,9 +37,9 @@ class InitiativeRepository extends ServiceEntityRepository
 
     public function findWhereLikesHigh()
     {
-        $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_consumer 
-        GROUP BY initiative_id ORDER BY likes DESC LIMIT 6";
-
+        $sql = "SELECT COUNT(initiative_id) AS likes, initiative_id FROM initiative_user JOIN initiative 
+        ON initiative.id = initiative_user.initiative_id WHERE initiative.is_conform = true
+     GROUP BY initiative_id ORDER BY likes DESC LIMIT 6";
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -49,8 +50,6 @@ class InitiativeRepository extends ServiceEntityRepository
         }
         return $results;
     }
-
-
 
     /*
     public function findOneBySomeField($value): ?Initiative

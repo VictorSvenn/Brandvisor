@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\News;
 use App\Entity\Opinion;
 use App\Form\NewsType;
+use App\Repository\InitiativeRepository;
 use App\Repository\OpinionRepository;
 use App\Services\FileUpload;
 use DateTime;
@@ -66,6 +67,13 @@ class AdminController extends AbstractController
         $opinions = $opinionRepository->findAllNotValidOpinionsDesc();
         return $this->render('admin/validate_opinions.html.twig', ['opinions' => $opinions]);
     }
+
+//    /**
+//     * @Route("admin/validate/initiatives", name="validate_init")
+//     */
+//    public function validateInitiativve(InitiativeRepository $initiativeRepository): Response
+//    {
+//    }
 
     /**
      * @Route("admin/validate/opinion/{id}", name="validate_opinion")
