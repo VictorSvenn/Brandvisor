@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Expert;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\User;
 
 /**
  * @method Expert|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,18 @@ class ExpertRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Expert::class);
+    }
+
+    public function findWhereNameLike($value)
+    {
+        return $this->createQueryBuilder('e')
+            ->Join(User::class, 'u')
+            ->where('u.id = e.user')
+            ->andWhere('u.firstName LIKE :val')
+            ->orWhere('u.lastName LIKE :val')
+            ->setParameter('val', '%' . $value . '%')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

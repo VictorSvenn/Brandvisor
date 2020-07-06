@@ -30,7 +30,7 @@ class HomeController extends AbstractController
         $initiativeResult = null;
         $oddResult = null;
         $form = false;
-        if (isset($_POST['indexSearch'])) {
+        if (isset($_POST['searchText']) && trim($_POST['searchText']) !="") {
             $query = $_POST['searchText'];
 
             // Requête pour la table entreprise
