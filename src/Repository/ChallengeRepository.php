@@ -21,7 +21,7 @@ class ChallengeRepository extends ServiceEntityRepository
 
     public function findWhereVotes()
     {
-        $sql = "SELECT COUNT(challenge_id) AS likes, challenge_id FROM challenge_user WHERE
+        $sql = "SELECT COUNT(challenge_id) AS likes, challenge_id FROM challenge_user
         GROUP BY challenge_id";
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->prepare($sql);
