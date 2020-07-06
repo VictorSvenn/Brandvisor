@@ -36,7 +36,7 @@ class EnterpriseRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('e');
         $query->select('e');
-        $query->setMaxResults(2);
+        $query->setMaxResults(6);
         $query->orderBy('e.note', 'DESC');
 
         return $query->getQuery()->getResult();
