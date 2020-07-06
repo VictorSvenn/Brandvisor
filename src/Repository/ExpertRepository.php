@@ -6,7 +6,6 @@ use App\Entity\Expert;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\User;
 
 /**
  * @method Expert|null find($id, $lockMode = null, $lockVersion = null)

@@ -211,7 +211,7 @@
                         {% for new in news %}
                             <h3>{{ new.title }}</h3>
                             <p class="font-italic">{{ new.date|date("m/d/Y") }}</p>
-                            <img src="{{ new.illustration }}" width="70%">
+                            <img src="{{ asset('uploads/' ~ new.illustration) }}" width="70%"alt="">
                             <p>{{ new.text }}</p>
                             <hr/>
                         {% endfor %}
