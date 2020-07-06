@@ -3,7 +3,15 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-    <a href="{{ path('validate_opinions') }}">Validation des avis</a>
-    <a href="{{ path('news_new') }}">Déposer une news</a>
-    <a href="{{ path('init_validate') }}">Validation des initiatives</a>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <a href="{{ path('validate_opinions') }}">Validation des avis</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{{ path('news_new') }}">Déposer une news</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{{ path('init_validate') }}">Validation des initiatives</a>
+        </li>
+    </ul>
 {% endblock %}

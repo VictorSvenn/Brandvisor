@@ -40,6 +40,7 @@ class OpinionRepository extends ServiceEntityRepository
             ->join(User::class, 'u')
             ->where('u.id = o.depositary')
             ->andWhere('u.roles LIKE :role')
+            ->andWhere('o.isConform = true')
             ->setParameter('role', '%ROLE_EXPERT%')
             ->orderBy('o.date', 'DESC')
             ->setMaxResults(2)

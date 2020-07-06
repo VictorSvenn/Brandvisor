@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Initiative{% endblock %}
+
+{% block body %}
+    <div class="container-fluid d-flex mt-5">
+
+        {# Container partie gauche #}
+        <div class="container-fluid col-8">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Nom du challenge :</th>
+                    <td class="font-weight-light border-0">{{ challenge.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Déposé par:</th>
+                    <td class="font-weight-light border-0">{{ challenge.depositary.fullName }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Description :</th>
+                    <td class="font-weight-light border-0">{{ challenge.description }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Commentaire :</th>
+                    <td class="font-weight-light border-0">{{ challenge.comment }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Sur l'engagement :</th>
+                    {% if challenge.engagement %}
+                        <td class="font-weight-light border-0">{{ challenge.engagement.name }}</td>
+                    {% else %}
+                        <td class="font-weight-light border-0">Challenge déposé sans engagement</td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            </table>
+
+            <form action="" method="post">
+                <textarea name="text" id="text"></textarea>
+                <button type="submit" name="submit" id="submit">Répondre</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
