@@ -66,10 +66,10 @@
                             <div class="carousel-inner">
                                 {% for enterpriseNote in enterpriseNotes %}
                                     <div class="{{ loop.first ? 'carousel-item active' : 'carousel-item' }}">
-                                        <a href="#"><img class="d-block w-100" src="{{ asset('uploads/' ~ enterpriseNote.logo) }}" alt=""></a>
+                                        <a href="{{ path('show_enterprise', {'id': enterpriseNote.id }) }}"><img class="d-block w-100" src="{{ asset('uploads/' ~ enterpriseNote.logo) }}" alt=""></a>
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5 class="bg-info rounded">{{ enterpriseNote.name }}</h5>
-                                        </div>
+                                        </div>F
                                     </div>
                                 {% endfor %}
                             </div>
@@ -97,7 +97,7 @@
                             <div class="carousel-inner">
                                 {% for initiativeLike in initiativeLikes %}
                                     <div class="{{ loop.first ? 'carousel-item active' : 'carousel-item' }}">
-                                        <a href="#"><img class="d-block w-100" src="{{ asset('uploads/' ~ initiativeLike.illustration) }}" alt=""></a>
+                                        <a href="{{ path('initiative_show', { 'id': initiativeLike.id } ) }}"><img class="d-block w-100" src="{{ asset('uploads/' ~ initiativeLike.illustration) }}" alt=""></a>
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5 class="bg-info rounded">{{ initiativeLike.name }}</h5>
                                         </div>
