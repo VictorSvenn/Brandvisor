@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use PhpParser\Node\Expr\Cast\Object_;
 
 /**
+ * @SuppressWarnings(PHPMD)
  * @ORM\Entity(repositoryClass=EnterpriseRepository::class)
  */
 class Enterprise
@@ -101,6 +102,11 @@ class Enterprise
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isValid = false;
 
     public function __construct()
     {
@@ -377,6 +383,18 @@ class Enterprise
     public function setType($type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getIsValid(): ?bool
+    {
+        return $this->isValid;
+    }
+
+    public function setIsValid(bool $isValid): self
+    {
+        $this->isValid = $isValid;
 
         return $this;
     }

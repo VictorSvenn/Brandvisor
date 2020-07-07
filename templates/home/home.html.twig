@@ -57,18 +57,64 @@
                     {#Entreprise par notes #}
                     <div class="col-6 my-auto ">
                         <h2>Entreprises à l'honneur</h2>
-                        {% for enterpriseNote in enterpriseNotes %}
-                            <a href="#"><img src="{{ enterpriseNote.logo }}" alt="" width="45%"></a>
-                        {% endfor %}
+                        <div id="enterprises" class="carousel slide mb-2" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                {% for enterpriseNote in enterpriseNotes %}
+                                    <li data-target="#enterprises" data-slide-to="{{ loop.index }}" class="{{ loop.first ? 'active' : ' ' }}"></li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                {% for enterpriseNote in enterpriseNotes %}
+                                    <div class="{{ loop.first ? 'carousel-item active' : 'carousel-item' }}">
+                                        <a href="{{ path('show_enterprise', {'id': enterpriseNote.id }) }}"><img class="d-block w-100" src="{{ asset('uploads/' ~ enterpriseNote.logo) }}" alt=""></a>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="bg-info rounded">{{ enterpriseNote.name }}</h5>
+                                        </div>F
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#enterprises" role="button"
+                               data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#enterprises" role="button"
+                               data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
                     {# Section "initiatives les + likées"#}
                     <div class="col-6">
                         <h2>Initiatives à l'honneur</h2>
-                        {% for initiativeLike in initiativeLikes %}
-                            <a class="text-decoration-none text-dark" href="#">
-                                <h3 class="bg-lightGreen p-3 mt-3 rounded">{{ initiativeLike.name }}</h3>
+                        <div id="initiatives" class="carousel slide mb-2" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                {% for initiativeLike in initiativeLikes %}
+                                    <li data-target="#initiatives" data-slide-to="{{ loop.index }}" class="{{ loop.first ? 'active' : ' ' }}"></li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                {% for initiativeLike in initiativeLikes %}
+                                    <div class="{{ loop.first ? 'carousel-item active' : 'carousel-item' }}">
+                                        <a href="{{ path('initiative_show', { 'id': initiativeLike.id } ) }}"><img class="d-block w-100" src="{{ asset('uploads/' ~ initiativeLike.illustration) }}" alt=""></a>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="bg-info rounded">{{ initiativeLike.name }}</h5>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#initiatives" role="button"
+                               data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
                             </a>
-                        {% endfor %}
+                            <a class="carousel-control-next" href="#initiatives" role="button"
+                               data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 {#~~~~~~~~~~~~~#}
@@ -78,20 +124,29 @@
                     <div class="col-6 my-auto ">
                         <h2>Paroles de consommateur</h2>
                         {% for consumerAdvice in consumerAdvices %}
-                            <div class="bg-white rounded p-2 m-2">
-                                <h4>{{ consumerAdvice.enterprise.name }}</h4>
-                                <p>{{ consumerAdvice.text }}</p>
-                            </div>
+                            <a href="{{ path('opinion_show', { 'id': consumerAdvice.id }) }}"
+                               class="text-decoration-none text-dark">
+
+                                <div class="bg-white rounded p-2 m-2">
+                                    <h4>{{ consumerAdvice.depositary.fullName }} a déposé un avis
+                                        sur {{ consumerAdvice.enterprise.name }}</h4>
+                                    <p class=" text-truncate">{{ consumerAdvice.text }}</p>
+                                </div>
+                            </a>
                         {% endfor %}
                     </div>
                     {# Section "Paroles d'expert"#}
                     <div class="col-6">
                         <h2>Paroles d'expert</h2>
                         {% for expertAdvice in expertAdvices %}
-                            <div class="bg-white rounded p-2 m-2">
-                                <h4>{{ expertAdvice.enterprise.name }}</h4>
-                                <p>{{ expertAdvice.text }}</p>
-                            </div>
+                            <a href="{{ path('opinion_show', { 'id': expertAdvice.id }) }}"
+                               class=" text-decoration-none text-dark">
+                                <div class="bg-white rounded p-2 m-2">
+                                    <h4>{{ expertAdvice.depositary.fullName }} a déposé un avis
+                                        sur {{ expertAdvice.enterprise.name }}</h4>
+                                    <p class=" text-truncate">{{ expertAdvice.text }}</p>
+                                </div>
+                            </a>
                         {% endfor %}
                     </div>
                 </div>
@@ -110,7 +165,22 @@
                             <h4 class="card-title text-center">{{ dayChallenge.name }}</h4>
                             <p class="card-text text-center">{{ dayChallenge.description }}</p>
                             <p class="card-text text-center font-italic">Nombre de votes: {{ votes }}</p>
-                            <a href="#" class="btn btn-dark card-link w-100">Voter pour ce challenge</a>
+                            {% if is_granted('ROLE_CONSUMER') or is_granted('ROLE_EXPERT') %}
+                                {% set vote = false %}
+                                {% for like in app.user.likes %}
+                                    {% if like.name == dayChallenge.name %}
+                                        {% set vote = true %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if vote == true %}
+                                    <a href="{{ path('vote_challenge', { 'id': dayChallenge.id }) }}"
+                                       class="disabled btn btn-dark card-link w-100">Vous avez déja voté pour ce
+                                        challenge</a>
+                                {% else %}
+                                    <a href="{{ path('vote_challenge', { 'id': dayChallenge.id }) }}"
+                                       class="btn btn-dark card-link w-100">Voter pour ce challenge</a>
+                                {% endif %}
+                            {% endif %}
                             <a href="#" class="btn btn-dark card-link w-100 m-0 mt-1">Voir tous les challenges</a>
                         </div>
                     </div>
@@ -141,7 +211,7 @@
                         {% for new in news %}
                             <h3>{{ new.title }}</h3>
                             <p class="font-italic">{{ new.date|date("m/d/Y") }}</p>
-                            <img src="{{ new.illustration }}" width="70%">
+                            <img src="{{ asset('uploads/' ~ new.illustration) }}" width="70%"alt="">
                             <p>{{ new.text }}</p>
                             <hr/>
                         {% endfor %}

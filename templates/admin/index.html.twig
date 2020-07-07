@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <a href="{{ path('validate_opinions') }}">Validation des avis</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{{ path('news_new') }}">Déposer une news</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{{ path('init_validate') }}">Validation des initiatives</a>
+        </li>
+    </ul>
+{% endblock %}

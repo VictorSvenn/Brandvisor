@@ -18,8 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class EngagementController extends AbstractController
 {
     /**
+     * @SuppressWarnings(PHPMD)
      * @Route("/new", name="engagement_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
@@ -54,10 +54,16 @@ class EngagementController extends AbstractController
                 array_push($docs, $filename);
             }
             $engagement->setProofDocuments($docs);
-
-
+            $enterprise = $this->getUser()->getEnterprise();
+            $enterprise->setNote(1);
             $entityManager->persist($engagement);
             $entityManager->flush();
+            foreach ($enterprise->getEngagements() as $engagement) {
+                $note = (!empty($engagement->getActionText()) and $enterprise->getNote() < 2) ? 2 : 1;
+                $note = (!empty($engagement->getResultsText()) and $enterprise->getNote() < 3) ? 3 : 1;
+                $note = (!empty($engagement->getProofText()) and $enterprise->getNote() < 4) ? 4 : 1;
+                $enterprise->setNote($note);
+            }
 
 
             return $this->redirectToRoute('account_enterprise');

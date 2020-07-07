@@ -88,11 +88,23 @@ class User implements UserInterface
      */
     private $admin;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Challenge::class, mappedBy="likes")
+     */
+    private $likes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Initiative::class, mappedBy="likes")
+     */
+    private $initlikes;
+
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
         $this->initiatives = new ArrayCollection();
         $this->opinions = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->initlikes = new ArrayCollection();
     }
 
     public function getFullName(): string
@@ -271,19 +283,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeChallenge(Challenge $challenge): self
-    {
-        if ($this->challenges->contains($challenge)) {
-            $this->challenges->removeElement($challenge);
-            // set the owning side to null (unless already changed)
-            if ($challenge->getDepositary() === $this) {
-                $challenge->setDepositary(null);
-            }
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Initiative[]
      */
@@ -297,19 +296,6 @@ class User implements UserInterface
         if (!$this->initiatives->contains($initiative)) {
             $this->initiatives[] = $initiative;
             $initiative->setDepositary($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInitiative(Initiative $initiative): self
-    {
-        if ($this->initiatives->contains($initiative)) {
-            $this->initiatives->removeElement($initiative);
-            // set the owning side to null (unless already changed)
-            if ($initiative->getDepositary() === $this) {
-                $initiative->setDepositary(null);
-            }
         }
 
         return $this;
@@ -333,31 +319,42 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeOpinion(Opinion $opinion): self
-    {
-        if ($this->opinions->contains($opinion)) {
-            $this->opinions->removeElement($opinion);
-            // set the owning side to null (unless already changed)
-            if ($opinion->getDepositary() === $this) {
-                $opinion->setDepositary(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getAdmin(): ?Admin
     {
         return $this->admin;
     }
 
-    public function setAdmin(Admin $admin): self
+    /**
+     * @return Collection|Challenge[]
+     */
+    public function getLikes(): Collection
     {
-        $this->admin = $admin;
+        return $this->likes;
+    }
 
-        // set the owning side of the relation if necessary
-        if ($admin->getUser() !== $this) {
-            $admin->setUser($this);
+    public function addLike(Challenge $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->addLike($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Initiative[]
+     */
+    public function getInitlikes(): Collection
+    {
+        return $this->initlikes;
+    }
+
+    public function addInitlike(Initiative $initlike): self
+    {
+        if (!$this->initlikes->contains($initlike)) {
+            $this->initlikes[] = $initlike;
+            $initlike->addLike($this);
         }
 
         return $this;

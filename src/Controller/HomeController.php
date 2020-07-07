@@ -30,7 +30,7 @@ class HomeController extends AbstractController
         $initiativeResult = null;
         $oddResult = null;
         $form = false;
-        if (isset($_POST['indexSearch'])) {
+        if (isset($_POST['searchText']) && trim($_POST['searchText']) !="") {
             $query = $_POST['searchText'];
 
             // Requête pour la table entreprise
@@ -63,9 +63,9 @@ class HomeController extends AbstractController
         $news = $newsRepo->findByDate();
 
         // Je choppe tous les avis consommateurs et je récupère seulement les deux derniers
-        $consummerAdvices = $opinionRepo->findConsummerOpinions();
+        $consummerAdvices = $opinionRepo->findConsummerValidOpinions();
         // Je choppe tous les avis experts et je récupère seulement les deux derniers
-        $expertAdvices = $opinionRepo->findExpertOpinions();
+        $expertAdvices = $opinionRepo->findExpertValidOpinions();
 
         return $this->render('/home/home.html.twig', [
             'enterprises' => $enterpriseResult,

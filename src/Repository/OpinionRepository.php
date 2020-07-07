@@ -20,12 +20,13 @@ class OpinionRepository extends ServiceEntityRepository
         parent::__construct($registry, Opinion::class);
     }
 
-    public function findConsummerOpinions()
+    public function findConsummerValidOpinions()
     {
         return $this->createQueryBuilder('o')
             ->join(User::class, 'u')
             ->where('u.id = o.depositary')
             ->andWhere('u.roles LIKE :role')
+            ->andWhere('o.isConform = true')
             ->setParameter('role', '%ROLE_CONSUMER%')
             ->orderBy('o.date', 'DESC')
             ->setMaxResults(2)
@@ -33,34 +34,45 @@ class OpinionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findExpertOpinions()
+    public function findExpertValidOpinions()
     {
         return $this->createQueryBuilder('o')
             ->join(User::class, 'u')
             ->where('u.id = o.depositary')
             ->andWhere('u.roles LIKE :role')
+            ->andWhere('o.isConform = true')
             ->setParameter('role', '%ROLE_EXPERT%')
             ->orderBy('o.date', 'DESC')
             ->setMaxResults(2)
             ->getQuery()
             ->getResult();
     }
+
     // /**
     //  * @return Opinion[] Returns an array of Opinion objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllValidOpinionsDesc($value)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
+            ->andWhere('o.enterprise = :val')
+            ->andWhere('o.isConform = true')
             ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('o.id', 'DESC')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
+
+    public function findAllNotValidOpinionsDesc()
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.isConform = false')
+            ->orderBy('o.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Opinion

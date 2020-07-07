@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for init in inits %}
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Initiative de : {{ init.depositary.fullName }}</h4>
+                    <p class="card-text">{{ init.name }}</p>
+                    <p class="card-text">{{ init.presentation }}</p>
+                    <p class="card-text">{{ init.objective }}</p>
+                    <div class="row mx-auto d-flex justify-content-center">
+                        <a href="{{ path('initiative_show', { 'id': init.id }) }}" class="mx-auto btn btn-primary">Consuler</a>
+                        <a href="{{ path('validate_init',{'id':init.id}) }}" class="mx-auto btn btn-primary">Valider</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+    Valider les Opinions
+{% endblock %}
+

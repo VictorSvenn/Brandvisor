@@ -5,17 +5,25 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row col-5 mx-auto">
-            <h1 class="mx-auto text-center my-5">{% if nb == 0  %}Vous n'avez aucun challenge {% else %}Les challenges déposés pour mon entreprise{% endif %}</h1>
+            <h1 class="mx-auto text-center my-5">{% if nb == 0 %}Vous n'avez aucun challenge {% else %}Les challenges déposés pour mon entreprise{% endif %}</h1>
         </div>
         <div class="row d-flex justify-content-between">
-            {% for challenge in user.enterprise.challenge %}
+            {% for challenge in user.enterprise.challenges %}
 
                 <div class="card col-5 my-3" style="width: 18rem; background-color: rgba(128,128,128,0.25)">
                     <div class="card-body">
                         <h5 class="card-title">Challenge déposé par M./Mme {{ challenge.depositary.lastName }}</h5>
                         <p class="card-text">{{ challenge.name }}</p>
                         <p class="card-text">{{ challenge.description }}</p>
-                        <a href="#" class="btn btn-primary">Voir ce challenge</a>
+                        {% if challenge.response %}
+                            <a href="{{ path('challenge_response', { 'id': challenge.id }) }}"
+                               class="disabled btn btn-primary">Vous avez déja répondu a ce challenge</a>
+                        {% else %}
+                            <a href="{{ path('challenge_response', { 'id': challenge.id }) }}" class="btn btn-primary">Repondre
+                                a ce
+                                challenge</a>
+                        {% endif %}
+
                     </div>
                 </div>
             {% endfor %}

@@ -8,11 +8,12 @@
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">Entrée Consommateur
                     </button>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Déposer une initiative</a>
-                    <a class="dropdown-item" href="#">Évaluer une entreprise</a>
-                    <a class="dropdown-item" href="#">Voir la liste des experts référencés</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('initiative_new') }}">Déposer une initiative</a>
+                        <a class="dropdown-item" href="{{ path('opinion_new') }}">Évaluer une entreprise</a>
+                        <a class="dropdown-item" href="{{ path('expert_annuary') }}">Voir la liste des experts
+                            référencés</a>
+                    </div>
                 </div>
             {% elseif is_granted('ROLE_EXPERT') %}
                 <div class="dropdown col-4 m-2">
@@ -20,12 +21,12 @@
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">Entrée Expert
                     </button>
-                </div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Déposer une initiative</a>
-                    <a class="dropdown-item" href="#">Évaluer une entreprise</a>
-                    <a class="dropdown-item" href="#">Se référencer comme conseil/expert</a>
-                    <a class="dropdown-item" href="#">Voir la liste des experts référencés</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('initiative_new') }}">Déposer une initiative</a>
+                        <a class="dropdown-item" href="{{ path('opinion_new') }}">Évaluer une entreprise</a>
+                        <a class="dropdown-item" href="{{ path('account_expert') }}">Se référencer comme conseil/expert</a>
+                        <a class="dropdown-item" href="{{ path('expert_annuary') }}">Voir la liste des experts référencés</a>
+                    </div>
                 </div>
             {% elseif is_granted('ROLE_ENTERPRISE') %}
                 <div class="dropdown col-4 m-2">
@@ -35,8 +36,8 @@
                     </button>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Déposer des informations sur mon entreprise</a>
-                    <a class="dropdown-item" href="#">Voir la liste des experts référencés</a>
+                    <a class="dropdown-item" href="{{ path('enterprise_edit') }}">Déposer des informations sur mon entreprise</a>
+                    <a class="dropdown-item" href="{{ path('expert_annuary') }}">Voir la liste des experts référencés</a>
                 </div>
             {% endif %}
             <div class="dropdown col-4 m-2">

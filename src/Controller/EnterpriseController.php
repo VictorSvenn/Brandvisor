@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Challenge;
 use App\Entity\Enterprise;
+use App\Entity\Opinion;
 use App\Form\EnterpriseType;
 use App\Repository\EnterpriseRepository;
+use App\Repository\OpinionRepository;
 use App\Services\FileUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/enterprise")
- * @IsGranted("ROLE_ENTERPRISE")
  */
 class EnterpriseController extends AbstractController
 {
@@ -25,6 +27,24 @@ class EnterpriseController extends AbstractController
     {
         $challenges = count($this->getUser()->getEnterprise()->getChallenges());
         return $this->render('challenges/etpchallenges.html.twig', ['user' => $this->getUser(), 'nb' => $challenges]);
+    }
+
+    /**
+     * @Route("/challenge/response/{id}", name="challenge_response")
+     */
+    public function responseChallenge(Challenge $challenge)
+    {
+        if (isset($_POST['submit']) and isset($_POST['text'])) {
+            $challenge->setResponse($_POST['text']);
+            $enterprise = $this->getUser()->getEnterprise();
+            $enterprise->setNote(5);
+            $this->getDoctrine()->getManager()->persist($challenge);
+            $this->getDoctrine()->getManager()->persist($enterprise);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('show_challenges');
+        }
+        return $this->render('challenge/response.html.twig', ['challenge' => $challenge]);
     }
 
 
@@ -42,10 +62,11 @@ class EnterpriseController extends AbstractController
     /**
      * @Route("/opinions", name="enterprise_opinions")
      */
-    public function etpOpinions(): Response
+    public function etpOpinions(OpinionRepository $opinionRepository): Response
     {
         $user = $this->getUser();
-        return $this->render('opinion/opinions.html.twig', ['user' => $user]);
+        $opinions = $opinionRepository->findAllValidOpinionsDesc($this->getUser()->getEnterprise());
+        return $this->render('opinion/opinions.html.twig', ['user' => $user, 'opinions' => $opinions]);
     }
 
     /**
@@ -70,8 +91,6 @@ class EnterpriseController extends AbstractController
                 }
             }
             $enterprise->setDocuments($docs);
-
-
             $this->getDoctrine()->getManager()->persist($enterprise);
             $this->getDoctrine()->getManager()->flush();
 
@@ -83,5 +102,13 @@ class EnterpriseController extends AbstractController
             'enterprise' => $enterprise,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="show_enterprise")
+     */
+    public function showEnterprise(Enterprise $enterprise): Response
+    {
+        return $this->render('enterprise/consultation.html.twig', ['enterprise' => $enterprise ]);
     }
 }
