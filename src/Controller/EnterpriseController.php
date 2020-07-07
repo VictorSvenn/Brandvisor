@@ -115,13 +115,16 @@ class EnterpriseController extends AbstractController
     /**
     * @Route("/{id}", name="show_enterprise")
     */
-    public function showEnterprise(Enterprise $enterprise, OpinionRepository $oprepo): Response{
+    public function showEnterprise(Enterprise $enterprise, OpinionRepository $oprepo): Response
+    {
 
-        return $this->render('enterprise/consultation.html.twig', 
-        [
-            'enterprise' => $enterprise, 
+        return $this->render(
+            'enterprise/consultation.html.twig',
+            [
+            'enterprise' => $enterprise,
             "experts" => $oprepo->findEnterpriseExpertValidOpinions($enterprise->getId()),
             "consummers" => $oprepo->findEnterpriseConsummerValidOpinions($enterprise->getId())
-        ]);
+            ]
+        );
     }
 }
