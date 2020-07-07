@@ -45,7 +45,6 @@ class ExpertOpinionsController extends AbstractController
             array_push($experts, $allExperts);
             dump($experts);
         }
-
         return $this->render('expertOpinions/index.html.twig', [
             'types' => $rse,
             'odds' => $odds,
