@@ -49,7 +49,8 @@ class OpinionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findEnterpriseExpertValidOpinions($enterpriseId){
+    public function findEnterpriseExpertValidOpinions($enterpriseId)
+    {
     
         
         $query = $this->createQueryBuilder('o')
@@ -66,7 +67,8 @@ class OpinionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findEnterpriseConsummerValidOpinions($enterpriseId){
+    public function findEnterpriseConsummerValidOpinions($enterpriseId)
+    {
         return $this->createQueryBuilder('o')
         ->join(User::class, 'u')
         ->join(Enterprise::class, 'e')
