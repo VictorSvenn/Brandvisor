@@ -36,7 +36,7 @@
                     </button>
                 </div>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{ path('enterprise_edit') }}">Déposer des informations sur mon entreprise</a>
+                    <a class="dropdown-item" href="{{ path('enterprise_edit', {'id': app.user.enterprise.id }) }}">Déposer des informations sur mon entreprise</a>
                     <a class="dropdown-item" href="{{ path('expert_annuary') }}">Voir la liste des experts référencés</a>
                 </div>
             {% endif %}

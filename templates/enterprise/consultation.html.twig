@@ -47,7 +47,7 @@
         <h3>Quels documents pour les résultats ?</h3>
         <ul>
             {% for doc in eng.resultsDocuments %}
-                <li><a href="{{ asset(doc) }}">Document {{loop.index}}</a></li>
+                <li><a href="{{ asset('uploads/' ~ doc) }}">Document {{loop.index}}</a></li>
             {% endfor %}
         </ul>
 
@@ -57,7 +57,7 @@
         <h3>Quels documents pour les preuves ?</h3>
         <ul>
             {% for doc in eng.proofDocuments %}
-                <li><a href="{{ asset(doc) }}">Document {{loop.index}}</a></li>
+                <li><a href="{{ asset('uploads/' ~ doc) }}">Document {{loop.index}}</a></li>
             {% endfor %}
         </ul>
 
