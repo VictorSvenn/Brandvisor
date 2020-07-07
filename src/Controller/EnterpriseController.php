@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Challenge;
 use App\Entity\Enterprise;
 use App\Entity\Opinion;
 use App\Form\EnterpriseType;
@@ -26,6 +27,24 @@ class EnterpriseController extends AbstractController
     {
         $challenges = count($this->getUser()->getEnterprise()->getChallenges());
         return $this->render('challenges/etpchallenges.html.twig', ['user' => $this->getUser(), 'nb' => $challenges]);
+    }
+
+    /**
+     * @Route("/challenge/response/{id}", name="challenge_response")
+     */
+    public function responseChallenge(Challenge $challenge)
+    {
+        if (isset($_POST['submit']) and isset($_POST['text'])) {
+            $challenge->setResponse($_POST['text']);
+            $enterprise = $this->getUser()->getEnterprise();
+            $enterprise->setNote(5);
+            $this->getDoctrine()->getManager()->persist($challenge);
+            $this->getDoctrine()->getManager()->persist($enterprise);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('show_challenges');
+        }
+        return $this->render('challenge/response.html.twig', ['challenge' => $challenge]);
     }
 
 
@@ -72,8 +91,6 @@ class EnterpriseController extends AbstractController
                 }
             }
             $enterprise->setDocuments($docs);
-
-
             $this->getDoctrine()->getManager()->persist($enterprise);
             $this->getDoctrine()->getManager()->flush();
 

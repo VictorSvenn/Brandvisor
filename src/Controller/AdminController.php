@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Initiative;
 use App\Entity\News;
 use App\Entity\Opinion;
 use App\Form\NewsType;
@@ -68,12 +69,14 @@ class AdminController extends AbstractController
         return $this->render('admin/validate_opinions.html.twig', ['opinions' => $opinions]);
     }
 
-//    /**
-//     * @Route("admin/validate/initiatives", name="validate_init")
-//     */
-//    public function validateInitiativve(InitiativeRepository $initiativeRepository): Response
-//    {
-//    }
+    /**
+     * @Route("admin/validate/initiatives", name="init_validate")
+     */
+    public function validateInitiativve(InitiativeRepository $initiativeRepository): Response
+    {
+        $init = $initiativeRepository->findAllNotValid();
+        return $this->render('admin/validate_init.html.twig', ['inits' => $init]);
+    }
 
     /**
      * @Route("admin/validate/opinion/{id}", name="validate_opinion")
@@ -83,6 +86,18 @@ class AdminController extends AbstractController
         $opinion->setIsConform(true);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($opinion);
+        $entityManager->flush();
+        return $this->redirectToRoute('init_validate');
+    }
+
+    /**
+     * @Route("admin/validate/initiative/{id}", name="validate_init")
+     */
+    public function validateInit(Initiative $initiative): Response
+    {
+        $initiative->setIsConform(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($initiative);
         $entityManager->flush();
         return $this->redirectToRoute('validate_opinions');
     }

@@ -18,29 +18,41 @@ use Symfony\Component\Routing\Annotation\Route;
 class ExpertOpinionsController extends AbstractController
 {
     /**
-     * @Route("/", name="expert_opinions")
+     * @Route("/", name="expert_annuary")
      */
-    public function index(
-        RseCategoryRepository $rseCategoryRepo,
-        OddRepository $oddRepo,
-        ExpertRepository $expertRepo
-    ):Response {
+    public function index(ExpertRepository $expertRepo):Response
+    {
         $rse = null;
         $odds = null;
-        $expertResults = null;
-        if (isset($_POST['indexSearch'])) {
+        if (isset($_POST['searchText']) && trim($_POST['searchText']) !="") {
             $query = $_POST['searchText'];
             // Recherche des experts par nom
-            $expertResults = $expertRepo->findWhereNameLike($query);
-
-            $rse = $rseCategoryRepo->findAll();
-            $odds = $oddRepo->findAll();
-            dump($expertResults);
+            $experts = $expertRepo->findWhereNameLike($query);
+        } else {
+            $experts = $expertRepo->findAll();
         }
+
         return $this->render('expertOpinions/index.html.twig', [
             'types' => $rse,
             'odds' => $odds,
-            'experts' => $expertResults,
+            'experts' => $experts,
+        ]);
+    }
+
+    /**
+     * @Route("/categories", name="expert_categories")
+     */
+    public function categories(
+        OddRepository $oddRepo,
+        RseCategoryRepository $categoryRepo
+    ):Response {
+
+        $rse = $categoryRepo->findAll();
+        $odds = $oddRepo->findAll();
+
+        return $this->render('expertOpinions/categories.html.twig', [
+            'odds' => $odds,
+            'rses' => $rse,
         ]);
     }
 }
