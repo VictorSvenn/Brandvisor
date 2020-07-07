@@ -30,11 +30,11 @@ class ExpertOpinionsController extends AbstractController
             $query = $_POST['searchText'];
             // Recherche des experts par nom
             $fNameExperts = $expertRepo->findWhereFirstNameLike($query);
-            if (!empty($fNameExperts)){
+            if (!empty($fNameExperts)) {
                 $sent += 1;
             }
             $lNameExperts = $expertRepo->findWhereNameLike($query);
-            if (!empty($lNameExperts)){
+            if (!empty($lNameExperts)) {
                 $sent +=2;
             }
             array_push($experts, $fNameExperts);
@@ -42,9 +42,8 @@ class ExpertOpinionsController extends AbstractController
             dump($experts);
         } else {
             $allExperts = $expertRepo->findAll();
-            array_push($experts,$allExperts);
+            array_push($experts, $allExperts);
             dump($experts);
-
         }
 
         return $this->render('expertOpinions/index.html.twig', [
@@ -61,8 +60,7 @@ class ExpertOpinionsController extends AbstractController
     public function categories(
         OddRepository $oddRepo,
         RseCategoryRepository $categoryRepo
-    ): Response
-    {
+    ): Response {
 
         $rse = $categoryRepo->findAll();
         $odds = $oddRepo->findAll();
