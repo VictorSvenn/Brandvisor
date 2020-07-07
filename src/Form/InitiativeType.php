@@ -7,6 +7,7 @@ use App\Entity\Odd;
 use Nette\Neon\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +19,7 @@ class InitiativeType extends AbstractType
             ->add('name', null, [
                 'label'=>'Le nom de votre initiative : '
             ])
-            ->add('illustration', null, [
+            ->add('illustration', FileType::class, [
                 'label' => "Une potentielle illustration de votre initiative : "
             ])
             ->add('presentation', null, [

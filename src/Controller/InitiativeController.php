@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Initiative;
 use App\Form\InitiativeType;
 use App\Repository\InitiativeRepository;
+use App\Services\FileUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class InitiativeController extends AbstractController
     /**
      * @Route("/new", name="initiative_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUpload $fileUpload): Response
     {
         $initiative = new Initiative();
         $form = $this->createForm(InitiativeType::class, $initiative);
@@ -28,8 +29,14 @@ class InitiativeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $initiative->setDepositary($this->getUser());
+            $initiative->setIsConform(false);
+            $illustration = $form->get('illustration')->getData();
+            $filename = $fileUpload->upload($illustration);
+            $initiative->setIllustration($filename);
+
             $entityManager->persist($initiative);
             $entityManager->flush();
+
 
             if ($this->getUser()->getExpert()) {
                 return $this->redirectToRoute('account_expert');

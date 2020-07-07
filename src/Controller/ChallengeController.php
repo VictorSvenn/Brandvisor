@@ -51,7 +51,7 @@ class ChallengeController extends AbstractController
             $entityManager->persist($challenge);
             $entityManager->flush();
 
-            return $this->redirectToRoute('challenge_index');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('challenge/new.html.twig', [
