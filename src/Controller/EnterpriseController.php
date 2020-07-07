@@ -112,8 +112,6 @@ class EnterpriseController extends AbstractController
         ]);
     }
 
-
-
     /**
     * @Route("/{id}", name="show_enterprise")
     */
