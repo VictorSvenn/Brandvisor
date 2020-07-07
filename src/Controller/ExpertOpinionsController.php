@@ -24,8 +24,8 @@ class ExpertOpinionsController extends AbstractController
     {
         $rse = null;
         $odds = null;
-        if (isset($_POST['searchExpert']) && trim($_POST['searchExpert']) !="") {
-            $query = $_POST['searchExpert'];
+        if (isset($_POST['searchText']) && trim($_POST['searchText']) !="") {
+            $query = $_POST['searchText'];
             // Recherche des experts par nom
             $experts = $expertRepo->findWhereNameLike($query);
         } else {
