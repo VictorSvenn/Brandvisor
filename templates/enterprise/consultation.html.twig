@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enterprise
+{% endblock %}
+
+{% block body %}
+	<h1>{{enterprise.name}}</h1>
+
+	<div>
+		<div>
+            <p>{{ enterprise.name }}</p>
+            <p>{{ enterprise.adress }}</p>
+            <p>{{ enterprise.user.email }}</p>
+            <p>{{ enterprise.user.firstname }} {{ enterprise.user.lastname }}</p>
+            <p>{{ enterprise.contactFunction }}</p>
+            <p>{{ enterprise.type.name }}</p>
+            <p><a href="{{ enterprise.website }}" target="_website">Site web</a></p>
+            {% for doc in enterprise.documents %}
+                <p><a href="{{doc}}">Document {{loop.index}}</a></p>
+            {% endfor %}
+        </div>
+		<div>
+            <img src="{{ asset('uploads/' ~ enterprise.logo) }}" alt="enterprise's logo" class="img-thumbnail">
+        </div>
+	</div>
+
+    <h2>Quels sont mes engagements ?</h2>
+    {% for eng in enterprise.engagements %}
+
+        <h2>{{eng.name}}</h2>
+
+        
+        <h3>Categories RSE</h3>
+        <ul>
+            {% for cat in eng.rse %}
+                <li>{{ cat.name }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Quelles actions sont mises en place pour y répondre ?</h3>
+        <p>{{eng.actionText}}</p>
+
+        
+        <h3>Quels résultats obtenus ?</h3>
+        <p>{{eng.resultsText}}</p>
+
+        <h3>Quels documents pour les résultats ?</h3>
+        <ul>
+            {% for doc in eng.resultsDocuments %}
+                <li><a href="{{ asset(doc) }}">Document {{loop.index}}</a></li>
+            {% endfor %}
+        </ul>
+
+        <h3>Quelles preuves fournies ?</h3>
+        <p>{{eng.proofText}}</p>
+
+        <h3>Quels documents pour les preuves ?</h3>
+        <ul>
+            {% for doc in eng.proofDocuments %}
+                <li><a href="{{ asset(doc) }}">Document {{loop.index}}</a></li>
+            {% endfor %}
+        </ul>
+
+    {% endfor %}
+    
+    
+    <h2>Les challenges</h2>
+    {% for cha in enterprise.challenges %}
+        <h3>{{cha.name}}</h3>
+        <p>{{cha.description}}</p> 
+        <p>{{cha.response}}</p> 
+    {% endfor %}
+
+    <h2>Avis experts</h2>
+    {% for op in experts %}
+        <h3>{{op.depositary.firstname}} {{op.depositary.lastname}} </h3>
+        <p>{{op.text}}</p>
+    {% endfor %}
+
+    <h2>Avis consommateurs</h2>
+    {% for op in consummers %}
+        <h3>{{op.depositary.firstname}} {{op.depositary.lastname}}</h3>
+        <p>{{op.text}}</p>
+    {% endfor %}
+
+{% endblock %}
