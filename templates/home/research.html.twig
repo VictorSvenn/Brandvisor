@@ -28,7 +28,7 @@
                         <h5 class="card-title">{{ enterprise.name }}</h5>
                         <h5 class="card-title">{{ enterprise.type.name }}</h5>
                         <p class="card-text">{{ enterprise.enterprisePres }}</p>
-                        <a href="#" class="btn btn-primary">Consulter l'entreprise</a>
+                        <a href="{{ path('show_enterprise', {'id': enterprise.id }) }}" class="btn btn-primary">Consulter l'entreprise</a>
                     </div>
                 </div>
                 {% set count = count+1 %}

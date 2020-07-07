@@ -103,4 +103,12 @@ class EnterpriseController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}", name="show_enterprise")
+     */
+    public function showEnterprise(Enterprise $enterprise): Response
+    {
+        return $this->render('enterprise/consultation.html.twig', ['enterprise' => $enterprise ]);
+    }
 }
