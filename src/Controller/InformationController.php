@@ -38,4 +38,5 @@ class InformationController extends AbstractController
             }
         }
         return $this->render('/information/index.html.twig');
-    } }
+    }
+}
