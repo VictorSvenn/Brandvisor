@@ -19,7 +19,7 @@
                href="{{ path('initiative_new') }}">Déposer une initiative</a>
             <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
                href="{{ path('opinion_new') }}">Déposer un avis</a>
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" href="{{ path('expert_argumentation_new') }}">Déposer un éclairage</a>
+            <a class="mx-auto text-center disabled col-3 btn btn-outline-secondary" href="{{ path('expert_argumentation_new') }}">Déposer un éclairage</a>
         </div>
     </div>
     <hr>
@@ -33,7 +33,7 @@
                 <p class="font-weight-bold">Téléphone : </p>
                 <p class="mx-2"> {{ expert.phone }}</p>
             </div>
-            <div class="row">eux
+            <div class="row">
 
                 <p class="font-weight-bold">Structure de rattachement : </p>
                 <p class="mx-2"> {{ expert.connectingStructure }}</p>

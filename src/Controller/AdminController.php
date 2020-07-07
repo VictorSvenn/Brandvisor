@@ -51,7 +51,7 @@ class AdminController extends AbstractController
             $entityManager->persist($news);
             $entityManager->flush();
 
-            return $this->redirectToRoute('news_index');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('news/new.html.twig', [
@@ -87,7 +87,7 @@ class AdminController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($opinion);
         $entityManager->flush();
-        return $this->redirectToRoute('init_validate');
+        return $this->redirectToRoute('validate_opinions');
     }
 
     /**
@@ -99,6 +99,6 @@ class AdminController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($initiative);
         $entityManager->flush();
-        return $this->redirectToRoute('validate_opinions');
+        return $this->redirectToRoute('init_validate');
     }
 }
