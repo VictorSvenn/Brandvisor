@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recruitment index{% endblock %}
+
+{% block body %}
+    <h1>Recrutement</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Link</th>
+                <th>Content</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for recruitment in recruitments %}
+            <tr>
+                <td>{{ recruitment.id }}</td>
+                <td>{{ recruitment.name }}</td>
+                <td>{{ recruitment.link }}</td>
+                <td>{{ recruitment.content }}</td>
+                <td>{{ recruitment.image ? recruitment.image|join(', ') : '' }}</td>
+                <td>
+                    <a href="{{ path('recruitment_show', {'id': recruitment.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune offre disponible pour le moment.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
