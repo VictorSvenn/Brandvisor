@@ -61,10 +61,7 @@ class ChallengeController extends AbstractController
                 array_push($docs, $filename);
             }
             $challenge->setDocuments($docs);
-//            $engagementID = $form->get('challenge_engagement')->getData();
-//            $engagement = $this->getDoctrine()
-//                ->getRepository(Engagement::class)
-//                ->find($engagementID);
+//            $engagement = $form->get('challenge_engagement')->getData();
 //            $challenge->setEngagement($engagement);
             $entityManager->persist($challenge);
             $entityManager->flush();

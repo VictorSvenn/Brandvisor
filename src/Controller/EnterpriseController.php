@@ -14,6 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/enterprise")
@@ -28,6 +34,8 @@ class EnterpriseController extends AbstractController
         $challenges = count($this->getUser()->getEnterprise()->getChallenges());
         return $this->render('challenges/etpchallenges.html.twig', ['user' => $this->getUser(), 'nb' => $challenges]);
     }
+
+
 
     /**
      * @Route("/challenge/response/{id}", name="challenge_response")
@@ -105,10 +113,18 @@ class EnterpriseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show_enterprise")
-     */
-    public function showEnterprise(Enterprise $enterprise): Response
+    * @Route("/{id}", name="show_enterprise")
+    */
+    public function showEnterprise(Enterprise $enterprise, OpinionRepository $oprepo): Response
     {
-        return $this->render('enterprise/consultation.html.twig', ['enterprise' => $enterprise ]);
+
+        return $this->render(
+            'enterprise/consultation.html.twig',
+            [
+            'enterprise' => $enterprise,
+            "experts" => $oprepo->findEnterpriseExpertValidOpinions($enterprise->getId()),
+            "consummers" => $oprepo->findEnterpriseConsummerValidOpinions($enterprise->getId())
+            ]
+        );
     }
 }

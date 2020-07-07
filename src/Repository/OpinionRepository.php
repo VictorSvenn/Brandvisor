@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Enterprise;
 use App\Entity\Opinion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,6 +47,40 @@ class OpinionRepository extends ServiceEntityRepository
             ->setMaxResults(2)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findEnterpriseExpertValidOpinions($enterpriseId)
+    {
+    
+        
+        $query = $this->createQueryBuilder('o')
+        ->join(User::class, 'u')
+        ->join(Enterprise::class, 'e')
+        ->where('u.id = o.depositary')
+        ->andWhere('e.id = o.enterprise')
+        ->andWhere('u.roles LIKE :role')
+        ->andWhere('o.isConform = true')
+        ->setParameter('role', '%ROLE_EXPERT%')
+        ->orderBy('o.date', 'DESC')
+        ->setMaxResults(2)
+        ->getQuery();
+        return $query->getResult();
+    }
+
+    public function findEnterpriseConsummerValidOpinions($enterpriseId)
+    {
+        return $this->createQueryBuilder('o')
+        ->join(User::class, 'u')
+        ->join(Enterprise::class, 'e')
+        ->where('u.id = o.depositary')
+        ->andWhere('e.id = o.enterprise')
+        ->andWhere('u.roles LIKE :role')
+        ->andWhere('o.isConform = true')
+        ->setParameter('role', '%ROLE_CONSUMER%')
+        ->orderBy('o.date', 'DESC')
+        ->setMaxResults(2)
+        ->getQuery()
+        ->getResult();
     }
 
     // /**
