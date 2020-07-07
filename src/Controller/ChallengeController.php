@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Challenge;
+use App\Entity\Engagement;
+use App\Entity\Enterprise;
 use App\Form\ChallengeType;
 use App\Repository\ChallengeRepository;
 use App\Services\FileUpload;
@@ -11,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/challenge")
@@ -25,6 +29,16 @@ class ChallengeController extends AbstractController
         return $this->render('challenge/index.html.twig', [
             'challenges' => $challengeRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/api/{id}", name="show_json_enterprise")
+     */
+    public function getAPIEnterpriseEngagements(Enterprise $enterprise, SerializerInterface $serializer): Response
+    {
+        $ctx = [AbstractNormalizer::ATTRIBUTES => ['name', 'id']];
+        $json = $serializer->serialize($enterprise->getEngagements(), 'json', $ctx);
+        return new Response($json, 200, ["Content-type" => "application/json"]);
     }
 
     /**
@@ -47,7 +61,11 @@ class ChallengeController extends AbstractController
                 array_push($docs, $filename);
             }
             $challenge->setDocuments($docs);
-
+//            $engagementID = $form->get('challenge_engagement')->getData();
+//            $engagement = $this->getDoctrine()
+//                ->getRepository(Engagement::class)
+//                ->find($engagementID);
+//            $challenge->setEngagement($engagement);
             $entityManager->persist($challenge);
             $entityManager->flush();
 

@@ -7,6 +7,7 @@ use App\Entity\Enterprise;
 use App\Entity\Engagement;
 use App\Entity\Challenge;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -24,12 +25,15 @@ class ChallengeType extends AbstractType
                 'choice_label' => 'name',
                 'label' => "L'entreprise visée"
             ))
-            ->add('engagement', EntityType::class, array(
-                'label' => 'Engagement',
+//            ->add('engagementt', ChoiceType::class, [
+//                'mapped'=>false,
+//                'label' => "L'engagement relié a votre challenge : ",
+//                'required' => false
+//            ])
+            ->add('engagement', EntityType::class, [
                 'class' => Engagement::class,
-                'choice_label' => 'name',
-                'required' => false
-                ))
+                'choice_label' => 'name'
+            ])
             ->add('description', null, array('label' => 'Description'))
             ->add('comment', null, array('label' => 'Commentaire'))
             ->add('documents', FileType::class, array(
