@@ -20,22 +20,37 @@ class ExpertOpinionsController extends AbstractController
     /**
      * @Route("/", name="expert_annuary")
      */
-    public function index(ExpertRepository $expertRepo):Response
+    public function index(ExpertRepository $expertRepo): Response
     {
         $rse = null;
         $odds = null;
-        if (isset($_POST['searchText']) && trim($_POST['searchText']) !="") {
+        $experts = [];
+        $sent = 0;
+        if (isset($_POST['searchText']) && trim($_POST['searchText']) != "") {
             $query = $_POST['searchText'];
             // Recherche des experts par nom
-            $experts = $expertRepo->findWhereNameLike($query);
+            $fNameExperts = $expertRepo->findWhereFirstNameLike($query);
+            if (!empty($fNameExperts)) {
+                $sent += 1;
+            }
+            $lNameExperts = $expertRepo->findWhereNameLike($query);
+            if (!empty($lNameExperts)) {
+                $sent +=2;
+            }
+            array_push($experts, $fNameExperts);
+            array_push($experts, $lNameExperts);
+            dump($experts);
         } else {
-            $experts = $expertRepo->findAll();
+            $allExperts = $expertRepo->findAll();
+            array_push($experts, $allExperts);
+            dump($experts);
         }
 
         return $this->render('expertOpinions/index.html.twig', [
             'types' => $rse,
             'odds' => $odds,
             'experts' => $experts,
+            'sent' => $sent
         ]);
     }
 
@@ -45,7 +60,7 @@ class ExpertOpinionsController extends AbstractController
     public function categories(
         OddRepository $oddRepo,
         RseCategoryRepository $categoryRepo
-    ):Response {
+    ): Response {
 
         $rse = $categoryRepo->findAll();
         $odds = $oddRepo->findAll();

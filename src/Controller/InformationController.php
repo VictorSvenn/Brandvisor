@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +34,16 @@ class InformationController extends AbstractController
                         "description"=>$_POST['description']
                     ]);
                 $mailer->send($email);
+
+                $contact = new Contact();
+                $contact->setMessage($_POST['description']);
+                $contact->setEmail($_POST['email']);
+                $contact->setLastName($_POST['lastname']);
+                $contact->setFirstName($_POST['firstname']);
+                $contact->setReason($_POST['subject']);
+                $entityM = $this->getDoctrine()->getManager();
+                $entityM->persist($contact);
+                $entityM->flush();
             } else {
                 echo "Veuillez remplir les champs obligatoires.";
             }

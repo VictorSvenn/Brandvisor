@@ -25,8 +25,17 @@ class ExpertRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->Join(User::class, 'u')
             ->where('u.id = e.user')
+            ->andWhere('u.lastName LIKE :val')
+            ->setParameter('val', '%' . $value . '%')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findWhereFirstNameLike($value)
+    {
+        return $this->createQueryBuilder('e')
+            ->Join(User::class, 'u')
+            ->where('u.id = e.user')
             ->andWhere('u.firstName LIKE :val')
-            ->orWhere('u.lastName LIKE :val')
             ->setParameter('val', '%' . $value . '%')
             ->getQuery()
             ->getResult();
