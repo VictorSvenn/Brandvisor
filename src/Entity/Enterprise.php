@@ -106,7 +106,7 @@ class Enterprise
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isValid;
+    private $isValid = false;
 
     public function __construct()
     {
