@@ -97,8 +97,8 @@ class EnterpriseController extends AbstractController
                     $filename = $fileUpload->upload($file);
                     array_push($docs, $filename);
                 }
-                $enterprise->setDocuments($docs);
             }
+            $enterprise->setDocuments($docs);
             $this->getDoctrine()->getManager()->persist($enterprise);
             $this->getDoctrine()->getManager()->flush();
 
