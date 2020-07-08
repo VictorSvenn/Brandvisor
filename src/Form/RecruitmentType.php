@@ -19,8 +19,6 @@ class RecruitmentType extends AbstractType
             ->add('content', null, array('label' => "Contenu de l'article"))
             ->add('image', FileType::class, array(
                 'label' => 'Image',
-                'multiple' => 'multiple',
-                'required' => false
             ))
         ;
     }

@@ -38,17 +38,13 @@ class RecruitmentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            $docs = [];
-            $actionDocs = $request->files->get('recruitment')['image'];
-            foreach ($actionDocs as $file) {
-                $filename = $fileUpload->upload($file);
-                array_push($docs, $filename);
-            }
-            $recruitment->setImage($docs);
-
+            
+            $image = $form->get('image')->getData();
+            $filename = $fileUpload->upload($image);
+            $recruitment->setImage($filename);
+            
             $entityManager->persist($recruitment);
-            $entityManager->flush();
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('recruitment_index');
         }
