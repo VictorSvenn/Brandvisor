@@ -21,15 +21,6 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class ChallengeController extends AbstractController
 {
-    /**
-     * @Route("/", name="challenge_index", methods={"GET"})
-     */
-    public function index(ChallengeRepository $challengeRepository): Response
-    {
-        return $this->render('challenge/index.html.twig', [
-            'challenges' => $challengeRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/api/{id}", name="show_json_enterprise")
@@ -43,6 +34,8 @@ class ChallengeController extends AbstractController
 
     /**
      * @Route("/new", name="challenge_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_EXPERT")
+     * @IsGranted("ROLE_CONSUMER")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
@@ -53,7 +46,7 @@ class ChallengeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $challenge->setDepositary($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
-            
+
             $docs = [];
             $actionDocs = $request->files->get('challenge')['documents'];
             foreach ($actionDocs as $file) {
@@ -76,46 +69,15 @@ class ChallengeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="challenge_show", methods={"GET"})
+     * @Route("/vote/{id}",name="vote_challenge")
+     * @IsGranted("ROLE_USER")
      */
-    public function show(Challenge $challenge): Response
+    public function vote(Challenge $challenge)
     {
-        return $this->render('challenge/show.html.twig', [
-            'challenge' => $challenge,
-        ]);
-    }
+        $challenge->addLike($this->getUser());
+        $this->getDoctrine()->getManager()->persist($challenge);
+        $this->getDoctrine()->getManager()->flush();
 
-    /**
-     * @Route("/{id}/edit", name="challenge_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Challenge $challenge): Response
-    {
-        $form = $this->createForm(ChallengeType::class, $challenge);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('challenge_index');
-        }
-
-        return $this->render('challenge/edit.html.twig', [
-            'challenge' => $challenge,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="challenge_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Challenge $challenge): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$challenge->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($challenge);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('challenge_index');
+        return $this->redirectToRoute('app_home');
     }
 }

@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
      */
     public function connected(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('connected.html.twig');
+        return $this->redirectToRoute('app_home');
     }
 
 

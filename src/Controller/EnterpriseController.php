@@ -28,6 +28,7 @@ class EnterpriseController extends AbstractController
 {
     /**
      * @Route("/challenges", name="show_challenges")
+     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function showChallenges(): Response
     {
@@ -39,6 +40,7 @@ class EnterpriseController extends AbstractController
 
     /**
      * @Route("/challenge/response/{id}", name="challenge_response")
+     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function responseChallenge(Challenge $challenge)
     {
@@ -58,6 +60,7 @@ class EnterpriseController extends AbstractController
 
     /**
      * @Route("/account", name="account_enterprise")
+     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function enterprise()
     {
@@ -69,6 +72,7 @@ class EnterpriseController extends AbstractController
 
     /**
      * @Route("/opinions", name="enterprise_opinions")
+     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function etpOpinions(OpinionRepository $opinionRepository): Response
     {
@@ -79,6 +83,7 @@ class EnterpriseController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="enterprise_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function editEnterprise(Request $request, Enterprise $enterprise, FileUpload $fileUpload): Response
     {
