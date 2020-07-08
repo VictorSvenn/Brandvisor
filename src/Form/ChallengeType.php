@@ -38,10 +38,10 @@ class ChallengeType extends AbstractType
                 'choice_label' => 'name',
                 'required' => false
             ])
-            ->add('description', null, array('label' => 'Description :'))
-            ->add('comment', null, array('label' => 'Commentaire : '))
+            ->add('description', null, array('label' => 'Description '))
+            ->add('comment', null, array('label' => 'Commentaire '))
             ->add('documents', FileType::class, array(
-                'label' => 'Documents : ',
+                'label' => 'Documents ',
                 'required' => false,
                 'multiple' => 'multiple'))
             ->add('isConform', null, array('label' => 'Mon challenge est conforme à la charte.'));
