@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Challenge{% endblock %}
+{% block title %}Editer Challenge{% endblock %}
 
 {% block body %}
-    <h1>Edit Challenge</h1>
+    <h1>Editer Challenge</h1>
 
-    {{ include('challenge/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('challenge/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
-    <a href="{{ path('challenge_index') }}">back to list</a>
+    <a href="{{ path('challenge_index') }}">Retour</a>
 
     {{ include('challenge/_delete_form.html.twig') }}
 {% endblock %}

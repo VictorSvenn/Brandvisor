@@ -27,17 +27,16 @@
                 <td>{{ challenge.isConform ? 'Yes' : 'No' }}</td>
                 <td>{{ challenge.documents ? challenge.documents|join(', ') : '' }}</td>
                 <td>
-                    <a href="{{ path('challenge_show', {'id': challenge.id}) }}">show</a>
-                    <a href="{{ path('challenge_edit', {'id': challenge.id}) }}">edit</a>
+                    <a href="{{ path('challenge_show', {'id': challenge.id}) }}">Voir</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun challenge pour le moment !</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('challenge_new') }}">Create new</a>
+    <a href="{{ path('challenge_new') }}">Créer un nouveau challenge</a>
 {% endblock %}

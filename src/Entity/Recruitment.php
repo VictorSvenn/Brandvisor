@@ -33,9 +33,9 @@ class Recruitment
     private $content;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string")
      */
-    private $image = [];
+    private $image;
 
     public function getId(): ?int
     {
@@ -78,12 +78,12 @@ class Recruitment
         return $this;
     }
 
-    public function getImage(): ?array
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(array $image): self
+    public function setImage(string $image): self
     {
         $this->image = $image;
 
