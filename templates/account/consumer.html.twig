@@ -2,65 +2,61 @@
 
 {% block title %}{{ app.user.firstName }} account{% endblock %}
 
+
+
+
+
+
 {% block body %}
+    <div class="container mx-auto">
+        <div class="row mx-auto text-center">
+            <h1 class="text-center mx-auto my-5">Mon compte</h1>
+        </div>
+    </div>
     <div class="container-fluid">
-        <div class="row col-5 mx-auto">
-            <h1 class="mx-auto text-center">Mon compte</h1>
-        </div>
-        <div class="row col-8 mx-auto">
-            <p class="mx-auto text-center">M./Mme. {{ consumer.user.lastName }} {{ consumer.user.firstName }}
-                ,{{ app.user.email }}</p>
-        </div>
-        <div class="row col-12">
-            <a class="mx-auto text-center col-2 btn btn-outline-secondary" role="button"
-               href="{{ path('consumer_edit', {'id': consumer.id}) }}">Modifier mes
-                informations</a>
-            <a class="mx-auto text-center col-2 btn btn-outline-secondary" role="button"
-               href="{{ path('consumer_favs') }}">Mes favoris</a>
-            <a class="mx-auto text-center col-2 btn btn-outline-secondary" role="button"
-               href="{{ path('opinion_new') }}">Déposer un avis</a>
-            <a class="mx-auto text-center col-2 btn btn-outline-secondary"
-               role="button"
-               href="{{ path('challenge_new') }}">Challenger une entreprise</a>
-            <a class="mx-auto text-center col-2 btn btn-outline-secondary" role="button"
-               href="{{ path('initiative_new') }}">Déposer une initiative</a>
-
-            {#TODO : OBTENIR DES RECOMMANDATIONS#} <a class="mx-auto text-center col-2 btn btn-outline-secondary"
-                                                      href="">Recommandations</a>
+        <div class="row">
+            <div class="container col-4 ml-0">
+                <div class="row">
+                    <a href="{{ path('consumer_edit', {'id': consumer.id}) }}"
+                       class="navbar-brand btn btn-outline-primary">Modifier mes informations</a>
+                </div>
+                <div class="row">
+                    <a href="{{ path('consumer_favs') }}" class="navbar-brand btn btn-outline-primary">Mes favoris</a>
+                </div>
+                <div class="row">
+                    <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un
+                        avis</a>
+                </div>
+                <div class="row">
+                    <a href="{{ path('challenge_new') }}" class="navbar-brand btn btn-outline-primary">Challenger une
+                        entreprise</a>
+                </div>
+                <div class="row">
+                    <a href="" class="navbar-brand btn btn-outline-primary disabled">Obtenir des recommandations</a>
+                </div>
+            </div>
+            <div class="container col-8">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Prénom :</th>
+                        <td class="font-weight-light border-0">{{ app.user.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Nom :</th>
+                        <td class="font-weight-light border-0">{{ app.user.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Date de naissance :</th>
+                        <td class="font-weight-light border-0">{{ app.user.consumer.birthDate|date("d/m/Y") }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Zone géographique :</th>
+                        <td class="font-weight-light border-0">{{ app.user.consumer.geographicArea }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <hr>
-    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
-        <div class="container-fluid col-5">
-            <div class="row">
-                <p class="font-weight-bold">Prénom : </p>
-                <p class="mx-2"> {{ consumer.user.firstName }}</p>
-            </div>
-            <div class="row">
-                <p class="font-weight-bold">Nom : </p>
-                <p class="mx-2"> {{ consumer.user.lastName }}</p>
-            </div>
-        </div>
-        <div class="container-fluid col-3 mx-auto my-auto ">
-        </div>
-    </div>
-    {#    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">#}
-    {#        <div class="container-fluid col-5">#}
-    {#            <div class="row">#}
-    {#                <p class="font-weight-bold">Adresse : </p>#}
-    {#                <p class="mx-2"> {{ expert.adress }}</p>#}
-    {#            </div>#}
-    {#            <div class="row">#}
-    {#                <p class="font-weight-bold">Téléphone : </p>#}
-    {#                <p class="mx-2"> {{ expert.phone }}</p>#}
-    {#            </div>#}
-    {#            <div class="row">#}
-    {#                <p class="font-weight-bold">Structure de rattachement : </p>#}
-    {#                <p class="mx-2"> {{ expert.connectingStructure }}</p>#}
-    {#            </div>#}
-
-    {#            <div class="container-fluid col-3 mx-auto my-auto ">#}
-    {#                <img src="{{ asset('uploads/' ~ expert.illustration) }}" alt="consumer's illustration" class="img-thumbnail">#}
-    {#            </div>#}
-    {#        </div>#}
 {% endblock %}

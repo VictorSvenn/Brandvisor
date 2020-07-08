@@ -3,15 +3,28 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <a href="{{ path('validate_opinions') }}">Validation des avis</a>
-        </li>
-        <li class="list-group-item">
-            <a href="{{ path('news_new') }}">Déposer une news</a>
-        </li>
-        <li class="list-group-item">
-            <a href="{{ path('init_validate') }}">Validation des initiatives</a>
-        </li>
-    </ul>
+
+<div class="container-fluid">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('validate_opinions') }}">Validation des avis</a>
+    </nav>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('news_new') }}">Déposer une news</a>
+    </nav>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('init_validate') }}">Validation des initiatives</a>
+    </nav>
+</div>
+
+{#    <ul class="list-group list-group-flush">#}
+{#        <li class="list-group-item">#}
+{#            <a class="navbar-brand" href="{{ path('validate_opinions') }}">Validation des avis</a>#}
+{#        </li>#}
+{#        <li class="list-group-item">#}
+{#            <a class="navbar-brand" href="{{ path('news_new') }}">Déposer une news</a>#}
+{#        </li>#}
+{#        <li class="list-group-item">#}
+{#            <a class="navbar-brand" href="{{ path('init_validate') }}">Validation des initiatives</a>#}
+{#        </li>#}
+{#    </ul>#}
 {% endblock %}
