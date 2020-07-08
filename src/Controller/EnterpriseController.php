@@ -91,14 +91,14 @@ class EnterpriseController extends AbstractController
                 $enterprise->setLogo($filename);
             }
             $docs = [];
-            if ($request->files->get('enterprise')['document_list']) {
+            if (!empty($request->files->get('enterprise')['document_list'])) {
                 $files = $request->files->get('enterprise')['document_list'];
                 foreach ($files as $file) {
                     $filename = $fileUpload->upload($file);
                     array_push($docs, $filename);
                 }
+                $enterprise->setDocuments($docs);
             }
-            $enterprise->setDocuments($docs);
             $this->getDoctrine()->getManager()->persist($enterprise);
             $this->getDoctrine()->getManager()->flush();
 
