@@ -1,65 +1,73 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ app.user.firstName }} account{% endblock %}
-
-{% block body %}
-    <div class="container-fluid">
-        <div class="row col-5 mx-auto">
-            <h1 class="mx-auto text-center">Mon compte</h1>
-        </div>
-        <div class="row col-8 mx-auto">
-            <p class="mx-auto text-center">M./Mme. {{ expert.user.lastName }} {{ expert.user.firstName }},
-                {{ app.user.email }}</p>
-        </div>
-        <div class="row col-12">
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
-               href="{{ path('expert_edit', {'id': expert.id}) }}">Modifier mes
-                informations</a>
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
-               href="{{ path('initiative_new') }}">Déposer une initiative</a>
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
-               href="{{ path('opinion_new') }}">Déposer un avis</a>
-            <a class="mx-auto text-center disabled col-3 btn btn-outline-secondary" href="{{ path('expert_argumentation_new') }}">Déposer un éclairage</a>
-        </div>
-    </div>
-    <hr>
-    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">
-        <div class="container-fluid col-5">
-            <div class="row">
-                <p class="font-weight-bold">Adresse : </p>
-                <p class="mx-2"> {{ expert.adress }}</p>
-            </div>
-            <div class="row">
-                <p class="font-weight-bold">Téléphone : </p>
-                <p class="mx-2"> {{ expert.phone }}</p>
-            </div>
-            <div class="row">
-
-                <p class="font-weight-bold">Structure de rattachement : </p>
-                <p class="mx-2"> {{ expert.connectingStructure }}</p>
+    {% block body %}
+        <div class="container mx-auto">
+            <div class="row mx-auto text-center">
+                <h1 class="text-center mx-auto my-5">Mon compte</h1>
             </div>
         </div>
-        <div class="container-fluid col-3 mx-auto my-auto ">
-            <img src="{{ asset('uploads/' ~ expert.illustration) }}" alt="expert's illustration" class="img-thumbnail">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container col-4 ml-0">
+                    <div class="row">
+                        <a href="{{ path('expert_edit', {'id': expert.id}) }}"
+                           class="navbar-brand btn btn-outline-primary">Modifier mes informations</a>
+                    </div>
+                    <div class="row">
+                        <a href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary">Déposer une initiative</a>
+                    </div>
+                    <div class="row">
+                        <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un
+                            avis</a>
+                    </div>
+                    <div class="row">
+                        <a href="" class="navbar-brand btn btn-outline-primary disabled">Déposer un éclairage</a>
+                    </div>
+                </div>
+                <div class="container col-8">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th scope="row" class="font-weight-bold border-0">Logo :</th>
+                            <td class="font-weight-light border-0">
+                                <img src="{{ asset('uploads/' ~ app.user.expert.illustration) }}" style="height: 200px; width: auto"
+                                     alt="enterprise's logo" class="img-thumbnail">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="font-weight-bold border-0">Adresse :</th>
+                            <td class="font-weight-light border-0">{{ app.user.expert.adress }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="font-weight-bold border-0">Téléphone :</th>
+                            <td class="font-weight-light border-0">{{ app.user.expert.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="font-weight-bold border-0">Structure de rattachement :</th>
+                            <td class="font-weight-light border-0">{{ app.user.expert.connectingStructure }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-    {#    <div class="row px-2 py-2" style="background-color: rgba(128,128,128,0.25)">#}
-    {#        <div class="container-fluid col-5">#}
-    {#            <div class="row">#}
-    {#                <p class="font-weight-bold">Adresse : </p>#}
-    {#                <p class="mx-2"> {{ expert.adress }}</p>#}
-    {#            </div>#}
-    {#            <div class="row">#}
-    {#                <p class="font-weight-bold">Téléphone : </p>#}
-    {#                <p class="mx-2"> {{ expert.phone }}</p>#}
-    {#            </div>#}
-    {#            <div class="row">#}
-    {#                <p class="font-weight-bold">Structure de rattachement : </p>#}
-    {#                <p class="mx-2"> {{ expert.connectingStructure }}</p>#}
-    {#            </div>#}
+    {% endblock %}
 
-    {#            <div class="container-fluid col-3 mx-auto my-auto ">#}
-    {#                <img src="{{ asset('uploads/' ~ expert.illustration) }}" alt="expert's illustration" class="img-thumbnail">#}
-    {#            </div>#}
-    {#        </div>#}
-{% endblock %}
+{#                <p class="font-weight-bold">Adresse : </p>#}
+{#                <p class="mx-2"> {{ expert.adress }}</p>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <p class="font-weight-bold">Téléphone : </p>#}
+{#                <p class="mx-2"> {{ expert.phone }}</p>#}
+{#            </div>#}
+{#            <div class="row">#}
+
+{#                <p class="font-weight-bold">Structure de rattachement : </p>#}
+{#                <p class="mx-2"> {{ expert.connectingStructure }}</p>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="container-fluid col-3 mx-auto my-auto ">#}
+{#            <img src="{{ asset('uploads/' ~ expert.illustration) }}" alt="expert's illustration" class="img-thumbnail">#}
+{#        </div>#}
+{#    </div>#}

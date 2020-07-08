@@ -3,83 +3,116 @@
 {% block title %}{{ enterprise.name }} account{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row col-5 mx-auto">
-            <h1 class="mx-auto text-center">Mon compte</h1>
-        </div>
-        <div class="row col-8 mx-auto">
-            <p class="mx-auto text-center">M./Mme. {{ enterprise.user.lastName }} {{ enterprise.user.firstName }}
-                , {{ enterprise.name }} {{ app.user.email }}</p>
-        </div>
-        <div class="row col-12">
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
-               href="{{ path('enterprise_edit', {'id': enterprise.id}) }}">Modifier mes
-                informations</a>
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button"
-               href="{{ path('engagement_new') }}">Déposer un
-                engagement</a>
+    <div class="container mx-auto">
+        <div class="row mx-auto text-center">
+            <h1 class="col-4 text-center mx-auto my-5">Mon compte</h1>
 
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" role="button" href="{{ path('enterprise_opinions') }}">Avis sur mon
-                entreprise</a>
-            <a class="mx-auto text-center col-3 btn btn-outline-secondary" href="{{ path('show_challenges') }}">Challenge</a>
-            <a class="mx-auto text-center col-2 btn btn-outline-secondary" role="button"
-               href="{{ path('initiative_new') }}">Déposer une initiative</a>
         </div>
     </div>
-    <hr>
-    <div class="row px-2 py-2"">
-        <div class="container-fluid col-5">
-            <div class="row">
-                <p class="font-weight-bold">Adresse : </p>
-                <p class="mx-2"> {{ enterprise.adress }}</p>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container col-4 ml-0">
+                <div class="row my-1">
+                    <a  style="width: 450px" href="{{ path('enterprise_edit', {'id': enterprise.id}) }}"
+                       class="navbar-brand btn btn-outline-primary">Modifier mes informations</a>
+                </div>
+                <div class="row my-1">
+                    <a  style="width: 450px" href="{{ path('engagement_new') }}" class="navbar-brand btn btn-outline-primary">Déposer un
+                        engagement</a>
+                </div>
+                <div class="row my-1">
+                    <a  style="width: 450px" href="{{ path('enterprise_opinions') }}" class="navbar-brand btn btn-outline-primary">Avis sur
+                        mon entreprise</a>
+                </div>
+                <div class="row my-1">
+                    <a style="width: 450px" href="{{ path('show_challenges') }}" class="navbar-brand btn btn-outline-primary">Challenges
+                        déposés pour mon entreprise</a>
+                </div>
+                <div class="row my-1">
+                    <a style="width: 450px" href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary">Déposer une
+                        initiative</a>
+                </div>
             </div>
-            <div class="row">
-                <p class="font-weight-bold">Téléphone : </p>
-                <p class="mx-2"> {{ enterprise.enterprisePhone }}</p>
+            <div class="container col-8">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Logo :</th>
+                        <td class="font-weight-light border-0">
+                            <img src="{{ asset('uploads/' ~ enterprise.logo) }}" style="height: 200px; width: auto"
+                                 alt="enterprise's logo" class="img-thumbnail">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Adresse :</th>
+                        <td class="font-weight-light border-0">{{ app.user.enterprise.adress }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Téléphone :</th>
+                        <td class="font-weight-light border-0">{{ app.user.enterprise.enterprisePhone }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Nom de l'entreprise :</th>
+                        <td class="font-weight-light border-0">{{ app.user.enterprise.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Fonction :</th>
+                        <td class="font-weight-light border-0">{{ app.user.enterprise.contactFunction }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Catégorie de l'entreprise :</th>
+                        <td class="font-weight-light border-0">{{ app.user.enterprise.type.name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Site web :</th>
+                        <td class="font-weight-light border-0">{{ app.user.enterprise.website }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Documents utiles :</th>
+                        <td class="font-weight-light border-0">
+                            {% for documents in app.user.enterprise.documents %}
+                                <a href="{{ asset('uploads/' ~ documents) }}">
+                                    <img src="https://img.icons8.com/material-two-tone/24/000000/shared-document.png"/>
+                                </a>
+                            {% endfor %}
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="row">
-                <p class="font-weight-bold">Nom de l'entreprise : </p>
-                <p class="mx-2"> {{ enterprise.name }}</p>
-            </div>
-            <div class="row">
-                <p class="font-weight-bold">Fonction : </p>
-                <p class="mx-2"> {{ enterprise.contactFunction }}</p>
-            </div>
-            <div class="row">
-                <p class="font-weight-bold">Catégorie de l'entreprise : </p>
-                <p class="mx-2"> {{ enterprise.type.name }}</p>
-            </div>
-            <div class="row">
-                <p class="font-weight-bold"> Site web de l'entreprise : </p><a
-                        href="{{ enterprise.website }}" class="mx-2"> {{ enterprise.website }}</a>
-            </div>
-            <div class="row">
-                <p class="font-weight-bold">Documents utiles : </p>
-            </div>
-            {% for document in enterprise.documents %}
-                <div class="row">
-                    <a href="{{ asset('uploads/' ~ document) }}">LE DOCUMENT {{ loop.index }}</a>
-                    {#                    <iframe src="{{ asset('uploads/' ~ document) }}" style="height: 30%" class="col-12"></iframe>#}
+        </div>
+        <div class="row">
+            <h1 class="mx-auto text-center my-3"><u>Mes engagements</u></h1>
+        </div>
+        <div class="row">
+            {% for engagement in enterprise.engagements %}
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title mx-auto text-center">{{ engagement.name }}</h2>
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th scope="row" class="font-weight-bold border-0">L'action mise en place :</th>
+                                    <td class="font-weight-light border-0">{{ engagement.actionText }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="font-weight-bold border-0">Les résultats obtenus :</th>
+                                    <td class="font-weight-light border-0">{{ engagement.resultsText }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="font-weight-bold border-0">Les bénéfices obtenus :</th>
+                                    <td class="font-weight-light border-0">{{ engagement.benefits }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
-        </div>
-        <div class="container-fluid col-3 mx-auto my-auto ">
-            <img src="{{ asset('uploads/' ~ enterprise.logo) }}" alt="enterprise's logo" class="img-thumbnail">
-        </div>
-    </div>
-    <hr>
-    <div class="row justify-content-around my-5 mb-5">
-        {% for engagement in enterprise.engagements %}
-            <div class="container-fluid col-3 border border-info">
-                <div class="row mx-auto">
-                    <h5 class="">{{ engagement.name }}</h5>
-                </div>
-                <hr>
-                <div class="row">
-                    <p class="px-2">{{ engagement.actionText }}</p>
-                </div>
-            </div>
-        {% endfor %}
 
+        </div>
     </div>
+
 {% endblock %}
