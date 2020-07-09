@@ -39,11 +39,9 @@ class ExpertOpinionsController extends AbstractController
             }
             array_push($experts, $fNameExperts);
             array_push($experts, $lNameExperts);
-            dump($experts);
         } else {
             $allExperts = $expertRepo->findAll();
             array_push($experts, $allExperts);
-            dump($experts);
         }
         return $this->render('expertOpinions/index.html.twig', [
             'types' => $rse,

@@ -34,8 +34,7 @@ class ChallengeController extends AbstractController
 
     /**
      * @Route("/new", name="challenge_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_EXPERT")
-     * @IsGranted("ROLE_CONSUMER")
+     * @IsGranted({"ROLE_EXPERT","ROLE_CONSUMER"})
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
