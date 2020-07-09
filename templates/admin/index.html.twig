@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Administration{% endblock %}
 
 {% block body %}
 
@@ -10,6 +10,9 @@
     </nav>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="{{ path('news_new') }}">Déposer une news</a>
+    </nav>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('recruitment_new') }}">Déposer une offre d'emploi</a>
     </nav>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="{{ path('init_validate') }}">Validation des initiatives</a>

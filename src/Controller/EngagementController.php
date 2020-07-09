@@ -20,6 +20,7 @@ class EngagementController extends AbstractController
     /**
      * @SuppressWarnings(PHPMD)
      * @Route("/new", name="engagement_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ENTERPRISE")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {

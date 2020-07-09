@@ -1,23 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Initiative{% endblock %}
+{% block title %}{{ initiative.name }}{% endblock %}
 
 {% block body %}
     {# Container page entière#}
     <div class="container-fluid">
         {# Formulaire de recherche d'initiative#}
         <div class="row col-12 justify-content-between">
-            {% if initiative.isConform %}
-            <form method="post" action="" class="col-5">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Nom d'une initiative"
-                           aria-label="Recipient's username" aria-describedby="basic-addon2" name="searchText">
-                    <div class="input-group-append">
-                        <input class="btn btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
-                    </div>
-                </div>
-            </form>
-            {% endif %}
+
+
             {#~~~~~~~~#}
             {# Bouton pour déposer une initiative#}
             {% if initiative.isConform %}

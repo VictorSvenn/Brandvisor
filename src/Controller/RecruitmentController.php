@@ -29,6 +29,7 @@ class RecruitmentController extends AbstractController
 
     /**
      * @Route("/new", name="recruitment_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
@@ -38,17 +39,13 @@ class RecruitmentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
-            $docs = [];
-            $actionDocs = $request->files->get('recruitment')['image'];
-            foreach ($actionDocs as $file) {
-                $filename = $fileUpload->upload($file);
-                array_push($docs, $filename);
-            }
-            $recruitment->setImage($docs);
-
+            
+            $image = $form->get('image')->getData();
+            $filename = $fileUpload->upload($image);
+            $recruitment->setImage($filename);
+            
             $entityManager->persist($recruitment);
-            $entityManager->flush();
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('recruitment_index');
         }
@@ -71,6 +68,7 @@ class RecruitmentController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="recruitment_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Recruitment $recruitment): Response
     {
@@ -91,6 +89,7 @@ class RecruitmentController extends AbstractController
 
     /**
      * @Route("/{id}", name="recruitment_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Recruitment $recruitment): Response
     {

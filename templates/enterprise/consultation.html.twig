@@ -1,86 +1,141 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Enterprise
-{% endblock %}
+{% block title %}{{ enterprise.name }}{% endblock %}
 
 {% block body %}
-	<h1>{{enterprise.name}}</h1>
+    <h1 class="text-center m-3">{{ enterprise.name }}</h1>
 
-	<div>
-		<div>
-            <p>{{ enterprise.name }}</p>
-            <p>{{ enterprise.adress }}</p>
-            <p>{{ enterprise.user.email }}</p>
-            <p>{{ enterprise.user.firstname }} {{ enterprise.user.lastname }}</p>
-            <p>{{ enterprise.contactFunction }}</p>
-            <p>{{ enterprise.type.name }}</p>
-            <p><a href="{{ enterprise.website }}" target="_website">Site web</a></p>
-            {% for doc in enterprise.documents %}
-                <p><a href="{{doc}}">Document {{loop.index}}</a></p>
-            {% endfor %}
+    <div class="container-fluid d-flex">
+        <div class="container-fluid col-6">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Nom de l'entreprise:</th>
+                    <td class="font-weight-light border-0">{{ enterprise.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Adresse:</th>
+                    <td class="font-weight-light border-0">{{ enterprise.adress }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Contact:</th>
+                    <td class="font-weight-light border-0">{{ enterprise.user.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Nom du contact:</th>
+                    <td class="font-weight-light border-0">{{ enterprise.user.firstname }} {{ enterprise.user.lastname }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Fonction du contact:</th>
+                    <td class="font-weight-light border-0">{{ enterprise.contactFunction }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Catégorie d'entreprise:</th>
+                    <td class="font-weight-light border-0">{{ enterprise.type.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Site web:</th>
+                    <td class="font-weight-light border-0"><a href="{{ enterprise.website }}" target="_website">{{ enterprise.website }}</a></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Documents:</th>
+                    <td class="font-weight-light border-0">
+                        {% for doc in enterprise.documents %}
+                            <p><a href="{{ doc }}">Document {{ loop.index }}</a></p>
+                        {% endfor %}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-		<div>
+        <div class="container-fluid">
             <img src="{{ asset('uploads/' ~ enterprise.logo) }}" alt="enterprise's logo" class="img-thumbnail">
         </div>
-	</div>
+    </div>
 
-    <h2>Quels sont mes engagements ?</h2>
-    {% for eng in enterprise.engagements %}
+    <hr/>
 
-        <h2>{{eng.name}}</h2>
+    <h2 class="text-center">Quels sont mes engagements ?</h2>
+    <div class="container-fluid d-flex">
+        {% for eng in enterprise.engagements %}
+            <div class="card col-6">
+                <div class="card-body">
+                    <h2 class="card-title text-center">{{ eng.name }}</h2>
+                    <h6 class="card-subtitle mb-2 text-muted">Categories RSE</h6>
+                    <ul>
+                        {% for cat in eng.rse %}
+                            <li>{{ cat.name }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h4 class="card-text">Quelles actions sont mises en place pour y répondre ?</h4>
+                    <p>{{ eng.actionText }}</p>
+                    <h4 class="card-text">Quels résultats obtenus ?</h4>
+                    <p>{{ eng.resultsText }}</p>
+                    <h4 class="card-text">Quels documents pour les résultats ?</h4>
+                    <ul>
+                        {% for doc in eng.resultsDocuments %}
+                            <li><a href="{{ asset('uploads/' ~ doc) }}">Document {{ loop.index }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <h4 class="card-text">Quelles preuves fournies ?</h4>
+                    <p>{{ eng.proofText }}</p>
+                    <h4 class="card-text">Quels documents pour les preuves ?</h4>
+                    <ul>
+                        {% for doc in eng.proofDocuments %}
+                            <li><a href="{{ asset('uploads/' ~ doc) }}">Document {{ loop.index }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-        
-        <h3>Categories RSE</h3>
-        <ul>
-            {% for cat in eng.rse %}
-                <li>{{ cat.name }}</li>
-            {% endfor %}
-        </ul>
+    <hr/>
 
-        <h3>Quelles actions sont mises en place pour y répondre ?</h3>
-        <p>{{eng.actionText}}</p>
+    <h2 class="text-center">Les challenges</h2>
+    <div class="container-fluid d-flex">
+        {% for cha in enterprise.challenges %}
+            <div class="card col-5 m-5">
+                <div class="card-body">
+                    <h3 class="card-title text-center">{{ cha.name }}</h3>
+                    <h4 class="card-text">Description</h4>
+                    <p>{{ cha.description }}</p>
+                    <h4 class="card-text">Réponse</h4>
+                    <p>{{ cha.response }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-        
-        <h3>Quels résultats obtenus ?</h3>
-        <p>{{eng.resultsText}}</p>
+    <hr/>
 
-        <h3>Quels documents pour les résultats ?</h3>
-        <ul>
-            {% for doc in eng.resultsDocuments %}
-                <li><a href="{{ asset('uploads/' ~ doc) }}">Document {{loop.index}}</a></li>
-            {% endfor %}
-        </ul>
+    <h2 class="text-center">Avis experts</h2>
+    <div class="container-fluid d-flex">
+        {% for op in experts %}
+            <div class="card col-5 m-5">
+                <div class="card-body">
+                    <h3 class="card-title text-center">{{ op.depositary.firstname }} {{ op.depositary.lastname }} </h3>
+                    <h4 class="card-text">Avis: </h4>
+                    <p>{{ op.text }}</p>
+                    <a class="btn btn-success" href="{{ path('opinion_show', { 'id': op.id }) }}">Consulter</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-        <h3>Quelles preuves fournies ?</h3>
-        <p>{{eng.proofText}}</p>
+    <hr/>
 
-        <h3>Quels documents pour les preuves ?</h3>
-        <ul>
-            {% for doc in eng.proofDocuments %}
-                <li><a href="{{ asset('uploads/' ~ doc) }}">Document {{loop.index}}</a></li>
-            {% endfor %}
-        </ul>
-
-    {% endfor %}
-    
-    
-    <h2>Les challenges</h2>
-    {% for cha in enterprise.challenges %}
-        <h3>{{cha.name}}</h3>
-        <p>{{cha.description}}</p> 
-        <p>{{cha.response}}</p> 
-    {% endfor %}
-
-    <h2>Avis experts</h2>
-    {% for op in experts %}
-        <h3>{{op.depositary.firstname}} {{op.depositary.lastname}} </h3>
-        <p>{{op.text}}</p>
-    {% endfor %}
-
-    <h2>Avis consommateurs</h2>
-    {% for op in consummers %}
-        <h3>{{op.depositary.firstname}} {{op.depositary.lastname}}</h3>
-        <p>{{op.text}}</p>
-    {% endfor %}
+    <h2 class="text-center">Avis consommateurs</h2>
+    <div class="container-fluid d-flex">
+        {% for op in consummers %}
+            <div class="card col-5 m-5">
+                <div class="card-body">
+                    <h3 class="card-title text-center">{{ op.depositary.firstname }} {{ op.depositary.lastname }}</h3>
+                    <h4 class="card-text">Avis: </h4>
+                    <p>{{ op.text }}</p>
+                    <a class="btn btn-success" href="{{ path('opinion_show', { 'id': op.id }) }}">Consulter</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/consumer")
+ * @IsGranted("ROLE_CONSUMER")
  */
 class ConsumerController extends AbstractController
 {
@@ -28,19 +29,6 @@ class ConsumerController extends AbstractController
             'consumer' => $consumer,
         ]);
     }
-
-    /**
-     * @Route("/vote/{id}",name="vote_challenge")
-     */
-    public function vote(Challenge $challenge)
-    {
-        $challenge->addLike($this->getUser());
-        $this->getDoctrine()->getManager()->persist($challenge);
-        $this->getDoctrine()->getManager()->flush();
-
-        return $this->redirectToRoute('app_home');
-    }
-
 
 
 //    /**
