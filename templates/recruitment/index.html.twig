@@ -1,37 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recruitment index{% endblock %}
+{% block title %}Offres d'emploi{% endblock %}
 
 {% block body %}
-    <h1>Recrutement</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Link</th>
-                <th>Content</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="text-center p-5">
+        <h1>Offres d'emploi</h1>
+    </div>
+    
+    <div class="container-fluid px-5 pb-5">
         {% for recruitment in recruitments %}
-            <tr>
-                <td>{{ recruitment.id }}</td>
-                <td>{{ recruitment.name }}</td>
-                <td>{{ recruitment.link }}</td>
-                <td>{{ recruitment.content }}</td>
-                <td>{{ recruitment.image ? recruitment.image|join(', ') : '' }}</td>
-                <td>
-                    <a href="{{ path('recruitment_show', {'id': recruitment.id}) }}">show</a>
-                </td>
-            </tr>
+            <div class="card" style="width: 22rem;">
+                <img class="card-img-top" src="{{ asset('uploads/' ~ recruitment.image) }}" alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{ recruitment.name }}</h5>
+                <p class="card-text">{{ recruitment.content }}</p>
+                <a href={{ recruitment.link }} class="btn btn-primary">Lien</a>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="6">Aucune offre disponible pour le moment.</td>
-            </tr>
+            <div class="pl-5">
+                <p>Aucune offre disponible pour le moment.</p>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 {% endblock %}
