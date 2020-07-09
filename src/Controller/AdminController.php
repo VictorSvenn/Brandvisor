@@ -10,6 +10,7 @@ use App\Repository\InitiativeRepository;
 use App\Repository\OpinionRepository;
 use App\Services\FileUpload;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,7 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("admin/index", name="admin_index")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index()
     {
@@ -29,6 +31,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("admin/news/new", name="news_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
@@ -62,6 +65,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("admin/validate/opinions", name="validate_opinions")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function validateOpinions(OpinionRepository $opinionRepository): Response
     {
@@ -71,6 +75,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("admin/validate/initiatives", name="init_validate")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function validateInitiativve(InitiativeRepository $initiativeRepository): Response
     {
@@ -80,6 +85,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("admin/validate/opinion/{id}", name="validate_opinion")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function validateOpinion(Opinion $opinion): Response
     {
@@ -92,6 +98,7 @@ class AdminController extends AbstractController
 
     /**
      * @Route("admin/validate/initiative/{id}", name="validate_init")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function validateInit(Initiative $initiative): Response
     {

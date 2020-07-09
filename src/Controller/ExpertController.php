@@ -23,6 +23,7 @@ class ExpertController extends AbstractController
 {
     /**
      * @Route("/account", name="account_expert")
+     * @IsGranted("ROLE_EXPERT")
      */
     public function expert()
     {
@@ -34,6 +35,7 @@ class ExpertController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="expert_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_EXPERT")
      */
     public function editExpert(Request $request, Expert $expert, FileUpload $fileUpload): Response
     {
@@ -56,41 +58,6 @@ class ExpertController extends AbstractController
         return $this->render('expert/edit.html.twig', [
             'expert' => $expert,
             'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/argumentation/new", name="expert_argumentation_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $expertArgumentation = new ExpertArgumentation();
-        $form = $this->createForm(ExpertArgumentationType::class, $expertArgumentation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $expertArgumentation->setDepositary($this->getUser()->getExpert());
-            $expertArgumentation->setDate(new DateTime());
-            $entityManager->persist($expertArgumentation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('account_expert');
-        }
-
-        return $this->render('expertOpinions/new.html.twig', [
-            'expertOpinions' => $expertArgumentation,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/argumentation/{id}", name="expert_argumentation_show", methods={"GET"})
-     */
-    public function show(ExpertArgumentation $expertArgumentation): Response
-    {
-        return $this->render('expertOpinions/show.html.twig', [
-            'expertOpinions' => $expertArgumentation,
         ]);
     }
 }

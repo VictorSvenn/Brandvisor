@@ -36,7 +36,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setLastName($lname);
             $user->setEmail("$fname.$lname@gmail.com");
             $user->setPassword($this->passwordEncoder->encodePassword($user, 'password'));
-            $user->setRoles(['ROLE_CONSUMER']);
+            $user->setRoles(['ROLE_CONSUMER','ROLE_USER']);
             $manager->persist($user);
 
             $this->addReference('user_' . $i, $user);
@@ -58,7 +58,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setLastName($lname);
             $user->setEmail("$fname.$lname@gmail.com");
             $user->setPassword($this->passwordEncoder->encodePassword($user, 'password'));
-            $user->setRoles(['ROLE_EXPERT']);
+            $user->setRoles(['ROLE_EXPERT','ROLE_USER']);
             $manager->persist($user);
 
             $this->addReference('user_' . $i, $user);
@@ -86,7 +86,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setLastName($lname);
             $user->setEmail("$fname.$lname@gmail.com");
             $user->setPassword($this->passwordEncoder->encodePassword($user, 'password'));
-            $user->setRoles(['ROLE_ENTERPRISE']);
+            $user->setRoles(['ROLE_ENTERPRISE','ROLE_USER']);
             $manager->persist($user);
 
             $this->addReference('user_' . $i, $user);
