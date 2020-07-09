@@ -135,7 +135,6 @@
                         Valider cette initiative</a>
                 </div>
             {% else %}
-                {{ initiative.isConform }}
                 <div class="row mx-auto justify-content-center mt-5">
                     <a href="{{ path('app_login') }}"
                        class="disabled btn btn-success font-weight-bold">
@@ -149,7 +148,7 @@
                 </div>
             {% endif %}
 
-            {# Affichage du nombre de likes #}
+             Affichage du nombre de likes
             {% if initiative.isConform is same as (false) %}
 
             {% else %}
