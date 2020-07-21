@@ -78,7 +78,6 @@ class InitiativeController extends AbstractController
         $this->getDoctrine()->getManager()->persist($initiative);
         $this->getDoctrine()->getManager()->flush();
         return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
-//        return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
     }
 
 //    /**

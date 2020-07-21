@@ -1,42 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Challenge index{% endblock %}
+{% block title %}Tous les challenges{% endblock %}
 
 {% block body %}
-    <h1>Challenge index</h1>
+    <div class="text-center p-5">
+        <h1>Tous les challenges</h1>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Comment</th>
-                <th>IsConform</th>
-                <th>Documents</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row justify-content-center">
         {% for challenge in challenges %}
-            <tr>
-                <td>{{ challenge.id }}</td>
-                <td>{{ challenge.name }}</td>
-                <td>{{ challenge.description }}</td>
-                <td>{{ challenge.comment }}</td>
-                <td>{{ challenge.isConform ? 'Yes' : 'No' }}</td>
-                <td>{{ challenge.documents ? challenge.documents|join(', ') : '' }}</td>
-                <td>
-                    <a href="{{ path('challenge_show', {'id': challenge.id}) }}">Voir</a>
-                </td>
-            </tr>
+            <div class="card col-sm-12 col-md-5 col-lg-4 my-3 mx-3">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">{{ challenge.name }}</h5>
+                    <p class="card-text text-justify">{{ challenge.description }}</p>
+                    <a href="{{ path('challenge_show', {'id': challenge.id}) }}" class="btn btn-success">Voir</a>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="7">Aucun challenge pour le moment !</td>
-            </tr>
+            <div class="pl-5">
+                <p>Aucune offre disponible pour le moment.</p>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('challenge_new') }}">Créer un nouveau challenge</a>
+        <div class="p-2 text-center">
+            <a href="{{ path('challenge_new') }}">Créer un nouveau challenge</a>
+        </div>
+    </div>
 {% endblock %}

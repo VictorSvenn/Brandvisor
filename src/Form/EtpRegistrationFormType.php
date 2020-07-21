@@ -23,7 +23,7 @@ class EtpRegistrationFormType extends AbstractType implements FormTypeInterface
     {
         $builder
             ->add('email', null, [
-                'label'=> "Votre email : "
+                'label'=> "Votre email"
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -32,36 +32,40 @@ class EtpRegistrationFormType extends AbstractType implements FormTypeInterface
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-                'label' => 'Les termes de l\'application'
+                'label' => "J'accepte les conditions générales d'utilisation"
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Votre mot de passe : '],
-                'second_options' => ['label' => 'Validation de votre mot de passe :'],
+                'first_options'  => ['label' => 'Votre mot de passe'],
+                'second_options' => ['label' => 'Confirmez votre mot de passe'],
             ])
             ->add(
                 'etpname',
                 null,
                 ['mapped' => false,
-                    'label' => 'Le nom de votre entreprise :']
+                    'label' => 'Le nom de votre entreprise']
             )
             ->add(
                 'SIRET',
                 null,
                 ['mapped' => false,
-                    'label'=> 'Le numéro SIRET de votre entreprise : ']
+                    'label'=> 'Le numéro de SIRET pour votre entreprise']
             )
             ->add(
                 'contact_fct',
                 null,
                 ['mapped' => false,
-                    'label' => 'Votre fonction au sein de cette entreprise : ']
+                    'label' => 'Votre poste au sein de cette entreprise']
             )
-            ->add('firstName', null)
-            ->add('lastName', null)
+            ->add('firstName', null, [
+                'label' => 'Votre prénom'
+            ])
+            ->add('lastName', null, [
+                'label' => 'Votre nom'
+            ])
         ;
     }
 
