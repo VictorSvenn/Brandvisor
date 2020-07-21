@@ -57,15 +57,21 @@ class EngagementController extends AbstractController
             $engagement->setProofDocuments($docs);
             $enterprise = $this->getUser()->getEnterprise();
             $enterprise->setNote(1);
+            
+            $note = $enterprise->getNote();
+            if (!empty($engagement->getActionText())) {
+                $note += 1;
+            }
+            if (!empty($engagement->getResultsText())) {
+                $note += 1;
+            }
+            if (!empty($engagement->getProofText())) {
+                $note += 1;
+            }
+            $enterprise->setNote($note);
+            
             $entityManager->persist($engagement);
             $entityManager->flush();
-            foreach ($enterprise->getEngagements() as $engagement) {
-                $note = (!empty($engagement->getActionText()) and $enterprise->getNote() < 2) ? 2 : 1;
-                $note = (!empty($engagement->getResultsText()) and $enterprise->getNote() < 3) ? 3 : 1;
-                $note = (!empty($engagement->getProofText()) and $enterprise->getNote() < 4) ? 4 : 1;
-                $enterprise->setNote($note);
-            }
-
 
             return $this->redirectToRoute('account_enterprise');
         }
