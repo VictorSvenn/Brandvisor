@@ -80,6 +80,11 @@ class Engagement
      */
     private $rse;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isConform = 0;
+
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
@@ -196,6 +201,18 @@ class Engagement
     public function setProofDocuments(?array $proofDocuments): self
     {
         $this->proofDocuments = $proofDocuments;
+
+        return $this;
+    }
+
+    public function getIsConform(): ?bool
+    {
+        return $this->isConform;
+    }
+
+    public function setIsConform(?bool $isConform): self
+    {
+        $this->isConform = $isConform;
 
         return $this;
     }

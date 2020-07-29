@@ -56,16 +56,12 @@ class EngagementController extends AbstractController
             }
             $engagement->setProofDocuments($docs);
             $enterprise = $this->getUser()->getEnterprise();
-            $enterprise->setNote(1);
             
             $note = $enterprise->getNote();
             if (!empty($engagement->getActionText())) {
                 $note += 1;
             }
             if (!empty($engagement->getResultsText())) {
-                $note += 1;
-            }
-            if (!empty($engagement->getProofText())) {
                 $note += 1;
             }
             $enterprise->setNote($note);

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Engagement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Engagement|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,23 @@ class EngagementRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Engagement::class);
+    }
+
+    public function findAllNotValid()
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.isConform = false')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findEnterpriseById($value)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.owner_id LIKE :val')
+            ->setParameter('val', '%' . $value . '%')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

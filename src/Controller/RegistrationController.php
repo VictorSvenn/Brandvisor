@@ -204,7 +204,7 @@ class RegistrationController extends AbstractController
             $enterprise->setSiret((int)$siret);
             $enterprise->setType($type);
             $enterprise->setIsValid(false);
-
+            $enterprise->setNote(1);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($enterprise);

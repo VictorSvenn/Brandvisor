@@ -94,7 +94,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $enterprise = new Enterprise();
             $enterprise->setUser($user);
             $enterprise->setName($faker->company);
-            $enterprise->setNote($faker->randomNumber());
+            $enterprise->setNote($faker->numberBetween(0, 5));
             $enterprise->setAdress($faker->address);
             $enterprise->setContactFunction($faker->jobTitle);
             $enterprise->setWebsite($faker->url);
