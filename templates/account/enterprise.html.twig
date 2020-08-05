@@ -6,7 +6,6 @@
     <div class="container mx-auto">
         <div class="row mx-auto text-center">
             <h1 class="col-4 text-center mx-auto my-5">Mon compte</h1>
-
         </div>
     </div>
     <div class="container-fluid">
@@ -41,6 +40,18 @@
                         <td class="font-weight-light border-0">
                             <img src="{{ asset('uploads/' ~ enterprise.logo) }}" style="height: 200px; width: auto"
                                  alt="enterprise's logo" class="img-thumbnail">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="font-weight-bold border-0">Note :</th>
+                        <td class="font-weight-light border-0">
+                            {% if enterprise.note == 1 %}⭐
+                            {% elseif enterprise.note == 2 %}⭐⭐
+                            {% elseif enterprise.note == 3 %}⭐⭐⭐
+                            {% elseif enterprise.note == 4 %}⭐⭐⭐⭐
+                            {% elseif enterprise.note == 5 %}⭐⭐⭐⭐⭐
+                            {% else %} {{ enterprise.note }}
+                            {% endif %}
                         </td>
                     </tr>
                     <tr>
@@ -107,11 +118,13 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div class="text-right">
+                                <a href="{{ path('engagement_edit', { 'id': engagement.id }) }}" class="mx-auto btn btn-primary">Modifier</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-
         </div>
     </div>
 

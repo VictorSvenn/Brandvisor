@@ -135,7 +135,52 @@ class AdminController extends AbstractController
     {
         $engagement->setIsConform(true);
         $enterprise=$engagement->getOwner();
-        $enterprise->setNote(4);
+        $note = $enterprise->getNote();
+        if ($note === 0) {
+            $note = 1;
+        } elseif ($note ===1) {
+            $note = 2;
+        } elseif ($note === 2) {
+            $note = 3;
+        } elseif ($note === 3) {
+            $note = 4;
+        } elseif ($note === 4) {
+            $note = 4;
+        } elseif ($note === 5) {
+            $note = 5;
+        }
+        $enterprise->setNote($note);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($engagement);
+        $entityManager->flush();
+        return $this->redirectToRoute('engagements_validate', [
+            'engagement' => $engagement,
+        ]);
+    }
+
+    /**
+     * @Route("admin/refusvalidate/engagement/{id}", name="refus_engagement")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function refuseEngag(Engagement $engagement): Response
+    {
+        $engagement->setIsConform(true);
+        $enterprise=$engagement->getOwner();
+        $note = $enterprise->getNote();
+        if ($note === 0) {
+            $note = 0;
+        } elseif ($note === 1) {
+            $note = 1;
+        } elseif ($note === 2) {
+            $note = 2;
+        } elseif ($note === 3) {
+            $note = 3;
+        } elseif ($note === 4) {
+            $note = 3;
+        } elseif ($note === 5) {
+            $note = 5;
+        }
+        $enterprise->setNote($note);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($engagement);
         $entityManager->flush();

@@ -47,7 +47,6 @@ class EnterpriseController extends AbstractController
         if (isset($_POST['submit']) and isset($_POST['text'])) {
             $challenge->setResponse($_POST['text']);
             $enterprise = $this->getUser()->getEnterprise();
-            $enterprise->setNote(5);
             $this->getDoctrine()->getManager()->persist($challenge);
             $this->getDoctrine()->getManager()->persist($enterprise);
             $this->getDoctrine()->getManager()->flush();
@@ -65,6 +64,9 @@ class EnterpriseController extends AbstractController
     public function enterprise()
     {
         $enterprise = $this->getUser()->getEnterprise();
+        if (count($enterprise->getEngagements()) >= 5 && $enterprise->getNote() == 4) {
+            $enterprise->setNote(5);
+        }
         return $this->render('account/enterprise.html.twig', [
             'enterprise' => $enterprise,
         ]);
@@ -122,7 +124,9 @@ class EnterpriseController extends AbstractController
     */
     public function showEnterprise(Enterprise $enterprise, OpinionRepository $oprepo): Response
     {
-
+        if (count($enterprise->getEngagements()) >= 5 && $enterprise->getNote() == 4) {
+            $enterprise->setNote(5);
+        }
         return $this->render(
             'enterprise/consultation.html.twig',
             [

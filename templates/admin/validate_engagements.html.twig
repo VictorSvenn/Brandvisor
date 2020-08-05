@@ -15,7 +15,7 @@
                     <p class="card-text text-justify"><b>Preuves écrites : </b>{{ engagement.proofText }}</p>
                     <div class="row mx-auto mb-1 mt-4 d-flex justify-content-center">
                         <a href="{{ path('show_enterprise', { 'id': engagement.getOwner().getId()}) }}" class="mx-auto btn btn-primary">Consulter</a>
-                        <a href="#" class="mx-auto btn btn-primary">Refuser</a>
+                        <a href="{{ path('refus_engagement', { 'id': engagement.id }) }}" class="mx-auto btn btn-primary">Refuser</a>
                         <a href="{{ path('validate_engagement', { 'id': engagement.id }) }}" class="mx-auto btn btn-primary">Valider</a>
                     </div>
                 </div>

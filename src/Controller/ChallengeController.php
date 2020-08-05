@@ -77,8 +77,10 @@ class ChallengeController extends AbstractController
      */
     public function show(Challenge $challenge): Response
     {
+        $likes=count($challenge->getLikes());
         return $this->render('challenge/show.html.twig', [
             'challenge' => $challenge,
+            'likes' => $likes
         ]);
     }
 

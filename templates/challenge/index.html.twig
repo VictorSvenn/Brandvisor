@@ -7,22 +7,29 @@
         <h1>Tous les challenges</h1>
     </div>
 
+    <div class="p-2 text-center">
+        <a href="{{ path('challenge_new') }}" class="btn btn-success">Créer un nouveau challenge</a>
+    </div>
+
     <div class="row justify-content-center">
         {% for challenge in challenges %}
             <div class="card col-sm-12 col-md-5 col-lg-4 my-3 mx-3">
                 <div class="card-body">
-                    <h5 class="card-title font-weight-bold">{{ challenge.name }}</h5>
+                    <h5 class="card-title font-weight-bold text-center">{{ challenge.name }}</h5>
+                    {% if challenge.getResponse() != null %}<p class="card-text small text-center">✔️ Répondu</p>
+                    {% else %} <p class="card-text small text-center py-2">🔴 En attente de réponse</p>
+                    {% endif %}
                     <p class="card-text text-justify">{{ challenge.description }}</p>
-                    <a href="{{ path('challenge_show', {'id': challenge.id}) }}" class="btn btn-success">Voir</a>
+                    <div class="text-right">
+                        <a href="{{ path('challenge_show', {'id': challenge.id}) }}" class="btn btn-success">Voir</a>
+                    </div>
+                    
                 </div>
             </div>
         {% else %}
             <div class="pl-5">
-                <p>Aucune offre disponible pour le moment.</p>
+                <p>Aucun challenge pour le moment.</p>
             </div>
         {% endfor %}
-        <div class="p-2 text-center">
-            <a href="{{ path('challenge_new') }}">Créer un nouveau challenge</a>
-        </div>
     </div>
 {% endblock %}

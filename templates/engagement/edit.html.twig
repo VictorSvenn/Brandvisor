@@ -1,0 +1,9 @@
+{% extends 'registration/form.html.twig' %}
+
+{% block title %}Editer votre engagement {% endblock %}
+{% block formtitle %}
+    Modifier votre engagement
+{% endblock %}
+{% block form %}
+    {{ include('engagement/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+{% endblock %}
