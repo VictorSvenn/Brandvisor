@@ -104,6 +104,12 @@ class Enterprise
     private $type;
 
     /**
+     * @ORM\OneToOne(targetEntity=Recommandation::class, inversedBy="enterprise")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $recommandation;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isValid = false;
@@ -395,6 +401,18 @@ class Enterprise
     public function setIsValid(bool $isValid): self
     {
         $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getRecommandation(): ?Recommandation
+    {
+        return $this->recommandation;
+    }
+
+    public function setRecommandation(?Recommandation $recommandation): self
+    {
+        $this->recommandation = $recommandation;
 
         return $this;
     }

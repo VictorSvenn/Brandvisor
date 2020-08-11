@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déposer une recommandation{% endblock %}
+
+{% block body %}
+    <h1>Déposer une recommandation</h1>
+
+    {{ include('recommandation/_form.html.twig') }}
+
+    <a href="{{ path('recommandation_index') }}">back to list</a>
+{% endblock %}

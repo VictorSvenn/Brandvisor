@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déposer une recommandation{% endblock %}
+
+{% block body %}
+<h1>Consultation de recommandation</h1>
+
+<form method="get" action="" class="col-12">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Nom d'une entreprise" aria-label="Recipient's username"
+            aria-describedby="basic-addon2" name="searchText">
+        <div class="input-group-append">
+            <input class="btn btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
+        </div>
+    </div>
+</form>
+<div class="container-fluid ml-0">
+    {% if form == true and numResults > 1 %}
+    <p class="font-italic">{{ numResults }} résultats pour votre recherche</p>
+    {% elseif form == true %}
+    <p class="font-italic">{{ numResults }} résultat pour votre recherche</p>
+    {% endif %}
+    <div class="row my-3 justify-content-around">
+        {% if form == true %}
+
+        {% set count = 0 %}
+        {% for recommandation in recommandations %}
+        <div class="card col-6 ">
+            <img class="card-img-top" src="{{ recommandation.enterprise.logo }}" alt="">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-center">Note : {{ recommandation.enterprise.note }}</div>
+                    <img class="mx-auto d-block" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
+                        width="50%">
+                    <div class="text-center">{{ recommandation.getEnterprise().getName() }}</div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-12 row justify-content-around">
+                        <div class="text-center col-lg-12">Produits</div>
+                        <div class="col-lg-6">
+                            <a href="{{ recommandation.firstLink }}">
+                                <img class="col-lg-12 col-md-5 mx-auto offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ recommandation.secondLink }}">
+                                <img class="col-lg-12 col-md-5 mx-auto offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ recommandation.thirdLink }}">
+                                <img class="col-lg-12 col-md-5 mx-auto mt-2 offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.thirdImage) }}">
+                            </a>
+                        </div>
+                        <div class="col-lg-6">
+                            <a href="{{ recommandation.fourthLink }}">
+                                <img class="col-lg-12 col-md-5 mx-auto mt-2 offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.fourthImage) }}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% set count = count+1 %}
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% if is_granted('ROLE_ENTERPRISE') %}
+<a href="{{ path('recommandation_new') }}">Déposer une recommandation</a>
+{% elseif is_granted('ROLE_CONSUMER') %}
+{% elseif is_granted('ROLE_EXPERT') %}
+{% else %}
+{% endif %}
+
+{% for recommandation in all %}
+<div class="row border bg-success">
+    <div class="col-lg-6">
+        <div class="text-center my-3 font-weight-bold">Note : {{ recommandation.enterprise.note }}</div>
+        <img class="mx-auto d-block my-3" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
+            width="50%">
+        <div class="text-center font-weight-bold my-3">{{ recommandation.getEnterprise().getName() }}</div>
+    </div>
+    <div class="col-lg-6 bg-secondary">
+        <div class="col-lg-12 row justify-content-around text-white font-weight-bold">
+            <div class="text-center col-lg-12">Produits</div>
+            <div class="col-lg-5">
+                <a href="{{ recommandation.firstLink }}">
+                    <img class="col-lg-12 col-md-5 mx-auto" src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
+                </a>
+            </div>
+            <div class="col-lg-5">
+                <a href="{{ recommandation.secondLink }}">
+                    <img class="col-lg-12 col-md-5 mx-auto" src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
+                </a>
+            </div>
+            <div class="col-lg-5">
+                <a href="{{ recommandation.thirdLink }}">
+                    <img class="col-lg-12 col-md-5 mx-auto mt-2 mb-2"
+                        src="{{ asset('uploads/' ~ recommandation.thirdImage) }}">
+                </a>
+            </div>
+            <div class="col-lg-5">
+                <a href="{{ recommandation.fourthLink }}">
+                    <img class="col-lg-12 col-md-5 mx-auto mt-2 mb-2"
+                        src="{{ asset('uploads/' ~ recommandation.fourthImage) }}">
+                </a>
+            </div>
+        </div>
+    </div>
+    {% if app.user == recommandation.getEnterprise().getUser() %}
+    <a href="{{ path('recommandation_show', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Voir plus</a>
+    <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Modifier</a>
+    {% endif %}
+</div>
+{% else %}
+<div>Aucune recommandation</div>
+{% endfor %}
+
+{#<table class="table">
+    <thead>
+        <tr>
+            <th>Note</th>
+            <th>Logo</th>
+            <th>Nom de l'entreprise</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for recommandation in recommandations %}
+        <tr>
+            <td>{{ recommandation.enterprise.note }}</td>
+            <td>
+                <a>
+                    <img class="" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" width="200%"
+                        height="200%">
+                </a>
+            </td>
+            <td>{{ recommandation.enterprise.name }}</td>
+            {% for img in recommandation.image %}
+            <td><a href="{{ recommandation.link }}">
+                    <img class="col-lg-4" src="{{ asset('uploads/' ~ img) }}">
+                </a></td>
+            {% endfor %}
+            <td>
+                <a href="{{ path('recommandation_show', {'id': recommandation.id}) }}">Voir plus</a>
+                <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}">Modifier</a>
+            </td>
+
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">Aucune recommandation</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>#}
+
+{% endblock %}
