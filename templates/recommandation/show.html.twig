@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déposer une recommandation{% endblock %}
+
+{% block body %}
+    <h1>Recommandation</h1>
+
+    
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                {% if app.user == recommandation.getEnterprise().getUser() %}
+                <th>Sa marche fréro</th>
+                {% endif %}
+                <th>Lien</th>
+                <td>{{ recommandation.link }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                {% for img in recommandation.image %}
+                    <td><a href="{{ recommandation.link }}">
+                    <img class="col-lg-4" src="{{ asset('uploads/' ~ img) }}">
+                    </a></td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('recommandation_index') }}">Retour à la liste</a><br>
+
+    <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}">Modifier</a>
+
+    {{ include('recommandation/_delete_form.html.twig') }}
+{% endblock %}

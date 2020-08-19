@@ -85,6 +85,10 @@
                             <p><a href="{{ doc }}">Document {{ loop.index }}</a></p>
                         {% endfor %}</td>
                 </tr>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Recommandation:</th>
+                    <td class="font-weight-light border-0"><a href={{ path('recommandation_index') }}>Produit</a></td>
+                </tr>
                 </tbody>
             </table>
         </div>

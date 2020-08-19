@@ -1,9 +1,9 @@
 {% extends 'registration/form.html.twig' %}
 
 {% block title %}Connexion{% endblock %}
-{% block formtitle %}CONNEXION{% endblock %}
+{% block formtitle %}<h1 class="mx-auto">CONNEXION</h1>{% endblock %}
 {% block form %}
-    <form method="post">
+    <form method="post" class="pb-4">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
@@ -17,12 +17,13 @@
 
         <div class="row my-3">
             <div class="container-fluid col-10">
-                <div class="row col-10 offset-1"><label for="inputEmail">Email</label></div>
-                <div class="row col-10 offset-1">
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1"><label for="inputEmail">Email</label></div>
+                <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1"><input type="email" value="{{ last_username }}" name="email"
+                                                        id="inputEmail" class="form-control" required autofocus>
                 </div>
-                <div class="row col-10 offset-1"><label for="inputPassword">Mot de passe</label></div>
-                <div class="row col-10 offset-1"><input type="password" name="password" id="inputPassword" class="form-control" required>
+                <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1"><label for="inputPassword">Mot de passe</label></div>
+                <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1"><input type="password" name="password" id="inputPassword"
+                                                        class="form-control" required>
                 </div>
             </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -41,8 +42,8 @@
         #}
 
         <div class="row">
-            <p class="my-4 col-6 mx-auto">Je n'ai pas de compte, <a href="{{ path ('app_role') }}">m'inscrire</a> </p>
-            <div class="mx-auto">
+            <p class="my-4 col-lg-8 col-md-8 mx-auto">Je n'ai pas de compte, <a href="{{ path ('app_role') }}">m'inscrire</a> </p>
+            <div class="mx-auto col-lg-8 col-md-8">
                 <button class="mx-auto my-3 btn btn-lg btn-primary" type="submit">
                     Sign in
                 </button>

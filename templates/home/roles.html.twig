@@ -1,51 +1,143 @@
 {% block body %}
-    <div class="col-8">
-        <div class="d-flex flex-wrap justify-content-center">
+    <div>
+        <div class="row">
             {# Select qui permet d'accéder aux pages du site #}
-            {% if is_granted('ROLE_CONSUMER') %}
-                <div class="dropdown col-4 m-2">
+                {% if is_granted('ROLE_ENTERPRISE') %}
+                {% elseif is_granted('ROLE_EXPERT') %}
+                {% else %}
+                <div class="dropdown mx-auto">
                     <button class="btn btn-success dropdown-toggle" type="button"
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">Entrée Consommateur
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ path('initiative_new') }}">Déposer une initiative</a>
-                        <a class="dropdown-item" href="{{ path('opinion_new') }}">Évaluer une entreprise</a>
+                    {% if is_granted('ROLE_CONSUMER') %}
+                        <a class="dropdown-item" href="{{ path('enterprise_edit', {'id': app.user.consumer.id }) }}">Modifier 
+                            les informations de mon compte</a>
+                        <a class="dropdown-item" href="{{ path('initiative_new', {'id': app.user.consumer.id}) }}">Déposer 
+                            une initiative</a>
+                        <a class="dropdown-item" href="{{ path('opinion_new', {'id': app.user.consumer.id}) }}">Déposer
+                            un avis</a>
+                        <a class="dropdown-item" href="{{ path('consumer_favs', {'id': app.user.consumer.id}) }}">Mes favoris</a>
+                        <a class="dropdown-item" href="{{ path('challenge_new', {'id': app.user.consumer.id}) }}">Challenger 
+                            une entreprise</a>
+                        <a class="dropdown-item" href="#">Obtenir des recommandations</a>
+                    {% elseif is_granted('ROLE_ENTERPRISE') %}
+                    {% elseif is_granted('ROLE_EXPERT') %}
+                    {% else %} 
+                        <a class="dropdown-item disabled" href="#">Modifier 
+                            les informations de mon compte</a>
+                        <a class="dropdown-item disabled" href="#">Déposer 
+                            une initiative</a>
+                        <a class="dropdown-item disabled" href="#">Déposer
+                            un avis</a>
+                        <a class="dropdown-item disabled" href="#">Mes favoris</a>
+                        <a class="dropdown-item disabled" href="#">Challenger 
+                            une entreprise</a>
+                        <a class="dropdown-item disabled" href="#">Obtenir des recommandations</a>   
+                    {% endif %}
                         <a class="dropdown-item" href="{{ path('expert_annuary') }}">Voir la liste des experts
                             référencés</a>
+                    {% if is_granted('ROLE_ENTERPRISE') %}
+                    {% elseif is_granted('ROLE_CONSUMER') %}
+                    {% elseif is_granted('ROLE_EXPERT') %}
+                    {% else %}
+                        <a class="dropdown-item" href="{{ path('app_register_consumer') }}">S'inscrire</a>
+                    {% endif %}
                     </div>
                 </div>
-            {% elseif is_granted('ROLE_EXPERT') %}
-                <div class="dropdown col-4 m-2">
+                {% endif %}
+
+                {% if is_granted('ROLE_ENTERPRISE')%}
+                {% elseif is_granted('ROLE_CONSUMER') %}
+                {% else %}
+                <div class="dropdown mx-auto">
                     <button class="btn btn-success dropdown-toggle" type="button"
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">Entrée Expert
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ path('initiative_new') }}">Déposer une initiative</a>
-                        <a class="dropdown-item" href="{{ path('opinion_new') }}">Évaluer une entreprise</a>
-                        <a class="dropdown-item" href="{{ path('account_expert') }}">Se référencer comme
-                            conseil/expert</a>
+                    {% if is_granted('ROLE_EXPERT') %}
+                        <a class="dropdown-item" href="{{ path('account_expert', {'id': app.user.expert.id}) }}">Se référencer 
+                            comme conseil/expert</a>
+                        <a class="dropdown-item" href="{{ path('initiative_new', {'id': app.user.expert.id}) }}">Déposer 
+                            une initiative</a>
+                        <a class="dropdown-item" href="{{ path('opinion_new', {'id': app.user.expert.id}) }}">Déposer 
+                            un avis</a>
+                        <a class="dropdown-item" href="#">Déposer 
+                            un éclairage</a>
+                    {% elseif is_granted('ROLE_ENTERPRISE') %}
+                    {% elseif is_granted('ROLE_CONSUMER') %}
+                    {% else %}
+                        <a class="dropdown-item disabled" href="#">Se référencer 
+                            comme conseil/expert</a>
+                        <a class="dropdown-item disabled" href="#">Déposer 
+                            une initiative</a>
+                        <a class="dropdown-item disabled" href="#">Déposer 
+                            un avis</a>
+                        <a class="dropdown-item disabled" href="#">Déposer 
+                            un éclairage</a>
+                    {% endif %}
                         <a class="dropdown-item" href="{{ path('expert_annuary') }}">Voir la liste des experts
                             référencés</a>
+                        {% if is_granted('ROLE_ENTERPRISE') %}
+                        {% elseif is_granted('ROLE_CONSUMER') %}
+                        {% elseif is_granted('ROLE_EXPERT') %}
+                        {% else %}
+                            <a class="dropdown-item" href="{{ path('app_register_expert') }}">S'inscrire</a>
+                        {% endif %}
                     </div>
                 </div>
-            {% elseif is_granted('ROLE_ENTERPRISE') %}
-                <div class="dropdown col-4 m-2">
+                {% endif %}
+            
+                {% if is_granted('ROLE_EXPERT')%}
+                {% elseif is_granted('ROLE_CONSUMER') %}
+                {% else %}
+                <div class="dropdown mx-auto">
                     <button class="btn btn-success dropdown-toggle" type="button"
                             id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">Entrée Entreprise
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if is_granted('ROLE_ENTERPRISE') %}
                         <a class="dropdown-item" href="{{ path('enterprise_edit', {'id': app.user.enterprise.id }) }}">Déposer
                             des informations sur mon entreprise</a>
+                        <a class="dropdown-item" href="{{ path('enterprise_opinions', {'id': app.user.enterprise.id }) }}">Voir les 
+                            avis sur mon entreprise</a>
+                        <a class="dropdown-item" href="{{ path('initiative_new', {'id': app.user.enterprise.id }) }}">Déposer 
+                            une initiative</a>
+                        <a class="dropdown-item" href="{{ path('engagement_new', {'id': app.user.enterprise.id }) }}">Déposer 
+                            un engagement</a>
+                        <a class="dropdown-item" href="{{ path('show_challenges', {'id': app.user.enterprise.id }) }}">Challenge 
+                            sur mon entreprise</a>
+                    {% elseif is_granted('ROLE_CONSUMER') %}
+                    {% elseif is_granted('ROLE_EXPERT') %}
+                    {% else %}
+                        <a class="dropdown-item disabled" href="#">Déposer
+                            des informations sur mon entreprise</a>
+                        <a class="dropdown-item disabled" href="#">Voir les 
+                            avis sur mon entreprise</a>
+                        <a class="dropdown-item disabled" href="#">Déposer 
+                            une initiative</a>
+                        <a class="dropdown-item disabled" href="#">Déposer 
+                            un engagement</a>
+                        <a class="dropdown-item disabled" href="#">Challenge 
+                            sur mon entreprise</a>
+                    {% endif %}
                         <a class="dropdown-item" href="{{ path('expert_annuary') }}">Voir la liste des experts
                             référencés</a>
+                    {% if is_granted('ROLE_ENTERPRISE') %}
+                    {% elseif is_granted('ROLE_CONSUMER') %}
+                    {% elseif is_granted('ROLE_EXPERT') %}
+                    {% else %}
+                        <a class="dropdown-item" href="{{ path('app_register_enterprise') }}">S'inscrire</a>
+                    {% endif %}
                     </div>
                 </div>
+                {% endif %}
 
-            {% endif %}
-            <div class="dropdown col-4 m-2">
+            
+            <div class="dropdown mx-auto">
                 <button class="btn btn-success dropdown-toggle" type="button"
                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">Qui sommes-nous?

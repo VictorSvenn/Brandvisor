@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block title %}Brandvisor{% endblock %}
 {% block body %}
-    <div class="container-fluid d-flex">
+    {% include '/home/roles.html.twig' %}
+    <div class="container-fluid d-flex mt-5">
         <div class="container-fluid col-9">
             <div class="row">
                 {# Inclusion de l'affichage des menus déroulants inérants aux rôles#}
-                {% include '/home/roles.html.twig' %}
+                
                 {#~~~~~~~~~~~#}
-                <div class="text-center">
-                    <h4>Bienvenue sur BrandVisor!</h4>
-                    <p>Le site ou exprimer ce que vous faites de bien pour la société et l'environnement en toute
+                <div class="text-center mx-auto">
+                    <h1>Bienvenue sur Brandvisor !</h1>
+                    <p class="font-italic">Le site où exprimer ce que vous faites de bien pour la société et l'environnement en toute
                         transparence</p>
                 </div>
                 {# Inclusion du formulaire et affichage des résultats#}
@@ -24,14 +25,11 @@
                     <div class="col-6 my-auto ">
                         <h2>Les Objectifs</h2>
                         <p>Vous pensez que le partage des projets et des initiatives entre tous peut conduire à un monde
-                            meilleur
-                            Vous pensez qu'évaluer les entreprises et les marques sur leurs reponsabilités sociales et
-                            environnementales va les inciter à s'améliorer
-                            Vous pensez que les marques ont besoin de s'engager vers plus de transparence et ont des
-                            choses
-                            à
-                            faire
-                            valoir</p>
+                            meilleur.</p>
+                        <p>Vous pensez qu'évaluer les entreprises et les marques sur leurs reponsabilités sociales et
+                            environnementales va les inciter à s'améliorer.</p>  
+                        <p>Vous pensez que les marques ont besoin de s'engager vers plus de transparence et ont des
+                            choses à faire valoir.</p>
                     </div>
                     {#Image#}
                     <div class="col-6 my-auto">
@@ -43,19 +41,19 @@
                 <div class="row text-center bg-black mb-2">
                     {#Image#}
                     <div class="col-6 my-auto ">
-                        <img src="{{ asset('images/Baobabos-small.jpg') }}" alt="" width="100%">
+                        <img src="{{ asset('images/fleur.jpeg') }}" alt="" width="100%">
                     </div>
                     {#Texte#}
                     <div class="col-6 my-auto">
                         <h2>Nous sommes tous acteurs du changement</h2>
-                        <p>Décrire les cibles : les entreprises, les consommateurs, les experts.</p>
+                        <p>Brandvisor réunit les entreprises, engagées dans une démarche de développement durable et de transparence, les consummateurs, à la recherche d'un mode de consommation écoresponsable, et des experts qui apportent un éclairage supplémentaire.</p>
                     </div>
                 </div>
                 {#~~~~~~~~~~~~~#}
                 {# Section "Entreprises à l'honneur + initiatives les + likées"#}
                 <div class="row text-center bg-white mb-2">
                     {#Entreprise par notes #}
-                    <div class="col-6 my-auto ">
+                    <div class="col-6">
                         <h2>Entreprises à l'honneur</h2>
                         <div id="enterprises" class="carousel slide mb-2" data-ride="carousel">
                             <ol class="carousel-indicators">
@@ -121,7 +119,7 @@
                 {# Section "Paroles de consommateur + expert"#}
                 <div class="row text-center bg-black mb-2">
                     {# Paroles de consommateur #}
-                    <div class="col-6 my-auto ">
+                    <div class="col-6">
                         <h2>Paroles de consommateur</h2>
                         {% for consumerAdvice in consumerAdvices|slice(0, 2) %}
                             <a href="{{ path('opinion_show', { 'id': consumerAdvice.id }) }}"

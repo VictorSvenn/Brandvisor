@@ -107,6 +107,12 @@ class Enterprise
      */
     private $category;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Recommandation::class, inversedBy="enterprise")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $recommandation;
+
     public function __construct()
     {
         $this->challenges = new ArrayCollection();
@@ -391,6 +397,18 @@ class Enterprise
     public function setCategory(?string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getRecommandation(): ?Recommandation
+    {
+        return $this->recommandation;
+    }
+
+    public function setRecommandation(?Recommandation $recommandation): self
+    {
+        $this->recommandation = $recommandation;
 
         return $this;
     }
