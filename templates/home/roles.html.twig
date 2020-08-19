@@ -64,7 +64,7 @@
                             une initiative</a>
                         <a class="dropdown-item" href="{{ path('opinion_new', {'id': app.user.expert.id}) }}">Déposer 
                             un avis</a>
-                        <a class="dropdown-item" href="#">Déposer 
+                        <a class="dropdown-item" href="{{ path('light_new', {'id': app.user.expert.id}) }}">Déposer 
                             un éclairage</a>
                     {% elseif is_granted('ROLE_ENTERPRISE') %}
                     {% elseif is_granted('ROLE_CONSUMER') %}

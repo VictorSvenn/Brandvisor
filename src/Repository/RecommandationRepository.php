@@ -24,7 +24,7 @@ class RecommandationRepository extends ServiceEntityRepository
     {
         /*SELECT name FROM brandvisor.recommandation
         JOIN enterprise ON recommandation.enterprise_id = enterprise.id
-        WHERE name LIKE '%te%';*/
+        WHERE name LIKE '%%';*/
         return $this->createQueryBuilder('r')
             ->join('r.enterprise', 'en')
             ->where('en.name LIKE :val')

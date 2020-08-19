@@ -15,23 +15,35 @@ class RecommandationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstLink', TextType::class)
+            ->add('firstLink', TextType::class, [
+                'label'=>'Premier lien :',
+            ])
             ->add('firstImage', FileType::class, [
+                'label'=>'Première image :',
                 'mapped'=>false,
                 'required'=>false,
             ])
-            ->add('secondLink', TextType::class)
+            ->add('secondLink', TextType::class, [
+                'label'=>'Second lien :',
+            ])
             ->add('secondImage', FileType::class, [
+                'label'=>'Seconde image :',
                 'mapped'=>false,
                 'required'=>false,
             ])
-            ->add('thirdLink', TextType::class)
+            ->add('thirdLink', TextType::class, [
+                'label'=>'Troisième lien :',
+            ])
             ->add('thirdImage', FileType::class, [
+                'label'=>'Troisième image :',
                 'mapped'=>false,
                 'required'=>false,
             ])
-            ->add('fourthLink', TextType::class)
+            ->add('fourthLink', TextType::class, [
+                'label'=>'Quatrième lien :',
+            ])
             ->add('fourthImage', FileType::class, [
+                'label'=>'Quatrième image :',
                 'mapped'=>false,
                 'required'=>false,
             ]);

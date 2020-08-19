@@ -34,9 +34,10 @@
                             <div class="card-body p-1">
                                 <h5 class="card-title">{{ expert.user.fullname }}</h5>
                                 <h6 class="card-subtitle text-muted">{{ expert.connectingStructure }}</h6>
-                                <p class="card-text">{{ expert.website }}</p>
+                                <p class="card-text">{{ expert.user.email }}</p>
                                 <p class="card-text">{{ expert.expertiseAreas }}</p>
-                                <p class="card-text">{{ expert.phone }}</p>
+                                <p class="card-text">{{ expert.interventionZones }}</p>
+                                <a href="{{ expert.website }}" class="btn bg-light btn-outline-success">Site web</a>
                             </div>
                         </div>
                     {% endfor %}
@@ -46,34 +47,38 @@
                             <div class="card-body p-1">
                                 <h5 class="card-title">{{ expert.user.fullname }}</h5>
                                 <h6 class="card-subtitle text-muted">{{ expert.connectingStructure }}</h6>
-                                <p class="card-text">{{ expert.website }}</p>
+                                <p class="card-text">{{ expert.user.email }}</p>
                                 <p class="card-text">{{ expert.expertiseAreas }}</p>
-                                <p class="card-text">{{ expert.phone }}</p>
+                                <p class="card-text">{{ expert.interventionZones }}</p>
+                                <a href="{{ expert.website }}" class="btn bg-light btn-outline-success">Site web</a>
                             </div>
                         </div>
                     {% endfor %}
                     {% elseif sent is same as (3) %}
                         {% for expert in experts[0] %}
                             <div class="card col-4 mx-auto">
-                                <div class="card-body p-1">
-                                    <h5 class="card-title">{{ expert.user.fullname }}</h5>
-                                    <h6 class="card-subtitle text-muted">{{ expert.connectingStructure }}</h6>
-                                    <p class="card-text">{{ expert.website }}</p>
-                                    <p class="card-text">{{ expert.expertiseAreas }}</p>
-                                    <p class="card-text">{{ expert.phone }}</p>
-                                </div>
+                            <div class="card-body p-1">
+                                <h5 class="card-title">{{ expert.user.fullname }}</h5>
+                                <h6 class="card-subtitle text-muted">{{ expert.connectingStructure }}</h6>
+                                <p class="card-text">{{ expert.user.email }}</p>
+                                <p class="card-text">{{ expert.expertiseAreas }}</p>
+                                <p class="card-text">{{ expert.interventionZones }}</p>
+                                <a href="{{ expert.website }}" class="btn bg-light btn-outline-success">Site web</a>
                             </div>
+                        </div>
                         {% endfor %}
                         {% for expert in experts[1] %}
                             <div class="card col-4 mx-auto">
-                                <div class="card-body p-1">
-                                    <h5 class="card-title">{{ expert.user.fullname }}</h5>
-                                    <h6 class="card-subtitle text-muted">{{ expert.connectingStructure }}</h6>
-                                    <p class="card-text">{{ expert.website }}</p>
-                                    <p class="card-text">{{ expert.expertiseAreas }}</p>
-                                    <p class="card-text">{{ expert.phone }}</p>
-                                </div>
+                            <div class="card-body p-1">
+                                <h5 class="card-title">{{ expert.user.fullname }}</h5>
+                                <h6 class="card-subtitle text-muted">{{ expert.connectingStructure }}</h6>
+                                <p class="card-text">{{ expert.user.email }}</p>
+                                <p class="card-text"><a href={{ expert.website }}>{{ expert.website }}</a></p>
+                                <p class="card-text">{{ expert.expertiseAreas }}</p>
+                                <p class="card-text">{{ expert.interventionZones }}</p>
+                                <a href="{{ expert.website }}" class="btn bg-light btn-outline-success">Site web</a>
                             </div>
+                        </div>
                         {% endfor %}
                 {% endif %}
 

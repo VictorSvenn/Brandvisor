@@ -25,39 +25,39 @@
 
         {% set count = 0 %}
         {% for recommandation in recommandations %}
-        <div class="card col-6 ">
+        <div class="card col-xl-6 col-lg-10 col-md-12 col-sm-10">
             <img class="card-img-top" src="{{ recommandation.enterprise.logo }}" alt="">
             <div class="row">
-                <div class="col-lg-6">
+                <div class=" col-xl-6 col-lg-5 col-md-6 col-sm-6">
                     <div class="text-center">Note : {{ recommandation.enterprise.note }}</div>
                     <img class="mx-auto d-block" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
                         width="50%">
                     <div class="text-center">{{ recommandation.getEnterprise().getName() }}</div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="col-lg-12 row justify-content-around">
-                        <div class="text-center col-lg-12">Produits</div>
-                        <div class="col-lg-6">
+                <div class=" col-xl-6 col-lg-7 col-md-6 col-sm-6">
+                    <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 row justify-content-around">
+                        <div class="text-center col-xl-12 col-lg-12 col-md-12 col-sm-12">Produits</div>
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
                             <a href="{{ recommandation.firstLink }}">
-                                <img class="col-lg-12 col-md-5 mx-auto offset-1"
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto offset-1"
                                     src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
                             </a>
                         </div>
-                        <div class="col-lg-6">
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
                             <a href="{{ recommandation.secondLink }}">
-                                <img class="col-lg-12 col-md-5 mx-auto offset-1"
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto offset-1"
                                     src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
                             </a>
                         </div>
-                        <div class="col-lg-6">
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
                             <a href="{{ recommandation.thirdLink }}">
-                                <img class="col-lg-12 col-md-5 mx-auto mt-2 offset-1"
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 offset-1"
                                     src="{{ asset('uploads/' ~ recommandation.thirdImage) }}">
                             </a>
                         </div>
-                        <div class="col-lg-6">
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
                             <a href="{{ recommandation.fourthLink }}">
-                                <img class="col-lg-12 col-md-5 mx-auto mt-2 offset-1"
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 offset-1"
                                     src="{{ asset('uploads/' ~ recommandation.fourthImage) }}">
                             </a>
                         </div>
@@ -80,34 +80,34 @@
 
 {% for recommandation in all %}
 <div class="row border bg-success">
-    <div class="col-lg-6">
+    <div class=" col-xl-5 col-lg-5 col-md-5 col-sm-5">
         <div class="text-center my-3 font-weight-bold">Note : {{ recommandation.enterprise.note }}</div>
         <img class="mx-auto d-block my-3" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
             width="50%">
         <div class="text-center font-weight-bold my-3">{{ recommandation.getEnterprise().getName() }}</div>
     </div>
-    <div class="col-lg-6 bg-secondary">
-        <div class="col-lg-12 row justify-content-around text-white font-weight-bold">
-            <div class="text-center col-lg-12">Produits</div>
-            <div class="col-lg-5">
+    <div class=" col-xl-7 col-lg-7 col-md-7 col-sm-7 bg-secondary">
+        <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 row justify-content-around text-white font-weight-bold">
+            <div class="text-center col-xl-12 col-lg-12 col-md-12 col-sm-12">Produits</div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
                 <a href="{{ recommandation.firstLink }}">
-                    <img class="col-lg-12 col-md-5 mx-auto" src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto" src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
                 </a>
             </div>
-            <div class="col-lg-5">
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
                 <a href="{{ recommandation.secondLink }}">
-                    <img class="col-lg-12 col-md-5 mx-auto" src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
+                    <img class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto" src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
                 </a>
             </div>
-            <div class="col-lg-5">
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
                 <a href="{{ recommandation.thirdLink }}">
-                    <img class="col-lg-12 col-md-5 mx-auto mt-2 mb-2"
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 mb-2"
                         src="{{ asset('uploads/' ~ recommandation.thirdImage) }}">
                 </a>
             </div>
-            <div class="col-lg-5">
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
                 <a href="{{ recommandation.fourthLink }}">
-                    <img class="col-lg-12 col-md-5 mx-auto mt-2 mb-2"
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 mb-2"
                         src="{{ asset('uploads/' ~ recommandation.fourthImage) }}">
                 </a>
             </div>
