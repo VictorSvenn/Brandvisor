@@ -30,7 +30,6 @@ class OpinionRepository extends ServiceEntityRepository
             ->andWhere('o.isConform = true')
             ->setParameter('role', '%ROLE_CONSUMER%')
             ->orderBy('o.date', 'DESC')
-            ->setMaxResults(2)
             ->getQuery()
             ->getResult();
     }
@@ -44,7 +43,6 @@ class OpinionRepository extends ServiceEntityRepository
             ->andWhere('o.isConform = true')
             ->setParameter('role', '%ROLE_EXPERT%')
             ->orderBy('o.date', 'DESC')
-            ->setMaxResults(2)
             ->getQuery()
             ->getResult();
     }
@@ -62,7 +60,6 @@ class OpinionRepository extends ServiceEntityRepository
         ->andWhere('o.isConform = true')
         ->setParameter('role', '%ROLE_EXPERT%')
         ->orderBy('o.date', 'DESC')
-        ->setMaxResults(2)
         ->getQuery();
         return $query->getResult();
     }
@@ -78,7 +75,6 @@ class OpinionRepository extends ServiceEntityRepository
         ->andWhere('o.isConform = true')
         ->setParameter('role', '%ROLE_CONSUMER%')
         ->orderBy('o.date', 'DESC')
-        ->setMaxResults(2)
         ->getQuery()
         ->getResult();
     }

@@ -123,7 +123,7 @@
                     {# Paroles de consommateur #}
                     <div class="col-6 my-auto ">
                         <h2>Paroles de consommateur</h2>
-                        {% for consumerAdvice in consumerAdvices %}
+                        {% for consumerAdvice in consumerAdvices|slice(0, 2) %}
                             <a href="{{ path('opinion_show', { 'id': consumerAdvice.id }) }}"
                                class="text-decoration-none text-dark">
 
@@ -138,7 +138,7 @@
                     {# Section "Paroles d'expert"#}
                     <div class="col-6">
                         <h2>Paroles d'expert</h2>
-                        {% for expertAdvice in expertAdvices %}
+                        {% for expertAdvice in expertAdvices|slice(0, 2) %}
                             <a href="{{ path('opinion_show', { 'id': expertAdvice.id }) }}"
                                class=" text-decoration-none text-dark">
                                 <div class="bg-white rounded p-2 m-2">

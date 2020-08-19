@@ -52,13 +52,13 @@ class EtpRegistrationFormType extends AbstractType implements FormTypeInterface
                 'SIRET',
                 null,
                 ['mapped' => false,
-                    'label'=> 'Le numéro de SIRET pour votre entreprise']
+                    'label'=> 'Le numéro de SIRET']
             )
             ->add(
                 'contact_fct',
                 null,
                 ['mapped' => false,
-                    'label' => 'Votre poste au sein de cette entreprise']
+                    'label' => "Votre poste au sein de l'entreprise"]
             )
             ->add('firstName', null, [
                 'label' => 'Votre prénom'

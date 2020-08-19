@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Challenge;
 use App\Entity\Enterprise;
 use App\Entity\Opinion;
+use App\Entity\Consumer;
 use App\Form\EnterpriseType;
 use App\Repository\EnterpriseRepository;
+use App\Repository\ConsumerRepository;
 use App\Repository\OpinionRepository;
 use App\Services\FileUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -36,8 +38,6 @@ class EnterpriseController extends AbstractController
         return $this->render('challenges/etpchallenges.html.twig', ['user' => $this->getUser(), 'nb' => $challenges]);
     }
 
-
-
     /**
      * @Route("/challenge/response/{id}", name="challenge_response")
      * @IsGranted("ROLE_ENTERPRISE")
@@ -56,7 +56,6 @@ class EnterpriseController extends AbstractController
         return $this->render('challenge/response.html.twig', ['challenge' => $challenge]);
     }
 
-
     /**
      * @Route("/account", name="account_enterprise")
      * @IsGranted("ROLE_ENTERPRISE")
@@ -67,6 +66,7 @@ class EnterpriseController extends AbstractController
         if (count($enterprise->getEngagements()) >= 5 && $enterprise->getNote() == 4) {
             $enterprise->setNote(5);
         }
+
         return $this->render('account/enterprise.html.twig', [
             'enterprise' => $enterprise,
         ]);
@@ -115,7 +115,7 @@ class EnterpriseController extends AbstractController
 
         return $this->render('enterprise/edit.html.twig', [
             'enterprise' => $enterprise,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -124,15 +124,18 @@ class EnterpriseController extends AbstractController
     */
     public function showEnterprise(Enterprise $enterprise, OpinionRepository $oprepo): Response
     {
-        if (count($enterprise->getEngagements()) >= 5 && $enterprise->getNote() == 4) {
+        if (6 >= 5 && $enterprise->getNote() == 4) {
             $enterprise->setNote(5);
         }
+        $this->getDoctrine()->getManager()->persist($enterprise);
+        $this->getDoctrine()->getManager()->flush();
+
         return $this->render(
             'enterprise/consultation.html.twig',
             [
             'enterprise' => $enterprise,
             "experts" => $oprepo->findEnterpriseExpertValidOpinions($enterprise->getId()),
-            "consummers" => $oprepo->findEnterpriseConsummerValidOpinions($enterprise->getId())
+            "consummers" => $oprepo->findEnterpriseConsummerValidOpinions($enterprise->getId()),
             ]
         );
     }

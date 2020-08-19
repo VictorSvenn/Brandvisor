@@ -8,86 +8,102 @@
     {% endfor %}
     {{ form_start(registrationForm) }}
     <div class="row my-3">
-        <div class="container-fluid col-5">
+        <div class="container-fluid col-6">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.firstName) }}</div>
             <div class="row col-10 offset-1">{{ form_errors(registrationForm.firstName) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.firstName) }}</div>
         </div>
-        <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">{{ form_label(registrationForm.lastName) }}</div>
-            <div class="row col-10 offset-1">{{ form_errors(registrationForm.lastName) }}</div>
-            <div class="row col-10 offset-1">{{ form_widget(registrationForm.lastName) }}</div>
+        <div class="container-fluid col-6">
+            <div class="row col-12 offset-1">{{ form_label(registrationForm.lastName) }}</div>
+            <div class="row col-12 offset-1">{{ form_errors(registrationForm.lastName) }}</div>
+            <div class="row col-12 offset-1">{{ form_widget(registrationForm.lastName) }}</div>
         </div>
     </div>
     <div class="row my-3">
-        <div class="container-fluid col-5">
+        <div class="container-fluid col-6">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.etpname) }}</div>
             {% if errorname == true %}
                 <div class="row col-10 offset-1"><ul><li>Veuillez renseigner le nom de votre entreprise.</li></ul></div>
             {% endif %}
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.etpname) }}</div>
         </div>
-        <div class="container-fluid col-5">
+        <div class="container-fluid col-6">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.SIRET) }}</div>
-            {% if errorsiret == true%}
+            {% if errorsiret == true %}
                 <div class="row col-10 offset-1"><ul><li>Veuillez renseigner votre numéro SIRET</li></ul></div>
             {% endif %}
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.SIRET) }}</div>
         </div>
     </div>
     <div class="row my-3">
-        <div class="container-fluid col-5">
+        <div class="container-fluid col-6">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.contact_fct) }}</div>
             {% if errorfct == true%}
                 <div class="row col-10 offset-1"><ul><li>Veuillez renseigner votre fonction au sein de cette entreprise.</li></ul></div>
             {% endif %}
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.contact_fct) }}</div>
         </div>
-        <div class="container-fluid col-5">
+        <div class="container-fluid col-6">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.email) }}</div>
             <div class="row col-10 offset-1">{{ form_errors(registrationForm.email) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.email) }}</div>
         </div>
     </div>
     <div class="row my-3">
-        <div class="container-fluid col-5">
+        <div class="container-fluid col-6">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.password.first) }}</div>
             <div class="row col-10 offset-1">{{ form_errors(registrationForm.password.first) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.first) }}</div>
         </div>
-        <div class="container-fluid col-5">
+        <div class="container-fluid col-6">
             <div class="row col-10 offset-1">{{ form_label(registrationForm.password.second) }}</div>
             <div class="row col-10 offset-1">{{ form_errors(registrationForm.password.first) }}</div>
             <div class="row col-10 offset-1">{{ form_widget(registrationForm.password.second) }}</div>
         </div>
-
     </div>
     <div class="row my-3">
-        <div class="container-fluid col-5">
-            <div class="row col-10 offset-1 pr-0">
-                <select name="type" id="type" style="width: 100%">
-                    {% for type in types %}
-                        <option value="{{ type.getCategory().getId() }}">{{ type.getCategory().getName() }}</option>
-                    {% endfor %}
+        <div class="container-fluid col-6">
+            <div class="row col-7 offset-1">Secteurs d'activité:
+                <select name="type" id="type" style="width: 100%" class="mt-2" method="POST">
+                        <option>Aliments, boissons & tabac</option>
+                        <option>Animaux</option>
+                        <option>Argent & assurance</option>
+                        <option>Beauté & bien-être</option>
+                        <option>Construction & Manufacturing</option>
+                        <option>Éducation & formation</option>
+                        <option>Électronique & technologie</option>
+                        <option>Événements & divertissement</option>
+                        <option>Loisirs & artisanat</option>
+                        <option>Maison & jardin</option>
+                        <option>Médias & édition</option>
+                        <option>Restaurants & bars</option>
+                        <option>Santé & médecine</option>
+                        <option>Services</option>
+                        <option>Services aux entreprises</option>
+                        <option>Services juridiques & administration</option>
+                        <option>Services publics & locaux</option>
+                        <option>Services à domicile</option>
+                        <option>Shopping & mode</option>
+                        <option>Sport</option>
+                        <option>Vacances & voyages</option>
+                        <option>Véhicules & transport</option>
                 </select>
             </div>
             <div class="row col-10 offset-1"></div>
         </div>
-        <div class="container-fluid col-5">
-            <div class="row col-10 offset-1"></div>
-            <div class="row col-10 offset-1"></div>
-        </div>
-    </div>
-
-    <div class="row my-3">
-        <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">
+        <div class="container-fluid col-6">
+            <div class="row col-10 mt-4">
                 {{ form_row(registrationForm.agreeTerms) }}
             </div>
         </div>
-        <div class="container-fluid col-5">
-            <div class="row col-10 offset-1">
-                <button class="mx-auto my-3 btn btn-lg btn-primary" type="submit">
+    </div>
+
+    <div class="row">
+        <div class="container-fluid col-6">
+        </div>
+        <div class="container-fluid col-6">
+            <div class="row col-9">
+                <button class="mx-auto btn btn-lg btn-primary" type="submit">
                     Inscription
                 </button>
             </div>

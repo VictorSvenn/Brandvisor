@@ -103,7 +103,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $enterprise->setEnterprisePhone($faker->phoneNumber);
             $enterprise->setEnterprisePres($faker->text);
             $enterprise->setDocuments(["etpdocument_$i.$faker->fileExtension", "etpdocument_$i.$faker->fileExtension"]);
-            $enterprise->setType($this->getReference('etp_type' . rand(0, 500)));
+            $enterprise->setCategory($faker->jobTitle);
             $this->addReference('etp_' . $i, $enterprise);
             $manager->persist($enterprise);
         }
@@ -122,6 +122,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return [EtptypeFixtures::class];
+        return [OddFixtures::class];
     }
 }
