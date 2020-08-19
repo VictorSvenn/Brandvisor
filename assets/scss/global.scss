@@ -13,6 +13,7 @@ $white: white;
 $darkGreen: #356315;
 $red: #ff3254;
 $black: rgba(0, 0, 0, 0.2);
+$yellow: #729179;
 
 .text-lightGreen {
     color: $lightGreen;
@@ -32,6 +33,13 @@ $black: rgba(0, 0, 0, 0.2);
 
 .text-red {
     color: $red;
+}
+
+.text-yellow {
+    color: $yellow;
+}
+.bg-yellow {
+    background-color: $yellow;
 }
 
 .border-greySteel {

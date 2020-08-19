@@ -23,7 +23,7 @@
                 <div class="row text-center bg-white mb-2">
                     {#Texte#}
                     <div class="col-6 my-auto ">
-                        <h2>Les Objectifs</h2>
+                        <h3>Les Objectifs</h3>
                         <p>Vous pensez que le partage des projets et des initiatives entre tous peut conduire à un monde
                             meilleur.</p>
                         <p>Vous pensez qu'évaluer les entreprises et les marques sur leurs reponsabilités sociales et
@@ -38,15 +38,15 @@
                 </div>
                 {#~~~~~~~~~~~~~#}
                 {# Section "Nous sommes tous acteurs du changement"#}
-                <div class="row text-center bg-black mb-2">
+                <div class="row text-center bg-yellow mb-2">
                     {#Image#}
                     <div class="col-6 my-auto ">
                         <img src="{{ asset('images/fleur.jpeg') }}" alt="" width="100%">
                     </div>
                     {#Texte#}
                     <div class="col-6 my-auto">
-                        <h2>Nous sommes tous acteurs du changement</h2>
-                        <p>Brandvisor réunit les entreprises, engagées dans une démarche de développement durable et de transparence, les consummateurs, à la recherche d'un mode de consommation écoresponsable, et des experts qui apportent un éclairage supplémentaire.</p>
+                        <h3>Nous sommes tous acteurs du changement</h3>
+                        <p>Brandvisor réunit les entreprises, engagées dans une démarche de développement durable et de transparence, les consommateurs, à la recherche d'un mode de consommation écoresponsable, et des experts qui apportent un éclairage supplémentaire.</p>
                     </div>
                 </div>
                 {#~~~~~~~~~~~~~#}
@@ -54,7 +54,7 @@
                 <div class="row text-center bg-white mb-2">
                     {#Entreprise par notes #}
                     <div class="col-6">
-                        <h2>Entreprises à l'honneur</h2>
+                        <h3>Entreprises à l'honneur</h3>
                         <div id="enterprises" class="carousel slide mb-2" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 {% for enterpriseNote in enterpriseNotes %}
@@ -85,7 +85,7 @@
                     </div>
                     {# Section "initiatives les + likées"#}
                     <div class="col-6">
-                        <h2>Initiatives à l'honneur</h2>
+                        <h3>Initiatives à l'honneur</h3>
                         <div id="initiatives" class="carousel slide mb-2" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 {% for initiativeLike in initiativeLikes %}
@@ -117,31 +117,30 @@
                 </div>
                 {#~~~~~~~~~~~~~#}
                 {# Section "Paroles de consommateur + expert"#}
-                <div class="row text-center bg-black mb-2">
+                <div class="row text-center bg-yellow mb-2">
                     {# Paroles de consommateur #}
                     <div class="col-6">
-                        <h2>Paroles de consommateur</h2>
+                        <h3>Avis de consommateurs</h3>
                         {% for consumerAdvice in consumerAdvices|slice(0, 2) %}
                             <a href="{{ path('opinion_show', { 'id': consumerAdvice.id }) }}"
                                class="text-decoration-none text-dark">
 
                                 <div class="bg-white rounded p-2 m-2">
-                                    <h4>{{ consumerAdvice.depositary.fullName }} a déposé un avis
-                                        sur {{ consumerAdvice.enterprise.name }}</h4>
-                                    <p class=" text-truncate">{{ consumerAdvice.text }}</p>
+                                    <h5><b>Avis sur {{ consumerAdvice.enterprise.name }}</b></h5>
+                                    <p class="text-truncate">{{ consumerAdvice.text }}</p>
                                 </div>
                             </a>
                         {% endfor %}
                     </div>
                     {# Section "Paroles d'expert"#}
                     <div class="col-6">
-                        <h2>Paroles d'expert</h2>
+                        <h3>Paroles d'experts</h3>
                         {% for expertAdvice in expertAdvices|slice(0, 2) %}
                             <a href="{{ path('opinion_show', { 'id': expertAdvice.id }) }}"
                                class=" text-decoration-none text-dark">
                                 <div class="bg-white rounded p-2 m-2">
-                                    <h4>{{ expertAdvice.depositary.fullName }} a déposé un avis
-                                        sur {{ expertAdvice.enterprise.name }}</h4>
+                                    <h5><b>{{ expertAdvice.depositary.fullName }}, avis
+                                        sur {{ expertAdvice.enterprise.name }}</b></h5>
                                     <p class=" text-truncate">{{ expertAdvice.text }}</p>
                                 </div>
                             </a>
@@ -156,11 +155,11 @@
             <div class="row mt-3 bg-white">
                 <div>
                     <div class="mx-auto text-center">
-                        <h2 class="bg-black p-2 ">Challenge du jour</h2>
+                        <h3 class="bg-yellow p-2 ">Challenge du jour</h3>
                     </div>
                     <div class="card bg-transparent">
                         <div class="card-body p-2">
-                            <h4 class="card-title text-center">{{ dayChallenge.name }}</h4>
+                            <h5 class="card-title text-center"><b>{{ dayChallenge.name }}</b></h5>
                             <p class="card-text text-center">{{ dayChallenge.description }}</p>
                             <p class="card-text text-center font-italic">Nombre de votes: {{ votes }}</p>
                             {% if is_granted('ROLE_CONSUMER') or is_granted('ROLE_EXPERT') %}
@@ -190,10 +189,10 @@
             <div class="row mt-3 bg-white">
                 <div>
                     <div class="mx-auto text-center">
-                        <h2 class="bg-black p-2">Thématique du jour</h2>
+                        <h3 class="bg-yellow p-2">Thématique du jour</h3>
                     </div>
                     <div class="mx-auto text-center">
-                        <h4>{{ thematique.name }}</h4>
+                        <h5><b>{{ thematique.name }}</b></h5>
                     </div>
                 </div>
             </div>
@@ -203,11 +202,11 @@
             <div class="row mt-3 bg-white">
                 <div>
                     <div class="mx-auto text-center">
-                        <h2 class="bg-black p-2 ">Fil d'actualités</h2>
+                        <h3 class="bg-yellow p-2 ">Fil d'actualités</h3>
                     </div>
                     <div class="mx-auto text-center">
                         {% for new in news %}
-                            <h3>{{ new.title }}</h3>
+                            <h5><b>{{ new.title }}</b></h5>
                             <p class="font-italic">{{ new.date|date("m/d/Y") }}</p>
                             <img src="{{ asset('uploads/' ~ new.illustration) }}" width="70%"alt="">
                             <p>{{ new.text }}</p>
