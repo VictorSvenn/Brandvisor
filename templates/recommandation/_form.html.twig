@@ -5,3 +5,16 @@
         <button class="btn btn-success">{{ button_label|default('Envoyer') }}</button>
     </div>
 {{ form_end(form) }}
+{# {{ form_start(form) }}
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.task) }}
+        </div>
+        <div class="col" id="some-custom-id">
+            {{ form_row(form.dueDate) }}
+        </div>
+    </div>
+    <div class="mx-auto col-3">
+     <button class="btn mx-auto">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }} #}

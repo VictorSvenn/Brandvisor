@@ -6,6 +6,7 @@ use App\Entity\Challenge;
 use App\Entity\Enterprise;
 use App\Entity\Opinion;
 use App\Entity\Consumer;
+use App\Entity\Recommandation;
 use App\Form\EnterpriseType;
 use App\Repository\EnterpriseRepository;
 use App\Repository\ConsumerRepository;
@@ -63,12 +64,15 @@ class EnterpriseController extends AbstractController
     public function enterprise()
     {
         $enterprise = $this->getUser()->getEnterprise();
+        $recommandation = $this->getDoctrine()->getRepository(Recommandation::class)->findOneBy([
+            "enterprise"=>$enterprise]);
         if (count($enterprise->getEngagements()) >= 5 && $enterprise->getNote() == 4) {
             $enterprise->setNote(5);
         }
 
         return $this->render('account/enterprise.html.twig', [
             'enterprise' => $enterprise,
+            'recommandation' =>$recommandation,
         ]);
     }
 
@@ -127,6 +131,9 @@ class EnterpriseController extends AbstractController
         if (6 >= 5 && $enterprise->getNote() == 4) {
             $enterprise->setNote(5);
         }
+        $recommandation = $this->getDoctrine()->getRepository(Recommandation::class)->findOneBy([
+            "enterprise"=>$enterprise]);
+
         $this->getDoctrine()->getManager()->persist($enterprise);
         $this->getDoctrine()->getManager()->flush();
 
@@ -136,6 +143,7 @@ class EnterpriseController extends AbstractController
             'enterprise' => $enterprise,
             "experts" => $oprepo->findEnterpriseExpertValidOpinions($enterprise->getId()),
             "consummers" => $oprepo->findEnterpriseConsummerValidOpinions($enterprise->getId()),
+            'recommandation' => $recommandation,
             ]
         );
     }

@@ -80,6 +80,14 @@
                         {% endfor %}
                     </td>
                 </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Recommandation</th>
+                    {% if recommandation != null %}
+                    <td class="font-weight-light border-0"><a href="{{ path('recommandation_show', {'id': recommandation.id}) }}">Voir plus</a></td>
+                    {% else %}
+                    <td>Aucune recommandation</td>
+                    {% endif %}
+                </tr>
                 </tbody>
             </table>
         </div>

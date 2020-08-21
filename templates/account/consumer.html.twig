@@ -12,11 +12,12 @@
 <div class="container-fluid">
     <div class="row justify-content-center flex-column flex-lg-row mb-5">
         <a href="{{ path('consumer_edit', {'id': consumer.id}) }}" class="navbar-brand btn btn-outline-primary">Modifier
-            mes informations</a>
+            mes infos</a>
         <a href="{{ path('consumer_favs') }}" class="navbar-brand btn btn-outline-primary">Mes favoris</a>
-        <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un avis</a>
+        <a href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary">Déposer une initiative</a>
+        <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Déposer un avis</a>
         <a href="{{ path('challenge_new') }}" class="navbar-brand btn btn-outline-primary">Challenger une entreprise</a>
-        <a href="" class="navbar-brand btn btn-outline-primary disabled">Obtenir des recommandations</a>
+        <a href="{{ path('recommandation_index') }}" class="navbar-brand btn btn-outline-primary">Recommandations</a>
     </div>
 </div>
 <div class="container col-8">

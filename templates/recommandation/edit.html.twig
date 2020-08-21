@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Recommandation{% endblock %}
+{% block title %}Déposer une recommandation{% endblock %}
 
 {% block body %}
-    <h1>Edit Recommandation</h1>
+    <h1>Modifier la recommandation</h1>
 
-    {{ include('recommandation/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('recommandation/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('recommandation_index') }}">back to list</a>
+    <a href="{{ path('recommandation_index') }}">Retour à la liste</a>
 
     {{ include('recommandation/_delete_form.html.twig') }}
 {% endblock %}

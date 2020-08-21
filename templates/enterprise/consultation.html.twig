@@ -88,7 +88,15 @@
                 </tr>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Recommandation:</th>
-                    <td class="font-weight-light border-0"><a href={{ path('recommandation_index') }}>Produit</a></td>
+                    {% if recommandation != null %}
+                        {% if enterprise.note >= 4 %}
+                        <td class="font-weight-light border-0"><a href="{{ path('recommandation_show', {'id': recommandation.id}) }}">Voir plus</a></td>
+                        {% else %}
+                        <td>Visible à partir de 4 étoiles</td>
+                        {% endif %}
+                    {% else %}
+                    <td>Aucune recommandation</td>
+                    {% endif %}
                 </tr>
                 </tbody>
             </table>
