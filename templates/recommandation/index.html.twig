@@ -72,19 +72,25 @@
 </div>
 
 {% if is_granted('ROLE_ENTERPRISE') %}
-<a href="{{ path('recommandation_new') }}">Déposer une recommandation</a>
+<a href="{{ path('recommandation_new') }}" class="btn btn-outline-success">Déposer une recommandation</a>
 {% elseif is_granted('ROLE_CONSUMER') %}
 {% elseif is_granted('ROLE_EXPERT') %}
 {% else %}
 {% endif %}
 
+
 {% for recommandation in all %}
+{% if recommandation.enterprise.note >= 4 %}
 <div class="row border bg-success">
     <div class=" col-xl-5 col-lg-5 col-md-5 col-sm-5">
         <div class="text-center my-3 font-weight-bold">Note : {{ recommandation.enterprise.note }}</div>
         <img class="mx-auto d-block my-3" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
             width="50%">
         <div class="text-center font-weight-bold my-3">{{ recommandation.getEnterprise().getName() }}</div>
+        <a href="{{ path('recommandation_show', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Voir plus</a>
+        {% if app.user == recommandation.getEnterprise().getUser() %}
+        <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Modifier</a>
+        {% endif %}
     </div>
     <div class=" col-xl-7 col-lg-7 col-md-7 col-sm-7 bg-secondary">
         <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 row justify-content-around text-white font-weight-bold">
@@ -113,53 +119,9 @@
             </div>
         </div>
     </div>
-    {% if app.user == recommandation.getEnterprise().getUser() %}
-    <a href="{{ path('recommandation_show', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Voir plus</a>
-    <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Modifier</a>
-    {% endif %}
 </div>
-{% else %}
-<div>Aucune recommandation</div>
+
+{% endif %}
 {% endfor %}
-
-{#<table class="table">
-    <thead>
-        <tr>
-            <th>Note</th>
-            <th>Logo</th>
-            <th>Nom de l'entreprise</th>
-            <th>Image</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for recommandation in recommandations %}
-        <tr>
-            <td>{{ recommandation.enterprise.note }}</td>
-            <td>
-                <a>
-                    <img class="" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" width="200%"
-                        height="200%">
-                </a>
-            </td>
-            <td>{{ recommandation.enterprise.name }}</td>
-            {% for img in recommandation.image %}
-            <td><a href="{{ recommandation.link }}">
-                    <img class="col-lg-4" src="{{ asset('uploads/' ~ img) }}">
-                </a></td>
-            {% endfor %}
-            <td>
-                <a href="{{ path('recommandation_show', {'id': recommandation.id}) }}">Voir plus</a>
-                <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}">Modifier</a>
-            </td>
-
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="4">Aucune recommandation</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>#}
 
 {% endblock %}

@@ -26,7 +26,7 @@
                     <img class="card-img-top" src="{{ enterprise.logo }}" alt="">
                     <div class="card-body">
                         <h5 class="card-title">{{ enterprise.name }}</h5>
-                        <h5 class="card-title">{{ enterprise.type.name }}</h5>
+                        <h5 class="card-title">{{ enterprise.category }}</h5>
                         <p class="card-text">{{ enterprise.enterprisePres }}</p>
                         <a href="{{ path('show_enterprise', {'id': enterprise.id }) }}" class="btn btn-primary">Consulter l'entreprise</a>
                     </div>

@@ -3,12 +3,53 @@
 {% block title %}{{ enterprise.name }}{% endblock %}
 
 {% block body %}
-    <h1 class="text-center m-3">{{ enterprise.name }}</h1>
+    <div class="d-flex m-4">
+        <h1 class="d-flex mx-auto">{{ enterprise.name }}</h1>
+        {# {% set break = false %}
+        {% if is_granted('ROLE_CONSUMER') %}
+            {% for bookmark in app.user.consumer.bookmarks if not break %}
+                {% if bookmark != enterprise %}
+                    <a href="{{ path('add_bookmark_etp', { 'id': enterprise.id }) }}">
+                    <img src="https://img.icons8.com/cotton/64/000000/like--v4.png" style="height:3rem;" alt="Ajouter aux favoris"/>
+                    </a>
+                {% else %}
+                    <a href="{{ path('remove_bookmark', { 'id': enterprise.id }) }}">
+                    <img src="https://img.icons8.com/cotton/64/000000/like--v3.png" style="height:3rem;" alt="Supprimer des favoris"/>
+                    </a>
+                    {% set break = true %}
+                {% endif %}
+            {% endfor %}
+            
+        {% endif %} #}
 
+        {% if is_granted('ROLE_CONSUMER') %}
+            <a href="{{ path('add_bookmark_etp', { 'id': enterprise.id }) }}">
+            <img src="https://img.icons8.com/cotton/64/000000/like--v4.png" style="height:3rem;" alt="Ajouter aux favoris"/>
+            </a>
+        {% endif %}
+        {% if is_granted('ROLE_CONSUMER') %}
+            <a href="{{ path('remove_bookmark', { 'id': enterprise.id }) }}">
+            <img src="https://img.icons8.com/cotton/64/000000/like--v3.png" style="height:3rem;" alt="Supprimer des favoris"/>
+            </a>
+        {% endif %}
+    </div>
+    <div></div>
     <div class="container-fluid d-flex">
         <div class="container-fluid col-6">
             <table class="table table-striped">
                 <tbody>
+                <tr>
+                    <th scope="row" class="font-weight-bold border-0">Note :</th>
+                    <td class="font-weight-light border-0">
+                        {% if enterprise.note == 1 %}⭐
+                        {% elseif enterprise.note == 2 %}⭐⭐
+                        {% elseif enterprise.note == 3 %}⭐⭐⭐
+                        {% elseif enterprise.note == 4 %}⭐⭐⭐⭐
+                        {% elseif enterprise.note == 5 %}⭐⭐⭐⭐⭐
+                        {% else %} {{ enterprise.note }}
+                        {% endif %}
+                    </td>
+                </tr>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Nom de l'entreprise:</th>
                     <td class="font-weight-light border-0">{{ enterprise.name }}</td>
@@ -31,7 +72,7 @@
                 </tr>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Catégorie d'entreprise:</th>
-                    <td class="font-weight-light border-0">{{ enterprise.type.name }}</td>
+                    <td class="font-weight-light border-0">{{ enterprise.category }}</td>
                 </tr>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Site web:</th>
@@ -46,7 +87,15 @@
                 </tr>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Recommandation:</th>
-                    <td class="font-weight-light border-0"><a href={{ path('recommandation_index') }}>Produit</a></td>
+                    {% if recommandation != null %}
+                        {% if enterprise.note >= 4 %}
+                        <td class="font-weight-light border-0"><a href="{{ path('recommandation_show', {'id': recommandation.id}) }}">Voir plus</a></td>
+                        {% else %}
+                        <td>Visible à partir de 4 étoiles</td>
+                        {% endif %}
+                    {% else %}
+                    <td>Aucune recommandation</td>
+                    {% endif %}
                 </tr>
                 </tbody>
             </table>
@@ -58,8 +107,8 @@
 
     <hr/>
 
-    <h2 class="text-center">Quels sont mes engagements ?</h2>
-    <div class="container-fluid d-flex">
+    <h2 class="text-center m-4">Quels sont mes engagements ?</h2>
+    <div class="row">
         {% for eng in enterprise.engagements %}
             <div class="card col-6">
                 <div class="card-body">
@@ -95,7 +144,7 @@
 
     <hr/>
 
-    <h2 class="text-center">Les challenges</h2>
+    <h2 class="text-center m-4">Les challenges</h2>
     <div class="container-fluid d-flex">
         {% for cha in enterprise.challenges %}
             <div class="card col-5 m-5">
@@ -112,10 +161,11 @@
 
     <hr/>
 
-    <h2 class="text-center">Avis experts</h2>
-    <div class="container-fluid d-flex">
+    <h2 class="text-center m-4">Avis experts</h2>
+    <div class="row justify-content-center">
         {% for op in experts %}
-            <div class="card col-5 m-5">
+        {% if op.enterprise.id == enterprise.id %}
+            <div class="card col-10 col-lg-5 m-2">
                 <div class="card-body">
                     <h3 class="card-title text-center">{{ op.depositary.firstname }} {{ op.depositary.lastname }} </h3>
                     <h4 class="card-text">Avis: </h4>
@@ -123,15 +173,17 @@
                     <a class="btn btn-success" href="{{ path('opinion_show', { 'id': op.id }) }}">Consulter</a>
                 </div>
             </div>
+        {% endif %}
         {% endfor %}
     </div>
 
     <hr/>
 
-    <h2 class="text-center">Avis consommateurs</h2>
-    <div class="container-fluid d-flex">
+    <h2 class="text-center m-4">Avis consommateurs</h2>
+    <div class="row justify-content-center">
         {% for op in consummers %}
-            <div class="card col-5 m-5">
+        {% if op.enterprise.id == enterprise.id %}
+            <div class="card col-10 col-lg-5 m-2">
                 <div class="card-body">
                     <h3 class="card-title text-center">{{ op.depositary.firstname }} {{ op.depositary.lastname }}</h3>
                     <h4 class="card-text">Avis: </h4>
@@ -139,6 +191,7 @@
                     <a class="btn btn-success" href="{{ path('opinion_show', { 'id': op.id }) }}">Consulter</a>
                 </div>
             </div>
+        {% endif %}
         {% endfor %}
     </div>
 

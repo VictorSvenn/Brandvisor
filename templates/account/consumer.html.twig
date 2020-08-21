@@ -2,11 +2,6 @@
 
 {% block title %}Mon compte: {{ app.user.firstName }}{% endblock %}
 
-
-
-
-
-
 {% block body %}
     <div class="container mx-auto">
         <div class="row mx-auto text-center">
@@ -24,7 +19,10 @@
                     <a href="{{ path('consumer_favs') }}" class="navbar-brand btn btn-outline-primary">Mes favoris</a>
                 </div>
                 <div class="row">
-                    <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un
+                    <a href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary">Déposer une initiative</a>
+                </div>
+                <div class="row">
+                    <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Déposer un
                         avis</a>
                 </div>
                 <div class="row">
@@ -32,7 +30,7 @@
                         entreprise</a>
                 </div>
                 <div class="row">
-                    <a href="" class="navbar-brand btn btn-outline-primary disabled">Obtenir des recommandations</a>
+                    <a href="{{ path ('recommandation_index') }}" class="navbar-brand btn btn-outline-primary">Consulter les recommandations</a>
                 </div>
             </div>
             <div class="container col-8">

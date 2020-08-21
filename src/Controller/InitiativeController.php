@@ -19,6 +19,7 @@ class InitiativeController extends AbstractController
 {
     /**
      * @Route("/new", name="initiative_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
@@ -67,6 +68,7 @@ class InitiativeController extends AbstractController
 
     /**
      * @Route("/vote/{id}", name="initiative_vote")
+     * @IsGranted("ROLE_USER")
      * @param Initiative $initiative
      * @return Response
      */
@@ -76,7 +78,6 @@ class InitiativeController extends AbstractController
         $this->getDoctrine()->getManager()->persist($initiative);
         $this->getDoctrine()->getManager()->flush();
         return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
-//        return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
     }
 
 //    /**

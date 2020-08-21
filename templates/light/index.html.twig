@@ -5,7 +5,7 @@
 {% block body %}
 <h1>Paroles d'experts</h1>
 
-<div class="container-fluid d-flex">
+<div class="container-fluid d-flex row">
     <div class="container-fluid col-3 border">
         {#Formulaire de recherche#}
         <form method="post" action="" class="col-12">
@@ -45,7 +45,7 @@
             {#<img class="col-lg-6" src="{{ asset('uploads/' ~ light.image) }}" alt="Card image cap" width="100%">#}
             <div class="col-lg-6 p-1">
                 <h5 class="text-center">{{ light.name }}</h5>
-                <p class="text-center">{{ light.desciption }}</p>
+                <p class="text-center text-truncate">{{ light.desciption }}</p>
                 {% if app.user == light.getExpert().getUser() %}
                 {#<a href="{{ path('light_show', {'id': light.id}) }}">show</a>#}
                 <p class="text-right"><a href="{{ path('light_edit', {'id': light.id}) }}" class="btn bg-light btn-outline-success">Modifier</a></p>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             {% else %}
-            <div>Aucune paroles</div>
+            <div>Aucune parole</div>
             {% endfor %}
         </div>
     </div>

@@ -7,6 +7,7 @@ use App\Entity\Engagement;
 use App\Entity\Enterprise;
 use App\Form\ChallengeType;
 use App\Repository\ChallengeRepository;
+use App\Repository\EnterpriseRepository;
 use App\Services\FileUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,7 @@ class ChallengeController extends AbstractController
     /**
      * @Route("/", name="challenge_index", methods={"GET"})
      */
-    public function index(ChallengeRepository $challengeRepository): Response
+    public function index(ChallengeRepository $challengeRepository) :Response
     {
         return $this->render('challenge/index.html.twig', [
             'challenges' => $challengeRepository->findAll(),
@@ -43,6 +44,7 @@ class ChallengeController extends AbstractController
 
     /**
      * @Route("/new", name="challenge_new", methods={"GET","POST"})
+     * @IsGranted({"ROLE_EXPERT","ROLE_CONSUMER"})
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
@@ -53,16 +55,10 @@ class ChallengeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $challenge->setDepositary($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
-            
-            $docs = [];
-            $actionDocs = $request->files->get('challenge')['documents'];
-            foreach ($actionDocs as $file) {
-                $filename = $fileUpload->upload($file);
-                array_push($docs, $filename);
-            }
-            $challenge->setDocuments($docs);
-//            $engagement = $form->get('challenge_engagement')->getData();
-//            $challenge->setEngagement($engagement);
+            $documents = $form->get('documents')->getData();
+            $filename = $fileUpload->upload($documents);
+            $challenge->setDocuments($filename);
+
             $entityManager->persist($challenge);
             $entityManager->flush();
 
@@ -80,42 +76,32 @@ class ChallengeController extends AbstractController
      */
     public function show(Challenge $challenge): Response
     {
+        $likes=count($challenge->getLikes());
         return $this->render('challenge/show.html.twig', [
             'challenge' => $challenge,
+            'likes' => $likes
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="challenge_edit", methods={"GET","POST"})
+     * @Route("/delete", name="challenge_delete")
      */
-    public function edit(Request $request, Challenge $challenge): Response
+    public function delete(): Response
     {
-        $form = $this->createForm(ChallengeType::class, $challenge);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('challenge_index');
-        }
-
-        return $this->render('challenge/edit.html.twig', [
-            'challenge' => $challenge,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('challenge/_delete_form.html.twig');
     }
 
     /**
-     * @Route("/{id}", name="challenge_delete", methods={"DELETE"})
+     * @Route("/vote/{id}",name="vote_challenge")
+     * @IsGranted("ROLE_USER")
+     * @param Challenge $challenge
+     * @return Response
      */
-    public function delete(Request $request, Challenge $challenge): Response
+    public function vote(Challenge $challenge) :Response
     {
-        if ($this->isCsrfTokenValid('delete'.$challenge->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($challenge);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('challenge_index');
+        $challenge->addLike($this->getUser());
+        $this->getDoctrine()->getManager()->persist($challenge);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('challenge_show', ['id' => $challenge->getId()]);
     }
 }

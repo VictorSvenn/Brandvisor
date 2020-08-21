@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Consumer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Consumer|null find($id, $lockMode = null, $lockVersion = null)

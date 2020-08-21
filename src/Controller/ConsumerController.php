@@ -6,6 +6,7 @@ use App\Entity\Challenge;
 use App\Entity\Consumer;
 use App\Entity\Enterprise;
 use App\Form\ConsumerType;
+use App\Controller\EnterpriseController;
 use App\Repository\ConsumerRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/consumer")
+ * @IsGranted("ROLE_CONSUMER")
  */
 class ConsumerController extends AbstractController
 {
@@ -28,19 +30,6 @@ class ConsumerController extends AbstractController
             'consumer' => $consumer,
         ]);
     }
-
-    /**
-     * @Route("/vote/{id}",name="vote_challenge")
-     */
-    public function vote(Challenge $challenge)
-    {
-        $challenge->addLike($this->getUser());
-        $this->getDoctrine()->getManager()->persist($challenge);
-        $this->getDoctrine()->getManager()->flush();
-
-        return $this->redirectToRoute('app_home');
-    }
-
 
 
 //    /**
@@ -96,7 +85,7 @@ class ConsumerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            
             return $this->redirectToRoute('account_consumer');
         }
 
@@ -111,10 +100,12 @@ class ConsumerController extends AbstractController
      */
     public function removeBookmark(Enterprise $enterprise)
     {
-        $this->getUser()->getConsumer()->removeBookmark($enterprise);
-        $this->getDoctrine()->getManager()->persist($enterprise);
+        $consumer = $this->getUser()->getConsumer();
+        $consumer->removeBookmark($enterprise);
+        
+        $this->getDoctrine()->getManager()->persist($consumer);
         $this->getDoctrine()->getManager()->flush();
-        return $this->redirectToRoute('consumer_favs');
+        return $this->redirectToRoute('consumer_favs', ['id' => $enterprise->getId()]);
     }
 
     /**
@@ -122,9 +113,25 @@ class ConsumerController extends AbstractController
      */
     public function bookmarks()
     {
-
         return $this->render('consumer/consumer_favs.html.twig');
     }
+
+    /**
+     * @Route("/addbookmarketp/{id}", name="add_bookmark_etp")
+     * @IsGranted("ROLE_CONSUMER")
+     * @return Response
+     */
+    public function addBookmarksEtp(Enterprise $enterprise): Response
+    {
+        $consumer = $this->getUser()->getConsumer();
+        $consumer->addBookmark($enterprise);
+        
+        $this->getDoctrine()->getManager()->persist($consumer);
+        $this->getDoctrine()->getManager()->flush();
+        
+        return $this->redirectToRoute('show_enterprise', ['id' => $enterprise->getId()]);
+    }
+
 //    /**
 //     * @Route("/{id}", name="consumer_delete", methods={"DELETE"})
 //     */

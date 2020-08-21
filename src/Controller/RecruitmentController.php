@@ -29,6 +29,7 @@ class RecruitmentController extends AbstractController
 
     /**
      * @Route("/new", name="recruitment_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request, FileUpload $fileUpload): Response
     {
@@ -67,6 +68,7 @@ class RecruitmentController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="recruitment_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Recruitment $recruitment): Response
     {
@@ -87,6 +89,7 @@ class RecruitmentController extends AbstractController
 
     /**
      * @Route("/{id}", name="recruitment_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Recruitment $recruitment): Response
     {

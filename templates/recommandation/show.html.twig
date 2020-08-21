@@ -3,31 +3,51 @@
 {% block title %}Déposer une recommandation{% endblock %}
 
 {% block body %}
-    <h1>Recommandation</h1>
+    <h1>Ma recommandation</h1>
 
     
 
+<div class="row border bg-success">
+    <div class=" col-xl-5 col-lg-5 col-md-5 col-sm-5">
+        <div class="text-center my-3 font-weight-bold">Note : {{ recommandation.enterprise.note }}</div>
+        <img class="mx-auto d-block my-3" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
+            width="50%">
+        <div class="text-center font-weight-bold my-3">{{ recommandation.getEnterprise().getName() }}</div>
+    </div>
+    <div class=" col-xl-7 col-lg-7 col-md-7 col-sm-7 bg-secondary">
+        <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 row justify-content-around text-white font-weight-bold">
+            <div class="text-center col-xl-12 col-lg-12 col-md-12 col-sm-12">Produits</div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.firstLink }}">
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto" src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
+                </a>
+            </div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.secondLink }}">
+                    <img class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto" src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
+                </a>
+            </div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.thirdLink }}">
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 mb-2"
+                        src="{{ asset('uploads/' ~ recommandation.thirdImage) }}">
+                </a>
+            </div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.fourthLink }}">
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 mb-2"
+                        src="{{ asset('uploads/' ~ recommandation.fourthImage) }}">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+    <a href="{{ path('recommandation_index') }}" class="btn btn-outline-success">Retour à la liste</a><br>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Lien</th>
-                <td>{{ recommandation.link }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                {% for img in recommandation.image %}
-                    <td><a href="{{ recommandation.link }}">
-                    <img class="col-lg-4" src="{{ asset('uploads/' ~ img) }}">
-                    </a></td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('recommandation_index') }}">Retour à la liste</a><br>
-
-    <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}">Modifier</a>
-
+{% if app.user == recommandation.getEnterprise().getUser() %}
+    <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}" class="btn btn-outline-success">Modifier</a>
     {{ include('recommandation/_delete_form.html.twig') }}
+{% endif %}
+
+    
 {% endblock %}

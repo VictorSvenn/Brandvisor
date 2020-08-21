@@ -10,3 +10,10 @@ require('../scss/app.scss');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
+
+$(function(){
+    $("#infonote").hide();
+    $("#Hello").click(function(){
+        $("#infonote").slideToggle(1000);
+    });
+});

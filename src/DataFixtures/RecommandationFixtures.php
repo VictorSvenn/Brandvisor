@@ -16,8 +16,8 @@ class RecommandationFixtures extends Fixture implements DependentFixtureInterfac
 
         for ($i = 1; $i <= 10; $i++) {
             $recommandation = new Recommandation();
-            $recommandation->setLink($faker->url);
-            $recommandation->setImage(["$faker->word . $faker->fileExtension"]);
+            $recommandation->setFirstLink($faker->url);
+            $recommandation->setFirstImage("$faker->word . $faker->fileExtension");
             $recommandation->setEnterprise($this->getReference('etp_'.rand(21, 30)));
         }
     }

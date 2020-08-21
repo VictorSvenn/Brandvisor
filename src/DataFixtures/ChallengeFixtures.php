@@ -31,7 +31,7 @@ class ChallengeFixtures extends Fixture implements DependentFixtureInterface
             for ($o=1; $o<=$rand; $o++) {
                 $challenge->addLike($this->getReference('user_'.rand(1, 10)));
             }
-            $challenge->setDocuments(["document$i.$faker->fileExtension","document$i.$faker->fileExtension"]);
+            $challenge->setDocuments("document$i.$faker->fileExtension");
             $manager->persist($challenge);
         }
 

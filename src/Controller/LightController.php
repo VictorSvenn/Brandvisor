@@ -40,7 +40,6 @@ class LightController extends AbstractController
             'form' => $form,
             'numResults' => $numResults,
         ]);
-        
     }
 
     /**
@@ -56,9 +55,9 @@ class LightController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             $light->setExpert($this->getUser()->getExpert());
-            $image = $form->get('image')->getData();
+            /*$image = $form->get('image')->getData();
             $filename = $fileUpload->upload($image);
-            $light->setImage($filename);
+            $light->setImage($filename);*/
 
             $entityManager->persist($light);
             $entityManager->flush();
