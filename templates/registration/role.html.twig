@@ -8,7 +8,7 @@
     {% endfor %}
     <form action="" method="post">
         <div class="row my-3 mx-auto col-xl-7 col-lg-7">
-            <div class="container-fluid col-lg-5">
+            <div class="container-fluid col-xl-5 col-lg-7">
                 <div class="row col-xl-12 col-lg-12"><label for="role_select">Je suis :</label></div>
                 <div class="row col-xl-12 col-lg-12 mx-auto"><select name="roles" onchange="function displaymsg()
 {
@@ -41,12 +41,12 @@ displaymsg() " class="form-control" id="role_select">
                     </select>
                 </div>
             </div>
-            <div class="container-fluid col-xl-7 col-lg-7 mt-3" id="LADIV" style="display: none">
+            <div class="container-fluid col-xl-7 col-lg-12 mt-3" id="LADIV" style="display: none">
                 <p id="txt"></p>
             </div>
         </div>
-        <div class="container-fluid col-5">
-            <div class="row col-xl-10 col-lg-10 col-md-10 offset-1">
+        <div class="container-fluid col-xl-5 col-lg-5">
+            <div class="row col-xl-10 col-lg-11 col-md-10 offset-1">
                 <button class="mx-auto my-3 btn btn-lg btn-primary" type="submit" name="submit">
                     Inscrivez-vous
                 </button>
