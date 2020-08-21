@@ -64,7 +64,8 @@ class EnterpriseController extends AbstractController
     public function enterprise()
     {
         $enterprise = $this->getUser()->getEnterprise();
-        $recommandation = $this->getDoctrine()->getRepository(Recommandation::class)->findOneBy(["enterprise"=>$enterprise]);
+        $recommandation = $this->getDoctrine()->getRepository(Recommandation::class)->findOneBy([
+            "enterprise"=>$enterprise]);
         if (count($enterprise->getEngagements()) >= 5 && $enterprise->getNote() == 4) {
             $enterprise->setNote(5);
         }
@@ -130,7 +131,8 @@ class EnterpriseController extends AbstractController
         if (6 >= 5 && $enterprise->getNote() == 4) {
             $enterprise->setNote(5);
         }
-        $recommandation = $this->getDoctrine()->getRepository(Recommandation::class)->findOneBy(["enterprise"=>$enterprise]);
+        $recommandation = $this->getDoctrine()->getRepository(Recommandation::class)->findOneBy([
+            "enterprise"=>$enterprise]);
 
         $this->getDoctrine()->getManager()->persist($enterprise);
         $this->getDoctrine()->getManager()->flush();
