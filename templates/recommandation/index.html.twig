@@ -121,45 +121,4 @@
 {% else %}
 <div>Aucune recommandation</div>
 {% endfor %}
-
-{#<table class="table">
-    <thead>
-        <tr>
-            <th>Note</th>
-            <th>Logo</th>
-            <th>Nom de l'entreprise</th>
-            <th>Image</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for recommandation in recommandations %}
-        <tr>
-            <td>{{ recommandation.enterprise.note }}</td>
-            <td>
-                <a>
-                    <img class="" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" width="200%"
-                        height="200%">
-                </a>
-            </td>
-            <td>{{ recommandation.enterprise.name }}</td>
-            {% for img in recommandation.image %}
-            <td><a href="{{ recommandation.link }}">
-                    <img class="col-lg-4" src="{{ asset('uploads/' ~ img) }}">
-                </a></td>
-            {% endfor %}
-            <td>
-                <a href="{{ path('recommandation_show', {'id': recommandation.id}) }}">Voir plus</a>
-                <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}">Modifier</a>
-            </td>
-
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="4">Aucune recommandation</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>#}
-
 {% endblock %}

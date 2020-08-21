@@ -4,10 +4,6 @@
 
 {% block body %}
     <h1>Recommandation</h1>
-
-    
-
-
     <table class="table">
         <tbody>
             <tr>
@@ -28,9 +24,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('recommandation_index') }}">Retour à la liste</a><br>
+    <a href="{{ path('recommandation_index') }}" class="btn btn-primary">Retour à la liste</a><br>
 
-    <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}">Modifier</a>
+    <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}" class="btn btn-primary">Modifier</a>
 
     {{ include('recommandation/_delete_form.html.twig') }}
 {% endblock %}

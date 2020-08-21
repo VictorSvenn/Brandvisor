@@ -7,8 +7,8 @@
         <h1>Challenge</h1>
     </div>
     <div class="container-fluid col-10">
-        <div class="card text-white bg-dark mb-3">
-        <div class="card-header h4 font-weight-bold">{{ challenge.name }}</div>
+        <div class="card text-light bg-dark mb-3">
+        <div class="card-header h4 text-center font-weight-bold">{{ challenge.name }}</div>
         <div class="card-body">
             <p class="card-text"><b>Entreprise 🔹 </b>
                 {% if  challenge.getEnterprise() != null %}
@@ -22,7 +22,7 @@
                 {% endif %}</p>
             <p class="card-text"><b>Description 🔹 </b>{{ challenge.description }}</p>
             <p class="card-text"><b>Commentaire 🔹 </b>{{ challenge.comment }}</p>
-            <p class="card-text"><b>Document 🔹 </b><a href="{{ asset('challenge.documents') }}" class="text-success">{{ challenge.documents }}</a></p>
+            {# <p class="card-text"><b>Document 🔹 </b><a href="{{ asset('challenge.documents') }}" class="text-success">{{ challenge.documents }}</a></p> #}
             <p class="card-text"><b>Dépositaire 🔹 </b>{{ challenge.getDepositary().getFullName() }}</p>
             <p class="card-text"><b>Nombre de Votes 🔹 </b><b class="h3 text-success">{{ likes }}</b></p>
             {% if is_granted('ROLE_CONSUMER') or is_granted('ROLE_EXPERT') %}
@@ -33,16 +33,20 @@
                     {% endif %}
                 {% endfor %}
                 {% if vote == true %}
+                <div class="row justify-content-center">
                     <a href="{{ path('vote_challenge', { 'id': challenge.id }) }}"
-                    class="card-text disabled btn btn-success font-weight-bold text-dark card-link w-100">Vous avez déja voté pour ce challenge</a>
+                    class="card-text disabled btn btn-success font-weight-bold text-dark card-link">Vous avez déjà voté pour ce challenge</a>
+                </div>
                 {% else %}
+                <div class="row justify-content-center">
                     <a href="{{ path('vote_challenge', { 'id': challenge.id }) }}"
-                    class="card-text btn btn-success text-dark font-weight-bold card-link w-100">Voter pour ce challenge</a>
+                    class="card-text btn btn-success text-dark font-weight-bold card-link">Voter pour ce challenge</a>
+                </div>
                 {% endif %}
             {% else %}
-            <div class="text-right">
+            <div class="row justify-content-center">
                 <a href="{{ path('app_login') }}"
-                class=" card-text btn btn-success text-dark font-weight-bold card-link">Connectez-vous pour voter</a>
+                class="card-text btn btn-success text-dark font-weight-bold card-link">Connectez-vous pour voter</a>
             </div>
             {% endif %}
         </div>

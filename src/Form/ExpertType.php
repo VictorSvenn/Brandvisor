@@ -40,7 +40,7 @@ class ExpertType extends AbstractType
                 'label' => 'Un lien vers votre site web : '
             ])
             ->add('expertiseAreas', null, [
-                'label' => 'Vos zones d\'expertises : '
+                'label' => 'Vos domaines d\'expertise : '
             ])
             ->add('interventionZones', null, [
                 'label'=>'Vos zones d\'intervention : '

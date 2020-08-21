@@ -21,7 +21,7 @@
                 <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1"><input type="email" value="{{ last_username }}" name="email"
                                                         id="inputEmail" class="form-control" required autofocus>
                 </div>
-                <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1"><label for="inputPassword">Mot de passe</label></div>
+                <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1 mt-3"><label for="inputPassword">Mot de passe</label></div>
                 <div class="row col-lg-10 col-md-10 col-sm-12 offset-lg-1 offset-md-1"><input type="password" name="password" id="inputPassword"
                                                         class="form-control" required>
                 </div>
@@ -42,10 +42,10 @@
         #}
 
         <div class="row">
-            <p class="my-4 col-lg-8 col-md-8 mx-auto">Je n'ai pas de compte, <a href="{{ path ('app_role') }}">m'inscrire</a> </p>
-            <div class="mx-auto col-lg-8 col-md-8">
-                <button class="mx-auto my-3 btn btn-lg btn-primary" type="submit">
-                    Sign in
+            <p class="my-2 col-lg-8 col-md-8 text-center mx-auto">Je n'ai pas de compte, <a href="{{ path ('app_role') }}">m'inscrire</a> </p>
+            <div class="text-center col-lg-12 col-md-12">
+                <button class="btn btn-lg ml-auto text-center my-2 btn-primary" type="submit">
+                    Se connecter
                 </button>
             </div>
         </div>

@@ -1,25 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
+    {% block stylesheet %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
               integrity="sha256-7VVaJ5GDwFQiLIc+eNksQLUSSY5JNZtqv9o2BI8UGYg=" crossorigin="anonymous"/>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
               rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
               crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ asset('build/app.css') }}">
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     {% endblock %}
     {% block javascripts %}{% endblock %}
+
 </head>
 
 <body class="bg-blueGreen">
 {% block head %}
 <header>
-    <nav class="navbar navbar-light sticky-top bg-lightGreen">
+    <title>{% block title %}{% endblock %}</title>
+    <nav class="navbar navbar-expand-lg navbar-light bg-lightGreen">
+        <a class="navbar-brand" href="/">
+            <img src={{ asset( 'images/brandvisor.png' ) }} width="30" height="30"
+                 class="d-inline-block align-top" alt="">
+            Brandvisor
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline ml-auto">
+                <a href={{ path ('recommandation_index')}}>
+                    <img src="https://img.icons8.com/dusk/64/000000/shopping-bag.png" width="30" height="30"
+                         class="d-inline-block align-top mr-4" alt="">
+                </a>
+                {% if app.user %}
+                    <a href="{{ path ('app_logout') }}" class="btn btn-outline-success text-light mr-3 ml-1 my-2 my-sm-1 bg-dark"
+                       type="submit">Se déconnecter</a>
+                {% else %}
+                    <a href="{{ path ('app_login') }}" class="btn btn-outline-success text-light my-2 mr-1 px-4 my-sm-1 bg-dark"
+                       type="submit">Se Connecter</a>
+                    <a href="{{ path ('app_role') }}" class="btn btn-outline-success my-2 my-sm-1 ml-2 px-5 bg-dark text-light"
+                   type="submit">S'inscrire</a>   
+                {% endif %}
+                {# Logo mon compte #}
+                {% if app.user %}
+                <a class="navbar-brand p-2" href="
+                    {% if is_granted('ROLE_ADMIN') %}
+                    {{ path('admin_index') }}
+                    {% elseif is_granted('ROLE_ENTERPRISE') %}
+                    {{ path('account_enterprise') }}
+                    {% elseif is_granted('ROLE_EXPERT') %}
+                    {{ path('account_expert') }}
+                    {% elseif is_granted('ROLE_CONSUMER') %}
+                    {{ path('account_consumer') }}
+                    {% endif %}
+                    ">
+                    <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd"
+                              d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                    </svg></a>
+                {% elseif not app.user %}
+                {% endif %}
+            </form>
+        </div>
+      </nav>
+
+    {# <nav class="navbar navbar-light sticky-top bg-lightGreen">
         <a class="navbar-brand" href="/">
             <img src={{ asset( 'images/Android_O_Preview_Logo.png' ) }} width="30" height="30"
                  class="d-inline-block align-top" alt="">
@@ -40,7 +91,7 @@
             <a href="#" class="btn btn-outline-success my-2 my-sm-0 mx-1 bg-dark text-light"
                type="submit">Anglais/Français</a>
             {# Logo mon compte #}
-            {% if app.user %}
+            {# {% if app.user %}
             <a class="navbar-brand p-2" href="
                 {% if is_granted('ROLE_ADMIN') %}
                 {{ path('admin_index') }}
@@ -62,8 +113,8 @@
             {% elseif not app.user %}
             {% endif %}
         </form>
-    </nav>
-</header>
+    </nav>#}
+</header> 
 {% endblock %}
 <main>
 <div class="container-fluid col-12 col-md-10 bg-white justify-content-center pt-3 pb-5">
@@ -83,15 +134,7 @@
             <!-- Grid column -->
             <div class="col-md-2 ">
                 <h6 class="text-uppercase font-weight-bold">
-                    <a class="text-light" href="#">Presse</a>
-                </h6>
-            </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-2 ">
-                <h6 class="text-uppercase font-weight-bold">
-                    <a class="text-light" href="#">CGU</a>
+                    <a class="text-light" href="{{ path('CGU') }}">CGU</a>
                 </h6>
             </div>
             <!-- Grid column -->
@@ -99,7 +142,7 @@
             <!-- Grid column -->
             <div class="col-md-3 ">
                 <h6 class="text-uppercase font-weight-bold">
-                    <a class="text-light" href="#">Mentions Légales</a>
+                    <a class="text-light" href="{{ path('mentions_legales') }}">Mentions Légales</a>
                 </h6>
             </div>
             <!-- Grid column -->

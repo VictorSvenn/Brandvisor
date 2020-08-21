@@ -14,7 +14,12 @@
                 <div class="card-body">
                 <h5 class="card-title">{{ recruitment.name }}</h5>
                 <p class="card-text">{{ recruitment.content }}</p>
-                <a href={{ recruitment.link }} class="btn btn-primary">Lien</a>
+                    <div class="row">
+                        <a href={{ recruitment.link }} class="btn btn-success ml-2 mr-auto">Lien</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {% include 'recruitment/_delete_form.html.twig' %}
+                    {% endif %}
+                    </div>
                 </div>
             </div>
         {% else %}

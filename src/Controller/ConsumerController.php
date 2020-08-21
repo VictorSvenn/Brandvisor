@@ -105,7 +105,7 @@ class ConsumerController extends AbstractController
         
         $this->getDoctrine()->getManager()->persist($consumer);
         $this->getDoctrine()->getManager()->flush();
-        return $this->redirectToRoute('consumer_favs', ['id' => $enterprise->getId()]);
+        return $this->redirectToRoute('show_enterprise', ['id' => $enterprise->getId()]);
     }
 
     /**

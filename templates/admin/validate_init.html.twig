@@ -11,6 +11,7 @@
                     <p class="card-text">{{ init.objective }}</p>
                     <div class="row mx-auto d-flex justify-content-center">
                         <a href="{{ path('initiative_show', { 'id': init.id }) }}" class="mx-auto btn btn-primary">Consulter</a>
+                        {# {% include '/initiative/_delete_form.html.twig' %} #}
                         <a href="{{ path('validate_init',{'id':init.id}) }}" class="mx-auto btn btn-primary">Valider</a>
                     </div>
                 </div>

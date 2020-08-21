@@ -17,3 +17,17 @@ $(function(){
         $("#infonote").slideToggle(1000);
     });
 });
+
+$(function(){
+    $("#msgAdd").hide();
+    $("#addFavorite").click(function(){
+        $("#msgAdd").slideToggle(150);
+    });
+});
+
+$(function(){
+    $("#msgDel").hide();
+    $("#delFavorite").click(function(){
+        $("#msgDel").slideToggle(150);
+    });
+});

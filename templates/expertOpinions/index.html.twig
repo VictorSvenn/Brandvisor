@@ -3,7 +3,7 @@
 {% block title %}Annuaire d'expert{% endblock %}
 
 {% block body %}
-    <div class="container-fluid d-flex">
+    <div class="container-fluid d-flex mx-0 px-0">
         {# SideBar de recherche #}
         <div class="container-fluid col-3">
             {#Formulaire de recherche#}
@@ -17,26 +17,26 @@
                     <input class="btn bg-light btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
                 </div>
             </form>
-            {#~~~~~#}
+
             {#Bouton "Consulter les catégories"#}
-            <div class="input-group-append mt-5">
+            {# <div class="input-group-append mt-5">
                 <a href="{{ path('expert_categories') }}" class="btn bg-light btn-outline-success" type="submit">Consulter
                     les catégories</a>
-            </div>
-            {#~~~~~#}
+            </div> #}
+
         </div>
         {# Affichage du contenu de la recherche #}
         <div class="container-fluid col-9">
             <div class="row d-flex">
                 {% if sent is same as (0) or sent is same as (1) %}
                     {% for expert in experts[0] %}
-                        <div class="card col-4 mx-auto">
-                            <div class="card-body p-1">
+                        <div class="card col-4 mx-auto my-1">
+                            <div class="card-body p-1 text-center">
                                 <h5 class="card-title">{{ expert.user.fullname }}</h5>
                                 <h6 class="card-subtitle text-muted">{{ expert.connectingStructure }}</h6>
-                                <p class="card-text">{{ expert.website }}</p>
                                 <p class="card-text">{{ expert.expertiseAreas }}</p>
                                 <p class="card-text">{{ expert.phone }}</p>
+                                <a href="{{ expert.website }}" class="btn btn-success">Site web</a>
                             </div>
                         </div>
                     {% endfor %}

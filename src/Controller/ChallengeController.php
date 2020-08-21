@@ -55,9 +55,9 @@ class ChallengeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $challenge->setDepositary($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
-            $documents = $form->get('documents')->getData();
-            $filename = $fileUpload->upload($documents);
-            $challenge->setDocuments($filename);
+            // $documents = $form->get('documents')->getData();
+            // $filename = $fileUpload->upload($documents);
+            // $challenge->setDocuments($filename);
 
             $entityManager->persist($challenge);
             $entityManager->flush();

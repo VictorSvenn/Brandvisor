@@ -3,55 +3,44 @@
 {% block title %}Mon compte: {{ app.user.firstName }}{% endblock %}
 
 {% block body %}
-    <div class="container mx-auto">
-        <div class="row mx-auto text-center">
-            <h1 class="text-center mx-auto my-5">Mon compte</h1>
-        </div>
+<div class="container mx-auto">
+    <div class="row mx-auto text-center">
+        <h1 class="text-center mx-auto my-5">Mon compte</h1>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container col-4 ml-0">
-                <div class="row">
-                    <a href="{{ path('consumer_edit', {'id': consumer.id}) }}"
-                       class="navbar-brand btn btn-outline-primary">Modifier mes informations</a>
-                </div>
-                <div class="row">
-                    <a href="{{ path('consumer_favs') }}" class="navbar-brand btn btn-outline-primary">Mes favoris</a>
-                </div>
-                <div class="row">
-                    <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un
-                        avis</a>
-                </div>
-                <div class="row">
-                    <a href="{{ path('challenge_new') }}" class="navbar-brand btn btn-outline-primary">Challenger une
-                        entreprise</a>
-                </div>
-                <div class="row">
-                    <a href="" class="navbar-brand btn btn-outline-primary disabled">Obtenir des recommandations</a>
-                </div>
-            </div>
-            <div class="container col-8">
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Prénom :</th>
-                        <td class="font-weight-light border-0">{{ app.user.firstName }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Nom :</th>
-                        <td class="font-weight-light border-0">{{ app.user.lastName }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Date de naissance :</th>
-                        <td class="font-weight-light border-0">{{ app.user.consumer.birthDate|date("d/m/Y") }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Zone géographique :</th>
-                        <td class="font-weight-light border-0">{{ app.user.consumer.geographicArea }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center flex-column flex-lg-row mb-5">
+        <a href="{{ path('consumer_edit', {'id': consumer.id}) }}" class="navbar-brand btn btn-outline-primary">Modifier
+            mes informations</a>
+        <a href="{{ path('consumer_favs') }}" class="navbar-brand btn btn-outline-primary">Mes favoris</a>
+        <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un avis</a>
+        <a href="{{ path('challenge_new') }}" class="navbar-brand btn btn-outline-primary">Challenger une entreprise</a>
+        <a href="" class="navbar-brand btn btn-outline-primary disabled">Obtenir des recommandations</a>
     </div>
+</div>
+<div class="container col-8">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Prénom :</th>
+                <td class="font-weight-light border-0">{{ app.user.firstName }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Nom :</th>
+                <td class="font-weight-light border-0">{{ app.user.lastName }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Date de naissance :</th>
+                <td class="font-weight-light border-0">{{ app.user.consumer.birthDate|date("d/m/Y") }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Zone géographique :</th>
+                <td class="font-weight-light border-0">{{ app.user.consumer.geographicArea }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
 {% endblock %}

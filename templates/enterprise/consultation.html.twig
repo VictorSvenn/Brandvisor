@@ -24,16 +24,17 @@
 
         {% if is_granted('ROLE_CONSUMER') %}
             <a href="{{ path('add_bookmark_etp', { 'id': enterprise.id }) }}">
-            <img src="https://img.icons8.com/cotton/64/000000/like--v4.png" style="height:3rem;" alt="Ajouter aux favoris"/>
+            <img src="https://img.icons8.com/cotton/64/000000/like--v4.png" id="addFavorite" style="height:3rem;" alt="Ajouter aux favoris"/>
             </a>
         {% endif %}
         {% if is_granted('ROLE_CONSUMER') %}
             <a href="{{ path('remove_bookmark', { 'id': enterprise.id }) }}">
-            <img src="https://img.icons8.com/cotton/64/000000/like--v3.png" style="height:3rem;" alt="Supprimer des favoris"/>
+            <img src="https://img.icons8.com/cotton/64/000000/like--v3.png" id="delFavorite" style="height:3rem;" alt="Supprimer des favoris"/>
             </a>
         {% endif %}
     </div>
-    <div></div>
+    <div class="text-right h6" id="msgAdd">Ajouté aux Favoris</div>
+    <div class="text-right h6" id="msgDel">Supprimé des Favoris</div>
     <div class="container-fluid d-flex">
         <div class="container-fluid col-6">
             <table class="table table-striped">
@@ -187,4 +188,10 @@
         {% endfor %}
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/runtime.js') }}"></script>
+    <script src="{{ asset('build/vendors~app.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}

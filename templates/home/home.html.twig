@@ -2,7 +2,7 @@
 {% block title %}Brandvisor{% endblock %}
 {% block body %}
     {% include '/home/roles.html.twig' %}
-    <div class="container-fluid d-flex mt-5">
+    <div class="container-fluid d-flex mt-4">
         <div class="container-fluid col-9">
             <div class="row">
                 {# Inclusion de l'affichage des menus déroulants inérants aux rôles#}
@@ -38,7 +38,7 @@
                 </div>
                 {#~~~~~~~~~~~~~#}
                 {# Section "Nous sommes tous acteurs du changement"#}
-                <div class="row text-center bg-yellow mb-2">
+                <div class="row text-center bg-black-50 mb-2">
                     {#Image#}
                     <div class="col-6 my-auto ">
                         <img src="{{ asset('images/fleur.jpeg') }}" alt="" width="100%">
@@ -117,7 +117,7 @@
                 </div>
                 {#~~~~~~~~~~~~~#}
                 {# Section "Paroles de consommateur + expert"#}
-                <div class="row text-center bg-yellow mb-2">
+                <div class="row text-center bg-black-50 mb-2">
                     {# Paroles de consommateur #}
                     <div class="col-6">
                         <h3>Avis de consommateurs</h3>
@@ -155,7 +155,7 @@
             <div class="row mt-3 bg-white">
                 <div>
                     <div class="mx-auto text-center">
-                        <h3 class="bg-yellow p-2 ">Challenge du jour</h3>
+                        <h3 class="bg-yellow text-white p-2 ">Challenge du jour</h3>
                     </div>
                     <div class="card bg-transparent">
                         <div class="card-body p-2">
@@ -189,7 +189,7 @@
             <div class="row mt-3 bg-white">
                 <div>
                     <div class="mx-auto text-center">
-                        <h3 class="bg-yellow p-2">Thématique du jour</h3>
+                        <h3 class="bg-yellow text-light p-2">Thématique du jour</h3>
                     </div>
                     <div class="mx-auto text-center">
                         <h5><b>{{ thematique.name }}</b></h5>
@@ -202,7 +202,7 @@
             <div class="row mt-3 bg-white">
                 <div>
                     <div class="mx-auto text-center">
-                        <h3 class="bg-yellow p-2 ">Fil d'actualités</h3>
+                        <h3 class="bg-yellow text-light p-2 ">Fil d'actualités</h3>
                     </div>
                     <div class="mx-auto text-center">
                         {% for new in news %}
@@ -219,5 +219,14 @@
     </div>
     {#~~~~~~~~~~~~~#}
 
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
+</script>
 
 {% endblock %}

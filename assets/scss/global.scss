@@ -13,8 +13,12 @@ $white: white;
 $darkGreen: #356315;
 $red: #ff3254;
 $black: rgba(0, 0, 0, 0.2);
-$yellow: #729179;
+$yellow: #73B981;
+$black-50:rgba(0, 0, 0, 0.1);
 
+.bg-black-50 {
+    background-color: $black-50;
+}
 .text-lightGreen {
     color: $lightGreen;
 }
