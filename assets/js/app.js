@@ -13,17 +13,17 @@ const $ = require('jquery');
 
 $('#infonote').hide();
 /* eslint func-style: ["error", "expression"] */
-$('#Hello').click(function () {
+$('#Hello').click(function info_node () {
     $('#infonote').slideToggle(1000);
 });
 
 $('#msgAdd').hide();
 /* eslint func-style: ["error", "expression"] */
-$('#addFavorite').click(function () {
+$('#addFavorite').click(function msg_add () {
     $('#msgAdd').slideToggle(150);
 });
 $('#msgDel').hide();
 /* eslint func-style: ["error", "expression"] */
-$('#delFavorite').click(function () {
+$('#delFavorite').click(function msg_del () {
     $('#msgDel').slideToggle(150);
 });
