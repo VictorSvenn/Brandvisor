@@ -10,7 +10,7 @@
                     <p class="card-text">{{ opinion.text }}</p>
                     <p class="card-text"><small class="text-muted">Publié le {{ opinion.date|date("m/d/Y") }}</small></p>
                     <div class="row mx-auto d-flex justify-content-center">
-                        <a href="{{ path('opinion_show', { 'id': opinion.id }) }}" class="mx-auto btn btn-primary">Consuler</a>
+                        <a href="{{ path('opinion_show', { 'id': opinion.id }) }}" class="mx-auto btn btn-primary">Consulter</a>
                         <a href="{{ path('validate_opinion',{'id':opinion.id}) }}" class="mx-auto btn btn-primary">Valider</a>
                     </div>
                 </div>

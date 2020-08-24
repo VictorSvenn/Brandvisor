@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="text-center p-3 mt-3">
+        <h1>Validation des engagements</h1>
+        <p>Pour avoir la 4ème étoile</p>
+    </div>
+    
+    {% for engagement in engagements %}
+        <div class="container">
+            <div class="card m-3">
+                <div class="card-body">
+                    <h4 class="card-title pb-3"><b>Nom de l'engagement →</b> {{ engagement.name }}</h4>
+                    <p class="card-text text-justify"><b>Résultats : </b>{{ engagement.resultsText }}</p>
+                    <p class="card-text text-justify"><b>Preuves écrites : </b>{{ engagement.proofText }}</p>
+                    <div class="row mx-auto mb-1 mt-4 d-flex justify-content-center">
+                        <a href="{{ path('show_enterprise', { 'id': engagement.getOwner().getId()}) }}" class="mx-auto btn btn-primary">Consulter</a>
+                        <a href="{{ path('refus_engagement', { 'id': engagement.id }) }}" class="mx-auto btn btn-primary">Refuser</a>
+                        <a href="{{ path('validate_engagement', { 'id': engagement.id }) }}" class="mx-auto btn btn-primary">Valider</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block title %}
+    Validation Engagements
+{% endblock %}

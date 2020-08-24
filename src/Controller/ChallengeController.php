@@ -7,6 +7,7 @@ use App\Entity\Engagement;
 use App\Entity\Enterprise;
 use App\Form\ChallengeType;
 use App\Repository\ChallengeRepository;
+use App\Repository\EnterpriseRepository;
 use App\Services\FileUpload;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +22,15 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class ChallengeController extends AbstractController
 {
+    /**
+     * @Route("/", name="challenge_index", methods={"GET"})
+     */
+    public function index(ChallengeRepository $challengeRepository) :Response
+    {
+        return $this->render('challenge/index.html.twig', [
+            'challenges' => $challengeRepository->findAll(),
+        ]);
+    }
 
     /**
      * @Route("/api/{id}", name="show_json_enterprise")
@@ -45,16 +55,10 @@ class ChallengeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $challenge->setDepositary($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
+            // $documents = $form->get('documents')->getData();
+            // $filename = $fileUpload->upload($documents);
+            // $challenge->setDocuments($filename);
 
-            $docs = [];
-            $actionDocs = $request->files->get('challenge')['documents'];
-            foreach ($actionDocs as $file) {
-                $filename = $fileUpload->upload($file);
-                array_push($docs, $filename);
-            }
-            $challenge->setDocuments($docs);
-//            $engagement = $form->get('challenge_engagement')->getData();
-//            $challenge->setEngagement($engagement);
             $entityManager->persist($challenge);
             $entityManager->flush();
 
@@ -68,15 +72,36 @@ class ChallengeController extends AbstractController
     }
 
     /**
+     * @Route("/{id}", name="challenge_show", methods={"GET"})
+     */
+    public function show(Challenge $challenge): Response
+    {
+        $likes=count($challenge->getLikes());
+        return $this->render('challenge/show.html.twig', [
+            'challenge' => $challenge,
+            'likes' => $likes
+        ]);
+    }
+
+    /**
+     * @Route("/delete", name="challenge_delete")
+     */
+    public function delete(): Response
+    {
+        return $this->render('challenge/_delete_form.html.twig');
+    }
+
+    /**
      * @Route("/vote/{id}",name="vote_challenge")
      * @IsGranted("ROLE_USER")
+     * @param Challenge $challenge
+     * @return Response
      */
-    public function vote(Challenge $challenge)
+    public function vote(Challenge $challenge) :Response
     {
         $challenge->addLike($this->getUser());
         $this->getDoctrine()->getManager()->persist($challenge);
         $this->getDoctrine()->getManager()->flush();
-
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('challenge_show', ['id' => $challenge->getId()]);
     }
 }

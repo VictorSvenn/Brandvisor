@@ -3,91 +3,101 @@
 {% block title %}Mon compte: {{ enterprise.name }}{% endblock %}
 
 {% block body %}
-    <div class="container mx-auto">
-        <div class="row mx-auto text-center">
-            <h1 class="col-4 text-center mx-auto my-5">Mon compte</h1>
-
+    <div class="container-fluid">
+        <div class="row justify-content-center my-5">
+            <h1>Mon compte</h1>
         </div>
     </div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="container col-4 ml-0">
-                <div class="row my-1">
-                    <a  style="width: 450px" href="{{ path('enterprise_edit', {'id': enterprise.id}) }}"
-                       class="navbar-brand btn btn-outline-primary">Modifier mes informations</a>
-                </div>
-                <div class="row my-1">
-                    <a  style="width: 450px" href="{{ path('engagement_new') }}" class="navbar-brand btn btn-outline-primary">Déposer un
-                        engagement</a>
-                </div>
-                <div class="row my-1">
-                    <a  style="width: 450px" href="{{ path('enterprise_opinions') }}" class="navbar-brand btn btn-outline-primary">Avis sur
-                        mon entreprise</a>
-                </div>
-                <div class="row my-1">
-                    <a style="width: 450px" href="{{ path('show_challenges') }}" class="navbar-brand btn btn-outline-primary">Challenges
-                        déposés pour mon entreprise</a>
-                </div>
-                <div class="row my-1">
-                    <a style="width: 450px" href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary">Déposer une
-                        initiative</a>
-                </div>
-            </div>
-            <div class="container col-8">
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Logo :</th>
-                        <td class="font-weight-light border-0">
-                            <img src="{{ asset('uploads/' ~ enterprise.logo) }}" style="height: 200px; width: auto"
-                                 alt="enterprise's logo" class="img-thumbnail">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Adresse :</th>
-                        <td class="font-weight-light border-0">{{ app.user.enterprise.adress }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Téléphone :</th>
-                        <td class="font-weight-light border-0">{{ app.user.enterprise.enterprisePhone }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Nom de l'entreprise :</th>
-                        <td class="font-weight-light border-0">{{ app.user.enterprise.name }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Fonction :</th>
-                        <td class="font-weight-light border-0">{{ app.user.enterprise.contactFunction }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Catégorie de l'entreprise :</th>
-                        <td class="font-weight-light border-0">{{ app.user.enterprise.type.name }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Site web :</th>
-                        <td class="font-weight-light border-0">{{ app.user.enterprise.website }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="font-weight-bold border-0">Documents utiles :</th>
-                        <td class="font-weight-light border-0">
-                            {% for documents in app.user.enterprise.documents %}
-                                <a href="{{ asset('uploads/' ~ documents) }}">
-                                    <img src="https://img.icons8.com/material-two-tone/24/000000/shared-document.png"/>
-                                </a>
-                            {% endfor %}
-
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="row justify-content-center flex-column flex-lg-row mb-5"> 
+            <a href="{{ path('enterprise_edit', {'id': enterprise.id}) }}" class="navbar-brand btn btn-outline-primary mt-1">Modifier mes informations</a>
+            <a href="{{ path('engagement_new') }}" class="navbar-brand btn btn-outline-primary mt-1">Déposer un engagement</a>
+            <a href="{{ path('enterprise_opinions') }}" class="navbar-brand btn btn-outline-primary mt-1">Avis sur mon entreprise</a>
+            <a href="{{ path('show_challenges') }}" class="navbar-brand btn btn-outline-primary mt-1">Challenges reçus</a>
+            <a href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary mt-1">Déposer une initiative</a>
         </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="card">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th class="font-weight-bold border-0">Mon logo</th>
+                    <td class="font-weight-light border-0">
+                        <img src="{{ asset('uploads/' ~ enterprise.logo) }}" style="height: 6em; width: auto" alt="enterprise's logo" class="img-thumbnail">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Note :</th>
+                    <td class="font-weight-light border-0">
+                        {% if enterprise.note == 1 %}⭐
+                        {% elseif enterprise.note == 2 %}⭐⭐
+                        {% elseif enterprise.note == 3 %}⭐⭐⭐
+                        {% elseif enterprise.note == 4 %}⭐⭐⭐⭐
+                        {% elseif enterprise.note == 5 %}⭐⭐⭐⭐⭐
+                        {% else %} {{ enterprise.note }}
+                        {% endif %}
+                        <img src="https://img.icons8.com/metro/26/000000/about.png" class="ml-2" style="width:1em;" id="Hello"/>
+                        <div class="text-justify" id="infonote">Votre entreprise obtient sa première étoile à son inscription sur Brandvisor,
+                        déposez un engagement et remplissez tous les champs pour gagner 2 étoiles supplémentaires. 
+                        Cet engagement sera soumis à une analyse des preuves fournies pour vous octroyer une nouvelle
+                        étoile supplémentaire si elles sont valides. La 5ème étoile est accordée aux entreprises ayant 
+                        plus de 5 engagements validés. Votre note dépend du dernier engagement déposé.
+                        </div> 
+                    </td> 
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Adresse :</th>
+                    <td class="font-weight-light border-0">{{ app.user.enterprise.adress }}</td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Téléphone :</th>
+                    <td class="font-weight-light border-0">{{ app.user.enterprise.enterprisePhone }}</td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Nom de l'entreprise :</th>
+                    <td class="font-weight-light border-0">{{ app.user.enterprise.name }}</td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Fonction :</th>
+                    <td class="font-weight-light border-0">{{ app.user.enterprise.contactFunction }}</td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Catégorie de l'entreprise :</th>
+                    <td class="font-weight-light border-0">{{ app.user.enterprise.category }}</td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Site web :</th>
+                    <td class="font-weight-light border-0">{{ app.user.enterprise.website }}</td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Documents utiles :</th>
+                    <td class="font-weight-light border-0">
+                        {% for documents in app.user.enterprise.documents %}
+                            <a href="{{ asset('uploads/' ~ documents) }}">
+                                <img src="https://img.icons8.com/material-two-tone/24/000000/shared-document.png"/>
+                            </a>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="font-weight-bold border-0">Recommandation</th>
+                    {% if recommandation != null %}
+                    <td class="font-weight-light border-0"><a href="{{ path('recommandation_show', {'id': recommandation.id}) }}">Voir plus</a></td>
+                    {% else %}
+                    <td>Aucune recommandation</td>
+                    {% endif %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
         <div class="row">
-            <h1 class="mx-auto text-center my-3"><u>Mes engagements</u></h1>
+            <h1 class="mx-auto text-center my-3">Mes engagements</h1>
         </div>
         <div class="row">
             {% for engagement in enterprise.engagements %}
-                <div class="col-6">
+                <div class="col-12 col-lg-6 mt-2">
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title mx-auto text-center">{{ engagement.name }}</h2>
@@ -107,12 +117,19 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <div class="text-right">
+                                <a href="{{ path('engagement_edit', { 'id': engagement.id }) }}" class="mx-auto btn btn-primary">Modifier</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-
         </div>
     </div>
+{% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('build/runtime.js') }}"></script>
+    <script src="{{ asset('build/vendors~app.js') }}"></script>
+    <script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}

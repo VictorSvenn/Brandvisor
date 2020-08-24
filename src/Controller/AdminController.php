@@ -5,9 +5,15 @@ namespace App\Controller;
 use App\Entity\Initiative;
 use App\Entity\News;
 use App\Entity\Opinion;
+use App\Entity\Engagement;
+use App\Entity\Enterprise;
+use App\Entity\User;
 use App\Form\NewsType;
+use App\Repository\EngagementRepository;
+use App\Repository\EnterpriseRepository;
 use App\Repository\InitiativeRepository;
 use App\Repository\OpinionRepository;
+use App\Repository\UserRepository;
 use App\Services\FileUpload;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -107,5 +113,79 @@ class AdminController extends AbstractController
         $entityManager->persist($initiative);
         $entityManager->flush();
         return $this->redirectToRoute('init_validate');
+    }
+
+    /**
+     * @Route("admin/validate/engagement", name="engagements_validate")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function validateEngagement(EngagementRepository $engagementRepository): Response
+    {
+        $engage = $engagementRepository->findAllNotValid();
+        return $this->render('admin/validate_engagements.html.twig', [
+            'engagements' => $engage,
+            ]);
+    }
+
+    /**
+     * @Route("admin/validate/engagement/{id}", name="validate_engagement")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function validateEngag(Engagement $engagement): Response
+    {
+        $engagement->setIsConform(true);
+        $enterprise=$engagement->getOwner();
+        $note = $enterprise->getNote();
+        if ($note === 0) {
+            $note = 1;
+        } elseif ($note ===1) {
+            $note = 2;
+        } elseif ($note === 2) {
+            $note = 3;
+        } elseif ($note === 3) {
+            $note = 4;
+        } elseif ($note === 4) {
+            $note = 4;
+        } elseif ($note === 5) {
+            $note = 5;
+        }
+        $enterprise->setNote($note);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($engagement);
+        $entityManager->flush();
+        return $this->redirectToRoute('engagements_validate', [
+            'engagement' => $engagement,
+        ]);
+    }
+
+    /**
+     * @Route("admin/refusvalidate/engagement/{id}", name="refus_engagement")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function refuseEngag(Engagement $engagement): Response
+    {
+        $engagement->setIsConform(true);
+        $enterprise=$engagement->getOwner();
+        $note = $enterprise->getNote();
+        if ($note === 0) {
+            $note = 0;
+        } elseif ($note === 1) {
+            $note = 1;
+        } elseif ($note === 2) {
+            $note = 2;
+        } elseif ($note === 3) {
+            $note = 3;
+        } elseif ($note === 4) {
+            $note = 3;
+        } elseif ($note === 5) {
+            $note = 5;
+        }
+        $enterprise->setNote($note);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($engagement);
+        $entityManager->flush();
+        return $this->redirectToRoute('engagements_validate', [
+            'engagement' => $engagement,
+        ]);
     }
 }

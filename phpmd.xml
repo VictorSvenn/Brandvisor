@@ -38,5 +38,11 @@
     <rule ref="rulesets/unusedcode.xml" >
         <exclude name="UnusedFormalParameter" />
     </rule>
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <priority>30</priority>
+        <properties>
+            <property name="reportLevel" value="50" />
+        </properties>
+    </rule>
     <exclude-pattern>src/Migrations</exclude-pattern>
 </ruleset>

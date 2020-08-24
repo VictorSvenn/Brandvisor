@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paroles d'experts{% endblock %}
+
+{% block body %}
+    <h1>Créer une parole d'expert</h1>
+    
+    {{ include('light/_form.html.twig') }}
+
+    <a href="{{ path('light_index') }}">Retour à la liste</a>
+{% endblock %}

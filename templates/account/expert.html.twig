@@ -1,58 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Mon compte: {{ app.user.firstName }}{% endblock %}
-    {% block body %}
-        <div class="container mx-auto">
-            <div class="row mx-auto text-center">
-                <h1 class="text-center mx-auto my-5">Mon compte</h1>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="container col-4 ml-0">
-                    <div class="row">
-                        <a href="{{ path('expert_edit', {'id': expert.id}) }}"
-                           class="navbar-brand btn btn-outline-primary">Modifier mes informations</a>
-                    </div>
-                    <div class="row">
-                        <a href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary">Déposer une initiative</a>
-                    </div>
-                    <div class="row">
-                        <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un
-                            avis</a>
-                    </div>
-                    <div class="row">
-                        <a href="" class="navbar-brand btn btn-outline-primary disabled">Déposer un éclairage</a>
-                    </div>
-                </div>
-                <div class="container col-8">
-                    <table class="table table-striped">
-                        <tbody>
-                        <tr>
-                            <th scope="row" class="font-weight-bold border-0">Logo :</th>
-                            <td class="font-weight-light border-0">
-                                <img src="{{ asset('uploads/' ~ app.user.expert.illustration) }}" style="height: 200px; width: auto"
-                                     alt="enterprise's logo" class="img-thumbnail">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="font-weight-bold border-0">Adresse :</th>
-                            <td class="font-weight-light border-0">{{ app.user.expert.adress }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="font-weight-bold border-0">Téléphone :</th>
-                            <td class="font-weight-light border-0">{{ app.user.expert.phone }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="font-weight-bold border-0">Structure de rattachement :</th>
-                            <td class="font-weight-light border-0">{{ app.user.expert.connectingStructure }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    {% endblock %}
+{% block body %}
+<div class="container mx-auto">
+    <div class="row mx-auto text-center">
+        <h1 class="text-center mx-auto my-5">Mon compte</h1>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row justify-content-center flex-column flex-lg-row mb-5">
+        <a href="{{ path('expert_edit', {'id': expert.id}) }}" class="navbar-brand btn btn-outline-primary">Modifier mes
+            informations</a>
+        <a href="{{ path('initiative_new') }}" class="navbar-brand btn btn-outline-primary">Déposer une initiative</a>
+        <a href="{{ path('opinion_new') }}" class="navbar-brand btn btn-outline-primary">Deposer un avis</a>
+        <a href="{{ path('light_new') }}" class="navbar-brand btn btn-outline-primary">Déposer un éclairage</a>
+    </div>
+</div>
+<div class="container col-8">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Logo :</th>
+                <td class="font-weight-light border-0">
+                    <img src="{{ asset('uploads/' ~ app.user.expert.illustration) }}" style="height: 200px; width: auto"
+                        alt="enterprise's logo" class="img-thumbnail">
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Adresse :</th>
+                <td class="font-weight-light border-0">{{ app.user.expert.adress }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Téléphone :</th>
+                <td class="font-weight-light border-0">{{ app.user.expert.phone }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="font-weight-bold border-0">Structure de rattachement :</th>
+                <td class="font-weight-light border-0">{{ app.user.expert.connectingStructure }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock %}
 
 {#                <p class="font-weight-bold">Adresse : </p>#}
 {#                <p class="mx-2"> {{ expert.adress }}</p>#}

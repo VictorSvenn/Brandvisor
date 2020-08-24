@@ -19,14 +19,14 @@ class EngagementType extends AbstractType
             ->add('name', null, ['label' => 'Le nom de votre engagement : '])
             ->add('actionText', null, ['label' => 'Une explication de vos actions : '])
             ->add('actionDocuments', FileType::class, [
-                'label' => 'Des documents expliquant/prouvant vos actions : ',
+                'label' => 'Documents expliquant/prouvant vos actions : ',
                 'mapped' => false,
                 'required' => false,
                 'multiple' => 'multiple'
             ])
             ->add('resultsText', null, ['label' => 'Une explication de vos résultats : '])
             ->add('resultsDocuments', FileType::class, [
-                'label' => 'Des documents expliquants/prouvant vos résultats : ',
+                'label' => 'Documents expliquant/prouvant vos résultats : ',
                 'mapped' => false,
                 'required' => false,
                 'multiple' => 'multiple'
@@ -34,7 +34,7 @@ class EngagementType extends AbstractType
             ->add('benefits', null, ['label' => 'Une explication des bénéfices de cet engagement : '])
             ->add('proofText', null, ['label' => 'Une preuve : '])
             ->add('proofDocuments', FileType::class, [
-                'label' => 'Des documents faisant office de preuve : ',
+                'label' => 'Documents faisant office de preuve : ',
                 'mapped' => false,
                 'required' => false,
                 'multiple' => 'multiple'
@@ -43,14 +43,14 @@ class EngagementType extends AbstractType
                 'class' => Odd::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'label' => 'La/les catégorie(s) odd de votre engagement : '
+                'label' => 'La/les catégorie(s) ODD de votre engagement : '
             ])
             ->
             add('rse', EntityType::class, [
                 'class' => RseCriteria::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'label' => 'La/les catégorie(s) rse de votre engagement :  '
+                'label' => 'La/les catégorie(s) RSE de votre engagement :  '
             ]);
     }
 

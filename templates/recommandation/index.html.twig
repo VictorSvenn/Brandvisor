@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déposer une recommandation{% endblock %}
+
+{% block body %}
+<h1>Consultation de recommandation</h1>
+
+<form method="get" action="" class="col-12">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Nom d'une entreprise" aria-label="Recipient's username"
+            aria-describedby="basic-addon2" name="searchText">
+        <div class="input-group-append">
+            <input class="btn btn-outline-success" type="submit" value="Rechercher" name="indexSearch">
+        </div>
+    </div>
+</form>
+<div class="container-fluid ml-0">
+    {% if form == true and numResults > 1 %}
+    <p class="font-italic">{{ numResults }} résultats pour votre recherche</p>
+    {% elseif form == true %}
+    <p class="font-italic">{{ numResults }} résultat pour votre recherche</p>
+    {% endif %}
+    <div class="row my-3 justify-content-around">
+        {% if form == true %}
+
+        {% set count = 0 %}
+        {% for recommandation in recommandations %}
+        <div class="card col-xl-6 col-lg-10 col-md-12 col-sm-10">
+            <img class="card-img-top" src="{{ recommandation.enterprise.logo }}" alt="">
+            <div class="row">
+                <div class=" col-xl-6 col-lg-5 col-md-6 col-sm-6">
+                    <div class="text-center">Note : {{ recommandation.enterprise.note }}</div>
+                    <img class="mx-auto d-block" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
+                        width="50%">
+                    <div class="text-center">{{ recommandation.getEnterprise().getName() }}</div>
+                </div>
+                <div class=" col-xl-6 col-lg-7 col-md-6 col-sm-6">
+                    <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 row justify-content-around">
+                        <div class="text-center col-xl-12 col-lg-12 col-md-12 col-sm-12">Produits</div>
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
+                            <a href="{{ recommandation.firstLink }}">
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
+                            </a>
+                        </div>
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
+                            <a href="{{ recommandation.secondLink }}">
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
+                            </a>
+                        </div>
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
+                            <a href="{{ recommandation.thirdLink }}">
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.thirdImage) }}">
+                            </a>
+                        </div>
+                        <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-9">
+                            <a href="{{ recommandation.fourthLink }}">
+                                <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 offset-1"
+                                    src="{{ asset('uploads/' ~ recommandation.fourthImage) }}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% set count = count+1 %}
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% if is_granted('ROLE_ENTERPRISE') %}
+<a href="{{ path('recommandation_new') }}" class="btn btn-outline-success">Déposer une recommandation</a>
+{% elseif is_granted('ROLE_CONSUMER') %}
+{% elseif is_granted('ROLE_EXPERT') %}
+{% else %}
+{% endif %}
+
+
+{% for recommandation in all %}
+{% if recommandation.enterprise.note >= 4 %}
+<div class="row border bg-success">
+    <div class=" col-xl-5 col-lg-5 col-md-5 col-sm-5">
+        <div class="text-center my-3 font-weight-bold">Note : {{ recommandation.enterprise.note }}</div>
+        <img class="mx-auto d-block my-3" src="{{ asset('uploads/' ~  recommandation.enterprise.logo ) }}" alt=""
+            width="50%">
+        <div class="text-center font-weight-bold my-3">{{ recommandation.getEnterprise().getName() }}</div>
+        <a href="{{ path('recommandation_show', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Voir plus</a>
+        {% if app.user == recommandation.getEnterprise().getUser() %}
+        <a href="{{ path('recommandation_edit', {'id': recommandation.id}) }}" class=" btn btn-primary mx-2">Modifier</a>
+        {% endif %}
+    </div>
+    <div class=" col-xl-7 col-lg-7 col-md-7 col-sm-7 bg-secondary">
+        <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 row justify-content-around text-white font-weight-bold">
+            <div class="text-center col-xl-12 col-lg-12 col-md-12 col-sm-12">Produits</div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.firstLink }}">
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto" src="{{ asset('uploads/' ~ recommandation.firstImage) }}">
+                </a>
+            </div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.secondLink }}">
+                    <img class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto" src="{{ asset('uploads/' ~ recommandation.secondImage) }}">
+                </a>
+            </div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.thirdLink }}">
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 mb-2"
+                        src="{{ asset('uploads/' ~ recommandation.thirdImage) }}">
+                </a>
+            </div>
+            <div class=" col-xl-5 col-lg-5 col-md-6 col-sm-6">
+                <a href="{{ recommandation.fourthLink }}">
+                    <img class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto mt-2 mb-2"
+                        src="{{ asset('uploads/' ~ recommandation.fourthImage) }}">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endfor %}
+
+{% endblock %}

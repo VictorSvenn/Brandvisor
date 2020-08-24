@@ -27,7 +27,7 @@ class ExpertType extends AbstractType
                 'label' => 'Une rapide présentation de vous même : '
             ])
             ->add('illustration', FileType::class, [
-                'label' => 'Votre photo de profil / illustration',
+                'label' => 'Votre photo de profil / illustration :',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -37,10 +37,10 @@ class ExpertType extends AbstractType
                 ]
             ])
             ->add('website', null, [
-                'label' => 'Un lien vers votre site web : '
+                'label' => 'Site web de l\'entreprise : '
             ])
             ->add('expertiseAreas', null, [
-                'label' => 'Vos zones d\'expertises : '
+                'label' => 'Vos domaines d\'expertise : '
             ])
             ->add('interventionZones', null, [
                 'label'=>'Vos zones d\'intervention : '

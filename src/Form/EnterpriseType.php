@@ -51,17 +51,6 @@ class EnterpriseType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'multiple' => 'multiple',
-//                'constraints' => [
-//                    new File([
-//                        'mimeTypes' => 'application/png',
-//                        'mimeTypesMessage' => 'Please upload a valid PDF document'
-//                    ])
-//                ],
-            ])
-            ->add('type', EntityType::class, [
-                'label' => "Le type de votre entreprise :",
-                'class' => \App\Entity\EnterpriseType::class,
-                'choice_label' => 'name',
             ]);
     }
 

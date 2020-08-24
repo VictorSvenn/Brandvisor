@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Enterprise;
-use App\Entity\EnterpriseType;
 use App\Form\ConsumerRegistrationFormType;
 use App\Form\ExpertRegistrationFormType;
 use DateTime;
@@ -173,9 +172,6 @@ class RegistrationController extends AbstractController
         GuardAuthenticatorHandler $guardHandler,
         LoginFormAuthenticator $authenticator
     ): ?Response {
-        $etptype = $this->getDoctrine()
-            ->getRepository(EnterpriseType::class)
-            ->findAll();
         $user = new User();
         $form = $this->createForm(EtpRegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -184,10 +180,7 @@ class RegistrationController extends AbstractController
             $name = $form->get('etpname')->getData();
             $fct = $form->get('contact_fct')->getData();
             $siret = $form->get('SIRET')->getData();
-            $typeid = $_POST['type'];
-            $type = $this->getDoctrine()
-                ->getRepository(EnterpriseType::class)
-                ->findOneBy(['id' => $typeid]);
+            $category = $_POST['type'];
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -196,16 +189,14 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setRoles(["ROLE_ENTERPRISE", "ROLE_USER"]);
-
             $enterprise = new Enterprise();
             $enterprise->setUser($user);
             $enterprise->setName($name);
             $enterprise->setContactFunction($fct);
             $enterprise->setSiret((int)$siret);
-            $enterprise->setType($type);
+            $enterprise->setCategory($category);
             $enterprise->setIsValid(false);
-
-
+            $enterprise->setNote(1);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($enterprise);
             $entityManager->persist($user);
@@ -226,16 +217,13 @@ class RegistrationController extends AbstractController
 
             return $this->render('registration/enterprise.html.twig', [
                 'registrationForm' => $form->createView(),
-                'types' => $etptype,
                 'errorname' => $errorname,
                 'errorsiret' => $errorsiret,
                 'errorfct' => $errorfct,
             ]);
         }
-
         return $this->render('registration/enterprise.html.twig', [
             'registrationForm' => $form->createView(),
-            'types' => $etptype,
             'errorname' => 0,
             'errorsiret' => 0,
             'errorfct' => 0,

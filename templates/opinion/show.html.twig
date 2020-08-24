@@ -3,12 +3,16 @@
 {% block title %}Avis de {{ opinion.depositary.firstName }}{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row col-5 mb-5 mx-auto">
-            <h3 class="text-center mx-auto">Avis de M./Mme {{ opinion.depositary.fullName }} sur l'entreprise {{ opinion.enterprise.name }}</h3>
+    <div class="container mt-4 mx-auto">
+        <div class="row col-5 mb-5 mx-auto justify-content-center">
+            <h3>Avis de {{ opinion.depositary.fullName }}</h3>
+                {% if opinion.depositary.Expert != null %}
+                    <p class="font-italic">( Organisation                  : {{ opinion.depositary.Expert.connectingStructure }} )</p>
+                {% endif %}
+                <h4>sur l'entreprise {{ opinion.enterprise.name }}</h4>
         </div>
-        <div class="row col-10 my-auto mx-auto">
-            <p class="text-center">{{ opinion.text }}</p>
+        <div class="row col-10 my-auto mx-auto justify-content-center">
+            <p>{{ opinion.text }}</p>
         </div>
     </div>
 

@@ -7,9 +7,9 @@
         <div class="row col-5 mx-auto">
             <h1 class="mx-auto text-center my-5">Les avis sur mon compte</h1>
         </div>
-        <div class="row d-flex justify-content-between">
+        <div class="row justify-content-center mx-auto">
             {% for opinion in opinions %}
-                <div class="card col-5 my-3" style="width: 18rem; background-color: rgba(128,128,128,0.25)">
+                <div class="card col-12 col-sm-5 mx-auto my-3" style="width: 18rem; background-color: rgba(128,128,128,0.25)">
                     <div class="card-body over text-truncate">
                         <h5 class="card-title">Avis déposé par M./Mme {{ opinion.depositary.lastName }}</h5>
                         <p class="card-text">{{ opinion.text }}</p>
