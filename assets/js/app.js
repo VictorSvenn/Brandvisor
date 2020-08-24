@@ -11,18 +11,16 @@ require('../scss/app.scss');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
 
-$(document).ready(function () {
-    $("#infonote").hide();
-    $("#Hello").click(function () {
-        $("#infonote").slideToggle(1000);
+    $('#infonote').hide();
+    $('#Hello').click(function () {
+        $('#infonote').slideToggle(1000);
     });
 
-    $("#msgAdd").hide();
-    $("#addFavorite").click(function () {
-        $("#msgAdd").slideToggle(150);
+    $('#msgAdd').hide();
+    $('#addFavorite').click(function () {
+        $('#msgAdd').slideToggle(150);
     });
-    $("#msgDel").hide();
-    $("#delFavorite").click(function () {
-        $("#msgDel").slideToggle(150);
+    $('#msgDel').hide();
+    $('#delFavorite').click(function () {
+        $('#msgDel').slideToggle(150);
     });
-});

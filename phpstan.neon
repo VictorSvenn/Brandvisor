@@ -9,6 +9,6 @@ parameters:
         - src/DataFixtures
     ignoreErrors:
         - '#Cannot call method getNote() on App\Entity\Enterprise|null#'
-        - '#Cannot call method setNote(\) on App\Entity\Enterprise|null#'
+        - '#Cannot call method setNote() on App\Entity\Enterprise|null#'
         - '#The method edit() has a Cyclomatic Complexity of 24#'
         - '#The method edit() has an NPath complexity of 226. The configured NPath complexity threshold is 200#'
