@@ -88,7 +88,7 @@ class RecruitmentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="recruitment_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="recruitment_delete", methods={"DELETE"})
      * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Recruitment $recruitment): Response

@@ -17,13 +17,10 @@
                         <p class="card-text">{{ challenge.description }}</p>
                         {% if challenge.response %}
                             <a href="{{ path('challenge_response', { 'id': challenge.id }) }}"
-                               class="disabled btn btn-primary">Vous avez déja répondu a ce challenge</a>
+                               class="disabled btn btn-primary">Vous avez déjà répondu à ce challenge</a>
                         {% else %}
-                            <a href="{{ path('challenge_response', { 'id': challenge.id }) }}" class="btn btn-primary">Repondre
-                                a ce
-                                challenge</a>
+                            <a href="{{ path('challenge_response', { 'id': challenge.id }) }}" class="btn btn-primary">Répondre à ce challenge</a>
                         {% endif %}
-
                     </div>
                 </div>
             {% endfor %}

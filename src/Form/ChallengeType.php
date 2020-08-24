@@ -26,12 +26,6 @@ class ChallengeType extends AbstractType
                 'choice_label' => 'name',
                 'label' => "L'entreprise visée"
             ))
-//            ->add('engagement', ChoiceType::class, [
-//                'mapped' => false,
-//                'label' => "L'engagement relié a votre challenge : ",
-//                'required' => false,
-//                'choices' =>
-//            ])
             ->add('engagement', EntityType::class, [
                 'class' => Engagement::class,
 //                'choices' => [],
@@ -40,11 +34,16 @@ class ChallengeType extends AbstractType
             ])
             ->add('description', null, array('label' => 'Description '))
             ->add('comment', null, array('label' => 'Commentaire '))
-            ->add('documents', FileType::class, array(
-                'label' => 'Documents ',
-                'required' => false,
-                'multiple' => 'multiple'))
-            ->add('isConform', null, array('label' => 'Mon challenge est conforme à la charte.'));
+            // ->add('documents', FileType::class, array(
+            //     'attr' => array(
+            //         'class' => 'form-control-file',
+            //         'label' => FileType::class,
+            //         'placeholder' => ""
+            //     ),
+            //     'label' => 'Documents ',
+            //     'required' => false,
+            //     'multiple' => 'multiple'))
+            ->add('isConform', null, array('label' => 'Mon challenge est conforme aux CGU'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

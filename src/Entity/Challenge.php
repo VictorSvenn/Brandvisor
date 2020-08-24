@@ -51,9 +51,9 @@ class Challenge
     private $isConform;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $documents = [];
+    private $documents;
 
     /**
      * @ORM\ManyToOne(targetEntity=Engagement::class, inversedBy="challenges")
@@ -153,12 +153,12 @@ class Challenge
         return $this;
     }
 
-    public function getDocuments(): ?array
+    public function getDocuments(): ?string
     {
         return $this->documents;
     }
 
-    public function setDocuments(array $documents): self
+    public function setDocuments(string $documents): self
     {
         $this->documents = $documents;
 

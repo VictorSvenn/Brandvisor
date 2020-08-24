@@ -2,38 +2,47 @@
 
 {% block title %}Déposer un challenge {% endblock %}
 {% block formtitle %}
-    Déposer un challenge
+Déposer un challenge
 {% endblock %}
 {% block form %}
-    {{ include('challenge/_form.html.twig', {'button_label': 'Envoyer'}) }}
+{{ include('challenge/_form.html.twig', {'button_label': 'Envoyer'}) }}
 {% endblock %}
 {% block javascripts %}
-    <script>
-        function updateEngage() {
-            const etpSelector = document.getElementById("challenge_enterprise");
-            const id = parseInt(etpSelector.value);
-            fetch("/challenge/api/" + id).then(
-                (response) => {
-                    response.json().then(
-                        (engagements) => {
-                            let html = "<option></option>";
-                            for (let i = 0; i < engagements.length; i++) {
-                                html += `<option value=${engagements[i].id}>${engagements[i].name}</option>`
-                            }
-                            const element = document.getElementById("challenge_engagement");
-                            element.innerHTML = html;
+<script>
+    function updateEngage() {
+        const etpSelector = document.getElementById("challenge_enterprise");
+        const id = parseInt(etpSelector.value);
+        fetch("/challenge/api/" + id).then(
+            (response) => {
+                response.json().then(
+                    (engagements) => {
+                        let html = "<option></option>";
+                        for (let i = 0; i < engagements.length; i++) {
+                            html += `<option value=${engagements[i].id}>${engagements[i].name}</option>`
                         }
-                    )
-                }
-            )
-        }
+                        const element = document.getElementById("challenge_engagement");
+                        element.innerHTML = html;
+                    }
+                )
+            }
+        )
+    }
 
-        function initMe() {
-            window.removeEventListener("load", initMe);
-            const etpSelector = document.getElementById("challenge_enterprise");
-            etpSelector.addEventListener("change", updateEngage);
-        }
+    function initMe() {
+        window.removeEventListener("load", initMe);
+        const etpSelector = document.getElementById("challenge_enterprise");
+        etpSelector.addEventListener("change", updateEngage);
 
-        window.addEventListener("load", initMe);
-    </script>
+        const challengeDocuments = document.getElementById("challenge_documents");
+        challengeDocuments.addEventListener('change', (event) => {
+            console.log(challengeDocuments);
+            challengeDocuments.placeholder=event.target.files[0].name;
+        });
+    }
+
+    window.addEventListener("load", initMe);
+
+
+</script>
+
 {% endblock %}

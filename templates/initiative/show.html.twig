@@ -3,29 +3,34 @@
 {% block title %}{{ initiative.name }}{% endblock %}
 
 {% block body %}
-    {# Container page entière#}
-    <div class="container-fluid">
-        {# Formulaire de recherche d'initiative#}
-        <div class="row col-12 justify-content-between">
+{# Container page entière#}
+<div class="container-fluid">
+    {# Formulaire de recherche d'initiative#}
+    <div class="row col-12 justify-content-between">
 
 
-            {#~~~~~~~~#}
-            {# Bouton pour déposer une initiative#}
-            {% if initiative.isConform %}
-            <div>
-                <a href="{{ path('initiative_new') }}" class="btn btn-success">Déposer une initiative</a>
-            </div>
-            {% else %}
-            {% endif %}
-            {#~~~~~~#}
+        {#~~~~~~~~#}
+        {# Bouton pour déposer une initiative et modifier son initiative #}
+        {% if is_granted('ROLE_USER') %}
+        <div class="ml-3">
+            <a href="{{ path('initiative_new') }}" class="btn btn-success">Déposer une initiative</a>
         </div>
+            {% if app.user == initiative.depositary %}
+            <div>
+                <a href="{{ path('initiative_edit', {'id': initiative.id}) }}" class="btn btn-success">Modifier</a>
+            </div>
+            {% endif %}
+        {% else %}
+        {% endif %}
+        {#~~~~~~#}
     </div>
-    <div class="container-fluid d-flex mt-5">
+</div>
+<div class="container-fluid d-flex mt-5">
 
-        {# Container partie gauche #}
-        <div class="container-fluid col-6">
-            <table class="table table-striped">
-                <tbody>
+    {# Container partie gauche #}
+    <div class="container-fluid col-6">
+        <table class="table table-striped">
+            <tbody>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Nom de l'initiative:</th>
                     <td class="font-weight-light border-0">{{ initiative.name }}</td>
@@ -39,8 +44,10 @@
                     <td class="font-weight-light border-0">{{ initiative.objective }}</td>
                 </tr>
                 <tr>
-                    <th scope="row" class="font-weight-bold border-0">Liens utiles:</th>
-                    <td class="font-weight-light border-0">{{ initiative.links }}</td>
+                    <th scope="row" class="font-weight-bold border-0">Lien utile:</th>
+                    <td class="font-weight-light border-0">
+                        <a href="{{ initiative.links }}">Lien</a>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Partenaires:</th>
@@ -66,96 +73,93 @@
                     <th scope="row" class="font-weight-bold border-0">Description:</th>
                     <td class="font-weight-light border-0">{{ initiative.detailledDescription }}</td>
                 </tr>
-                <tr>
+                {# <tr>
                     <th scope="row" class="font-weight-bold border-0">Pièce jointe:</th>
-                    <td class="font-weight-light border-0"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        {# Container partie droite #}
-        <div class="container-fluid col-6">
-            <table class="table table-striped">
-                <tbody>
+                    <td class="font-weight-light border-0">{{ asset('') }}</td>
+                </tr> #}
+            </tbody>
+        </table>
+    </div>
+    {# Container partie droite #}
+    <div class="container-fluid col-6">
+        <table class="table table-striped">
+            <tbody>
                 <tr>
                     <th scope="row" class="font-weight-bold border-0">Thématique:</th>
                     {% for odd in initiative.odd %}
-                        <td class="font-weight-light border-0">{{ odd.name }}</td>
+                    <td class="font-weight-light border-0">{{ odd.name }}</td>
                     {% endfor %}
                 </tr>
-                </tbody>
-            </table>
-            {# affichage illustration #}
-            <div class="row col-11 mx-auto">
-                <img src="{{ asset('uploads/' ~ initiative.illustration) }}" width="100%" alt="">
-            </div>
-            {# Bouton Like #}
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                {% set vote = false %}
-                {% for like in app.user.initlikes %}
-                    {% if like.name == initiative.name %}
-                        {% set vote = true  %}
-                    {% endif %}
-                {% endfor %}
-                {% if vote == true %}
-                    <div class="row mx-auto justify-content-center mt-5">
-                        <a href="{{ path('initiative_vote', { 'id': initiative.id }) }}"
-                           class="disabled btn btn-success font-weight-bold">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z"/>
-                                <path d="M7 13h2v3H7v-3z"/>
-                            </svg>
-                            Vous avez déja liké</a>
-                    </div>
-                {% else %}
-                    <div class="row mx-auto justify-content-center mt-5">
-                        <a href="{{ path('initiative_vote', { 'id': initiative.id }) }}"
-                           class="btn btn-success font-weight-bold">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z"/>
-                                <path d="M7 13h2v3H7v-3z"/>
-                            </svg>
-                            Liker cette initiative</a>
-                    </div>
-                {% endif %}
-            {% elseif initiative.isConform is same as (false) %}
-                <div class="row mx-auto justify-content-center mt-5">
-                    <a href="{{ path('validate_init', { 'id': initiative.id }) }}"
-                       class="btn btn-success font-weight-bold">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z"/>
-                            <path d="M7 13h2v3H7v-3z"/>
-                        </svg>
-                        Valider cette initiative</a>
-                </div>
-            {% else %}
-                <div class="row mx-auto justify-content-center mt-5">
-                    <a href="{{ path('app_login') }}"
-                       class="disabled btn btn-success font-weight-bold">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z"/>
-                            <path d="M7 13h2v3H7v-3z"/>
-                        </svg>
-                        Veuillez vous connecter pour liker cette initiative</a>
-                </div>
-            {% endif %}
-
-             Affichage du nombre de likes
-            {% if initiative.isConform is same as (false) %}
-
-            {% else %}
-                <div class="row mt-3 mx-auto justify-content-center">
-                    <h5>Nombre de likes : {{ likes }}</h5>
-                </div>
-            {% endif %}
+            </tbody>
+        </table>
+        {# affichage illustration #}
+        <div class="row col-12 mx-auto mt-5">
+            <img src="{{ asset('uploads/' ~ initiative.illustration) }}" width="100%" alt="">
         </div>
+        {# Bouton Like #}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% set vote = false %}
+        {% for like in app.user.initlikes %}
+        {% if like.name == initiative.name %}
+        {% set vote = true  %}
+        {% endif %}
+        {% endfor %}
+        {% if vote == true %}
+        <div class="row mx-auto justify-content-center mt-5">
+            <a href="{{ path('initiative_vote', { 'id': initiative.id }) }}"
+                class="disabled btn btn-success font-weight-bold">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z" />
+                    <path d="M7 13h2v3H7v-3z" />
+                </svg>
+                Vous avez déja liké</a>
+        </div>
+        {% else %}
+        <div class="row mx-auto justify-content-center mt-5">
+            <a href="{{ path('initiative_vote', { 'id': initiative.id }) }}" class="btn btn-success font-weight-bold">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z" />
+                    <path d="M7 13h2v3H7v-3z" />
+                </svg>
+                Liker cette initiative</a>
+        </div>
+        {% endif %}
+        {% elseif initiative.isConform is same as (false) %}
+        <div class="row mx-auto justify-content-center mt-5">
+            <a href="{{ path('validate_init', { 'id': initiative.id }) }}" class="btn btn-success font-weight-bold">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z" />
+                    <path d="M7 13h2v3H7v-3z" />
+                </svg>
+                Valider cette initiative</a>
+        </div>
+        {% else %}
+        <div class="row mx-auto justify-content-center mt-5">
+            <a href="{{ path('app_login') }}" class="disabled btn btn-success font-weight-bold">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tree" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 0a.5.5 0 0 1 .416.223l3 4.5A.5.5 0 0 1 11 5.5h-.098l2.022 3.235a.5.5 0 0 1-.424.765h-.191l1.638 3.276a.5.5 0 0 1-.447.724h-11a.5.5 0 0 1-.447-.724L3.69 9.5H3.5a.5.5 0 0 1-.424-.765L5.098 5.5H5a.5.5 0 0 1-.416-.777l3-4.5A.5.5 0 0 1 8 0zM5.934 4.5H6a.5.5 0 0 1 .424.765L4.402 8.5H4.5a.5.5 0 0 1 .447.724L3.31 12.5h9.382l-1.638-3.276A.5.5 0 0 1 11.5 8.5h.098L9.576 5.265A.5.5 0 0 1 10 4.5h.066L8 1.401 5.934 4.5z" />
+                    <path d="M7 13h2v3H7v-3z" />
+                </svg>
+                Veuillez vous connecter pour liker cette initiative</a>
+        </div>
+        {% endif %}
+
+        {# Affichage du nombre de likes #}
+        {% if initiative.isConform is same as (false) %}
+            <p class="col-8 text-center mx-auto mt-4">Le nombre de like sera disponible après validation de l'initiative par un administrateur.</p>
+        {% else %}
+        <div class="row mt-3 mx-auto justify-content-center">
+            <h5>Nombre de likes : {{ likes }}</h5>
+        </div>
+        {% endif %}
     </div>
+</div>
 {% endblock %}

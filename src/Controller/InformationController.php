@@ -25,7 +25,7 @@ class InformationController extends AbstractController
                 $name = $_POST['firstname']." ".$_POST['lastname'];
                 $email = (new TemplatedEmail())
                 ->from($_POST['email'])
-                ->to('wcs.brandvisor@gmail.com')
+                ->to('contact@brandvisor.fr')
                     ->subject($_POST['subject'])
                     ->htmlTemplate('email/contact.html.twig')
                     ->context([

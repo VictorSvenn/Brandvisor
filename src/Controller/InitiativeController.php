@@ -54,6 +54,40 @@ class InitiativeController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/edit/{id}", name="initiative_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Initiative $initiative, FileUpload $fileUpload): Response
+    {
+        $form = $this->createForm(InitiativeType::class, $initiative);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $initiative->setDepositary($this->getUser());
+            $initiative->setIsConform(false);
+            $illustration = $form->get('illustration')->getData();
+            $filename = $fileUpload->upload($illustration);
+            $initiative->setIllustration($filename);
+
+            $entityManager->persist($initiative);
+            $entityManager->flush();
+
+
+            if ($this->getUser()->getExpert()) {
+                return $this->redirectToRoute('account_expert');
+            } elseif ($this->getUser()->getEnterprise()) {
+                return $this->redirectToRoute('account_enterprise');
+            } else {
+                return $this->redirectToRoute('account_consumer');
+            }
+        }
+        return $this->render('initiative/edit.html.twig', [
+            'initiative' => $initiative,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/{id}", name="initiative_show", methods={"GET"})
      */
@@ -64,6 +98,20 @@ class InitiativeController extends AbstractController
             'initiative' => $initiative,
             'likes' => count($likes),
         ]);
+    }
+
+    /**
+     * @Route("/{id}/delete", name="initiative_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function delete(Initiative $initiative, Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$initiative->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($initiative);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('admin_index');
     }
 
     /**
@@ -78,7 +126,6 @@ class InitiativeController extends AbstractController
         $this->getDoctrine()->getManager()->persist($initiative);
         $this->getDoctrine()->getManager()->flush();
         return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
-//        return $this->redirectToRoute('initiative_show', ['id' => $initiative->getId()]);
     }
 
 //    /**

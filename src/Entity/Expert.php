@@ -72,6 +72,12 @@ class Expert
      */
     private $Argumentations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Light::class, mappedBy="expert")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $light;
+
     public function __construct()
     {
         $this->Argumentations = new ArrayCollection();
@@ -217,6 +223,18 @@ class Expert
                 $argumentation->setDepositary(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLight(): ?Light
+    {
+        return $this->light;
+    }
+
+    public function setLight(?Light $light): self
+    {
+        $this->light = $light;
 
         return $this;
     }

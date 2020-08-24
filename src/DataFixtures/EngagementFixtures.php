@@ -29,6 +29,7 @@ class EngagementFixtures extends Fixture implements DependentFixtureInterface
             $engagement->setProofDocuments(["proofdocument$i.$faker->fileExtension",
                 "proofdocument$i.$faker->fileExtension"]);
             $rand = rand(0, 1);
+            $engagement->setIsConform($faker->boolean());
             if ($rand===0) {
                 for ($o=1; $o<=3; $o++) {
                     $engagement->addOdd($this->getReference('odd_'.rand(1, 17)));

@@ -47,7 +47,7 @@ class Enterprise
     private $website;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $siret;
 
@@ -98,15 +98,20 @@ class Enterprise
     private $opinions;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EnterpriseType::class, inversedBy="enterprises")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $type;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isValid = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $category;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Recommandation::class, inversedBy="enterprise")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $recommandation;
 
     public function __construct()
     {
@@ -181,12 +186,12 @@ class Enterprise
         return $this;
     }
 
-    public function getSiret(): ?int
+    public function getSiret(): ?float
     {
         return $this->siret;
     }
 
-    public function setSiret(int $siret): self
+    public function setSiret(float $siret): self
     {
         $this->siret = $siret;
 
@@ -357,10 +362,8 @@ class Enterprise
             $this->opinions[] = $opinion;
             $opinion->setEnterprise($this);
         }
-
         return $this;
     }
-
 
     public function removeOpinion(Opinion $opinion): self
     {
@@ -371,19 +374,6 @@ class Enterprise
                 $opinion->setEnterprise(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getType(): ?EnterpriseType
-    {
-        return $this->type;
-    }
-
-    public function setType($type): self
-    {
-        $this->type = $type;
-
         return $this;
     }
 
@@ -395,6 +385,30 @@ class Enterprise
     public function setIsValid(bool $isValid): self
     {
         $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?string $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getRecommandation(): ?Recommandation
+    {
+        return $this->recommandation;
+    }
+
+    public function setRecommandation(?Recommandation $recommandation): self
+    {
+        $this->recommandation = $recommandation;
 
         return $this;
     }
