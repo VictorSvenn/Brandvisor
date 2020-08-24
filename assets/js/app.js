@@ -12,15 +12,15 @@ require('../scss/app.scss');
 const $ = require('jquery');
 
 $('#infonote').hide();
-$('#Hello').click(function infoNode() {
+$('#Hello').click(() => {
     $('#infonote').slideToggle(1000);
 });
 
 $('#msgAdd').hide();
-$('#addFavorite').click(function msgAdd() {
+$('#addFavorite').click(() => {
     $('#msgAdd').slideToggle(150);
 });
 $('#msgDel').hide();
-$('#delFavorite').click(function msgDel() {
+$('#delFavorite').click(() => {
     $('#msgDel').slideToggle(150);
 });
