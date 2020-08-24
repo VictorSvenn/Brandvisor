@@ -12,18 +12,15 @@ require('../scss/app.scss');
 const $ = require('jquery');
 
 $('#infonote').hide();
-/* eslint func-style: ["error", "expression"] */
-$('#Hello').click(function info_node () {
+$('#Hello').click(function infoNode () {
     $('#infonote').slideToggle(1000);
 });
 
 $('#msgAdd').hide();
-/* eslint func-style: ["error", "expression"] */
-$('#addFavorite').click(function msg_add () {
+$('#addFavorite').click(function msgAdd () {
     $('#msgAdd').slideToggle(150);
 });
 $('#msgDel').hide();
-/* eslint func-style: ["error", "expression"] */
-$('#delFavorite').click(function msg_del () {
+$('#delFavorite').click(function msgDel () {
     $('#msgDel').slideToggle(150);
 });
